@@ -67,9 +67,9 @@ public class Cliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroClienteActionPerformed
-        String nome = txtNome.getText();
+        String cliente = txtNome.getText();
         
-        String sql = "Insert into cliente (nmCliente) values ('"+nome+"')";
+        String sql = "Insert into cliente (nmCliente) values ('"+cliente+"')";
         
         try{
             Connection con =conecta.getConexão();
