@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.pizzaria;
+package br.com.pizzaria.view;
 
 /**
  *
