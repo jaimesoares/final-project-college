@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package br.com.pizzaria;
+package br.com.pizzaria.view;
 
+import br.com.pizzaria.bd.ConectaBanco;
 import java.sql.Connection;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -72,7 +73,7 @@ public class Cliente extends javax.swing.JInternalFrame {
         String sql = "Insert into cliente (nmCliente) values ('"+cliente+"')";
         
         try{
-            Connection con =conecta.getConexão();
+            Connection con =ConectaBanco.getConexão();
             Statement smt = con.createStatement();
             smt.executeUpdate(sql);
             smt.close();

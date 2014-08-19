@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.pizzaria;
+package br.com.pizzaria.bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author katia
  */
-public class conecta {
+public class ConectaBanco {
     public static Connection getConexão(){
         try{
             
