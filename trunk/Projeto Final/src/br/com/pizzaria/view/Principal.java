@@ -1,9 +1,19 @@
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.util.FundoDeTela;
+import java.awt.Frame;
+import javax.swing.JFrame;
+
 public class Principal extends javax.swing.JFrame {
 
+    FundoDeTela Desktop;
+    
     public Principal() {
         initComponents();
+        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Desktop = new FundoDeTela("imagens/pizza_logo.jpg");
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -11,26 +21,44 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mnCdCliente = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        JM_Manutencao = new javax.swing.JMenu();
+        JMI_Cliente = new javax.swing.JMenuItem();
+        JMI_Funcionario = new javax.swing.JMenuItem();
+        JMI_Entregador = new javax.swing.JMenuItem();
+        JMI_Cardapio = new javax.swing.JMenuItem();
+        JM_Movimentacao = new javax.swing.JMenu();
+        JMI_Pedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pizza MAMA");
 
-        jMenu1.setText("File");
+        JM_Manutencao.setText("Manutenção");
 
-        mnCdCliente.setText("Cadastro Cliente");
-        mnCdCliente.addActionListener(new java.awt.event.ActionListener() {
+        JMI_Cliente.setText("Cliente");
+        JMI_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnCdClienteActionPerformed(evt);
+                JMI_ClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(mnCdCliente);
+        JM_Manutencao.add(JMI_Cliente);
 
-        jMenuBar1.add(jMenu1);
+        JMI_Funcionario.setText("Funcionário");
+        JM_Manutencao.add(JMI_Funcionario);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        JMI_Entregador.setText("Entregador");
+        JM_Manutencao.add(JMI_Entregador);
+
+        JMI_Cardapio.setText("Cardápio");
+        JM_Manutencao.add(JMI_Cardapio);
+
+        jMenuBar1.add(JM_Manutencao);
+
+        JM_Movimentacao.setText("Movimentação");
+
+        JMI_Pedido.setText("Pedido");
+        JM_Movimentacao.add(JMI_Pedido);
+
+        jMenuBar1.add(JM_Movimentacao);
 
         setJMenuBar(jMenuBar1);
 
@@ -48,12 +76,12 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnCdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCdClienteActionPerformed
+    private void JMI_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_ClienteActionPerformed
         Cliente cliente = new Cliente();
         cliente.setTitle("Cadastro Cliente");
         cliente.setVisible(true);
         this.add(cliente);
-    }//GEN-LAST:event_mnCdClienteActionPerformed
+    }//GEN-LAST:event_JMI_ClienteActionPerformed
 
     public static void main(String args[]) {
 
@@ -87,10 +115,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem JMI_Cardapio;
+    private javax.swing.JMenuItem JMI_Cliente;
+    private javax.swing.JMenuItem JMI_Entregador;
+    private javax.swing.JMenuItem JMI_Funcionario;
+    private javax.swing.JMenuItem JMI_Pedido;
+    private javax.swing.JMenu JM_Manutencao;
+    private javax.swing.JMenu JM_Movimentacao;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mnCdCliente;
     // End of variables declaration//GEN-END:variables
-    //teste
+    
 }
