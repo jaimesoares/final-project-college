@@ -6,7 +6,7 @@
 
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.bd.ConectaBanco;
+import br.com.pizzaria.util.ConectaBanco;
 import java.sql.Connection;
 import java.sql.Statement;
 import javax.swing.JOptionPane;

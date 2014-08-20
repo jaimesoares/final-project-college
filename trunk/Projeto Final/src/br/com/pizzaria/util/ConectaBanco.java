@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.pizzaria.bd;
+package br.com.pizzaria.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
