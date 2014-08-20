@@ -1,4 +1,3 @@
-
 package br.com.pizzaria.view;
 
 public class Principal extends javax.swing.JFrame {
@@ -93,4 +92,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem mnCdCliente;
     // End of variables declaration//GEN-END:variables
+    //teste
 }
