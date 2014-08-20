@@ -1,40 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.pizzaria.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author katia
- */
 public class ConectaBanco {
-    public static Connection getConexão(){
-        try{
-            
-            Connection con;
-            
-            String serverName = "localhost";
-            String mydatabase = "projeto";
-            String userName = "root";
-            String password = "";
-            String driverName = "com.mysql.jdbc.Driver";
+
+    private final String url = "jdbc:mysql://localhost/pizzaria_mama";
+    private final String driverName = "com.mysql.jdbc.Driver";
+    private final String userName = "root";
+    private final String password = "";
+    private static Connection con;
+
+    public ConectaBanco() {
+        try {
             Class.forName(driverName);
-            String url = "jdbc:mysql://"+serverName+"/"+mydatabase;
             con = DriverManager.getConnection(url, userName, password);
-            return con;       
-        }catch(ClassNotFoundException e){
-           System.out.println("Driver não encontrado");
-        }catch(SQLException e){
+            System.out.println("Conectou");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver não encontrado");
+        } catch (SQLException e) {
             System.out.println("Erro ao conectar ao banco");
         }
-        return null;
+
     }
-    
+
+    public static Connection getConnection() {
+        if (con == null) {
+            new ConectaBanco();
+        }
+        return con;
+    }
+
+    public static void closeConnection() throws SQLException {
+        if (!con.isClosed()) {
+            con.close();
+        }
+    }
+
+    public static void main(String args[]) {
+        ConectaBanco.getConnection();
+    }
+
 }
