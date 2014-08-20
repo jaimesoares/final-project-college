@@ -2,6 +2,8 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.util.FundoDeTela;
 import java.awt.Frame;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 public class Principal extends javax.swing.JFrame {
@@ -12,8 +14,11 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        Desktop = new FundoDeTela("imagens/pizza_logo.jpg");
+        setLayout(new GridLayout());
         
+        Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
+        getContentPane().add(Desktop);
+        Desktop.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,7 +85,7 @@ public class Principal extends javax.swing.JFrame {
         Cliente cliente = new Cliente();
         cliente.setTitle("Cadastro Cliente");
         cliente.setVisible(true);
-        this.add(cliente);
+        //this.add(cliente);
     }//GEN-LAST:event_JMI_ClienteActionPerformed
 
     public static void main(String args[]) {
