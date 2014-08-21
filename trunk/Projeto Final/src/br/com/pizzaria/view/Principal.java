@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class Principal extends javax.swing.JFrame {
 
     FundoDeTela Desktop;
+    ClienteView clienteV;
     
     public Principal() {
         initComponents();
@@ -82,10 +83,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JMI_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_ClienteActionPerformed
-        Cliente cliente = new Cliente();
-        cliente.setTitle("Cadastro Cliente");
-        cliente.setVisible(true);
-        //this.add(cliente);
+        clienteV = new ClienteView();        
+        Desktop.add(clienteV);
+        clienteV.setVisible(true);
     }//GEN-LAST:event_JMI_ClienteActionPerformed
 
     public static void main(String args[]) {
