@@ -4,6 +4,7 @@ import br.com.pizzaria.util.FundoDeTela;
 import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Principal extends javax.swing.JFrame {
@@ -16,6 +17,7 @@ public class Principal extends javax.swing.JFrame {
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new GridLayout());
+        JMI_Cliente.setIcon(new ImageIcon("imagens/mais.png"));
         
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
@@ -49,6 +51,11 @@ public class Principal extends javax.swing.JFrame {
         JM_Manutencao.add(JMI_Cliente);
 
         JMI_Funcionario.setText("Funcionário");
+        JMI_Funcionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_FuncionarioActionPerformed(evt);
+            }
+        });
         JM_Manutencao.add(JMI_Funcionario);
 
         JMI_Entregador.setText("Entregador");
@@ -87,6 +94,10 @@ public class Principal extends javax.swing.JFrame {
         Desktop.add(clienteV);
         clienteV.setVisible(true);
     }//GEN-LAST:event_JMI_ClienteActionPerformed
+
+    private void JMI_FuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_FuncionarioActionPerformed
+        
+    }//GEN-LAST:event_JMI_FuncionarioActionPerformed
 
     public static void main(String args[]) {
 
