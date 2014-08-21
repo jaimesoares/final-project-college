@@ -52,4 +52,39 @@ public class ClienteController {
     public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
         clienteModel.procuraCliente(pesquisa, modelo);
     }
+    
+    public ClienteBeans controlePreenchimento(int codigo){
+        return clienteModel.preencherCampos(codigo);
+    }
+    
+    public boolean verificarDadosParaEditar(ClienteBeans cliente) {
+        if (cliente.getNome().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (cliente.getRua().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo rua não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+
+            return false;
+        }
+
+        if (cliente.getBairro().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo bairro não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (cliente.getTelefone().equals("(  )    -    ")) {
+            JOptionPane.showMessageDialog(null, "Campo telefone não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (cliente.getNome().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        clienteModel.editarCliente(cliente);
+        return true;
+    }
 }
