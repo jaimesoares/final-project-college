@@ -16,6 +16,7 @@ public class ConectaBanco {
         try {
             Class.forName(driverName);
             con = DriverManager.getConnection(url, userName, password);
+            con.setAutoCommit(false);
             System.out.println("Conectou");
         } catch (ClassNotFoundException e) {
             System.out.println("Driver não encontrado");
