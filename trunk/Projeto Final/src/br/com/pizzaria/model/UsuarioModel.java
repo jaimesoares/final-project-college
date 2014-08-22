@@ -29,7 +29,7 @@ public class UsuarioModel {
                 usuarioBeans.setSenha(rs.getString("usu_senha"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Login ou senha inválido", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao consultar usuario", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
         return usuarioBeans;
     }

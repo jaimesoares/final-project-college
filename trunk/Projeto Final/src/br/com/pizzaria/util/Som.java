@@ -7,10 +7,6 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Paulo Rodrigues
- */
 public class Som {
 
     private AudioClip clip = null;

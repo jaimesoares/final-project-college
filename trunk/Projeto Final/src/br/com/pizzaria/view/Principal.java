@@ -38,7 +38,7 @@ public class Principal extends javax.swing.JFrame {
         JMI_Pedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pizza MAMA");
+        setTitle("PIZZARIA MAMA");
 
         JM_Manutencao.setText("Manutenção");
 
