@@ -1,73 +1,25 @@
 package br.com.pizzaria.view;
 
-
 import br.com.pizzaria.beans.UsuarioBeans;
-import br.com.pizzaria.model.UsuarioModel;
-import br.com.pizzaria.util.ConectaBanco;
+import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Som;
 import br.com.pizzaria.util.ThreadTempo;
-
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
     private ThreadTempo thread;
-    private UsuarioBeans usuarioBeans1;
-    private UsuarioBeans usuarioBeans2;
-    private ConectaBanco conn;
-    private UsuarioModel usuarioModel;
+    private final UsuarioBeans momentUser;
     private final Som play;
+    private final UsuarioController usuarioController;
 
     public Login() {
         initComponents();
         lblMensagem.setVisible(false);
-        usuarioBeans1 = new UsuarioBeans();
-        usuarioBeans2 = new UsuarioBeans();
-        usuarioModel = new UsuarioModel();
-        //this.conn = new ConectaBanco();
-        //this.usuarioModel = new UsuarioModel(this.conn.getConnection());
+        momentUser = new UsuarioBeans();
+        usuarioController = new UsuarioController();
         play = new Som();
-    }
-
-    public void login() {
-
-        if (txtUsuario.getText().equals("")) {
-            lblMensagem.setText("Mensagem: Informe um usuário");
-            lblMensagem.setVisible(true);
-            thread = new ThreadTempo(lblMensagem);
-            thread.start();
-            play.som();
-        } else if (txtSenha.getText().equals("")) {
-            lblMensagem.setText("Mensagem: Informe a senha");
-            lblMensagem.setVisible(true);
-            thread = new ThreadTempo(lblMensagem);
-            thread.start();
-            play.som();
-        } else {
-            UsuarioBeans momentUser = new UsuarioBeans();
-
-            momentUser.setUsuario(this.txtUsuario.getText());
-            momentUser.setSenha(String.valueOf(this.txtSenha.getPassword()));
-            this.usuarioBeans2 = this.usuarioModel.selectUser(momentUser);
-
-            if (usuarioBeans2 == null) {
-                lblMensagem.setText("Mensagem: Usuário não cadastrado!");
-                lblMensagem.setVisible(true);
-                thread = new ThreadTempo(lblMensagem);
-                thread.start();
-                play.som();
-            } else if (usuarioBeans2.getSenha().equals(momentUser.getSenha())) {
-                new Principal().setVisible(true);
-                this.dispose();
-            } else {
-                lblMensagem.setText("Mensagem: Senha incorreta!");
-                lblMensagem.setVisible(true);
-                thread = new ThreadTempo(lblMensagem);
-                thread.start();
-                play.som();
-            }
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -83,6 +35,7 @@ public class Login extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         separador = new javax.swing.JSeparator();
+        lblH2O = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
         jmnArquivo = new javax.swing.JMenu();
         mniSair = new javax.swing.JMenuItem();
@@ -169,6 +122,10 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblH2O.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
+        lblH2O.setForeground(new java.awt.Color(0, 204, 51));
+        lblH2O.setText("Beba H2O");
+
         jmnArquivo.setText("Arquivo");
 
         mniSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
@@ -192,13 +149,16 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(lblMensagem))
+                        .addComponent(lblMensagem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblH2O))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(separador, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(painelLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(painelLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +168,9 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensagem)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMensagem)
+                    .addComponent(lblH2O))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -217,7 +179,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        if (txtUsuario.getText().equals("") && txtSenha.getText().equals("")) {
+        if (txtUsuario.getText().equals("") && String.valueOf(txtSenha.getPassword()).equals("")) {
             play.som();
         } else {
             txtUsuario.setText("");
@@ -289,6 +251,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLogin;
     private javax.swing.JMenu jmnArquivo;
+    private javax.swing.JLabel lblH2O;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
@@ -298,4 +261,37 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    final void populaUsuarioBeans() {
+        momentUser.setUsuario(this.txtUsuario.getText());
+        momentUser.setSenha(String.valueOf(this.txtSenha.getPassword()));
+    }
+
+    public void login() {
+
+        populaUsuarioBeans();
+        if (usuarioController.verificaDados(momentUser)) {
+
+            UsuarioBeans usuarioBeans = usuarioController.controlePesquisa(momentUser);
+
+            if (usuarioBeans.getCodigo() == 0) {
+                lblMensagem.setText("Mensagem: Usuário não cadastrado!");
+                lblMensagem.setVisible(true);
+                thread = new ThreadTempo(lblMensagem);
+                thread.start();
+                play.som();
+            } else if (usuarioBeans.getSenha().equals(momentUser.getSenha())) {
+                new Principal().setVisible(true);
+                this.dispose();
+            } else {
+                lblMensagem.setText("Mensagem: Senha incorreta!");
+                lblMensagem.setVisible(true);
+                thread = new ThreadTempo(lblMensagem);
+                thread.start();
+                play.som();
+            }
+        }
+
+    }
+
 }
