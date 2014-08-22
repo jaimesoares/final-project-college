@@ -102,6 +102,7 @@ public class Login extends javax.swing.JFrame {
         lblSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSenha.setText("Senha");
 
+        txtUsuario.setText("jaime");
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyPressed(evt);
