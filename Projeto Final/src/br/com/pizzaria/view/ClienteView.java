@@ -2,6 +2,7 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
+import br.com.pizzaria.util.VerificadoresECorretores;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
@@ -12,8 +13,6 @@ import javax.swing.text.MaskFormatter;
 public class ClienteView extends javax.swing.JInternalFrame {
 
     MaskFormatter FormatoTelefone;
-    SimpleDateFormat FormatoData;
-    Date DataAtual;
     ClienteBeans clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
@@ -21,7 +20,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
     public ClienteView() {
         initComponents();
         habilitarCampos(false);
-        FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
         clienteBeans = new ClienteBeans();
         clienteController = new ClienteController();
@@ -130,13 +128,14 @@ public class ClienteView extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblCliente.getTableHeader().setReorderingAllowed(false);
         tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblClienteMousePressed(evt);
@@ -276,8 +275,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        DataAtual = new Date();
-        txtData.setText(FormatoData.format(DataAtual));
+        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
         habilitarCampos(true);
         txtNome.requestFocus();
         txtCodigo.setText(clienteController.controleDeCodigo());

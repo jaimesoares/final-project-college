@@ -11,6 +11,7 @@ public class Principal extends javax.swing.JFrame {
 
     FundoDeTela Desktop;
     ClienteView clienteV;
+    FuncionarioView funcionarioV;
     
     public Principal() {
         initComponents();
@@ -96,7 +97,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_JMI_ClienteActionPerformed
 
     private void JMI_FuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_FuncionarioActionPerformed
-        
+        funcionarioV = new FuncionarioView();        
+        Desktop.add(funcionarioV);
+        funcionarioV.setVisible(true);
     }//GEN-LAST:event_JMI_FuncionarioActionPerformed
 
 //    public static void main(String args[]) {

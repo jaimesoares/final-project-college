@@ -124,7 +124,7 @@ public class Login extends javax.swing.JFrame {
 
         lblH2O.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         lblH2O.setForeground(new java.awt.Color(0, 204, 51));
-        lblH2O.setText("Beba H2O");
+        lblH2O.setText("(Beba H2O)");
 
         jmnArquivo.setText("Arquivo");
 

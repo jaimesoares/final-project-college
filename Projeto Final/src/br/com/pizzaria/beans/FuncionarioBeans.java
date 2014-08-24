@@ -5,8 +5,8 @@ public class FuncionarioBeans {
     private int codigo;
     private String nome;
     private String rua;
-    private String bairro;
-    private String telefone;
+    private String cargo;
+    private String permissao;
     private String dataCad;
 
     public FuncionarioBeans() {        
@@ -37,20 +37,20 @@ public class FuncionarioBeans {
         this.rua = rua;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPermissao() {
+        return permissao;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPermissao(String permissao) {
+        this.permissao = permissao;
     }
 
     public String getDataCad() {
