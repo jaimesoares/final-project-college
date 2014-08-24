@@ -3,8 +3,6 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificadoresECorretores;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,14 +21,13 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
         clienteBeans = new ClienteBeans();
         clienteController = new ClienteController();
-        modelo = (DefaultTableModel) tblCliente.getModel();
+        modelo = (DefaultTableModel) tblFuncionario.getModel();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnNovo = new javax.swing.JButton();
         lbl_codigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -41,7 +38,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txtBairro = new javax.swing.JTextField();
         lbl_bairro = new javax.swing.JLabel();
         lbl_telefone = new javax.swing.JLabel();
-        txfPesquisar = new javax.swing.JFormattedTextField();
+        txtPesquisar = new javax.swing.JFormattedTextField();
         lbl_data = new javax.swing.JLabel();
         txtData = new javax.swing.JTextField();
         sep_formulario = new javax.swing.JSeparator();
@@ -56,12 +53,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txfTelefone = new JFormattedTextField(FormatoTelefone);
         sep_pesquisa = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblFuncionario = new javax.swing.JTable();
         sep_tabela = new javax.swing.JSeparator();
-        btnCadastrar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnLiberar = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -72,14 +68,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
         } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
-
-        btnNovo.setText("Novo");
-        btnNovo.setToolTipText("Habilita o formulário para receber novos dados");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
 
         lbl_codigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -102,12 +90,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_telefone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_telefone.setText("Telefone:");
 
-        txfPesquisar.setForeground(new java.awt.Color(0, 51, 255));
-        txfPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPesquisar.setForeground(new java.awt.Color(0, 51, 255));
+        txtPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txfPesquisarKeyReleased(evt);
+                txtPesquisarKeyReleased(evt);
             }
         });
 
@@ -119,7 +107,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Pesquisar:");
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -135,35 +123,18 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblCliente.getTableHeader().setReorderingAllowed(false);
-        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblFuncionario.getTableHeader().setReorderingAllowed(false);
+        tblFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblClienteMousePressed(evt);
+                tblFuncionarioMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblCliente);
+        jScrollPane1.setViewportView(tblFuncionario);
 
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.setToolTipText("Cadastro de um novo cliente");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setText("Editar");
-        btnEditar.setToolTipText("Para edita alguma informação de cliente");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnLiberar.setText("Liberar");
-        btnLiberar.setToolTipText("Libera os campos para edição");
-        btnLiberar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLiberarActionPerformed(evt);
+                btnNovoActionPerformed(evt);
             }
         });
 
@@ -171,6 +142,13 @@ public class ClienteView extends javax.swing.JInternalFrame {
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFecharActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -183,7 +161,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
             .addComponent(sep_codigo)
             .addComponent(sep_formulario)
             .addComponent(sep_pesquisa)
-            .addComponent(sep_tabela)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,19 +185,15 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_data1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfPesquisar))
+                        .addComponent(txtPesquisar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLiberar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFechar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFechar)))
                 .addContainerGap())
+            .addComponent(sep_tabela, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,81 +227,111 @@ public class ClienteView extends javax.swing.JInternalFrame {
                         .addComponent(sep_formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lbl_data1))
-                    .addComponent(txfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(sep_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnLiberar)
-                    .addComponent(btnFechar))
-                .addGap(31, 31, 31))
+                    .addComponent(btnFechar)
+                    .addComponent(btnEditar))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
-        habilitarCampos(true);
-        txtNome.requestFocus();
-        txtCodigo.setText(clienteController.controleDeCodigo());
-        limpaNovo();
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        populaClienteBeans();
-        if (clienteController.verificarDados(clienteBeans)) {
-            limpaTudo();
-            habilitarCampos(false);
-        }
-
-
-    }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
         modelo.setNumRows(0);
-        clienteController.controlePesquisa(txfPesquisar.getText(), modelo);
-    }//GEN-LAST:event_txfPesquisarKeyReleased
+        clienteController.controlePesquisa(txtPesquisar.getText(), modelo);
+    }//GEN-LAST:event_txtPesquisarKeyReleased
 
-    private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
-        clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblCliente.getSelectedRow(), 0).toString()));
+    private void tblFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMousePressed
+        clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFuncionario.getSelectedRow(), 0).toString()));
         txtCodigo.setText(clienteBeans.getCodigo() + "");
         txtNome.setText(clienteBeans.getNome());
         txtRua.setText(clienteBeans.getRua());
         txtBairro.setText(clienteBeans.getBairro());
         txfTelefone.setText(clienteBeans.getTelefone());
         txtData.setText(clienteBeans.getDataCad());
-    }//GEN-LAST:event_tblClienteMousePressed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        populaClienteBeans();
-        if (clienteController.verificarDadosParaEditar(clienteBeans)) {
-            limpaTudo();
-            habilitarCampos(false);
-        }
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiberarActionPerformed
-        habilitarCampos(true);
-    }//GEN-LAST:event_btnLiberarActionPerformed
+    }//GEN-LAST:event_tblFuncionarioMousePressed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        dispose();
+        if (btnFechar.getText().equals("Cancelar")) {
+            limpaTudo();
+            if (btnEditar.getText().equals("Salvar")) {
+                btnEditar.setText("Editar");
+                btnNovo.setEnabled(true);
+                habilitarCampos(false);
+            } else {
+                btnNovo.setText("Novo");
+                btnFechar.setText("Fechar");
+                btnEditar.setEnabled(true);
+                tblFuncionario.setEnabled(true);
+                txtPesquisar.setEnabled(true);
+                habilitarCampos(false);
+            }
+            btnFechar.setText("Fechar");
+        } else {
+            this.dispose();
+        }
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        if (btnNovo.getText().equals("Novo")) {
+            btnNovo.setText("Salvar");
+            btnFechar.setText("Cancelar");
+            btnEditar.setEnabled(false);
+            txtPesquisar.setEnabled(false);
+            modelo.setNumRows(0);
+            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+            habilitarCampos(true);
+            txtNome.requestFocus();
+            txtCodigo.setText(clienteController.controleDeCodigo());
+            limpaNovo();
+        } else {
+
+            populaClienteBeans();
+            if (clienteController.verificarDados(clienteBeans)) {
+                btnNovo.setText("Novo");
+                btnFechar.setText("Fechar");
+                btnEditar.setEnabled(true);
+                tblFuncionario.setEnabled(true);
+                txtPesquisar.setEnabled(true);
+                limpaTudo();
+                habilitarCampos(false);
+            }
+        }
+
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+        if (btnEditar.getText().equals("Editar")) {
+            btnEditar.setText("Salvar");
+            btnFechar.setText("Cancelar");
+            btnNovo.setEnabled(false);
+            habilitarCampos(true);
+        } else {
+            if (clienteController.verificarDadosParaEditar(populaClienteBeans())) {
+                btnEditar.setText("Editar");
+                btnFechar.setText("Fechar");
+                btnNovo.setEnabled(true);
+                limpaTudo();
+                habilitarCampos(false);
+            }
+        }
+
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLiberar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -342,13 +345,13 @@ public class ClienteView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_formulario;
     private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
-    private javax.swing.JTable tblCliente;
-    private javax.swing.JFormattedTextField txfPesquisar;
+    private javax.swing.JTable tblFuncionario;
     private javax.swing.JFormattedTextField txfTelefone;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JFormattedTextField txtPesquisar;
     private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
 
@@ -359,12 +362,14 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txfTelefone.setEditable(valor);
     }
 
-    final void populaClienteBeans() {
+    final ClienteBeans populaClienteBeans() {
         clienteBeans.setNome(txtNome.getText());
         clienteBeans.setRua(txtRua.getText());
         clienteBeans.setBairro(txtBairro.getText());
         clienteBeans.setTelefone(txfTelefone.getText());
         clienteBeans.setDataCad(txtData.getText());
+
+        return clienteBeans;
 
     }
 
@@ -375,13 +380,18 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txfTelefone.setText("");
         txtCodigo.setText("");
         txtData.setText("");
-    }   
-    
+    }
+
     final void limpaNovo() {
         txtNome.setText("");
         txtRua.setText("");
         txtBairro.setText("");
         txfTelefone.setText("");
-    }   
+    }
+
+    public static void main(String args[]) {
+        ClienteView cliente = new ClienteView();
+        cliente.setVisible(true);
+    }
 
 }

@@ -36,7 +36,7 @@ public class ClienteModel {
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Cadastrar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Cadastrar"+ex.getMessage(), "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
 
     }

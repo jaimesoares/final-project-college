@@ -15,6 +15,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     public FuncionarioView() {
         initComponents();
+        
         habilitarCampos(false);
         funcionarioBeans = new FuncionarioBeans();
         funcionarioController = new FuncionarioController();
@@ -157,6 +158,15 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
         });
 
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um cargo...", "Atendente", "Pizzaiolo(a)", "Entregador(a)", "Gerente" }));
+        cbCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCargoActionPerformed(evt);
+            }
+        });
+
+        cbPermissao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleclione uma permissão", "user_AT", "user_PZ", "user_ET", "SUPER" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,7 +195,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_data)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,11 +270,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        populaClienteBeans();
-//        if (funcionarioController.verificarDados(funcionarioBeans)) {
-//            limpaTudo();
-//            habilitarCampos(false);
-//        }
+        if (funcionarioController.verificarDados(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
+            limpaTudo();
+            habilitarCampos(false);
+        }
 
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -275,21 +284,19 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void tblFucnionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFucnionarioMousePressed
- //       funcionarioBeans = funcionarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
+        funcionarioBeans = funcionarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
         txtCodigo.setText(funcionarioBeans.getCodigo() + "");
         txtNome.setText(funcionarioBeans.getNome());
-//        txtRua.setText(funcionarioBeans.getRua());
-//        txtBairro.setText(funcionarioBeans.getBairro());
-//        txfTelefone.setText(funcionarioBeans.getTelefone());
+        cbCargo.setSelectedItem(funcionarioBeans.getCargo());
+        cbPermissao.setSelectedItem(funcionarioBeans.getPermissao());
         txtData.setText(funcionarioBeans.getDataCad());
     }//GEN-LAST:event_tblFucnionarioMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        populaClienteBeans();
-//        if (funcionarioController.verificarDadosParaEditar(funcionarioBeans)) {
-//            limpaTudo();
-//            habilitarCampos(false);
-//        }
+        if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
+            limpaTudo();
+            habilitarCampos(false);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiberarActionPerformed
@@ -299,6 +306,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCargoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -329,34 +340,42 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     final void habilitarCampos(boolean valor) {
         txtNome.setEditable(valor);
-//        txtRua.setEditable(valor);
-//        txtBairro.setEditable(valor);
-//        txfTelefone.setEditable(valor);
+        cbCargo.setEnabled(valor);
+        cbPermissao.setEnabled(valor);
     }
 
     final void populaClienteBeans() {
         funcionarioBeans.setNome(txtNome.getText());
-//        funcionarioBeans.setRua(txtRua.getText());
-//        funcionarioBeans.setBairro(txtBairro.getText());
+//        funcionarioBeans.setCargo(txtRua.getText());
+//        funcionarioBeans.setPermissao(txtBairro.getText());
 //        funcionarioBeans.setTelefone(txfTelefone.getText());
         funcionarioBeans.setDataCad(txtData.getText());
 
     }
+    
+    final FuncionarioBeans capturaBeans() {
+        funcionarioBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
+        funcionarioBeans.setNome(txtNome.getText());
+        funcionarioBeans.setCargo(cbCargo.getSelectedItem().toString());
+        funcionarioBeans.setPermissao(cbPermissao.getSelectedItem().toString());
+        funcionarioBeans.setDataCad(txtData.getText());
+        
+        return funcionarioBeans;
+    }
 
     final void limpaTudo() {
         txtNome.setText("");
-//        txtRua.setText("");
-//        txtBairro.setText("");
-//        txfTelefone.setText("");
+        cbCargo.setSelectedIndex(0);
+        cbPermissao.setSelectedIndex(0);
         txtCodigo.setText("");
         txtData.setText("");
     }   
     
     final void limpaNovo() {
         txtNome.setText("");
-//        txtRua.setText("");
-//        txtBairro.setText("");
-//        txfTelefone.setText("");
+        cbCargo.setSelectedIndex(0);
+        cbPermissao.setSelectedIndex(0);
+        
     }   
 
 }

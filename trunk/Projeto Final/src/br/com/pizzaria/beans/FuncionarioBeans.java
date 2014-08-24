@@ -4,7 +4,6 @@ public class FuncionarioBeans {
     
     private int codigo;
     private String nome;
-    private String rua;
     private String cargo;
     private String permissao;
     private String dataCad;
@@ -27,15 +26,7 @@ public class FuncionarioBeans {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
+    }    
 
     public String getCargo() {
         return cargo;

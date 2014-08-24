@@ -53,7 +53,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbl_data" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtData" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="txtData" min="-2" pref="118" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -321,14 +321,29 @@
     <Component class="javax.swing.JComboBox" name="cbCargo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Selecione um cargo..."/>
+            <StringItem index="1" value="Atendente"/>
+            <StringItem index="2" value="Pizzaiolo(a)"/>
+            <StringItem index="3" value="Entregador(a)"/>
+            <StringItem index="4" value="Gerente"/>
+          </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCargoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbPermissao">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Seleclione uma permiss&#xe3;o"/>
+            <StringItem index="1" value="user_AT"/>
+            <StringItem index="2" value="user_PZ"/>
+            <StringItem index="3" value="user_ET"/>
+            <StringItem index="4" value="SUPER"/>
+          </StringArray>
         </Property>
       </Properties>
     </Component>
