@@ -12,14 +12,18 @@ public class Principal extends javax.swing.JFrame {
     FundoDeTela Desktop;
     ClienteView clienteV;
     FuncionarioView funcionarioV;
-    
+    EntregadorView entregadorV;
+    ProdutoView cardapioV;
+    PedidoView pedidoV;
+    SobreView sobreV;
+
     public Principal() {
         initComponents();
-        
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new GridLayout());
-        JMI_Cliente.setIcon(new ImageIcon("imagens/mais.png"));
-        
+        mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
+
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
         Desktop.setVisible(true);
@@ -31,48 +35,81 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         JM_Manutencao = new javax.swing.JMenu();
-        JMI_Cliente = new javax.swing.JMenuItem();
-        JMI_Funcionario = new javax.swing.JMenuItem();
-        JMI_Entregador = new javax.swing.JMenuItem();
-        JMI_Cardapio = new javax.swing.JMenuItem();
+        mniCliente = new javax.swing.JMenuItem();
+        mniFuncionario = new javax.swing.JMenuItem();
+        mniEntregador = new javax.swing.JMenuItem();
+        mniCardapio = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
-        JMI_Pedido = new javax.swing.JMenuItem();
+        mniPedido = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        mnSobre = new javax.swing.JMenu();
+        mniSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PIZZARIA MAMA");
 
         JM_Manutencao.setText("Manutenção");
 
-        JMI_Cliente.setText("Cliente");
-        JMI_Cliente.addActionListener(new java.awt.event.ActionListener() {
+        mniCliente.setText("Cliente");
+        mniCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMI_ClienteActionPerformed(evt);
+                mniClienteActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(JMI_Cliente);
+        JM_Manutencao.add(mniCliente);
 
-        JMI_Funcionario.setText("Funcionário");
-        JMI_Funcionario.addActionListener(new java.awt.event.ActionListener() {
+        mniFuncionario.setText("Funcionário");
+        mniFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMI_FuncionarioActionPerformed(evt);
+                mniFuncionarioActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(JMI_Funcionario);
+        JM_Manutencao.add(mniFuncionario);
 
-        JMI_Entregador.setText("Entregador");
-        JM_Manutencao.add(JMI_Entregador);
+        mniEntregador.setText("Entregador");
+        mniEntregador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEntregadorActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(mniEntregador);
 
-        JMI_Cardapio.setText("Cardápio");
-        JM_Manutencao.add(JMI_Cardapio);
+        mniCardapio.setText("Produto");
+        mniCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCardapioActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(mniCardapio);
 
         jMenuBar1.add(JM_Manutencao);
 
         JM_Movimentacao.setText("Movimentação");
 
-        JMI_Pedido.setText("Pedido");
-        JM_Movimentacao.add(JMI_Pedido);
+        mniPedido.setText("Pedido");
+        mniPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPedidoActionPerformed(evt);
+            }
+        });
+        JM_Movimentacao.add(mniPedido);
 
         jMenuBar1.add(JM_Movimentacao);
+
+        jMenu1.setText("Relatório");
+        jMenuBar1.add(jMenu1);
+
+        mnSobre.setText("Ajuda");
+
+        mniSobre.setText("Sobre");
+        mniSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSobreActionPerformed(evt);
+            }
+        });
+        mnSobre.add(mniSobre);
+
+        jMenuBar1.add(mnSobre);
 
         setJMenuBar(jMenuBar1);
 
@@ -90,17 +127,40 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JMI_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_ClienteActionPerformed
-        clienteV = new ClienteView();        
+    private void mniClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniClienteActionPerformed
+        clienteV = new ClienteView();
         Desktop.add(clienteV);
         clienteV.setVisible(true);
-    }//GEN-LAST:event_JMI_ClienteActionPerformed
+    }//GEN-LAST:event_mniClienteActionPerformed
 
-    private void JMI_FuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_FuncionarioActionPerformed
-        funcionarioV = new FuncionarioView();        
+    private void mniFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFuncionarioActionPerformed
+        funcionarioV = new FuncionarioView();
         Desktop.add(funcionarioV);
         funcionarioV.setVisible(true);
-    }//GEN-LAST:event_JMI_FuncionarioActionPerformed
+    }//GEN-LAST:event_mniFuncionarioActionPerformed
+
+    private void mniEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEntregadorActionPerformed
+        entregadorV = new EntregadorView();
+        Desktop.add(entregadorV);
+        entregadorV.setVisible(true);
+    }//GEN-LAST:event_mniEntregadorActionPerformed
+
+    private void mniCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCardapioActionPerformed
+        cardapioV = new ProdutoView();
+        Desktop.add(cardapioV);
+        cardapioV.setVisible(true);
+    }//GEN-LAST:event_mniCardapioActionPerformed
+
+    private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
+        pedidoV = new PedidoView();
+        Desktop.add(pedidoV);
+        pedidoV.setVisible(true);
+    }//GEN-LAST:event_mniPedidoActionPerformed
+
+    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
+        sobreV = new SobreView();
+        sobreV.setVisible(true);
+    }//GEN-LAST:event_mniSobreActionPerformed
 
 //    public static void main(String args[]) {
 //
@@ -134,14 +194,17 @@ public class Principal extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem JMI_Cardapio;
-    private javax.swing.JMenuItem JMI_Cliente;
-    private javax.swing.JMenuItem JMI_Entregador;
-    private javax.swing.JMenuItem JMI_Funcionario;
-    private javax.swing.JMenuItem JMI_Pedido;
     private javax.swing.JMenu JM_Manutencao;
     private javax.swing.JMenu JM_Movimentacao;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu mnSobre;
+    private javax.swing.JMenuItem mniCardapio;
+    private javax.swing.JMenuItem mniCliente;
+    private javax.swing.JMenuItem mniEntregador;
+    private javax.swing.JMenuItem mniFuncionario;
+    private javax.swing.JMenuItem mniPedido;
+    private javax.swing.JMenuItem mniSobre;
     // End of variables declaration//GEN-END:variables
-    
+
 }

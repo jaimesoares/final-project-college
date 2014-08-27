@@ -2,6 +2,7 @@ package br.com.pizzaria.controller;
 
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.model.ClienteModel;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,16 @@ public class ClienteController {
     
     public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
         clienteModel.procuraCliente(pesquisa, modelo);
+    }
+    
+    /**
+     * Método sobrescrito para trabalhar com a tela 
+     * de pedido do cliente
+     * @param pesquisa
+     * @param lista para popular o comboBox da pesquisa
+     */
+    public void controlePesquisa(String pesquisa, List<String> lista){
+        clienteModel.procuraCliente(pesquisa, lista);
     }
     
     public ClienteBeans controlePreenchimento(int codigo){
