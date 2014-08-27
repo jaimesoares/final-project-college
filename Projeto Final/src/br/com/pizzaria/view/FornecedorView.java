@@ -67,7 +67,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE CLIENTE");
+        setTitle("MANUTENÇÃO DE FORNECEDOR");
         setPreferredSize(new java.awt.Dimension(450, 600));
         try {
             setSelected(true);

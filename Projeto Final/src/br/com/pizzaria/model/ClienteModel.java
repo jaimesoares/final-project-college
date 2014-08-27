@@ -6,6 +6,7 @@ import br.com.pizzaria.util.VerificadoresECorretores;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -36,7 +37,7 @@ public class ClienteModel {
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Cadastrar"+ex.getMessage(), "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Cadastrar" + ex.getMessage(), "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
 
     }
@@ -69,6 +70,25 @@ public class ClienteModel {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Cadastrar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }
+
+    /**
+     * Método sobrescrito para trabalhar com
+     * a pesquisa da tela de pedido do cliente
+     * @param pesquisa o nome dos clientes
+     * @param lista para popular o comboBox da pesquisa
+     */
+    public void procuraCliente(String pesquisa, List<String> lista) {
+        try {
+            String SQLSelection = "select * from cliente where cli_nome like '%" + pesquisa + "%';";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                lista.add(rs.getString("cli_cod") + " - " + rs.getString("cli_nome"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

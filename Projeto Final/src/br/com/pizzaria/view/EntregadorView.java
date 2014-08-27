@@ -1,25 +1,25 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.FuncionarioBeans;
-import br.com.pizzaria.controller.FuncionarioController;
+import br.com.pizzaria.beans.EntregadorBeans;
+import br.com.pizzaria.controller.EntregadorController;
 import br.com.pizzaria.util.VerificadoresECorretores;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-public class FuncionarioView extends javax.swing.JInternalFrame {
+public class EntregadorView extends javax.swing.JInternalFrame {
 
     MaskFormatter FormatoTelefone;
-    FuncionarioBeans funcionarioBeans;
-    FuncionarioController funcionarioController;
     DefaultTableModel modelo;
+    EntregadorBeans entregadorBeans;
+    EntregadorController entregadorController;
 
-    public FuncionarioView() {
+    public EntregadorView() {
         initComponents();
-        
+
         habilitarCampos(false);
-        funcionarioBeans = new FuncionarioBeans();
-        funcionarioController = new FuncionarioController();
-        modelo = (DefaultTableModel) tblFucnionario.getModel();
+        entregadorBeans = new EntregadorBeans();
+        entregadorController = new EntregadorController();
+        modelo = (DefaultTableModel) tblEntregador.getModel();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,8 +32,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         sep_codigo = new javax.swing.JSeparator();
-        lbl_cargo = new javax.swing.JLabel();
-        lbl_bairro = new javax.swing.JLabel();
         txfPesquisar = new javax.swing.JFormattedTextField();
         lbl_data = new javax.swing.JLabel();
         txtData = new javax.swing.JTextField();
@@ -41,18 +39,16 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_data1 = new javax.swing.JLabel();
         sep_pesquisa = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFucnionario = new javax.swing.JTable();
+        tblEntregador = new javax.swing.JTable();
         sep_tabela = new javax.swing.JSeparator();
         btnCadastrar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnLiberar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        cbCargo = new javax.swing.JComboBox();
-        cbPermissao = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE FUNCIONARIO");
+        setTitle("MANUTENÇÃO DE ENTREGADORES");
         setPreferredSize(new java.awt.Dimension(450, 600));
         try {
             setSelected(true);
@@ -80,12 +76,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
 
-        lbl_cargo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_cargo.setText("Cargo:");
-
-        lbl_bairro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_bairro.setText("Permissão:");
-
         txfPesquisar.setForeground(new java.awt.Color(0, 51, 255));
         txfPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -103,29 +93,29 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Pesquisar:");
 
-        tblFucnionario.setModel(new javax.swing.table.DefaultTableModel(
+        tblEntregador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Nome", "Cargo", "Permissão"
+                "Código", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblFucnionario.getTableHeader().setReorderingAllowed(false);
-        tblFucnionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblEntregador.getTableHeader().setReorderingAllowed(false);
+        tblEntregador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblFucnionarioMousePressed(evt);
+                tblEntregadorMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblFucnionario);
+        jScrollPane1.setViewportView(tblEntregador);
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setToolTipText("Cadastro de um novo cliente");
@@ -158,15 +148,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
         });
 
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um cargo...", "Atendente", "Pizzaiolo(a)", "Gerente" }));
-        cbCargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCargoActionPerformed(evt);
-            }
-        });
-
-        cbPermissao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleclione uma permissão", "user_AT", "user_PZ", "SUPER" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,20 +163,16 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_bairro)
-                            .addComponent(lbl_cargo)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNome)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cbPermissao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lbl_data)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(103, 103, 103))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,15 +204,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_cargo)
-                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_bairro)
-                    .addComponent(cbPermissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_data)
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sep_formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,15 +233,15 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
         habilitarCampos(true);
+        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
         txtNome.requestFocus();
-        txtCodigo.setText(funcionarioController.controleDeCodigo());
+        txtCodigo.setText(entregadorController.controleDeCodigo());
         limpaNovo();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if (funcionarioController.verificarDados(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
+        if (entregadorController.verificarDados(capturaBeans())) {
             limpaTudo();
             habilitarCampos(false);
         }
@@ -280,20 +251,18 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
         modelo.setNumRows(0);
-        funcionarioController.controlePesquisa(txfPesquisar.getText(), modelo);
+        entregadorController.controlePesquisa(txfPesquisar.getText(), modelo);
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
-    private void tblFucnionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFucnionarioMousePressed
-        funcionarioBeans = funcionarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
-        txtCodigo.setText(funcionarioBeans.getCodigo() + "");
-        txtNome.setText(funcionarioBeans.getNome());
-        cbCargo.setSelectedItem(funcionarioBeans.getCargo());
-        cbPermissao.setSelectedItem(funcionarioBeans.getPermissao());
-        txtData.setText(funcionarioBeans.getDataCad());
-    }//GEN-LAST:event_tblFucnionarioMousePressed
+    private void tblEntregadorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntregadorMousePressed
+       entregadorBeans = entregadorController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblEntregador.getSelectedRow(), 0).toString()));
+        txtCodigo.setText(entregadorBeans.getCodigo() + "");
+        txtNome.setText(entregadorBeans.getNome());
+        txtData.setText(entregadorBeans.getDataCad());
+    }//GEN-LAST:event_tblEntregadorMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
+        if (entregadorController.verificarDadosParaEditar(capturaBeans())) {
             limpaTudo();
             habilitarCampos(false);
         }
@@ -307,10 +276,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCargoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
@@ -318,12 +283,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnLiberar;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JComboBox cbCargo;
-    private javax.swing.JComboBox cbPermissao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_bairro;
-    private javax.swing.JLabel lbl_cargo;
     private javax.swing.JLabel lbl_codigo;
     private javax.swing.JLabel lbl_data;
     private javax.swing.JLabel lbl_data1;
@@ -331,7 +292,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_formulario;
     private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
-    private javax.swing.JTable tblFucnionario;
+    private javax.swing.JTable tblEntregador;
     private javax.swing.JFormattedTextField txfPesquisar;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
@@ -340,42 +301,30 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     final void habilitarCampos(boolean valor) {
         txtNome.setEditable(valor);
-        cbCargo.setEnabled(valor);
-        cbPermissao.setEnabled(valor);
     }
 
     final void populaClienteBeans() {
-        funcionarioBeans.setNome(txtNome.getText());
-//        funcionarioBeans.setCargo(txtRua.getText());
-//        funcionarioBeans.setPermissao(txtBairro.getText());
-//        funcionarioBeans.setTelefone(txfTelefone.getText());
-        funcionarioBeans.setDataCad(txtData.getText());
+        entregadorBeans.setNome(txtNome.getText());
+       entregadorBeans.setDataCad(txtData.getText());
 
     }
-    
-    final FuncionarioBeans capturaBeans() {
-        funcionarioBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        funcionarioBeans.setNome(txtNome.getText());
-        funcionarioBeans.setCargo(cbCargo.getSelectedItem().toString());
-        funcionarioBeans.setPermissao(cbPermissao.getSelectedItem().toString());
-        funcionarioBeans.setDataCad(txtData.getText());
-        
-        return funcionarioBeans;
+
+    final EntregadorBeans capturaBeans() {
+        entregadorBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
+        entregadorBeans.setNome(txtNome.getText());
+        entregadorBeans.setDataCad(txtData.getText());
+
+        return entregadorBeans;
     }
 
     final void limpaTudo() {
         txtNome.setText("");
-        cbCargo.setSelectedIndex(0);
-        cbPermissao.setSelectedIndex(0);
         txtCodigo.setText("");
         txtData.setText("");
-    }   
-    
+    }
+
     final void limpaNovo() {
         txtNome.setText("");
-        cbCargo.setSelectedIndex(0);
-        cbPermissao.setSelectedIndex(0);
-        
-    }   
+    }
 
 }
