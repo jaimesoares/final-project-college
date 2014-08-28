@@ -7,14 +7,14 @@ import br.com.pizzaria.util.ThreadTempo;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
-public class Login extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame {
 
     private ThreadTempo thread;
     private final UsuarioBeans momentUser;
     private final Som play;
     private final UsuarioController usuarioController;
 
-    public Login() {
+    public LoginView() {
         initComponents();
         lblMensagem.setVisible(false);
         momentUser = new UsuarioBeans();
@@ -227,13 +227,13 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -242,7 +242,7 @@ public class Login extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                new Login().setVisible(true);
+                new LoginView().setVisible(true);
             }
         });
     }
@@ -281,7 +281,7 @@ public class Login extends javax.swing.JFrame {
                 thread.start();
                 play.som();
             } else if (usuarioBeans.getSenha().equals(momentUser.getSenha())) {
-                new Principal().setVisible(true);
+                new PrincipalView().setVisible(true);
                 this.dispose();
             } else {
                 lblMensagem.setText("Mensagem: Senha incorreta!");

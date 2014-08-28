@@ -6,11 +6,17 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.controller.ClienteController;
+import br.com.pizzaria.controller.PedidoController;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -18,11 +24,16 @@ import javax.swing.text.MaskFormatter;
  * @author katia
  */
 public class PedidoView extends javax.swing.JInternalFrame {
-
+    
     MaskFormatter formatoTelefone;
     ClienteBeans clienteBeans;
     ClienteController clienteController;
-    List<String> lista;
+    List<String> listaDeClientes;
+    private List<String> listaDeItens;
+    PedidoBeans pedidoBeans;
+    PedidoController pedidoController;
+    DefaultTableModel modeloDeTabela;
+    DecimalFormat decimalFormato;
 
     /**
      * Creates new form PedidoView
@@ -30,11 +41,19 @@ public class PedidoView extends javax.swing.JInternalFrame {
     public PedidoView() {
         initComponents();
         habilitarCampos(false);
+        txtValor.setEditable(false);
+        txtCodigoItem.setEditable(false);
         clienteController = new ClienteController();
         clienteBeans = new ClienteBeans();
-        lista = new ArrayList<>();
+        listaDeClientes = new ArrayList<>();
+        listaDeItens = new ArrayList<>();
         pnlPai.setEnabledAt(1, false);
-
+        pedidoBeans = new PedidoBeans();
+        pedidoController = new PedidoController();
+        modeloDeTabela = (DefaultTableModel) tblPedido.getModel();
+        decimalFormato = new DecimalFormat("0.00");
+        tblPedido.setSelectionMode(0);
+        txtTotal.setEditable(false);
     }
 
     /**
@@ -52,7 +71,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         btnPesquisar = new javax.swing.JButton();
         cbPesquisa = new javax.swing.JComboBox();
         lbl_codigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
+        txtCodigoCliente = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         txtRua = new javax.swing.JTextField();
         sep_codigo = new javax.swing.JSeparator();
@@ -84,7 +103,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lblValor = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
         lblQuantidade = new javax.swing.JLabel();
-        txtQuantidade = new javax.swing.JTextField();
+        txtCodigoItem = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         btnAdiciona = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
@@ -92,11 +111,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lblTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFuncionario = new javax.swing.JTable();
+        tblPedido = new javax.swing.JTable();
         btnFecharPedido = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txtQuantidade1 = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
 
         jLabel4.setText("jLabel4");
 
@@ -120,10 +139,10 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_codigo.setText("Código");
 
-        txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtCodigo.setForeground(new java.awt.Color(255, 51, 51));
-        txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCodigoCliente.setEditable(false);
+        txtCodigoCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtCodigoCliente.setForeground(new java.awt.Color(255, 51, 51));
+        txtCodigoCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lbl_telefone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_telefone.setText("Telefone:");
@@ -162,7 +181,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sep_codigo)
             .addComponent(sep_formulario, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(txtCodigoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(lbl_codigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlClienteLayout.createSequentialGroup()
                 .addContainerGap()
@@ -184,16 +203,15 @@ public class PedidoView extends javax.swing.JInternalFrame {
                             .addComponent(txtBairro)
                             .addComponent(txtRua)
                             .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlClienteLayout.createSequentialGroup()
-                            .addComponent(btnPesquisar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(pnlClienteLayout.createSequentialGroup()
-                            .addComponent(btnContinuarPedido)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnFechar))))
+                    .addGroup(pnlClienteLayout.createSequentialGroup()
+                        .addComponent(btnPesquisar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlClienteLayout.createSequentialGroup()
+                        .addComponent(btnContinuarPedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFechar)))
                 .addContainerGap())
         );
         pnlClienteLayout.setVerticalGroup(
@@ -206,7 +224,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sep_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -241,13 +259,35 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
         pnlPai.addTab("Cliente", pnlCliente);
 
+        txtCliente.setEditable(false);
+        txtCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtCliente.setForeground(new java.awt.Color(255, 0, 51));
+        txtCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Selecionar:");
+
+        txtItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtItemActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Item:");
 
+        cbSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSelecionarActionPerformed(evt);
+            }
+        });
+
         btnValor.setText("Valor");
+        btnValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValorActionPerformed(evt);
+            }
+        });
 
         lblValor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor.setText("Valor:");
@@ -256,37 +296,52 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lblQuantidade.setText("Quantidade:");
 
         btnAdiciona.setText("+");
+        btnAdiciona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionaActionPerformed(evt);
+            }
+        });
 
         btnRemove.setText("-");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
         btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
 
         lblTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTotal.setText("Total:");
 
-        tblFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        tblPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código Item", "Descrição", "Valor UNT", "Total"
+                "Código Item", "Descrição", "Valor UNT", "Quantidade", "subTotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblFuncionario.getTableHeader().setReorderingAllowed(false);
-        tblFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPedido.getTableHeader().setReorderingAllowed(false);
+        tblPedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblFuncionarioMousePressed(evt);
+                tblPedidoMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblFuncionario);
+        jScrollPane1.setViewportView(tblPedido);
 
         btnFecharPedido.setText("Fechar");
         btnFecharPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +354,12 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Código:");
+
+        txtQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtQuantidadeFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlPedidoLayout = new javax.swing.GroupLayout(pnlPedido);
         pnlPedido.setLayout(pnlPedidoLayout);
@@ -328,11 +389,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPedidoLayout.createSequentialGroup()
-                                .addComponent(txtQuantidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQuantidade))
+                                .addComponent(txtCodigoItem))
                             .addComponent(cbSelecionar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlPedidoLayout.createSequentialGroup()
                         .addComponent(btnAdiciona)
@@ -369,9 +430,9 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor)
                     .addComponent(lblQuantidade)
-                    .addComponent(txtQuantidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigoItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -383,7 +444,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(lblTotal))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFecharPedido)
                     .addComponent(btnFinalizar))
@@ -410,16 +471,16 @@ public class PedidoView extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void tblFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMousePressed
+    private void tblPedidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidoMousePressed
 
-    }//GEN-LAST:event_tblFuncionarioMousePressed
+    }//GEN-LAST:event_tblPedidoMousePressed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         cbPesquisa.removeAllItems();
-        lista.clear();
+        listaDeClientes.clear();
         String pesquisa = JOptionPane.showInputDialog(null, "Entre com o nome do cliente:", "PESQUISA DE CLIENTE", 3);
-        clienteController.controlePesquisa(pesquisa, lista);
-        for (String string : lista) {
+        clienteController.controlePesquisa(pesquisa, listaDeClientes);
+        for (String string : listaDeClientes) {
             cbPesquisa.addItem(string);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -429,12 +490,13 @@ public class PedidoView extends javax.swing.JInternalFrame {
             String codigo = cbPesquisa.getSelectedItem().toString();
             codigo = codigo.substring(0, codigo.indexOf(" "));
             clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(codigo));
-            txtCodigo.setText(clienteBeans.getCodigo() + "");
+            txtCodigoCliente.setText(clienteBeans.getCodigo() + "");
             txtNome.setText(clienteBeans.getNome());
             txtRua.setText(clienteBeans.getRua());
             txtBairro.setText(clienteBeans.getBairro());
             txfTelefone.setText(clienteBeans.getTelefone());
             txtData.setText(clienteBeans.getDataCad());
+            txtCliente.setText(clienteBeans.getNome());
         }
     }//GEN-LAST:event_cbPesquisaActionPerformed
 
@@ -447,6 +509,56 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private void btnFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharPedidoActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnFecharPedidoActionPerformed
+
+    private void txtItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemActionPerformed
+        txtValor.setText("");
+        txtCodigoItem.setText("");
+        txtQuantidade.setText("");
+        cbSelecionar.removeAllItems();
+        listaDeItens.clear();
+        pedidoController.controleDeItens(txtItem.getText(), listaDeItens);
+        for (String string : listaDeItens) {
+            cbSelecionar.addItem(string);
+        }
+    }//GEN-LAST:event_txtItemActionPerformed
+
+    private void btnValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorActionPerformed
+        txtValor.setText(pedidoController.controleDeValor(cbSelecionar.getSelectedItem().toString()) + "");
+        txtCodigoItem.setText(pedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
+    }//GEN-LAST:event_btnValorActionPerformed
+
+    private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
+        txtValor.setText("");
+        txtCodigoItem.setText("");//20:56 OK
+        txtQuantidade.setText("");
+    }//GEN-LAST:event_cbSelecionarActionPerformed
+
+    private void txtQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusLost
+
+    }//GEN-LAST:event_txtQuantidadeFocusLost
+
+    private void btnAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaActionPerformed
+        if (cbSelecionar.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Campo 'Selecionar' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+        } else if (pedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), txtCodigoItem.getText(), cbSelecionar.getSelectedItem().toString())) {
+            double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
+            modeloDeTabela.addRow(new Object[]{txtCodigoItem.getText(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
+            limpaItens();
+            
+        }
+    }//GEN-LAST:event_btnAdicionaActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        modeloDeTabela.removeRow(tblPedido.getSelectedRow());
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        double totalDoPedido = 0;
+        for (int i = 0; i < tblPedido.getRowCount(); i++) {
+            totalDoPedido += Double.parseDouble(modeloDeTabela.getValueAt(i, 4).toString());            
+        }
+        txtTotal.setText(decimalFormato.format(totalDoPedido).replace(",", "."));
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -481,28 +593,36 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlPedido;
     private javax.swing.JSeparator sep_codigo;
     private javax.swing.JSeparator sep_formulario;
-    private javax.swing.JTable tblFuncionario;
+    private javax.swing.JTable tblPedido;
     private javax.swing.JFormattedTextField txfTelefone;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtCodigoCliente;
+    private javax.swing.JTextField txtCodigoItem;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtItem;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtQuantidade;
-    private javax.swing.JTextField txtQuantidade1;
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
     final void habilitarCampos(boolean valor) {
-        txtCodigo.setEditable(valor);
+        txtCodigoCliente.setEditable(valor);
         txtNome.setEditable(valor);
         txtRua.setEditable(valor);
         txtBairro.setEditable(valor);
         txfTelefone.setEditable(valor);
         txtData.setEditable(valor);
     }
-
+    
+    final void limpaItens() {
+        txtItem.setText("");
+        txtQuantidade.setText("");
+        txtValor.setText("");
+        txtCodigoItem.setText("");
+        cbSelecionar.removeAllItems();
+    }
+    
 }
