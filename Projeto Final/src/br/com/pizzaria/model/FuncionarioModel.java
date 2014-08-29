@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -72,6 +73,19 @@ public class FuncionarioModel {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }
+    
+    public void listaFuncionario(DefaultTableModel modelo) {
+        try {
+            String SQLSelection = "select * from funcionario;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                modelo.addRow(new Object[]{rs.getString("fun_codigo"), rs.getString("fun_nome")});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível listar funcionário "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 

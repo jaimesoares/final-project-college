@@ -10,7 +10,9 @@ import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.PedidoController;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -24,7 +26,7 @@ import javax.swing.text.MaskFormatter;
  * @author katia
  */
 public class PedidoView extends javax.swing.JInternalFrame {
-    
+
     MaskFormatter formatoTelefone;
     ClienteBeans clienteBeans;
     ClienteController clienteController;
@@ -34,15 +36,20 @@ public class PedidoView extends javax.swing.JInternalFrame {
     PedidoController pedidoController;
     DefaultTableModel modeloDeTabela;
     DecimalFormat decimalFormato;
+    int codigoFuncionario;
+    Date dataAtual;
+    SimpleDateFormat formatoData, formatoHora;
 
     /**
      * Creates new form PedidoView
      */
-    public PedidoView() {
+    public PedidoView(int codigoFuncionario) {
         initComponents();
+        this.codigoFuncionario = codigoFuncionario;
         habilitarCampos(false);
         txtValor.setEditable(false);
         txtCodigoItem.setEditable(false);
+        btnFinalizar.setEnabled(false);
         clienteController = new ClienteController();
         clienteBeans = new ClienteBeans();
         listaDeClientes = new ArrayList<>();
@@ -54,6 +61,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
         decimalFormato = new DecimalFormat("0.00");
         tblPedido.setSelectionMode(0);
         txtTotal.setEditable(false);
+        formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        formatoHora = new SimpleDateFormat("HH-mm-ss");
     }
 
     /**
@@ -351,6 +360,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
         });
 
         btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Código:");
@@ -544,7 +558,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
             modeloDeTabela.addRow(new Object[]{txtCodigoItem.getText(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
             limpaItens();
-            
+
         }
     }//GEN-LAST:event_btnAdicionaActionPerformed
 
@@ -555,10 +569,22 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         double totalDoPedido = 0;
         for (int i = 0; i < tblPedido.getRowCount(); i++) {
-            totalDoPedido += Double.parseDouble(modeloDeTabela.getValueAt(i, 4).toString());            
+            totalDoPedido += Double.parseDouble(modeloDeTabela.getValueAt(i, 4).toString());
         }
         txtTotal.setText(decimalFormato.format(totalDoPedido).replace(",", "."));
+        populaBeans();
+        if (totalDoPedido > 0) {
+            btnFinalizar.setEnabled(true);
+            btnAdiciona.setEnabled(false);
+            btnRemove.setEnabled(false);
+            btnCalcular.setEnabled(false);
+        }
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        pedidoController.conttroleDePedido(txtCodigoCliente.getText(), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), pedidoBeans);
+        limpaFinaliza();
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -616,7 +642,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         txfTelefone.setEditable(valor);
         txtData.setEditable(valor);
     }
-    
+
     final void limpaItens() {
         txtItem.setText("");
         txtQuantidade.setText("");
@@ -624,5 +650,27 @@ public class PedidoView extends javax.swing.JInternalFrame {
         txtCodigoItem.setText("");
         cbSelecionar.removeAllItems();
     }
+
+    final void populaBeans() {
+        dataAtual = new Date();
+        pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
+        pedidoBeans.setCodigoFuncionario(codigoFuncionario);
+        pedidoBeans.setCodigoEntregador(0);
+        pedidoBeans.setData(formatoData.format(dataAtual));
+        pedidoBeans.setData(formatoHora.format(dataAtual));
+        pedidoBeans.setStatus("Pedido aberto");
+        pedidoBeans.setValor(Double.parseDouble(txtTotal.getText()));
+        for (int i = 0; i < tblPedido.getRowCount(); i++) {
+            pedidoBeans.setCodProduto(Integer.parseInt(modeloDeTabela.getValueAt(i, 0).toString()));
+            pedidoBeans.setQuantidade(Integer.parseInt(modeloDeTabela.getValueAt(i, 3).toString()));
+
+        }
+    }
     
+    final void limpaFinaliza(){
+        txtTotal.setText("");
+        btnFinalizar.setEnabled(false);
+        modeloDeTabela.setNumRows(0);
+        txtCliente.setText("");
+    }
 }

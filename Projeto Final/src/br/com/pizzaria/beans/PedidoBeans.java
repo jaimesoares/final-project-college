@@ -1,5 +1,8 @@
 package br.com.pizzaria.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PedidoBeans {
     
     private int codigoPedido;
@@ -10,8 +13,28 @@ public class PedidoBeans {
     private String hora;
     private double valor;
     private String status;
+    private List<Integer> codProduto;
+    private List<Integer> quantidade;
 
     public PedidoBeans() {
+        codProduto = new ArrayList<>();
+        quantidade = new ArrayList<>();
+    }
+
+    public int getCodProduto(int posicao) {
+        return codProduto.get(posicao);
+    }
+
+    public void setCodProduto(int codProduto) {
+        this.codProduto.add(codProduto);
+    }
+
+    public int getQuantidade(int posicao) {
+        return quantidade.get(posicao);
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade.add(quantidade);
     }
 
     /**
