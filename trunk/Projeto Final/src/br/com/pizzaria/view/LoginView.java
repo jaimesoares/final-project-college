@@ -42,6 +42,7 @@ public class LoginView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Acesso ao sistema");
+        setResizable(false);
 
         lblMensagem.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         lblMensagem.setForeground(new java.awt.Color(0, 204, 51));
@@ -272,7 +273,7 @@ public class LoginView extends javax.swing.JFrame {
         populaUsuarioBeans();
         if (usuarioController.verificaDados(momentUser)) {
 
-            UsuarioBeans usuarioBeans = usuarioController.controlePesquisa(momentUser);
+            UsuarioBeans usuarioBeans = usuarioController.controlePesquisaLogin(momentUser);
 
             if (usuarioBeans.getCodigo() == 0) {
                 lblMensagem.setText("Mensagem: Usuário não cadastrado!");

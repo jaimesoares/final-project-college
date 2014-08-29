@@ -16,6 +16,7 @@ public class PrincipalView extends javax.swing.JFrame {
     ProdutoView cardapioV;
     PedidoView pedidoV;
     SobreView sobreV;
+    UsuarioView usuarioV;
 
     public PrincipalView() {
         initComponents();
@@ -39,6 +40,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mniFuncionario = new javax.swing.JMenuItem();
         mniEntregador = new javax.swing.JMenuItem();
         mniCardapio = new javax.swing.JMenuItem();
+        mniUsuario = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -81,6 +83,14 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         JM_Manutencao.add(mniCardapio);
+
+        mniUsuario.setText("Usuário");
+        mniUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniUsuarioActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(mniUsuario);
 
         jMenuBar1.add(JM_Manutencao);
 
@@ -152,7 +162,7 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCardapioActionPerformed
 
     private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
-        pedidoV = new PedidoView();
+        pedidoV = new PedidoView(1);
         Desktop.add(pedidoV);
         pedidoV.setVisible(true);
     }//GEN-LAST:event_mniPedidoActionPerformed
@@ -161,6 +171,12 @@ public class PrincipalView extends javax.swing.JFrame {
         sobreV = new SobreView();
         sobreV.setVisible(true);
     }//GEN-LAST:event_mniSobreActionPerformed
+
+    private void mniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuarioActionPerformed
+        usuarioV = new UsuarioView();
+        Desktop.add(usuarioV);
+        usuarioV.setVisible(true);
+    }//GEN-LAST:event_mniUsuarioActionPerformed
 
     public static void main(String args[]) {
 
@@ -205,6 +221,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniFuncionario;
     private javax.swing.JMenuItem mniPedido;
     private javax.swing.JMenuItem mniSobre;
+    private javax.swing.JMenuItem mniUsuario;
     // End of variables declaration//GEN-END:variables
 
 }
