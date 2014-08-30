@@ -55,9 +55,9 @@ public class ClienteController {
      * @param pesquisa
      * @param lista para popular o comboBox da pesquisa
      */
-    public void controlePesquisa(String pesquisa, List<String> lista){
-        clienteModel.procuraCliente(pesquisa, lista);
-    }
+//    public void controlePesquisa(String pesquisa, List<String> lista) {
+//        clienteModel.procuraCliente(pesquisa, lista);
+//    }
     
     public ClienteBeans controlePreenchimento(int codigo){
         return clienteModel.preencherCampos(codigo);

@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package br.com.pizzaria.model;
+
+import br.com.pizzaria.util.ConectaBanco;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author katia
+ */
+public class CozinhaModel {
+
+    public CozinhaModel() {
+    }
+    
+    
+    public static void populaTabela(DefaultTableModel modelo) {
+        try {
+            String SQLSelection = "SELECT p.ped_cod, c.car_descricao, i.`item_quantidade`, p.ped_hora "
+                    +"FROM pedido p JOIN item i ON i.item_ped_cod = p.`ped_cod` "
+                    +"JOIN cardapio c ON c.`car_cod` = i.`item_car_cod` "
+                    +"WHERE p.`ped_status` = 'Pedido aberto' AND c.`car_tipo` = 'Pizza'"
+                    +"ORDER BY p.`ped_hora`;;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                modelo.addRow(new Object[]{rs.getString("ped_cod"),rs.getString("car_descricao"), rs.getInt("item_quantidade"), rs.getString("ped_hora")});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Cadastrar "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }
+    
+    
+//SELECT 
+//  p.ped_cod,
+//  c.car_descricao,
+//  i.`item_quantidade`,
+//  p.ped_hora 
+//FROM
+//  pedido p 
+//  JOIN item i 
+//    ON i.item_ped_cod = p.`ped_cod` 
+//  JOIN cardapio c 
+//    ON c.`car_cod` = i.`item_car_cod` 
+//WHERE p.`ped_status` = 'Pedido aberto' 
+//  AND c.`car_tipo` = 'Pizza' 
+//     ORDER BY p.`ped_hora`;
+}
