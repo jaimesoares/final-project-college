@@ -1,10 +1,12 @@
 package br.com.pizzaria.controller;
 
 import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.PedidoModel;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,9 +15,11 @@ import javax.swing.JOptionPane;
 public class PedidoController {
 
     PedidoModel pedidoModel;
+    ClienteModel clienteModel;
 
     public PedidoController() {
         pedidoModel = new PedidoModel();
+        clienteModel = new ClienteModel();
     }
 
     public void controleDeItens(String pesquisa, List<String> listaDeItens) {
@@ -65,8 +69,12 @@ public class PedidoController {
 
         return true;
     }
-    
-    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans){
+
+    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
         pedidoModel.cadastrarPedido(codigoCliente, codigoFuncioario, total, tamanhoTabela, pedidobeans);
+    }
+
+    public void controlePesquisa(String pesquisa, String tipo, List<String> lista) {
+        clienteModel.procuraCliente(pesquisa, tipo, lista);
     }
 }

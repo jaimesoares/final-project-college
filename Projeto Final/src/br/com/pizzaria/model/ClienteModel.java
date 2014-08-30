@@ -77,14 +77,23 @@ public class ClienteModel {
     }
 
     /**
-     * Método sobrescrito para trabalhar com
-     * a pesquisa da tela de pedido do cliente
+     * Método sobrescrito para trabalhar com a pesquisa da tela de pedido do
+     * cliente
+     *
      * @param pesquisa o nome dos clientes
+     * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
-    public void procuraCliente(String pesquisa, List<String> lista) {
+    public void procuraCliente(String pesquisa, String tipo, List<String> lista) {
+        String SQLSelection = "";
         try {
-            String SQLSelection = "select * from cliente where cli_nome like '%" + pesquisa + "%';";
+            if (tipo.equals("nome")) {
+                SQLSelection = "select * from cliente where cli_nome like '%" + pesquisa + "%';";
+            } else if (tipo.equals("telefone")) {
+                SQLSelection = "select * from cliente where cli_telefone like '%" + pesquisa + "%';";
+            } else {
+                SQLSelection = "select * from cliente where cli_rua like '%" + pesquisa + "%';";
+            }
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {

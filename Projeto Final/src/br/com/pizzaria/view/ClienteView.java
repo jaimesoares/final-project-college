@@ -93,6 +93,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txtPesquisar.setForeground(new java.awt.Color(0, 51, 255));
         txtPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisarActionPerformed(evt);
+            }
+        });
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPesquisarKeyReleased(evt);
@@ -327,6 +332,10 @@ public class ClienteView extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
