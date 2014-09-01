@@ -1,11 +1,11 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.util.FundoDeTela;
-import java.awt.Frame;
-import java.awt.GridBagLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 
 public class PrincipalView extends javax.swing.JFrame {
 
@@ -13,11 +13,13 @@ public class PrincipalView extends javax.swing.JFrame {
     ClienteView clienteV;
     FuncionarioView funcionarioV;
     EntregadorView entregadorV;
-    ProdutoView cardapioV;
+    ProdutoView produtoV;
     PedidoView pedidoV;
     SobreView sobreV;
     UsuarioView usuarioV;
     CozinhaView cozinhaV;
+    TipoDePedidoView tipoPedidoV;
+    BalcaoPedidoView balcaoV;
 
     public PrincipalView() {
         initComponents();
@@ -29,6 +31,9 @@ public class PrincipalView extends javax.swing.JFrame {
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
         Desktop.setVisible(true);
+        
+        tipoPedidoV = new TipoDePedidoView(Desktop);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -148,33 +153,61 @@ public class PrincipalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniClienteActionPerformed
-        clienteV = new ClienteView();
-        Desktop.add(clienteV);
-        clienteV.setVisible(true);
+        if (clienteV == null || !clienteV.isShowing()) {
+            clienteV = new ClienteView(PrincipalView.this);
+            Desktop.add(clienteV);
+            centralizaForm(clienteV);
+            clienteV.setVisible(true);
+        }
     }//GEN-LAST:event_mniClienteActionPerformed
 
     private void mniFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFuncionarioActionPerformed
-        funcionarioV = new FuncionarioView();
-        Desktop.add(funcionarioV);
-        funcionarioV.setVisible(true);
+        if (funcionarioV == null || !funcionarioV.isShowing()) {
+            funcionarioV = new FuncionarioView();
+            Desktop.add(funcionarioV);
+            centralizaForm(funcionarioV);
+            funcionarioV.setVisible(true);
+        }
     }//GEN-LAST:event_mniFuncionarioActionPerformed
 
     private void mniEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEntregadorActionPerformed
-        entregadorV = new EntregadorView();
-        Desktop.add(entregadorV);
-        entregadorV.setVisible(true);
+        if (entregadorV == null || !entregadorV.isShowing()) {
+            entregadorV = new EntregadorView();
+            Desktop.add(entregadorV);
+            centralizaForm(entregadorV);
+            entregadorV.setVisible(true);
+        }
     }//GEN-LAST:event_mniEntregadorActionPerformed
 
     private void mniCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCardapioActionPerformed
-        cardapioV = new ProdutoView();
-        Desktop.add(cardapioV);
-        cardapioV.setVisible(true);
+        if (produtoV == null || !produtoV.isShowing()) {
+            produtoV = new ProdutoView();
+            Desktop.add(produtoV);
+            centralizaForm(produtoV);
+            produtoV.setVisible(true);
+        }
     }//GEN-LAST:event_mniCardapioActionPerformed
 
     private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
-        pedidoV = new PedidoView(1);
-        Desktop.add(pedidoV);
-        pedidoV.setVisible(true);
+//        if (pedidoV == null || !pedidoV.isShowing()) {
+//            pedidoV = new PedidoView(1);
+//            Desktop.add(pedidoV);
+//            centralizaForm(pedidoV);
+//            pedidoV.setVisible(true);
+//        }
+
+        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {            
+            Desktop.add(tipoPedidoV);
+            centralizaForm(tipoPedidoV);
+            tipoPedidoV.setVisible(true);
+        }
+        
+//        if (balcaoV == null || !balcaoV.isShowing()) {
+//            balcaoV = new BalcaoPedidoView(1);
+//            Desktop.add(balcaoV);
+//            centralizaForm(balcaoV);
+//            balcaoV.setVisible(true);
+//        }
     }//GEN-LAST:event_mniPedidoActionPerformed
 
     private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
@@ -183,15 +216,19 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniSobreActionPerformed
 
     private void mniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuarioActionPerformed
-        usuarioV = new UsuarioView();
-        Desktop.add(usuarioV);
-        usuarioV.setVisible(true);
+        if (usuarioV == null || !usuarioV.isShowing()) {
+            usuarioV = new UsuarioView();
+            Desktop.add(usuarioV);
+            centralizaForm(usuarioV);
+            usuarioV.setVisible(true);
+        }
     }//GEN-LAST:event_mniUsuarioActionPerformed
 
     private void mniCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCozinhaActionPerformed
-        cozinhaV = new CozinhaView();
-        Desktop.add(cozinhaV);
-        cozinhaV.setVisible(true);
+        if (cozinhaV == null || !cozinhaV.isShowing()) {
+            cozinhaV = new CozinhaView();
+            cozinhaV.setVisible(true);
+        }
     }//GEN-LAST:event_mniCozinhaActionPerformed
 
     public static void main(String args[]) {
@@ -240,5 +277,12 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniSobre;
     private javax.swing.JMenuItem mniUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void centralizaForm(JInternalFrame frame) {
+        Dimension desktopSize = Desktop.getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
 
 }

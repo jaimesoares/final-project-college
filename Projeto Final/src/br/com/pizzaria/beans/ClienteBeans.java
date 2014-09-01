@@ -1,7 +1,7 @@
 package br.com.pizzaria.beans;
 
 public class ClienteBeans {
-    
+
     private int codigo;
     private String nome;
     private String rua;
@@ -9,8 +9,8 @@ public class ClienteBeans {
     private String telefone;
     private String dataCad;
 
-    public ClienteBeans() {        
-        
+    public ClienteBeans() {
+
     }
 
     public int getCodigo() {
@@ -60,6 +60,10 @@ public class ClienteBeans {
     public void setDataCad(String dataCad) {
         this.dataCad = dataCad;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return this.codigo + "";
+    }
+
 }

@@ -62,4 +62,9 @@ public class ProdutoBeans {
     public void setValor(double valor) {
         this.valor = valor;
     }
+    
+    @Override
+    public String toString(){
+        return this.codigo+"";
+    }
 }

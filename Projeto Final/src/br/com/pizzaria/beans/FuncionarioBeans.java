@@ -52,5 +52,10 @@ public class FuncionarioBeans {
         this.dataCad = dataCad;
     }
     
+    @Override
+    public String toString(){
+        return this.codigo+"";
+    }
+    
     
 }

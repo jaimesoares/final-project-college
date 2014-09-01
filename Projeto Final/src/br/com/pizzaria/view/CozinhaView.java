@@ -1,19 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.controller.CozinhaController;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
-public class CozinhaView extends javax.swing.JInternalFrame {
-
+public class CozinhaView extends javax.swing.JFrame {
+    
     CozinhaController cozinhaController;
     static DefaultTableModel modelo;
-    
+
     public CozinhaView() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         cozinhaController = new CozinhaController();
         modelo = (DefaultTableModel) tblPedido.getModel();
         populaTabela();
+    }
+    
+    public static void populaTabela(){
+        modelo.setNumRows(0);
+        CozinhaController.controleTabela(modelo); 
     }
 
     @SuppressWarnings("unchecked")
@@ -22,11 +34,12 @@ public class CozinhaView extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedido = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
 
-        setIconifiable(true);
-        setMaximizable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setAlwaysOnTop(true);
+        getContentPane().setLayout(new java.awt.GridLayout());
 
+        tblPedido.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         tblPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -43,53 +56,49 @@ public class CozinhaView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPedido.setRowHeight(40);
+        tblPedido.setRowMargin(10);
         jScrollPane1.setViewportView(tblPedido);
 
-        jButton1.setText("Pedido Pronto");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
-    public static void populaTabela(){
-        modelo.setNumRows(0);
-        CozinhaController.controleTabela(modelo); 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CozinhaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CozinhaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CozinhaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CozinhaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CozinhaView().setVisible(true);
+            }
+        });
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tblPedido;
     // End of variables declaration//GEN-END:variables

@@ -14,8 +14,8 @@ import javax.swing.text.MaskFormatter;
 public class ProdutoView extends javax.swing.JInternalFrame {
 
     MaskFormatter FormatoTelefone;
-    ProdutoBeans cardapioBeans;
-    ProdutoController cardapioController;
+    ProdutoBeans produtoBeans;
+    ProdutoController produtoController;
     DefaultTableModel modelo;
     DecimalFormat formatoDecimal;
 
@@ -23,8 +23,8 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         initComponents();
         modelo = (DefaultTableModel) tblFucnionario.getModel();
         habilitarCampos(false);
-        cardapioBeans = new ProdutoBeans();
-        cardapioController = new ProdutoController();
+        produtoBeans = new ProdutoBeans();
+        produtoController = new ProdutoController();
         formatoDecimal = new DecimalFormat("0.00");
 
     }
@@ -273,12 +273,12 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         habilitarCampos(true);
-        txtCodigo.setText(cardapioController.controleDeCodigo());
+        txtCodigo.setText(produtoController.controleDeCodigo());
         limpaNovo();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if (cardapioController.verificarDados(capturaBeans(), txtValor.getText())) {
+        if (produtoController.verificarDados(capturaBeans(), txtValor.getText())) {
             limpaTudo();
             habilitarCampos(false);
         }
@@ -288,20 +288,20 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
         modelo.setNumRows(0);
-       cardapioController.controlePesquisa(txfPesquisar.getText(), modelo);
+       produtoController.controlePesquisa(txfPesquisar.getText(), modelo);
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void tblFucnionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFucnionarioMousePressed
-        cardapioBeans = cardapioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
-        txtCodigo.setText(cardapioBeans.getCodigo() + "");
-        txaDescricao.setText(cardapioBeans.getDescricao());
-        txtValor.setText(cardapioBeans.getValor()+"");
-        cbTipo.setSelectedItem(cardapioBeans.getTipo());
+        produtoBeans = produtoController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
+        txtCodigo.setText(produtoBeans.getCodigo() + "");
+        txaDescricao.setText(produtoBeans.getDescricao());
+        txtValor.setText(produtoBeans.getValor()+"");
+        cbTipo.setSelectedItem(produtoBeans.getTipo());
 
     }//GEN-LAST:event_tblFucnionarioMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (cardapioController.verificarDadosParaEditar(capturaBeans(), txtValor.getText())) {
+        if (produtoController.verificarDadosParaEditar(capturaBeans(), txtValor.getText())) {
             limpaTudo();
             habilitarCampos(false);
         }
@@ -368,12 +368,12 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 //    }
 //    
     final ProdutoBeans capturaBeans() {
-        cardapioBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        cardapioBeans.setDescricao(txaDescricao.getText());
-        cardapioBeans.setTipo(cbTipo.getSelectedItem().toString());
-        cardapioBeans.setValor(Double.parseDouble(txtValor.getText()));
 
-        return cardapioBeans;
+        produtoBeans.setDescricao(txaDescricao.getText());
+        produtoBeans.setTipo(cbTipo.getSelectedItem().toString());
+        produtoBeans.setValor(Double.parseDouble(txtValor.getText()));
+
+        return produtoBeans;
     }
 
     final void limpaTudo() {
