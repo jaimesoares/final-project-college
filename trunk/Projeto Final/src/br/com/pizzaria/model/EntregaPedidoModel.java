@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class PedidoModel {
+public class EntregaPedidoModel {
 
-    public PedidoModel() {
+    public EntregaPedidoModel() {
     }
 
     public void pesquisaItens(String pesquisa, List<String> listaDeItens) {
@@ -27,7 +27,7 @@ public class PedidoModel {
                 listaDeItens.add(rs.getString("car_descricao"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -42,7 +42,7 @@ public class PedidoModel {
                 return rs.getDouble("car_valor");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
@@ -58,7 +58,7 @@ public class PedidoModel {
                 return rs.getInt("car_cod");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
@@ -72,7 +72,7 @@ public class PedidoModel {
             String SQLInserePedido = "insert into pedido(ped_cli_cod, ped_fun_cod, ped_ent_cod, ped_data, ped_hora, ped_total, ped_status)"
                     + "values (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
-            pstmt.setInt(1, pedidobeans.getCodigoCliente());
+            pstmt.setString(1, codigoCliente);
             pstmt.setString(2, codigoFuncioario);
             pstmt.setString(3, "0");
             pstmt.setString(4, formatoData.format(data));
@@ -81,7 +81,7 @@ public class PedidoModel {
             pstmt.setString(7, "Pedido aberto");
 
             pstmt.execute();
-            cadastrarItens(pedidobeans.getCodigoCliente(), codigoFuncioario, codigoDoPedido(), tamanhoTabela, pedidobeans);
+            cadastrarItens(codigoCliente, codigoFuncioario, codigoDoPedido(), tamanhoTabela, pedidobeans);
             //codigoDoPedido();
             ConectaBanco.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
@@ -90,7 +90,7 @@ public class PedidoModel {
                 ConectaBanco.getConnection().rollback();
                 JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
             } catch (SQLException ex1) {
-                Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
     }
@@ -108,13 +108,13 @@ public class PedidoModel {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         //JOptionPane.showMessageDialog(null, codigo);
         return codigo;
     }
     
-    public void cadastrarItens(int codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBeans pedidoBeans){
+    public void cadastrarItens(String codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBeans pedidoBeans){
         for(int i=0; i< tamanhoTabela; i++){
             try {
                 String SQLInsertItens = "insert into item(item_ped_ent_cod, item_ped_fun_cod, item_ped_cli_cod, item_ped_cod, item_car_cod, item_quantidade)"
@@ -123,7 +123,7 @@ public class PedidoModel {
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
                 pstmt.setString(1, "0");
                 pstmt.setString(2, codigoFuncioario);
-                pstmt.setInt(3, codigoCliente);
+                pstmt.setString(3, codigoCliente);
                 pstmt.setString(4, codigoPedido);
                 pstmt.setInt(5, pedidoBeans.getCodProduto(i));
                 pstmt.setInt(6, pedidoBeans.getQuantidade(i));
@@ -134,7 +134,7 @@ public class PedidoModel {
                 ConectaBanco.getConnection().rollback();
                 JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
             } catch (SQLException ex1) {
-                Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
             }
             }
         }

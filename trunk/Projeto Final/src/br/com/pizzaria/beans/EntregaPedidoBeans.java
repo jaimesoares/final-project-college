@@ -3,7 +3,7 @@ package br.com.pizzaria.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PedidoBeans {
+public class EntregaPedidoBeans {
     
     private int codigoPedido;
     private int codigoCliente;
@@ -16,7 +16,7 @@ public class PedidoBeans {
     private List<Integer> codProduto;
     private List<Integer> quantidade;
 
-    public PedidoBeans() {
+    public EntregaPedidoBeans() {
         codProduto = new ArrayList<>();
         quantidade = new ArrayList<>();
     }

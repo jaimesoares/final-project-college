@@ -4,6 +4,7 @@ import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificadoresECorretores;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -14,14 +15,17 @@ public class ClienteView extends javax.swing.JInternalFrame {
     ClienteBeans clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
+    JFrame frame;
 
-    public ClienteView() {
+    public ClienteView(JFrame frame) {
         initComponents();
+        this.frame = frame;
         habilitarCampos(false);
 
         clienteBeans = new ClienteBeans();
         clienteController = new ClienteController();
         modelo = (DefaultTableModel) tblFuncionario.getModel();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -377,7 +381,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         clienteBeans.setBairro(txtBairro.getText());
         clienteBeans.setTelefone(txfTelefone.getText());
         clienteBeans.setDataCad(txtData.getText());
-
+        System.out.println(clienteBeans);
         return clienteBeans;
 
     }
@@ -399,8 +403,8 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }
 
     public static void main(String args[]) {
-        ClienteView cliente = new ClienteView();
-        cliente.setVisible(true);
+//        ClienteView cliente = new ClienteView();
+//        cliente.setVisible(true);
     }
 
 }

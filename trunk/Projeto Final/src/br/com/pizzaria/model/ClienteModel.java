@@ -68,6 +68,7 @@ public class ClienteModel {
             String SQLSelection = "select * from cliente where cli_nome like '%" + pesquisa + "%';";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
+            if(pesquisa.equals("")){rs.next();}
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
             }
@@ -80,7 +81,7 @@ public class ClienteModel {
      * Método sobrescrito para trabalhar com a pesquisa da tela de pedido do
      * cliente
      *
-     * @param pesquisa o nome dos clientes
+     * @param pesquisa o nome dos clientes para o pedido
      * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
@@ -96,7 +97,8 @@ public class ClienteModel {
             }
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
+            if(pesquisa.equals("")){rs.next();}
+            while (rs.next()) {                
                 lista.add(rs.getString("cli_cod") + " - " + rs.getString("cli_nome"));
             }
         } catch (SQLException ex) {

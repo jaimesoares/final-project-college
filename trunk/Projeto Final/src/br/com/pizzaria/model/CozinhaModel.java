@@ -30,7 +30,7 @@ public class CozinhaModel {
                     +"FROM pedido p JOIN item i ON i.item_ped_cod = p.`ped_cod` "
                     +"JOIN cardapio c ON c.`car_cod` = i.`item_car_cod` "
                     +"WHERE p.`ped_status` = 'Pedido aberto' AND c.`car_tipo` = 'Pizza'"
-                    +"ORDER BY p.`ped_hora`;;";
+                    +"ORDER BY p.`ped_hora`;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
