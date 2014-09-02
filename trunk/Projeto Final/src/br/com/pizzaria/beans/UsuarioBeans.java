@@ -29,4 +29,9 @@ public class UsuarioBeans {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+    
+    @Override
+    public String toString(){
+        return this.codigo+"";
+    }
 }

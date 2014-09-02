@@ -20,6 +20,7 @@ public class PrincipalView extends javax.swing.JFrame {
     CozinhaView cozinhaV;
     TipoDePedidoView tipoPedidoV;
     BalcaoPedidoView balcaoV;
+    ModuloView moduloV;
 
     public PrincipalView() {
         initComponents();
@@ -47,6 +48,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mniEntregador = new javax.swing.JMenuItem();
         mniCardapio = new javax.swing.JMenuItem();
         mniUsuario = new javax.swing.JMenuItem();
+        mniModulo = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
@@ -98,6 +100,14 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         JM_Manutencao.add(mniUsuario);
+
+        mniModulo.setText("Módulo");
+        mniModulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniModuloActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(mniModulo);
 
         jMenuBar1.add(JM_Manutencao);
 
@@ -231,6 +241,15 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mniCozinhaActionPerformed
 
+    private void mniModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniModuloActionPerformed
+        if (moduloV == null || !moduloV.isShowing()) {
+            moduloV = new ModuloView();
+            Desktop.add(moduloV);
+            centralizaForm(moduloV);
+            moduloV.setVisible(true);
+        }
+    }//GEN-LAST:event_mniModuloActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -273,6 +292,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniCozinha;
     private javax.swing.JMenuItem mniEntregador;
     private javax.swing.JMenuItem mniFuncionario;
+    private javax.swing.JMenuItem mniModulo;
     private javax.swing.JMenuItem mniPedido;
     private javax.swing.JMenuItem mniSobre;
     private javax.swing.JMenuItem mniUsuario;
