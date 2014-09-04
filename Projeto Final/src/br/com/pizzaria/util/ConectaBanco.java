@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConectaBanco {
+public class ConectaBanco implements AutoCloseable {
 
     private final String url = "jdbc:mysql://localhost/pizzaria_mama";
     private final String driverName = "com.mysql.jdbc.Driver";
@@ -41,6 +41,11 @@ public class ConectaBanco {
 
     public static void main(String args[]) {
         ConectaBanco.getConnection();
+    }
+
+    @Override
+    public void close() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -11,9 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ClienteModel {
+public class CargoModel {
 
-    public ClienteModel() {
+    public CargoModel() {
 
     }
 

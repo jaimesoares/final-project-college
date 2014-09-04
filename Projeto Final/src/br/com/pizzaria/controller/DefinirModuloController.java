@@ -9,11 +9,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ModuloController {
+public class DefinirModuloController {
 
     DefinirModuloModel moduloModel;
 
-    public ModuloController() {
+    public DefinirModuloController() {
         moduloModel = new DefinirModuloModel();
     }
 

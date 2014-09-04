@@ -20,7 +20,9 @@ public class PrincipalView extends javax.swing.JFrame {
     CozinhaView cozinhaV;
     TipoDePedidoView tipoPedidoV;
     BalcaoPedidoView balcaoV;
-    ModuloView moduloV;
+    DefinirModuloView moduloV;
+    FornecedorView fornecedorV;
+    CargoView cargoV;
 
     public PrincipalView() {
         initComponents();
@@ -49,6 +51,8 @@ public class PrincipalView extends javax.swing.JFrame {
         mniCardapio = new javax.swing.JMenuItem();
         mniUsuario = new javax.swing.JMenuItem();
         mniModulo = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
@@ -108,6 +112,22 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         JM_Manutencao.add(mniModulo);
+
+        jMenuItem1.setText("Fornecedor");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(jMenuItem1);
+
+        jMenuItem2.setText("Cargo");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(jMenuItem2);
 
         jMenuBar1.add(JM_Manutencao);
 
@@ -243,12 +263,30 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void mniModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniModuloActionPerformed
         if (moduloV == null || !moduloV.isShowing()) {
-            moduloV = new ModuloView();
+            moduloV = new DefinirModuloView();
             Desktop.add(moduloV);
             centralizaForm(moduloV);
             moduloV.setVisible(true);
         }
     }//GEN-LAST:event_mniModuloActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (fornecedorV == null || !fornecedorV.isShowing()) {
+            fornecedorV = new FornecedorView();
+            Desktop.add(fornecedorV);
+            centralizaForm(fornecedorV);
+            fornecedorV.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if (cargoV == null || !cargoV.isShowing()) {
+            cargoV = new CargoView();
+            Desktop.add(cargoV);
+            centralizaForm(cargoV);
+            cargoV.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void main(String args[]) {
 
@@ -286,6 +324,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu JM_Movimentacao;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnSobre;
     private javax.swing.JMenuItem mniCardapio;
     private javax.swing.JMenuItem mniCliente;
