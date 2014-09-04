@@ -1,20 +1,18 @@
 package br.com.pizzaria.controller;
 
 import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.model.ClienteModel;
-import br.com.pizzaria.model.DefinirModuloModel;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ModuloController {
+public class CargoController {
 
-    DefinirModuloModel moduloModel;
+    ClienteModel clienteModel;
 
-    public ModuloController() {
-        moduloModel = new DefinirModuloModel();
+    public CargoController() {
+        clienteModel = new ClienteModel();
     }
 
     public boolean verificarDados(ClienteBeans cliente) {
@@ -39,17 +37,16 @@ public class ModuloController {
             return false;
         }        
 
-      //  moduloModel.cadastrarCliente(cliente);
+        clienteModel.cadastrarCliente(cliente);
         return true;
     }
 
     public String controleDeCodigo() {
-     //   return moduloModel.proximoCliente();
-        return null;
+        return clienteModel.proximoCliente();
     }
     
     public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
-      //  moduloModel.procuraCliente(pesquisa, modelo);
+        clienteModel.procuraCliente(pesquisa, modelo);
     }
     
     /**
@@ -58,12 +55,12 @@ public class ModuloController {
      * @param pesquisa
      * @param lista para popular o comboBox da pesquisa
      */
-    public void controlePesquisa(List<UsuarioBeans> lista) {
-        moduloModel.procuraCliente(lista);
-    }
+//    public void controlePesquisa(String pesquisa, List<String> lista) {
+//        clienteModel.procuraCliente(pesquisa, lista);
+//    }
     
     public ClienteBeans controlePreenchimento(int codigo){
-        return moduloModel.preencherCampos(codigo);
+        return clienteModel.preencherCampos(codigo);
     }
     
     public boolean verificarDadosParaEditar(ClienteBeans cliente) {
@@ -90,7 +87,7 @@ public class ModuloController {
 
         
 
-        moduloModel.editarCliente(cliente);
+        clienteModel.editarCliente(cliente);
         return true;
     }
 }

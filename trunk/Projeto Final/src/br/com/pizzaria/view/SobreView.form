@@ -48,7 +48,8 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Edson de Moraes:&#xa;RGM: 135623-2   &#xa;email: edmoralles@hotmail.com&#xa;&#xa;Antonio Firmino:&#xa;RGM 80432-1 &#xa;Email: firmino.santos@panco.com.br&#xa;&#xa;Jaime Cangussu:&#xa;RGM 90096-6  &#xa;Email: jaime.sistema@gmail.com&#xa;&#xa;Guilherme:&#xa;RGM   ??????&#xa;Email:financeiro@contmarvel.com.br &#xa;&#xa;Lucas Correia:&#xa;RGM: 132820-4&#xa;email: lcsilva10@gmail.com"/>
+            <Property name="text" type="java.lang.String" value="Edson de Moraes:&#xa;RGM: 135623-2   &#xa;email: edmoralles@hotmail.com&#xa;&#xa;Antonio Firmino:&#xa;RGM 80432-1 &#xa;Email: firmino.santos@panco.com.br&#xa;&#xa;Jaime Cangussu:&#xa;RGM 90096-6  &#xa;Email: jaime.sistema@gmail.com&#xa;&#xa;Guilherme:&#xa;RGM   135922-3&#xa;Email:financeiro@contmarvel.com.br &#xa;&#xa;Lucas Correia:&#xa;RGM: 132820-4&#xa;email: lcsilva10@gmail.com"/>
+            <Property name="autoscrolls" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

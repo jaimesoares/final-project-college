@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-public class ModuloView extends javax.swing.JInternalFrame {
+public class CargoView extends javax.swing.JInternalFrame {
 
     MaskFormatter FormatoTelefone;
     ClienteBeans clienteBeans;
@@ -14,7 +14,7 @@ public class ModuloView extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
     JFrame frame;
 
-    public ModuloView() {
+    public CargoView() {
         initComponents();
         this.frame = frame;
         habilitarCampos(false);
