@@ -1,93 +1,43 @@
 package br.com.pizzaria.controller;
 
+import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.model.CargoModel;
 import br.com.pizzaria.model.ClienteModel;
-import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CargoController {
 
-    ClienteModel clienteModel;
+    CargoModel cargoModel;
 
     public CargoController() {
-        clienteModel = new ClienteModel();
+        cargoModel = new CargoModel();
     }
 
-    public boolean verificarDados(ClienteBeans cliente) {
-        if (cliente.getNome().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'NOME' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+    public boolean verificarDados(CargoBeans cargo) {
+        if (cargo.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Descrição' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'RUA' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-
-            return false;
-        }
-
-        if (cliente.getBairro().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'BAIRRO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        if (cliente.getTelefone().equals("(  )    -    ")) {
-            JOptionPane.showMessageDialog(null, "Campo 'TELEFONE' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }        
-
-        clienteModel.cadastrarCliente(cliente);
+        cargoModel.cadastrarCargo(cargo);
         return true;
     }
 
-    public String controleDeCodigo() {
-        return clienteModel.proximoCliente();
+    public void controleListaCargo(DefaultListModel modelo) {
+        cargoModel.populaListaCargo(modelo);
     }
-    
-    public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
-        clienteModel.procuraCliente(pesquisa, modelo);
-    }
-    
-    /**
-     * Método sobrescrito para trabalhar com a tela 
-     * de pedido do cliente
-     * @param pesquisa
-     * @param lista para popular o comboBox da pesquisa
-     */
-//    public void controlePesquisa(String pesquisa, List<String> lista) {
-//        clienteModel.procuraCliente(pesquisa, lista);
-//    }
-    
-    public ClienteBeans controlePreenchimento(int codigo){
-        return clienteModel.preencherCampos(codigo);
-    }
-    
-    public boolean verificarDadosParaEditar(ClienteBeans cliente) {
-        if (cliente.getNome().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo \"NOME\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+
+    public boolean verificarDadosParaEditar(CargoBeans cargo) {
+        if (cargo.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo \"Descrição\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo \"RUA\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-
-            return false;
-        }
-
-        if (cliente.getBairro().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo \"BAIRRO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        if (cliente.getTelefone().equals("(  )    -    ")) {
-            JOptionPane.showMessageDialog(null, "Campo \"TELEFONE\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        
-
-        clienteModel.editarCliente(cliente);
+        cargoModel.editarCargo(cargo);
         return true;
     }
 }

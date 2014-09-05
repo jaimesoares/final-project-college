@@ -264,7 +264,7 @@ public class LoginView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     final void populaUsuarioBeans() {
-        momentUser.setUsuario(this.txtUsuario.getText());
+        momentUser.setLogin(this.txtUsuario.getText());
         momentUser.setSenha(String.valueOf(this.txtSenha.getPassword()));
     }
 
@@ -275,7 +275,7 @@ public class LoginView extends javax.swing.JFrame {
 
             UsuarioBeans usuarioBeans = usuarioController.controlePesquisaLogin(momentUser);
 
-            if (usuarioBeans.getCodigo() == 0) {
+            if (usuarioBeans.getCodigoFuncionario() == 0) {
                 lblMensagem.setText("Mensagem: Usuário não cadastrado!");
                 lblMensagem.setVisible(true);
                 thread = new ThreadTempo(lblMensagem);

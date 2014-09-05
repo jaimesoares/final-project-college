@@ -6,6 +6,11 @@ public class ProdutoBeans {
     private String descricao;
     private String tipo;
     private double valor;
+    int codigoFornecedor;
+    double qtdMinima;
+    char avisaEstoqueMinimo;
+    double valorCompra;
+    double qtdSaldoEstoque;
 
     /**
      * @return the codigo
@@ -49,6 +54,13 @@ public class ProdutoBeans {
         this.tipo = tipo;
     }
 
+    
+    
+    @Override
+    public String toString(){
+        return this.codigo+"";
+    }
+
     /**
      * @return the valor
      */
@@ -61,10 +73,5 @@ public class ProdutoBeans {
      */
     public void setValor(double valor) {
         this.valor = valor;
-    }
-    
-    @Override
-    public String toString(){
-        return this.codigo+"";
     }
 }

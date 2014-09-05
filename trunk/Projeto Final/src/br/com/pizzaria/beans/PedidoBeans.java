@@ -7,7 +7,7 @@ public class PedidoBeans {
     
     private int codigoPedido;
     private int codigoCliente;
-    private int codigoFuncionario;
+    private int codigoUsuario;
     private int codigoEntregador;
     private String data;
     private String hora;
@@ -15,6 +15,8 @@ public class PedidoBeans {
     private String status;
     private List<Integer> codProduto;
     private List<Integer> quantidade;
+    String obs;
+    double valorDesc;
 
     public PedidoBeans() {
         codProduto = new ArrayList<>();
@@ -66,17 +68,17 @@ public class PedidoBeans {
     }
 
     /**
-     * @return the codigoFuncionario
+     * @return the codigoUsuario
      */
-    public int getCodigoFuncionario() {
-        return codigoFuncionario;
+    public int getCodigoUsuario() {
+        return codigoUsuario;
     }
 
     /**
-     * @param codigoFuncionario the codigoFuncionario to set
+     * @param codigoUsuario the codigoUsuario to set
      */
-    public void setCodigoFuncionario(int codigoFuncionario) {
-        this.codigoFuncionario = codigoFuncionario;
+    public void setCodigoUsuario(int codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
     }
 
     /**

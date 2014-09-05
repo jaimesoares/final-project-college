@@ -1,26 +1,24 @@
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.controller.ClienteController;
+import br.com.pizzaria.controller.CargoController;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 public class CargoView extends javax.swing.JInternalFrame {
 
-    MaskFormatter FormatoTelefone;
-    ClienteBeans clienteBeans;
-    ClienteController clienteController;
-    DefaultTableModel modelo;
-    JFrame frame;
+    CargoBeans cargoBeans;
+    CargoController cargoController;
+    DefaultListModel modelo;
 
     public CargoView() {
         initComponents();
-        this.frame = frame;
-        habilitarCampos(false);
 
-        clienteBeans = new ClienteBeans();
-        clienteController = new ClienteController();
+        cargoBeans = new CargoBeans();
+        cargoController = new CargoController();
+        modelo = new DefaultListModel();
         
     }
 
@@ -28,16 +26,13 @@ public class CargoView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbl_codigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        sep_codigo = new javax.swing.JSeparator();
-        btnNovo = new javax.swing.JButton();
+        txtCargo = new javax.swing.JTextField();
+        btnAdicionar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstCargo = new javax.swing.JList();
         sep_codigo1 = new javax.swing.JSeparator();
 
         setClosable(true);
@@ -50,22 +45,13 @@ public class CargoView extends javax.swing.JInternalFrame {
             e1.printStackTrace();
         }
 
-        lbl_codigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_codigo.setText("Código");
-
-        txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtCodigo.setForeground(new java.awt.Color(255, 51, 51));
-        txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Função");
+        jLabel1.setText("Função / Cargo");
 
-        btnNovo.setText("+");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionar.setText("+");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+                btnAdicionarActionPerformed(evt);
             }
         });
 
@@ -76,22 +62,19 @@ public class CargoView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEditar.setText("-");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnRemover.setText("-");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnRemoverActionPerformed(evt);
             }
         });
 
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(lstCargo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtCodigo)
-            .addComponent(sep_codigo)
-            .addComponent(lbl_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(sep_codigo1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -100,144 +83,93 @@ public class CargoView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNome)
+                    .addComponent(txtCargo)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovo)
+                        .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditar)
+                        .addComponent(btnRemover)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(btnFechar)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnNovo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lbl_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sep_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sep_codigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnEditar)
+                    .addComponent(btnAdicionar)
+                    .addComponent(btnRemover)
                     .addComponent(btnFechar))
-                .addGap(40, 40, 40))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-//        if (btnFechar.getText().equals("Cancelar")) {
-//            limpaTudo();
-//            if (btnEditar.getText().equals("Salvar")) {
-//                btnEditar.setText("Editar");
-//                btnNovo.setEnabled(true);
-//                habilitarCampos(false);
-//            } else {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//                habilitarCampos(false);
-//            }
-//            btnFechar.setText("Fechar");
-//        } else {
+
             this.dispose();
-//        }
+
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-//        if (btnNovo.getText().equals("Novo")) {
-//            btnNovo.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnEditar.setEnabled(false);
-//            modelo.setNumRows(0);
-//            habilitarCampos(true);
-//            txtNome.requestFocus();
-//            txtCodigo.setText(clienteController.controleDeCodigo());
-//            limpaNovo();
-//        } else {
-//
-//            populaClienteBeans();
-//            if (clienteController.verificarDados(clienteBeans)) {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//             
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
 
-    }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-//
-//        if (btnEditar.getText().equals("Editar")) {
-//            btnEditar.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnNovo.setEnabled(false);
-//            habilitarCampos(true);
-//        } else {
-//            if (clienteController.verificarDadosParaEditar(populaClienteBeans())) {
-//                btnEditar.setText("Editar");
-//                btnFechar.setText("Fechar");
-//                btnNovo.setEnabled(true);
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+
+
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbl_codigo;
-    private javax.swing.JSeparator sep_codigo;
+    private javax.swing.JList lstCargo;
     private javax.swing.JSeparator sep_codigo1;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtCargo;
     // End of variables declaration//GEN-END:variables
 
     final void habilitarCampos(boolean valor) {
-        txtNome.setEditable(valor);
+        txtCargo.setEditable(valor);
         
     }
 
-    final ClienteBeans populaClienteBeans() {
-        clienteBeans.setNome(txtNome.getText());
+    final CargoBeans populaClienteBeans() {
+        cargoBeans.setDescricao(txtCargo.getText());
         
-        System.out.println(clienteBeans);
-        return clienteBeans;
+        System.out.println(cargoBeans);
+        return cargoBeans;
 
     }
 
     final void limpaTudo() {
-        txtNome.setText("");
-        txtCodigo.setText("");
+        txtCargo.setText("");
     }
 
     final void limpaNovo() {
-        txtNome.setText("");
+        txtCargo.setText("");
        
+    }
+    
+    public void carregaListaCargo(){
+        cargoController.controleListaCargo(modelo);
+        lstCargo.setModel(modelo);
     }
 
     public static void main(String args[]) {

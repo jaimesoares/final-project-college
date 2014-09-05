@@ -4,10 +4,14 @@ public class FornecedorBeans {
     
     private int codigo;
     private String nome;
-    private String rua;
-    private String bairro;
+    private String pfj;
     private String telefone;
     private String dataCad;
+    private int cep;
+    private int numero;
+    private String email;
+    private String telCelular;
+    private String contato;
 
     public FornecedorBeans() {        
         
@@ -29,20 +33,12 @@ public class FornecedorBeans {
         this.nome = nome;
     }
 
-    public String getRua() {
-        return rua;
+    public String getPfj() {
+        return pfj;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setPfj(String pfj) {
+        this.pfj = pfj;
     }
 
     public String getTelefone() {
@@ -60,6 +56,80 @@ public class FornecedorBeans {
     public void setDataCad(String dataCad) {
         this.dataCad = dataCad;
     }
+
+    /**
+     * @return the cep
+     */
+    public int getCep() {
+        return cep;
+    }
+
+    /**
+     * @param cep the cep to set
+     */
+    public void setCep(int cep) {
+        this.cep = cep;
+    }
+
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the telCelular
+     */
+    public String getTelCelular() {
+        return telCelular;
+    }
+
+    /**
+     * @param telCelular the telCelular to set
+     */
+    public void setTelCelular(String telCelular) {
+        this.telCelular = telCelular;
+    }
+
+    /**
+     * @return the contato
+     */
+    public String getContato() {
+        return contato;
+    }
+
+    /**
+     * @param contato the contato to set
+     */
+    public void setContato(String contato) {
+        this.contato = contato;
+    }
     
+    @Override
+    public String toString(){
+        return this.codigo+"";
+    }
     
 }

@@ -251,7 +251,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
     private void tblFucnionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFucnionarioMousePressed
         usuarioBeans = usuarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
-        txtLogin.setText(usuarioBeans.getUsuario());
+        txtLogin.setText(usuarioBeans.getLogin());
     }//GEN-LAST:event_tblFucnionarioMousePressed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -342,8 +342,8 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
     public UsuarioBeans populaUsuarioBeans() {
         usuarioBeans.setSenha(new String(pswSenha.getPassword()));
-        usuarioBeans.setUsuario(txtLogin.getText());
-        usuarioBeans.setCodigo(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
+        usuarioBeans.setLogin(txtLogin.getText());
+        usuarioBeans.setCodigoFuncionario(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
         return usuarioBeans;
     }
 

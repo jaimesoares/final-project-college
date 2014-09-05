@@ -553,13 +553,13 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAdiciona)
                         .addComponent(btnRemove)
                         .addComponent(btnCalcular)
-                        .addComponent(lblTotal)))
+                        .addComponent(lblTotal))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -631,12 +631,12 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             String codigo = cbPesquisa.getSelectedItem().toString();
             codigo = codigo.substring(0, codigo.indexOf(" "));
             clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(codigo));
-            txtCodigoCliente.setText(clienteBeans.getCodigo() + "");
+            txtCodigoCliente.setText(clienteBeans.getCodigoCliente() + "");
             txtNome.setText(clienteBeans.getNome());
             txtRua.setText(clienteBeans.getRua());
             txtBairro.setText(clienteBeans.getBairro());
             txfTelefone.setText(clienteBeans.getTelefone());
-            txtData.setText(clienteBeans.getDataCad());
+            txtData.setText(clienteBeans.getDataCadastro());
             txtCliente.setText(clienteBeans.getNome());
             btnContinuarPedido.setEnabled(true);
         }
@@ -723,29 +723,29 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
-        if (btnNovoCliente.getText().equals("Novo Cliente")) {
-            btnNovoCliente.setText("Salvar");
-            btnFechar.setText("Cancelar");
-            btnContinuarPedido.setEnabled(false);
-            btnPesquisar.setEnabled(false);
-            cbSelecionar.removeAllItems();
-            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
-            habilitarCampos(true);
-            txtNome.requestFocus();
-            txtCodigoCliente.setText(clienteController.controleDeCodigo());
-            limpaNovo();
-        } else {
-
-            populaClienteBeans();
-            if (clienteController.verificarDados(clienteBeans)) {
-                btnNovoCliente.setText("Novo Cliente");
-                btnFechar.setText("Fechar");
-                btnContinuarPedido.setEnabled(true);
-                btnPesquisar.setEnabled(true);
-                limpaTudo();
-                habilitarCampos(false);
-            }
-        }
+//        if (btnNovoCliente.getText().equals("Novo Cliente")) {
+//            btnNovoCliente.setText("Salvar");
+//            btnFechar.setText("Cancelar");
+//            btnContinuarPedido.setEnabled(false);
+//            btnPesquisar.setEnabled(false);
+//            cbSelecionar.removeAllItems();
+//            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+//            habilitarCampos(true);
+//            txtNome.requestFocus();
+//            txtCodigoCliente.setText(clienteController.controleDeCodigo());
+//            limpaNovo();
+//        } else {
+//
+//            populaClienteBeans();
+//            if (clienteController.verificarDados(clienteBeans)) {
+//                btnNovoCliente.setText("Novo Cliente");
+//                btnFechar.setText("Fechar");
+//                btnContinuarPedido.setEnabled(true);
+//                btnPesquisar.setEnabled(true);
+//                limpaTudo();
+//                habilitarCampos(false);
+//            }
+//        }
     }//GEN-LAST:event_btnNovoClienteActionPerformed
 
     private void txtValorRecebidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyReleased
@@ -846,7 +846,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     final void populaPedidoBeans() {
         dataAtual = new Date();
         pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
-        pedidoBeans.setCodigoFuncionario(codigoFuncionario);
+        pedidoBeans.setCodigoUsuario(codigoFuncionario);
         pedidoBeans.setCodigoEntregador(0);
         pedidoBeans.setData(formatoData.format(dataAtual));
         pedidoBeans.setData(formatoHora.format(dataAtual));
@@ -885,7 +885,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         clienteBeans.setRua(txtRua.getText());
         clienteBeans.setBairro(txtBairro.getText());
         clienteBeans.setTelefone(txfTelefone.getText());
-        clienteBeans.setDataCad(txtData.getText());
+        clienteBeans.setDataCadastro(txtData.getText());
 
         return clienteBeans;
 

@@ -17,27 +17,35 @@ public class ClienteModel {
 
     }
 
-    public void cadastrarCliente(ClienteBeans clienteBeans) {
+    public boolean cadastrarCliente(ClienteBeans clienteBeans) {
 
-        String SQLInsertion = "INSERT INTO `cliente`(`cli_nome`,`cli_rua`,`cli_bairro`,"
-                + "`cli_telefone`,`cli_datacad`)"
-                + "VALUES (?,?,?,?,?);";
+        String SQLInsertion = "INSERT INTO `cliente`(`cli_nome`,`cli_cep`,`cli_nro_ender`,"
+                + "`cli_email`,`cli_telefone`,`cli_tel_cel`,`cli_aniversario`,`cli_datacad`,"
+                + "`cli_rua`,`cli_bairro`,`cli_obs`)"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion)) {
 
             pstm.setString(1, clienteBeans.getNome());
-            pstm.setString(2, clienteBeans.getRua());
-            pstm.setString(3, clienteBeans.getBairro());
-            pstm.setString(4, clienteBeans.getTelefone());
-            pstm.setString(5, VerificadoresECorretores.converteParaSql(clienteBeans.getDataCad()));
+            pstm.setInt(2, clienteBeans.getCep());
+            pstm.setInt(3, clienteBeans.getNumero());
+            pstm.setString(4, clienteBeans.getEmail());
+            pstm.setString(5, clienteBeans.getTelefone());
+            pstm.setString(6, clienteBeans.getTelCelular());
+            pstm.setString(7, VerificadoresECorretores.converteParaSql(clienteBeans.getAniversario()));
+            pstm.setString(8, VerificadoresECorretores.converteParaSql(clienteBeans.getDataCadastro()));
+            pstm.setString(9, clienteBeans.getRua());
+            pstm.setString(10, clienteBeans.getBairro());
+            pstm.setString(11, clienteBeans.getObservacao());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
-
+            return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar" + ex.getMessage(), "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
         }
 
     }
@@ -71,9 +79,9 @@ public class ClienteModel {
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
             ResultSet rs = pstm.executeQuery();
-            if (pesquisa.equals("")) {
-                rs.next();
-            }
+//            if (pesquisa.equals("")) {
+//                rs.next();
+//            }
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
             }
@@ -126,12 +134,18 @@ public class ClienteModel {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                clienteBeans.setCodigo(rs.getInt("cli_cod"));
+                clienteBeans.setObservacao(rs.getString("cli_obs"));
+                clienteBeans.setCep(rs.getInt("cli_cep"));
+                clienteBeans.setAniversario(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_aniversario")));
+                clienteBeans.setTelCelular(rs.getString("cli_tel_cel"));
+                clienteBeans.setEmail(rs.getString("cli_email"));
+                clienteBeans.setNumero(rs.getInt("cli_nro_ender"));
+                clienteBeans.setCodigoCliente(rs.getInt("cli_cod"));
                 clienteBeans.setNome(rs.getString("cli_nome"));
                 clienteBeans.setRua(rs.getString("cli_rua"));
                 clienteBeans.setBairro(rs.getString("cli_bairro"));
                 clienteBeans.setTelefone(rs.getString("cli_telefone"));
-                clienteBeans.setDataCad(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad")));
+                clienteBeans.setDataCadastro(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -142,16 +156,27 @@ public class ClienteModel {
 
     public void editarCliente(ClienteBeans clienteBeans) {
 
-        String SQLUpdate = "UPDATE `cliente` SET `cli_nome` = ?,`cli_rua` = ?,"
-                + "`cli_bairro` = ?,`cli_telefone` = ?"
-                + "WHERE `cli_cod` = ?;";
+        String SQLUpdate = "update `pizzaria`.`cliente`"
+                + "`cli_nome` = ?,`cli_cep` = ?,"
+                + "`cli_nro_ender` = ?,`cli_email` = ?,`cli_telefone` = ?,"
+                + "`cli_tel_cel` = ?,`cli_aniversario` = ?,`cli_datacad` = ?,"
+                + "`cli_rua` = ?,"
+                + "`cli_bairro` = ?,`cli_obs` = ?"
+                + "where `cli_cod` = ?;";
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate)) {
 
             pstm.setString(1, clienteBeans.getNome());
-            pstm.setString(2, clienteBeans.getRua());
-            pstm.setString(3, clienteBeans.getBairro());
-            pstm.setString(4, clienteBeans.getTelefone());
-            pstm.setInt(5, clienteBeans.getCodigo());
+            pstm.setInt(2, clienteBeans.getCep());
+            pstm.setInt(3, clienteBeans.getNumero());
+            pstm.setString(4, clienteBeans.getEmail());
+            pstm.setString(5, clienteBeans.getTelefone());
+            pstm.setString(6, clienteBeans.getTelCelular());
+            pstm.setString(7, VerificadoresECorretores.converteParaSql(clienteBeans.getAniversario()));
+            pstm.setString(8, VerificadoresECorretores.converteParaSql(clienteBeans.getDataCadastro()));
+            pstm.setString(9, clienteBeans.getRua());
+            pstm.setString(10, clienteBeans.getBairro());
+            pstm.setString(11, clienteBeans.getObservacao());
+            pstm.setInt(12, clienteBeans.getCodigoCliente());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();

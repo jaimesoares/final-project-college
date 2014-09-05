@@ -22,13 +22,13 @@ public class UsuarioModel {
         UsuarioBeans usuarioBeans = new UsuarioBeans();
 
         try {
-            String SQLSelection = "SELECT * FROM usuario WHERE usu_login = '" + user.getUsuario() + "';";
+            String SQLSelection = "SELECT * FROM usuario WHERE usu_login = '" + user.getLogin() + "';";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
 
             if (rs.next()) {
-                usuarioBeans.setCodigo(rs.getInt("usu_fun_cod"));
-                usuarioBeans.setUsuario(rs.getString("usu_login"));
+                usuarioBeans.setCodigoFuncionario(rs.getInt("usu_fun_cod"));
+                usuarioBeans.setLogin(rs.getString("usu_login"));
                 usuarioBeans.setSenha(rs.getString("usu_senha"));
             }
         } catch (SQLException ex) {
@@ -47,9 +47,9 @@ public class UsuarioModel {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                usuarioBeans.setCodigo(rs.getInt("usu_fun_cod"));
+                usuarioBeans.setCodigoFuncionario(rs.getInt("usu_fun_cod"));
                 usuarioBeans.setSenha(rs.getString("usu_senha"));
-                usuarioBeans.setUsuario(rs.getString("usu_login"));
+                usuarioBeans.setLogin(rs.getString("usu_login"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -63,9 +63,9 @@ public class UsuarioModel {
             String SQLInsertion = "INSERT INTO `usuario`(`usu_login`,`usu_senha`,`usu_fun_cod`)"
                     + "VALUES (?,?,?);";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
-            pstm.setString(1, usuarioBeans.getUsuario());
+            pstm.setString(1, usuarioBeans.getLogin());
             pstm.setString(2, usuarioBeans.getSenha());
-            pstm.setInt(3, usuarioBeans.getCodigo());
+            pstm.setInt(3, usuarioBeans.getCodigoFuncionario());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -83,9 +83,9 @@ public class UsuarioModel {
             String SQLUpdate = "UPDATE `usuario` SET `usu_login` = ?,`usu_senha` = ?"
                     + "WHERE `usu_fun_cod` = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
-            pstm.setString(1, usuarioBeans.getUsuario());
+            pstm.setString(1, usuarioBeans.getLogin());
             pstm.setString(2, usuarioBeans.getSenha());
-            pstm.setInt(3, usuarioBeans.getCodigo());
+            pstm.setInt(3, usuarioBeans.getCodigoFuncionario());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
