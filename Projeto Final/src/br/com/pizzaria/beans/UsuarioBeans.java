@@ -2,16 +2,17 @@ package br.com.pizzaria.beans;
 
 public class UsuarioBeans {
 
-    private int codigo;
-    private String usuario;
+    private int codigoFuncionario;
+    private String login;
     private String senha;
+    private char ativoInativo;
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoFuncionario() {
+        return codigoFuncionario;
     }
 
-    public void setCodigo(int id_usuario) {
-        this.codigo = id_usuario;
+    public void setCodigoFuncionario(int id_usuario) {
+        this.codigoFuncionario = id_usuario;
     }
 
     public String getSenha() {
@@ -22,16 +23,30 @@ public class UsuarioBeans {
         this.senha = senha;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setLogin(String login) {
+        this.login = login;
     }
     
     @Override
     public String toString(){
-        return this.codigo+"";
+        return this.codigoFuncionario+"";
+    }
+
+    /**
+     * @return the ativoInativo
+     */
+    public char getAtivoInativo() {
+        return ativoInativo;
+    }
+
+    /**
+     * @param ativoInativo the ativoInativo to set
+     */
+    public void setAtivoInativo(char ativoInativo) {
+        this.ativoInativo = ativoInativo;
     }
 }

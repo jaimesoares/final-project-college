@@ -131,7 +131,7 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
         listaUsuario = new ArrayList<>();
         moduloController.controlePesquisa(listaUsuario);
         for(UsuarioBeans usuarioBeans : listaUsuario){
-            cbUsuario.addItem(usuarioBeans.getUsuario());
+            cbUsuario.addItem(usuarioBeans.getLogin());
         }
     }
 

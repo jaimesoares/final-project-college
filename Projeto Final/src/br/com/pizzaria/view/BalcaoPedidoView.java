@@ -526,7 +526,7 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
     final void populaPedidoBeans() {
         dataAtual = new Date();
         pedidoBeans.setCodigoCliente(1);
-        pedidoBeans.setCodigoFuncionario(codigoFuncionario);
+        pedidoBeans.setCodigoUsuario(codigoFuncionario);
         pedidoBeans.setCodigoEntregador(0);
         pedidoBeans.setData(formatoData.format(dataAtual));
         pedidoBeans.setData(formatoHora.format(dataAtual));

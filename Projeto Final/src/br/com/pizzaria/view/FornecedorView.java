@@ -578,7 +578,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         clienteBeans.setRua(txtRua.getText());
         clienteBeans.setBairro(txtBairro.getText());
         clienteBeans.setTelefone(txfTelefone.getText());
-        clienteBeans.setDataCad(txtData.getText());
+        clienteBeans.setDataCadastro(txtData.getText());
 
     }
 

@@ -32,9 +32,9 @@ public class ModuloModel {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 UsuarioBeans usuarioBeans = new UsuarioBeans();
-                usuarioBeans.setCodigo(rs.getInt("usu_fun_cod"));
+                usuarioBeans.setCodigoFuncionario(rs.getInt("usu_fun_cod"));
                 usuarioBeans.setSenha(rs.getString("usu_senha"));
-                usuarioBeans.setUsuario(rs.getString("usu_login"));
+                usuarioBeans.setLogin(rs.getString("usu_login"));
                 lista.add(usuarioBeans);
             }
         } catch (SQLException ex) {
@@ -52,12 +52,12 @@ public class ModuloModel {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                clienteBeans.setCodigo(rs.getInt("cli_cod"));
+                clienteBeans.setCodigoCliente(rs.getInt("cli_cod"));
                 clienteBeans.setNome(rs.getString("cli_nome"));
                 clienteBeans.setRua(rs.getString("cli_rua"));
                 clienteBeans.setBairro(rs.getString("cli_bairro"));
                 clienteBeans.setTelefone(rs.getString("cli_telefone"));
-                clienteBeans.setDataCad(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad")));
+                clienteBeans.setDataCadastro(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -76,7 +76,7 @@ public class ModuloModel {
             pstm.setString(2, clienteBeans.getRua());
             pstm.setString(3, clienteBeans.getBairro());
             pstm.setString(4, clienteBeans.getTelefone());
-            pstm.setInt(5, clienteBeans.getCodigo());
+            pstm.setInt(5, clienteBeans.getCodigoCliente());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();

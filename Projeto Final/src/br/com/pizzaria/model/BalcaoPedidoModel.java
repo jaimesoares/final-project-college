@@ -73,7 +73,7 @@ public class BalcaoPedidoModel {
                     + "values (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
             pstmt.setInt(1, pedidobeans.getCodigoCliente());
-            pstmt.setInt(2, pedidobeans.getCodigoFuncionario());
+            pstmt.setInt(2, pedidobeans.getCodigoUsuario());
             pstmt.setString(3, "0");
             pstmt.setString(4, formatoData.format(data));
             pstmt.setString(5, formatoHora.format(data));
@@ -122,7 +122,7 @@ public class BalcaoPedidoModel {
                 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
                 pstmt.setString(1, "0");
-                pstmt.setInt(2, pedidoBeans.getCodigoFuncionario());
+                pstmt.setInt(2, pedidoBeans.getCodigoUsuario());
                 pstmt.setInt(3, pedidoBeans.getCodigoCliente());
                 pstmt.setString(4, codigoPedido);
                 pstmt.setInt(5, pedidoBeans.getCodProduto(i));

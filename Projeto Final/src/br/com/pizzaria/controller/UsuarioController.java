@@ -23,7 +23,7 @@ public class UsuarioController {
 
     public boolean verificaDados(UsuarioBeans usuarioBeans) {
 
-        if (usuarioBeans.getUsuario().equals("")) {
+        if (usuarioBeans.getLogin().equals("")) {
             play.som();
             JOptionPane.showMessageDialog(null, "Campo 'USUÁRIO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -88,7 +88,7 @@ public class UsuarioController {
     
     public boolean controleDadosNovo(UsuarioBeans usuarioBeans) {
 
-        if (usuarioBeans.getUsuario().equals("")) {
+        if (usuarioBeans.getLogin().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Login' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -103,7 +103,7 @@ public class UsuarioController {
     
     public boolean controleDadosEditar(UsuarioBeans usuarioBeans) {
 
-        if (usuarioBeans.getUsuario().equals("")) {
+        if (usuarioBeans.getLogin().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Login' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
