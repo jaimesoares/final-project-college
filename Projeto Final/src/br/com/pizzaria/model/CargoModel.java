@@ -16,7 +16,7 @@ public class CargoModel {
 
     }
 
-    public void cadastrarCargo(CargoBeans cargoBeans) {
+    public void cadastrarCargo(String descricao) {
 
         String SQLInsertion = "insert into `pizzaria`.`cargo`"
                 + "(`crg_descr`)"
@@ -24,7 +24,7 @@ public class CargoModel {
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion)) {
 
-            pstm.setString(1, cargoBeans.getDescricao());
+            pstm.setString(1, descricao);
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -46,8 +46,10 @@ public class CargoModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-
-                modelo.addElement(rs.getString("crg_descr"));
+                CargoBeans novo = new CargoBeans();
+                novo.setCodigo(rs.getInt("crg_id_cargo"));
+                novo.setDescricao(rs.getString("crg_descr"));
+                modelo.addElement(novo);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Carregar Lista", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

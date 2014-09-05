@@ -27,7 +27,7 @@ public class CargoBeans {
 
     @Override
     public String toString() {
-        return this.codigo + "";
+        return this.descricao;
     }
 
 }

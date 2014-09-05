@@ -19,6 +19,7 @@ public class CargoView extends javax.swing.JInternalFrame {
         cargoBeans = new CargoBeans();
         cargoController = new CargoController();
         modelo = new DefaultListModel();
+        carregaListaCargo();
         
     }
 
@@ -69,6 +70,11 @@ public class CargoView extends javax.swing.JInternalFrame {
             }
         });
 
+        lstCargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lstCargoMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstCargo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,14 +130,27 @@ public class CargoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-
+       if( cargoController.verificarDados(txtCargo.getText())){
+           modelo.removeAllElements();
+           carregaListaCargo();
+           txtCargo.setText("");
+       }
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-
+        CargoBeans novo =(CargoBeans)lstCargo.getSelectedValue();        
+        cargoController.verificarDadosParaEditar(novo);
+        modelo.removeAllElements();
+           carregaListaCargo();
+           txtCargo.setText("");
 
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void lstCargoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCargoMouseReleased
+        CargoBeans novo =(CargoBeans)lstCargo.getSelectedValue();
+        //txtCargo.setText(novo.getDescricao());
+    }//GEN-LAST:event_lstCargoMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -17,13 +17,13 @@ public class CargoController {
         cargoModel = new CargoModel();
     }
 
-    public boolean verificarDados(CargoBeans cargo) {
-        if (cargo.getDescricao().equals("")) {
+    public boolean verificarDados(String descricao) {
+        if (descricao.equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Descrição' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        cargoModel.cadastrarCargo(cargo);
+        cargoModel.cadastrarCargo(descricao);
         return true;
     }
 
