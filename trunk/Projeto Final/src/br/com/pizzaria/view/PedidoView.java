@@ -9,7 +9,6 @@ import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.PedidoController;
-import br.com.pizzaria.util.VerificadoresECorretores;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 

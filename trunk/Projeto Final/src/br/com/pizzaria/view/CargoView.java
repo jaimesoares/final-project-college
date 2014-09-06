@@ -1,11 +1,8 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.CargoBeans;
-import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.CargoController;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.text.MaskFormatter;
 
 public class CargoView extends javax.swing.JInternalFrame {
 
@@ -20,7 +17,7 @@ public class CargoView extends javax.swing.JInternalFrame {
         cargoController = new CargoController();
         modelo = new DefaultListModel();
         carregaListaCargo();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +35,7 @@ public class CargoView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE CLIENTE");
+        setTitle("MANUTENÇÃO DE FUNÇÃO / CARGO");
         setPreferredSize(new java.awt.Dimension(229, 315));
         try {
             setSelected(true);
@@ -125,30 +122,30 @@ public class CargoView extends javax.swing.JInternalFrame {
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
 
-            this.dispose();
+        this.dispose();
 
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-       if( cargoController.verificarDados(txtCargo.getText())){
-           modelo.removeAllElements();
-           carregaListaCargo();
-           txtCargo.setText("");
-       }
+        if (cargoController.verificarDados(txtCargo.getText())) {
+            modelo.removeAllElements();
+            carregaListaCargo();
+            txtCargo.setText("");
+        }
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        CargoBeans novo =(CargoBeans)lstCargo.getSelectedValue();        
+        CargoBeans novo = (CargoBeans) lstCargo.getSelectedValue();
         cargoController.verificarDadosParaEditar(novo);
         modelo.removeAllElements();
-           carregaListaCargo();
-           txtCargo.setText("");
+        carregaListaCargo();
+        txtCargo.setText("");
 
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void lstCargoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCargoMouseReleased
-        CargoBeans novo =(CargoBeans)lstCargo.getSelectedValue();
+        CargoBeans novo = (CargoBeans) lstCargo.getSelectedValue();
         //txtCargo.setText(novo.getDescricao());
     }//GEN-LAST:event_lstCargoMouseReleased
 
@@ -164,29 +161,15 @@ public class CargoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCargo;
     // End of variables declaration//GEN-END:variables
 
-    final void habilitarCampos(boolean valor) {
-        txtCargo.setEditable(valor);
-        
-    }
-
     final CargoBeans populaClienteBeans() {
         cargoBeans.setDescricao(txtCargo.getText());
-        
+
         System.out.println(cargoBeans);
         return cargoBeans;
 
     }
 
-    final void limpaTudo() {
-        txtCargo.setText("");
-    }
-
-    final void limpaNovo() {
-        txtCargo.setText("");
-       
-    }
-    
-    public void carregaListaCargo(){
+    public void carregaListaCargo() {
         cargoController.controleListaCargo(modelo);
         lstCargo.setModel(modelo);
     }

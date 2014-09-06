@@ -1,6 +1,7 @@
 package br.com.pizzaria.model;
 
 import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.ModuloBeans;
 import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificadoresECorretores;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +30,7 @@ public class DefinirModuloModel {
      * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
-    public void procuraCliente(List<UsuarioBeans> lista) {
+    public void populaCliente(List<UsuarioBeans> lista) {
         try {
             String SQLSelection = "select * from usuario;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
@@ -42,6 +44,26 @@ public class DefinirModuloModel {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar"+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }
+    
+    public void populaModulo(List<ModuloBeans> modelo) {
+
+        String SQLSelection = "select * from programas;";
+
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                ModuloBeans novo = new ModuloBeans();
+                novo.setCodigo(rs.getInt("pgm_id"));
+                novo.setNome(rs.getString("pgm_nome"));
+                novo.setTitulo(rs.getString("pgm_titulo"));
+                modelo.add(novo);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 

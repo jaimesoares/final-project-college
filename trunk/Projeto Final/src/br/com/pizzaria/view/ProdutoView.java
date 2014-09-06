@@ -57,7 +57,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE FUNCIONARIO");
+        setTitle("MANUTENÇÃO DE PRODUTO");
         setPreferredSize(new java.awt.Dimension(450, 600));
         try {
             setSelected(true);

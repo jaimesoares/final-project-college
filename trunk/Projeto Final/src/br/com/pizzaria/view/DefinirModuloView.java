@@ -1,5 +1,6 @@
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.beans.ModuloBeans;
 import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.controller.DefinirModuloController;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javax.swing.DefaultListModel;
 public final class DefinirModuloView extends javax.swing.JInternalFrame {
     
     List<UsuarioBeans> listaUsuario;
+    List<ModuloBeans> listaModulo;
     DefinirModuloController moduloController;
     DefaultListModel modeloLista;
 
@@ -16,6 +18,7 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
         initComponents();
         moduloController = new DefinirModuloController();
         populaUsuario();
+        populaModulo();
         modeloLista = new DefaultListModel();
         
     }
@@ -34,15 +37,15 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
         btnFechar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
 
-        setTitle("Definição de Módulos");
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("MANUTENÇÃO DE MÓDULOS USUÁRIO");
 
         lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario.setText("Usuário:");
 
         lblModulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblModulo.setText("Módulo:");
-
-        cbModulo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cadastro Usuário", "Cadastro Cliente", "Cadastro Funcionário" }));
 
         btnAdicionar.setText("+");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +57,11 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(lstModulos);
 
         btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
 
         btnRemover.setText("Remover Módulo");
 
@@ -96,13 +104,13 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
                     .addComponent(lblModulo)
                     .addComponent(cbModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdicionar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFechar)
-                    .addComponent(btnRemover))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(btnRemover)
+                    .addComponent(btnFechar))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,6 +121,10 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
        lstModulos.setModel(modeloLista);
        cbModulo.removeItem(cbModulo.getSelectedItem());
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -129,9 +141,17 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
 
     public void populaUsuario(){
         listaUsuario = new ArrayList<>();
-        moduloController.controlePesquisa(listaUsuario);
+        moduloController.controleUsuario(listaUsuario);
         for(UsuarioBeans usuarioBeans : listaUsuario){
             cbUsuario.addItem(usuarioBeans.getLogin());
+        }
+    }
+    
+    public void populaModulo(){
+        listaModulo = new ArrayList<>();
+        moduloController.controleModulo(listaModulo);
+        for(ModuloBeans moduloBeans : listaModulo){
+            cbModulo.addItem(moduloBeans.getNome());
         }
     }
 

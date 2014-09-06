@@ -1,96 +1,49 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.UsuarioBeans;
-import br.com.pizzaria.model.ClienteModel;
-import br.com.pizzaria.model.DefinirModuloModel;
-import java.util.List;
+import br.com.pizzaria.beans.ModuloBeans;
+import br.com.pizzaria.model.ModuloModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class ModuloController {
 
-    DefinirModuloModel moduloModel;
+    ModuloModel moduloModel;
 
     public ModuloController() {
-        moduloModel = new DefinirModuloModel();
+        moduloModel = new ModuloModel();
     }
 
-    public boolean verificarDados(ClienteBeans cliente) {
-        if (cliente.getNome().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'NOME' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+    public boolean verificarDados(ModuloBeans moduloBeans) {
+        if (moduloBeans.getNome().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+        if (moduloBeans.getTitulo().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Titulo' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'RUA' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-
-            return false;
-        }
-
-        if (cliente.getBairro().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'BAIRRO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        if (cliente.getTelefone().equals("(  )    -    ")) {
-            JOptionPane.showMessageDialog(null, "Campo 'TELEFONE' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }        
-
-      //  moduloModel.cadastrarCliente(cliente);
+        moduloModel.cadastrarModulo(moduloBeans);
         return true;
     }
 
-    public String controleDeCodigo() {
-     //   return moduloModel.proximoCliente();
-        return null;
+    public void controleListaModulo(DefaultListModel modelo) {
+        moduloModel.populaListaModulo(modelo);
     }
-    
-    public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
-      //  moduloModel.procuraCliente(pesquisa, modelo);
-    }
-    
-    /**
-     * Método sobrescrito para trabalhar com a tela 
-     * de pedido do cliente
-     * @param pesquisa
-     * @param lista para popular o comboBox da pesquisa
-     */
-    public void controlePesquisa(List<UsuarioBeans> lista) {
-        moduloModel.procuraCliente(lista);
-    }
-    
-    public ClienteBeans controlePreenchimento(int codigo){
-        return moduloModel.preencherCampos(codigo);
-    }
-    
-    public boolean verificarDadosParaEditar(ClienteBeans cliente) {
-        if (cliente.getNome().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo \"NOME\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+
+    public boolean verificarDadosParaEditar(ModuloBeans modulo) {
+        if (modulo.getNome().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo \"Nome\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-
-        if (cliente.getRua().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo \"RUA\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-
-            return false;
-        }
-
-        if (cliente.getBairro().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo \"BAIRRO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        if (cliente.getTelefone().equals("(  )    -    ")) {
-            JOptionPane.showMessageDialog(null, "Campo \"TELEFONE\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
         
+        if (modulo.getTitulo().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo \"Título\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
 
-        moduloModel.editarCliente(cliente);
+        moduloModel.editarModulo(modulo);
         return true;
     }
 }

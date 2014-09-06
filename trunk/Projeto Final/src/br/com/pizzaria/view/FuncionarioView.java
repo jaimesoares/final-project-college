@@ -172,28 +172,18 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
         });
 
-        txtBairro5.setForeground(new java.awt.Color(51, 102, 255));
-
         lbl_bairro3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro3.setText("CEP:");
-
-        txfTelefone.setForeground(new java.awt.Color(51, 102, 255));
-
-        txtBairro3.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_rua2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua2.setText("Estado:");
 
-        cbPermissao.setForeground(new java.awt.Color(51, 102, 255));
         cbPermissao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", " " }));
-
-        txtBairro4.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_data.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data.setText("Data:");
 
         txtData.setEditable(false);
-        txtData.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_telefone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_telefone.setText("Tel. Fixo:");
@@ -203,8 +193,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         lbl_rua3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua3.setText("E-mail:");
-
-        txtNome2.setForeground(new java.awt.Color(51, 102, 255));
 
         txfTelefone1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,19 +209,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_rua.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua.setText("Endereço:");
 
-        txtBairro2.setForeground(new java.awt.Color(51, 102, 255));
-
-        txtNome.setForeground(new java.awt.Color(51, 102, 255));
-
         lbl_bairro2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro2.setText("Cidade:");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
-
-        txtRua.setForeground(new java.awt.Color(51, 102, 255));
-
-        txtBairro.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_data3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data3.setText("Número:");
@@ -241,12 +221,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro4.setText("CPF:");
 
-        txtBairro6.setForeground(new java.awt.Color(51, 102, 255));
-
         lbl_bairro5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro5.setText("RG:");
-
-        txtBairro7.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_rua6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua6.setText("Cargo:");
@@ -261,27 +237,20 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro7.setText("CTPS:");
 
-        txtBairro9.setForeground(new java.awt.Color(51, 102, 255));
         txtBairro9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBairro9ActionPerformed(evt);
             }
         });
 
-        txtBairro10.setForeground(new java.awt.Color(51, 102, 255));
-
         lbl_bairro8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro8.setText("Salário:");
-
-        txtBairro11.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_bairro9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro9.setText("Vale Ref.:");
 
         lbl_bairro10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro10.setText("Vale Trans.:");
-
-        txtBairro12.setForeground(new java.awt.Color(51, 102, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,7 +276,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                             .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_data)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)

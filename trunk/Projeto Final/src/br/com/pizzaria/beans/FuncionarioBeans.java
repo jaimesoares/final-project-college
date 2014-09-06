@@ -20,6 +20,10 @@ public class FuncionarioBeans {
     private int codEmpresa;
     private double valeRefeicao;
     private double valeTrans;
+    private String cidade;
+    private String rua;
+    private String bairro;
+    private String nascimento;
     
 
     public FuncionarioBeans() {        
@@ -251,6 +255,62 @@ public class FuncionarioBeans {
      */
     public void setValeTrans(double valeTrans) {
         this.valeTrans = valeTrans;
+    }
+
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
+
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    /**
+     * @return the rua
+     */
+    public String getRua() {
+        return rua;
+    }
+
+    /**
+     * @param rua the rua to set
+     */
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    /**
+     * @return the nascimento
+     */
+    public String getNascimento() {
+        return nascimento;
+    }
+
+    /**
+     * @param nascimento the nascimento to set
+     */
+    public void setNascimento(String nascimento) {
+        this.nascimento = nascimento;
     }
     
     

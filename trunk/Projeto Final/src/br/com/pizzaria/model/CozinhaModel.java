@@ -7,6 +7,7 @@
 package br.com.pizzaria.model;
 
 import br.com.pizzaria.util.ConectaBanco;
+import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class CozinhaModel {
                     +"JOIN cardapio c ON c.`car_cod` = i.`item_car_cod` "
                     +"WHERE p.`ped_status` = 'Pedido aberto' AND c.`car_tipo` = 'Pizza'"
                     +"ORDER BY p.`ped_hora`;";
-            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            PreparedStatement pstm = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getString("ped_cod"),rs.getString("car_descricao"), rs.getInt("item_quantidade"), rs.getString("ped_hora")});

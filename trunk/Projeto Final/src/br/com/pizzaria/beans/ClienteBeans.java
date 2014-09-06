@@ -16,6 +16,7 @@ public class ClienteBeans {
     private String dataUltimaCompra;
     private char inadimplente;
     private String observacao;
+    private String cidade;
     
 
     public ClienteBeans() {
@@ -185,6 +186,20 @@ public class ClienteBeans {
      */
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
+
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
 }
