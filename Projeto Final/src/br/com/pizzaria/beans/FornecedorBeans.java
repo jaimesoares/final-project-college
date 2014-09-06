@@ -12,6 +12,7 @@ public class FornecedorBeans {
     private String email;
     private String telCelular;
     private String contato;
+    private String cidade;
 
     public FornecedorBeans() {        
         
@@ -130,6 +131,20 @@ public class FornecedorBeans {
     @Override
     public String toString(){
         return this.codigo+"";
+    }
+
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
+
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
     
 }

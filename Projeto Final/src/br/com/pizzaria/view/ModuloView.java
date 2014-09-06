@@ -1,26 +1,24 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.controller.ClienteController;
-import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
+import br.com.pizzaria.beans.CargoBeans;
+import br.com.pizzaria.beans.ModuloBeans;
+import br.com.pizzaria.controller.ModuloController;
+import javax.swing.DefaultListModel;
 
 public class ModuloView extends javax.swing.JInternalFrame {
 
-    MaskFormatter FormatoTelefone;
-    ClienteBeans clienteBeans;
-    ClienteController clienteController;
-    DefaultTableModel modelo;
-    JFrame frame;
+   ModuloBeans moduloBeans;
+    ModuloController moduloController;
+    DefaultListModel modelo;
 
     public ModuloView() {
         initComponents();
-        this.frame = frame;
-        habilitarCampos(false);
-
-        clienteBeans = new ClienteBeans();
-        clienteController = new ClienteController();
+        
+        moduloBeans = new ModuloBeans();
+        moduloController = new ModuloController();
+        modelo = new DefaultListModel();
+        carregaListaModulo();
+        
         
     }
 
@@ -30,17 +28,21 @@ public class ModuloView extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        btnNovo = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstModulo = new javax.swing.JList();
         sep_codigo1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtTitulo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE CLIENTE");
-        setPreferredSize(new java.awt.Dimension(229, 315));
+        setTitle("MANUTENÇÃO DE MÓDULOS");
+        setPreferredSize(new java.awt.Dimension(229, 350));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -50,10 +52,10 @@ public class ModuloView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Permissão de Módulos");
 
-        btnNovo.setText("+");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionar.setText("+");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+                btnAdicionarActionPerformed(evt);
             }
         });
 
@@ -64,38 +66,49 @@ public class ModuloView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEditar.setText("-");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnRemover.setText("-");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnRemoverActionPerformed(evt);
             }
         });
 
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(lstModulo);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setText("Nome:");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setText("Título:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sep_codigo1)
+            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNome)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovo)
+                        .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditar)
+                        .addComponent(btnRemover)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(btnFechar)))
+                        .addComponent(btnFechar))
+                    .addComponent(txtNome)
+                    .addComponent(txtTitulo)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnNovo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnRemover});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,118 +116,83 @@ public class ModuloView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sep_codigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnEditar)
+                    .addComponent(btnAdicionar)
+                    .addComponent(btnRemover)
                     .addComponent(btnFechar))
-                .addGap(89, 89, 89))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-//        if (btnFechar.getText().equals("Cancelar")) {
-//            limpaTudo();
-//            if (btnEditar.getText().equals("Salvar")) {
-//                btnEditar.setText("Editar");
-//                btnNovo.setEnabled(true);
-//                habilitarCampos(false);
-//            } else {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//                habilitarCampos(false);
-//            }
-//            btnFechar.setText("Fechar");
-//        } else {
+
             this.dispose();
-//        }
+
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-//        if (btnNovo.getText().equals("Novo")) {
-//            btnNovo.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnEditar.setEnabled(false);
-//            modelo.setNumRows(0);
-//            habilitarCampos(true);
-//            txtNome.requestFocus();
-//            txtCodigo.setText(clienteController.controleDeCodigo());
-//            limpaNovo();
-//        } else {
-//
-//            populaClienteBeans();
-//            if (clienteController.verificarDados(clienteBeans)) {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//             
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        if (moduloController.verificarDados(populaModuloBeans())) {
+            modelo.removeAllElements();
+            carregaListaModulo();
+            txtNome.setText("");
+        }
 
-    }//GEN-LAST:event_btnNovoActionPerformed
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-//
-//        if (btnEditar.getText().equals("Editar")) {
-//            btnEditar.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnNovo.setEnabled(false);
-//            habilitarCampos(true);
-//        } else {
-//            if (clienteController.verificarDadosParaEditar(populaClienteBeans())) {
-//                btnEditar.setText("Editar");
-//                btnFechar.setText("Fechar");
-//                btnNovo.setEnabled(true);
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
-
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        ModuloBeans novo = (ModuloBeans) lstModulo.getSelectedValue();
+        moduloController.verificarDadosParaEditar(novo);
+        modelo.removeAllElements();
+        carregaListaModulo();
+        txtNome.setText("");
+        txtTitulo.setText("");
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JList lstModulo;
     private javax.swing.JSeparator sep_codigo1;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 
-    final void habilitarCampos(boolean valor) {
-        txtNome.setEditable(valor);
-        
+    public void carregaListaModulo() {
+        moduloController.controleListaModulo(modelo);
+        lstModulo.setModel(modelo);
+    }
+final ModuloBeans populaModuloBeans() {
+        moduloBeans.setNome(txtNome.getText());
+        moduloBeans.setTitulo(txtTitulo.getText());
+
+        System.out.println(moduloBeans);
+        return moduloBeans;
+
     }
 
-    final ClienteBeans populaClienteBeans() {
-        clienteBeans.setNome(txtNome.getText());
-        
-        System.out.println(clienteBeans);
-        return clienteBeans;
-
-    }
-
-    final void limpaTudo() {
-        txtNome.setText("");
-    }
-
-    final void limpaNovo() {
-        txtNome.setText("");
-       
-    }
 
     public static void main(String args[]) {
 //        ClienteView cliente = new ClienteView();

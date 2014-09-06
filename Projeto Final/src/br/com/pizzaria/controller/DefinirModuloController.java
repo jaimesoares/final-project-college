@@ -1,13 +1,12 @@
 package br.com.pizzaria.controller;
 
 import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.ModuloBeans;
 import br.com.pizzaria.beans.UsuarioBeans;
-import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.DefinirModuloModel;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class DefinirModuloController {
 
@@ -43,23 +42,15 @@ public class DefinirModuloController {
         return true;
     }
 
-    public String controleDeCodigo() {
-     //   return moduloModel.proximoCliente();
-        return null;
+    
+    
+    
+    public void controleUsuario(List<UsuarioBeans> lista) {
+        moduloModel.populaCliente(lista);
     }
     
-    public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
-      //  moduloModel.procuraCliente(pesquisa, modelo);
-    }
-    
-    /**
-     * Método sobrescrito para trabalhar com a tela 
-     * de pedido do cliente
-     * @param pesquisa
-     * @param lista para popular o comboBox da pesquisa
-     */
-    public void controlePesquisa(List<UsuarioBeans> lista) {
-        moduloModel.procuraCliente(lista);
+    public void controleModulo(List<ModuloBeans> lista) {
+        moduloModel.populaModulo(lista);
     }
     
     public ClienteBeans controlePreenchimento(int codigo){

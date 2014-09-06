@@ -35,9 +35,8 @@ public class CozinhaView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedido = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setAlwaysOnTop(true);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         tblPedido.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         tblPedido.setModel(new javax.swing.table.DefaultTableModel(

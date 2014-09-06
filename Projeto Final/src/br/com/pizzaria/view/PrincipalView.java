@@ -21,6 +21,7 @@ public class PrincipalView extends javax.swing.JFrame {
     TipoDePedidoView tipoPedidoV;
     BalcaoPedidoView balcaoV;
     DefinirModuloView moduloV;
+    ModuloView moduloV2;
     FornecedorView fornecedorV;
     CargoView cargoV;
 
@@ -219,18 +220,18 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCardapioActionPerformed
 
     private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
-//        if (pedidoV == null || !pedidoV.isShowing()) {
-//            pedidoV = new PedidoView(1);
-//            Desktop.add(pedidoV);
-//            centralizaForm(pedidoV);
-//            pedidoV.setVisible(true);
-//        }
-
-        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {            
-            Desktop.add(tipoPedidoV);
-            centralizaForm(tipoPedidoV);
-            tipoPedidoV.setVisible(true);
+        if (pedidoV == null || !pedidoV.isShowing()) {
+            pedidoV = new PedidoView(1);
+            Desktop.add(pedidoV);
+            centralizaForm(pedidoV);
+            pedidoV.setVisible(true);
         }
+
+//        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {            
+//            Desktop.add(tipoPedidoV);
+//            centralizaForm(tipoPedidoV);
+//            tipoPedidoV.setVisible(true);
+//        }
         
 //        if (balcaoV == null || !balcaoV.isShowing()) {
 //            balcaoV = new BalcaoPedidoView(1);
@@ -252,6 +253,7 @@ public class PrincipalView extends javax.swing.JFrame {
             centralizaForm(usuarioV);
             usuarioV.setVisible(true);
         }
+        
     }//GEN-LAST:event_mniUsuarioActionPerformed
 
     private void mniCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCozinhaActionPerformed
@@ -268,6 +270,13 @@ public class PrincipalView extends javax.swing.JFrame {
             centralizaForm(moduloV);
             moduloV.setVisible(true);
         }
+        
+//        if (moduloV2 == null || !moduloV2.isShowing()) {
+//            moduloV2 = new ModuloView();
+//            Desktop.add(moduloV2);
+//            centralizaForm(moduloV2);
+//            moduloV2.setVisible(true);
+//        }
     }//GEN-LAST:event_mniModuloActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

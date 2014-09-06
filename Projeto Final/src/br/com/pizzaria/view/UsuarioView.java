@@ -51,6 +51,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("Manutenção Usuário");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
