@@ -69,7 +69,7 @@ public class ConectaBancoCorreios implements AutoCloseable {
                 + " AND "
                 + " log_logradouro.bai_nu_sequencial_ini = log_bairro.bai_nu_sequencial"
                 + " AND "
-                + " log_localidade.loc_no = 'São Paulo';";
+                + " log_localidade.ufe_sg = 'SP';";
 
         try (PreparedStatement pstm = getConnection().prepareStatement(SQLSelect)) {
 
@@ -85,7 +85,7 @@ public class ConectaBancoCorreios implements AutoCloseable {
                     PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertLogradouro);
 
                     pstmt.setString(1, rs.getString("cep"));
-                    pstmt.setString(2, rs.getString("log_tipo_logradouro") + rs.getString("logradouro"));
+                    pstmt.setString(2, rs.getString("log_tipo_logradouro") +" "+ rs.getString("logradouro"));
                     pstmt.setString(3, rs.getString("bairro"));
                     pstmt.setString(4, rs.getString("cidade"));
                     pstmt.setInt(5, 1);
@@ -93,7 +93,7 @@ public class ConectaBancoCorreios implements AutoCloseable {
                     pstmt.execute();
                     ConectaBanco.getConnection().commit();
 
-                    System.out.println("SUCESSO CEP "+cont++);
+                    System.out.println("SUCESSO CEP "+rs.getString("bairro")+cont++);
                 } catch (SQLException ex) {
                     System.out.println("ERRO CEP " + ex);
                 }
