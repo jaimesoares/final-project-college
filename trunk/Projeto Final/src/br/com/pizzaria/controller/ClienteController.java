@@ -1,5 +1,6 @@
 package br.com.pizzaria.controller;
 
+import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.model.ClienteModel;
 import javax.swing.ImageIcon;
@@ -122,5 +123,18 @@ public class ClienteController {
         cliente.setCep(Integer.parseInt(cep.replace("-", "")));
         clienteModel.editarCliente(cliente);
         return true;
+    }
+
+    public CepBeans controleCep(String cep) {
+        return clienteModel.populaCamposCep(cep);
+    }
+
+    public boolean controleCepValido(CepBeans cepBeans) {
+        if (cepBeans.getCep() == null) {
+            JOptionPane.showMessageDialog(null, "CEP Inválido", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        } else {
+            return true;
+        }
     }
 }
