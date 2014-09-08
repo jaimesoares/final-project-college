@@ -1,5 +1,6 @@
 package br.com.pizzaria.model;
 
+import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificadoresECorretores;
@@ -187,4 +188,47 @@ public class ClienteModel {
             JOptionPane.showMessageDialog(null, "Impossível Editar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
+
+    public CepBeans populaCamposCep(String cep) {
+        CepBeans cepBeans = new CepBeans();
+        String SQLSelection = "select "
+                + "c.`cep_cod`,"
+                + "c.`cep_ender`,"
+                + "c.`cep_bai`,"
+                + "c.`cep_cid`,"
+                + "m.`mun_uf` "
+                + "from"
+                + "`cep` c "
+                + "join municipio m "
+                + "on c.`cep_municip` = m.`mun_cod` "
+                + "WHERE c.`cep_cod` = ? ;";
+
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+            pstm.setString(1, cep);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                cepBeans.setBairro(rs.getString("cep_bai"));
+                cepBeans.setCep(rs.getString("cep_cod"));
+                cepBeans.setCidade(rs.getString("cep_cid"));
+                cepBeans.setEndereco(rs.getString("cep_ender"));
+                cepBeans.setEstado(rs.getString("mun_uf"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+
+        return cepBeans;
+    }
 }
+
+//"select "
+//  +"c.`cep_cod`,"
+//  +"c.`cep_ender`,"
+//  +"c.`cep_bai`,"
+//  +"c.`cep_cid`,"
+//  +"m.`mun_uf` "
+//+"from"
+//  +"`cep` c "
+//  +"join municipio m "
+//    +"on c.`cep_municip` = m.`mun_cod` "
+//+"WHERE c.`cep_cod` = '14403351' ;"

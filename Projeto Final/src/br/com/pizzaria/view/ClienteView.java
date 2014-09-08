@@ -1,5 +1,6 @@
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificadoresECorretores;
@@ -286,6 +287,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
             }
         });
 
+        txfCEP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txfCEPFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -458,7 +465,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
         clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblCliente.getSelectedRow(), 0).toString()));
-        
+
         txtCodigo.setText(clienteBeans.getCodigoCliente() + "");
         txtNome.setText(clienteBeans.getNome());
         txtRua.setText(clienteBeans.getRua());
@@ -597,6 +604,19 @@ public class ClienteView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataActionPerformed
 
+    private void txfCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfCEPFocusLost
+        CepBeans cepBeans;
+        cbEstado.removeAllItems();
+        if (clienteController.controleCepValido(cepBeans = clienteController.controleCep(txfCEP.getText().replace("-", "")))) {
+            txtBairro.setText(cepBeans.getBairro());
+            txtCidade.setText(cepBeans.getCidade());
+            txtRua.setText(cepBeans.getEndereco());
+            cbEstado.addItem(cepBeans.getEstado());
+        }
+
+
+    }//GEN-LAST:event_txfCEPFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
@@ -642,18 +662,18 @@ public class ClienteView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     final void habilitarCampos(boolean valor) {
-        cbEstado.setEditable(valor);
+        cbEstado.setEditable(false);
         txaObs.setEditable(valor);
         txfCEP.setEditable(valor);
         txfNascimento.setEditable(valor);
         txfTelCelular.setEditable(valor);
         txfTelefone.setEditable(valor);
-        txtBairro.setEditable(valor);
-        txtCidade.setEditable(valor);
+        txtBairro.setEditable(false);
+        txtCidade.setEditable(false);
         txtEmail.setEditable(valor);
         txtNome.setEditable(valor);
         txtNumero.setEditable(valor);
-        txtRua.setEditable(valor);
+        txtRua.setEditable(false);
     }
 
     final ClienteBeans populaClienteBeans() {
