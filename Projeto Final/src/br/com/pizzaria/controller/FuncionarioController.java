@@ -16,7 +16,7 @@ public class FuncionarioController {
         funcionarioModel = new FuncionarioModel();
     }
 
-    public boolean verificarDados(FuncionarioBeans funcionario, int cargo, int permissao) {
+    public boolean verificarDados(FuncionarioBeans funcionario, int cargo) {
         if (funcionario.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -27,10 +27,7 @@ public class FuncionarioController {
             return false;
         }
 
-        if (permissao == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione uma permissão!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+        
       
         funcionarioModel.cadastrarFuncionario(funcionario);
         return true;
@@ -48,7 +45,7 @@ public class FuncionarioController {
         return funcionarioModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(FuncionarioBeans funcionario, int cargo, int permissao) {
+    public boolean verificarDadosParaEditar(FuncionarioBeans funcionario, int cargo) {
         if (funcionario.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -59,10 +56,7 @@ public class FuncionarioController {
             return false;
         }
 
-        if (permissao == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione uma permissão!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+       
       
         funcionarioModel.editarFuncionario(funcionario);
         return true;

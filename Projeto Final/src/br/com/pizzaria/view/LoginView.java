@@ -41,7 +41,7 @@ public class LoginView extends javax.swing.JFrame {
         mniSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Acesso ao sistema");
+        setTitle("ACESSO AO SISTEMA");
         setResizable(false);
 
         lblMensagem.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N

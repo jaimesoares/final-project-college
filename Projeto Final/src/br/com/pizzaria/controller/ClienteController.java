@@ -54,7 +54,7 @@ public class ClienteController {
 
         cliente.setAniversario(nascimento);
         cliente.setNumero(Integer.parseInt(numero));
-        cliente.setCep(Integer.parseInt(cep.replace("-", "")));
+        cliente.setCep(cep.replace("-", ""));
         if (clienteModel.cadastrarCliente(cliente)) {
             return true;
         } else {
@@ -120,7 +120,7 @@ public class ClienteController {
         }
         cliente.setAniversario(nascimento);
         cliente.setNumero(Integer.parseInt(numero));
-        cliente.setCep(Integer.parseInt(cep.replace("-", "")));
+        cliente.setCep(cep.replace("-", ""));
         clienteModel.editarCliente(cliente);
         return true;
     }

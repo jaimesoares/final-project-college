@@ -19,6 +19,7 @@ public class SobreView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(300, 300));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 

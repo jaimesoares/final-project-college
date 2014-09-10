@@ -112,7 +112,7 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
         jLabel4.setText("jLabel4");
 
         setClosable(true);
-        setTitle("PEDIDO");
+        setTitle("PEDIDO BALCÃO");
         setPreferredSize(new java.awt.Dimension(600, 600));
 
         txtCliente.setEditable(false);

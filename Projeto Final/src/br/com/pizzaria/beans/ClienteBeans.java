@@ -8,7 +8,7 @@ public class ClienteBeans {
     private String bairro;
     private String telefone;
     private String dataCadastro;
-    private int cep;
+    private String cep;
     private int numero;
     private String email;
     private String telCelular;
@@ -17,6 +17,7 @@ public class ClienteBeans {
     private char inadimplente;
     private String observacao;
     private String cidade;
+    private String estado;
     
 
     public ClienteBeans() {
@@ -79,14 +80,14 @@ public class ClienteBeans {
     /**
      * @return the cep
      */
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
     /**
      * @param cep the cep to set
      */
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -200,6 +201,20 @@ public class ClienteBeans {
      */
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

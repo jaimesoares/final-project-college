@@ -94,7 +94,6 @@ public class ConectaBancoCorreios implements AutoCloseable {
                     ConectaBanco.getConnection().commit();
 
                     System.out.println(cont++);
-                    System.out.println("SUCESSO CEP "+rs.getString("bairro")+cont++);
                 } catch (SQLException ex) {
                     System.out.println("ERRO CEP " + ex);
                 }
