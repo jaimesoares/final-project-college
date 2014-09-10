@@ -4,6 +4,7 @@ import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificadoresECorretores;
+import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -76,7 +77,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_bairro2 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         lbl_rua2 = new javax.swing.JLabel();
-        cbEstado = new javax.swing.JComboBox();
         lbl_bairro3 = new javax.swing.JLabel();
         lbl_data2 = new javax.swing.JLabel();
         lbl_rua3 = new javax.swing.JLabel();
@@ -103,11 +103,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
         }
         txfCEP = new JFormattedTextField(formatoCEP);
         ;
+        txtEstado = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("MANUTENÇÃO DE CLIENTE");
-        setPreferredSize(new java.awt.Dimension(550, 680));
+        setPreferredSize(new java.awt.Dimension(680, 680));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -126,12 +127,10 @@ public class ClienteView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
 
-        txtNome.setForeground(new java.awt.Color(51, 102, 255));
-
         lbl_rua.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua.setText("Endereço:");
 
-        txtBairro.setForeground(new java.awt.Color(51, 102, 255));
+        txtBairro.setBackground(new java.awt.Color(255, 255, 204));
 
         lbl_bairro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro.setText("Bairro:");
@@ -157,6 +156,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_data.setText("Data:");
 
         txtData.setEditable(false);
+        txtData.setBackground(new java.awt.Color(255, 255, 204));
         txtData.setForeground(new java.awt.Color(51, 102, 255));
         txtData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +167,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Pesquisar:");
 
-        txfTelefone.setForeground(new java.awt.Color(51, 102, 255));
         txfTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfTelefoneActionPerformed(evt);
@@ -224,7 +223,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
             }
         });
 
-        txfTelCelular.setForeground(new java.awt.Color(51, 102, 255));
         txfTelCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfTelCelularActionPerformed(evt);
@@ -242,13 +240,10 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_bairro2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro2.setText("Cidade:");
 
-        txtCidade.setForeground(new java.awt.Color(51, 102, 255));
+        txtCidade.setBackground(new java.awt.Color(255, 255, 204));
 
         lbl_rua2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua2.setText("Estado:");
-
-        cbEstado.setForeground(new java.awt.Color(51, 102, 255));
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", " " }));
 
         lbl_bairro3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro3.setText("CEP:");
@@ -259,8 +254,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_rua3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua3.setText("E-mail:");
 
-        txtEmail.setForeground(new java.awt.Color(51, 102, 255));
-
         txaObs.setColumns(20);
         txaObs.setLineWrap(true);
         txaObs.setRows(5);
@@ -269,12 +262,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_rua5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua5.setText("Observação:");
 
-        txtRua.setForeground(new java.awt.Color(51, 102, 255));
+        txtRua.setBackground(new java.awt.Color(255, 255, 204));
 
         lbl_data3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data3.setText("Número:");
 
-        txtNumero.setForeground(new java.awt.Color(51, 102, 255));
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumeroKeyTyped(evt);
@@ -287,11 +279,24 @@ public class ClienteView extends javax.swing.JInternalFrame {
             }
         });
 
+        txfCEP.setBackground(new java.awt.Color(204, 255, 255));
+        txfCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfCEPActionPerformed(evt);
+            }
+        });
         txfCEP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txfCEPFocusLost(evt);
             }
         });
+        txfCEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txfCEPKeyPressed(evt);
+            }
+        });
+
+        txtEstado.setBackground(new java.awt.Color(255, 255, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,7 +312,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3)
@@ -326,54 +331,54 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_bairro2)
-                                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_bairro3)
-                                    .addComponent(txfCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_bairro))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_rua2)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(cbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbl_data1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPesquisar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtNome))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_telefone))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txfTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_telefone1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_data2)
                                     .addComponent(txfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(txfCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtRua)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_data3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_rua5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_bairro2)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_rua)
-                                        .addGap(364, 364, 364)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbl_data3)))
-                                    .addComponent(lbl_rua5)
-                                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(lbl_bairro3)
+                                        .addGap(78, 78, 78)
+                                        .addComponent(lbl_rua))
+                                    .addComponent(txtCidade))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_bairro))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_rua2))))
                         .addGap(10, 10, 10))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
@@ -404,25 +409,29 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     .addComponent(txfTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_rua)
-                    .addComponent(lbl_data3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_data3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_bairro3)
+                            .addComponent(lbl_rua))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_bairro)
-                    .addComponent(lbl_bairro3)
                     .addComponent(lbl_bairro2)
                     .addComponent(lbl_rua2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_rua3)
@@ -476,7 +485,8 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txfCEP.setText(clienteBeans.getCep() + "");
         txfNascimento.setText(clienteBeans.getAniversario());
         txfTelCelular.setText(clienteBeans.getTelCelular());
-        txfTelefone.setText(clienteBeans.getTelefone());
+        txtCidade.setText(clienteBeans.getCidade());
+        txtEstado.setText("SP");
         txtEmail.setText(clienteBeans.getEmail());
         txtNumero.setText(clienteBeans.getNumero() + "");
     }//GEN-LAST:event_tblClienteMousePressed
@@ -605,24 +615,24 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataActionPerformed
 
     private void txfCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfCEPFocusLost
-        CepBeans cepBeans;
-        cbEstado.removeAllItems();
-        if (clienteController.controleCepValido(cepBeans = clienteController.controleCep(txfCEP.getText().replace("-", "")))) {
-            txtBairro.setText(cepBeans.getBairro());
-            txtCidade.setText(cepBeans.getCidade());
-            txtRua.setText(cepBeans.getEndereco());
-            cbEstado.addItem(cepBeans.getEstado());
-        }
-
-
+        populaCamposCep();
     }//GEN-LAST:event_txfCEPFocusLost
+
+    private void txfCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfCEPActionPerformed
+        
+    }//GEN-LAST:event_txfCEPActionPerformed
+
+    private void txfCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCEPKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            populaCamposCep();
+        }
+    }//GEN-LAST:event_txfCEPKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JComboBox cbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -655,6 +665,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JFormattedTextField txtPesquisar;
@@ -662,7 +673,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     final void habilitarCampos(boolean valor) {
-        cbEstado.setEditable(false);
+        txtEstado.setEditable(false);
         txaObs.setEditable(valor);
         txfCEP.setEditable(valor);
         txfNascimento.setEditable(valor);
@@ -682,20 +693,20 @@ public class ClienteView extends javax.swing.JInternalFrame {
         clienteBeans.setBairro(txtBairro.getText());
         clienteBeans.setDataCadastro(txtData.getText());
         clienteBeans.setObservacao(txaObs.getText());
-        //clienteBeans.setCep(Integer.parseInt(txfCEP.getText().replace("-", "")));
         clienteBeans.setAniversario(txfNascimento.getText());
         clienteBeans.setTelCelular(txfTelCelular.getText());
         clienteBeans.setTelefone(txfTelefone.getText());
         clienteBeans.setCodigoCliente(Integer.parseInt(txtCodigo.getText()));
         clienteBeans.setEmail(txtEmail.getText());
-        //clienteBeans.setNumero(Integer.parseInt(txtNumero.getText()));
+        clienteBeans.setEstado(txtEstado.getText());
+        clienteBeans.setCidade(txtCidade.getText());
 
         return clienteBeans;
 
     }
 
     final void limpaTudo() {
-        cbEstado.setSelectedIndex(0);
+        txtEstado.setText("");
         txaObs.setText("");
         txfCEP.setText("");
         txfNascimento.setText("");
@@ -713,7 +724,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }
 
     final void limpaNovo() {
-        cbEstado.setSelectedIndex(0);
+       txtEstado.setText("");
         txaObs.setText("");
         txfCEP.setText("");
         txfNascimento.setText("");
@@ -726,6 +737,17 @@ public class ClienteView extends javax.swing.JInternalFrame {
         txtNumero.setText("");
         txtPesquisar.setText("");
         txtRua.setText("");
+    }
+    
+    public void populaCamposCep(){
+        CepBeans cepBeans;
+        
+        if (clienteController.controleCepValido(cepBeans = clienteController.controleCep(txfCEP.getText().replace("-", "")))) {
+            txtBairro.setText(cepBeans.getBairro());
+            txtCidade.setText(cepBeans.getCidade());
+            txtRua.setText(cepBeans.getEndereco());
+            txtEstado.setText(cepBeans.getEstado());
+        }
     }
 
     public static void main(String args[]) {

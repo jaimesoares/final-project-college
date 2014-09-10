@@ -1,11 +1,17 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.util.FundoDeTela;
+import java.awt.AWTEvent;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 public class PrincipalView extends javax.swing.JFrame {
 
@@ -35,9 +41,14 @@ public class PrincipalView extends javax.swing.JFrame {
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
         Desktop.setVisible(true);
-        
+
         tipoPedidoV = new TipoDePedidoView(Desktop);
-        
+
+        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            public void eventDispatched(AWTEvent e) {
+            }
+        }, AWTEvent.KEY_EVENT_MASK);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -63,6 +74,17 @@ public class PrincipalView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PIZZARIA MAMA");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        jMenuBar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenuBar1KeyPressed(evt);
+            }
+        });
 
         JM_Manutencao.setText("Manutenção");
 
@@ -163,6 +185,11 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniSobreActionPerformed(evt);
             }
         });
+        mniSobre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mniSobreKeyPressed(evt);
+            }
+        });
         mnSobre.add(mniSobre);
 
         jMenuBar1.add(mnSobre);
@@ -220,19 +247,18 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCardapioActionPerformed
 
     private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
-        if (pedidoV == null || !pedidoV.isShowing()) {
-            pedidoV = new PedidoView(1);
-            Desktop.add(pedidoV);
-            centralizaForm(pedidoV);
-            pedidoV.setVisible(true);
-        }
-
-//        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {            
-//            Desktop.add(tipoPedidoV);
-//            centralizaForm(tipoPedidoV);
-//            tipoPedidoV.setVisible(true);
+//        if (pedidoV == null || !pedidoV.isShowing()) {
+//            pedidoV = new PedidoView(1);
+//            Desktop.add(pedidoV);
+//            centralizaForm(pedidoV);
+//            pedidoV.setVisible(true);
 //        }
-        
+
+        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {            
+            Desktop.add(tipoPedidoV);
+            centralizaForm(tipoPedidoV);
+            tipoPedidoV.setVisible(true);
+        }
 //        if (balcaoV == null || !balcaoV.isShowing()) {
 //            balcaoV = new BalcaoPedidoView(1);
 //            Desktop.add(balcaoV);
@@ -253,7 +279,7 @@ public class PrincipalView extends javax.swing.JFrame {
             centralizaForm(usuarioV);
             usuarioV.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_mniUsuarioActionPerformed
 
     private void mniCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCozinhaActionPerformed
@@ -270,7 +296,7 @@ public class PrincipalView extends javax.swing.JFrame {
             centralizaForm(moduloV);
             moduloV.setVisible(true);
         }
-        
+
 //        if (moduloV2 == null || !moduloV2.isShowing()) {
 //            moduloV2 = new ModuloView();
 //            Desktop.add(moduloV2);
@@ -297,6 +323,18 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void jMenuBar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuBar1KeyPressed
+
+    }//GEN-LAST:event_jMenuBar1KeyPressed
+
+    private void mniSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mniSobreKeyPressed
+
+    }//GEN-LAST:event_mniSobreKeyPressed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -321,11 +359,66 @@ public class PrincipalView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PrincipalView().setVisible(true);
+        final PrincipalView novo;
+        novo = new PrincipalView();
+        novo.setVisible(true);
+
+        EventQueue queue = new EventQueue() {
+            protected void dispatchEvent(AWTEvent event) {
+                super.dispatchEvent(event);
+
+                String a[];
+                String tecla[];
+
+                if (!event.paramString().equals("")) {
+                    if (event.paramString().substring(0, 5).equals("KEY_P")) {
+                        a = event.paramString().split(",");
+                        tecla = a[1].split("=");
+                        //System.out.println(tecla[1]);
+
+                        switch (Integer.parseInt(tecla[1])) {
+                            case 112: //F1
+                                JOptionPane.showMessageDialog(null, "Pressionou F1!");
+                                break;
+                            case 113: //F2
+                                try {
+                                    Runtime.getRuntime().exec("calc.exe");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case 114: //F3
+                                
+                                break;
+                            case 115: //F4
+                                break;
+                            case 116: //F5
+                                JOptionPane.showMessageDialog(null, "Pressionou F5!");
+                                break;
+                            case 117: //F6
+                                break;
+                            case 118: //F7
+                                break;
+                            case 119: //F8
+                                break;
+                            case 120: //F9
+                                JOptionPane.showMessageDialog(null, "Pressionou F9!");
+                                break;
+                            case 121: //F10
+                                novo.moduloView();
+                                break;
+                            case 122: //F11
+                                break;
+                            case 123: //F12
+                                break;                            
+                            default:
+                                break;
+                        }
+                    }
+                }
             }
-        });
+        };
+        Toolkit.getDefaultToolkit().getSystemEventQueue().push(queue);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -354,4 +447,10 @@ public class PrincipalView extends javax.swing.JFrame {
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 
+    public void moduloView() {
+        if (moduloV2 == null || !moduloV2.isShowing()) {
+            moduloV2 = new ModuloView();
+            moduloV2.setVisible(true);
+        }
+    }
 }
