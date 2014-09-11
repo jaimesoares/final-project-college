@@ -114,7 +114,7 @@ public class ClienteModel {
                 SQLSelection = "select * from cliente where cli_rua like '%" + pesquisa + "%';";
                 break;
         }
-        try (PreparedStatement pstm = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
             ResultSet rs = pstm.executeQuery();
             if (pesquisa.equals("")) {
@@ -133,7 +133,7 @@ public class ClienteModel {
         ClienteBeans clienteBeans = new ClienteBeans();
         String SQLSelection = "select * from cliente where cli_cod = ?;";
 
-        try (PreparedStatement pstm = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {

@@ -30,6 +30,7 @@ public class PrincipalView extends javax.swing.JFrame {
     ModuloView moduloV2;
     FornecedorView fornecedorV;
     CargoView cargoV;
+    RelatorioClienteView relatorioClienteV;
 
     public PrincipalView() {
         initComponents();
@@ -69,6 +70,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        mniRelatorioCliente = new javax.swing.JMenuItem();
         mnSobre = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
 
@@ -175,6 +177,15 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(JM_Movimentacao);
 
         jMenu1.setText("Relatório");
+
+        mniRelatorioCliente.setText("Relatório de Clientes");
+        mniRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRelatorioClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniRelatorioCliente);
+
         jMenuBar1.add(jMenu1);
 
         mnSobre.setText("Ajuda");
@@ -335,6 +346,15 @@ public class PrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mniSobreKeyPressed
 
+    private void mniRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioClienteActionPerformed
+        if (relatorioClienteV == null || !relatorioClienteV.isShowing()) {
+            relatorioClienteV = new RelatorioClienteView(PrincipalView.this);
+            Desktop.add(relatorioClienteV);
+            centralizaForm(relatorioClienteV);
+            relatorioClienteV.setVisible(true);
+        }
+    }//GEN-LAST:event_mniRelatorioClienteActionPerformed
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -436,6 +456,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniFuncionario;
     private javax.swing.JMenuItem mniModulo;
     private javax.swing.JMenuItem mniPedido;
+    private javax.swing.JMenuItem mniRelatorioCliente;
     private javax.swing.JMenuItem mniSobre;
     private javax.swing.JMenuItem mniUsuario;
     // End of variables declaration//GEN-END:variables
