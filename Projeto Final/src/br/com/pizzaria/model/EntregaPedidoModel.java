@@ -22,7 +22,7 @@ public class EntregaPedidoModel {
     public void pesquisaItens(String pesquisa, List<String> listaDeItens) {
         try {
             String SQLPesquisa = "select * from cardapio where car_descricao like '%" + pesquisa + "%';";
-            PreparedStatement pstmt = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLPesquisa);
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 listaDeItens.add(rs.getString("car_descricao"));
@@ -35,7 +35,7 @@ public class EntregaPedidoModel {
     public double valorDoItem(String pesquisa) {
         try {
             String SQLPesquisa = "select * from cardapio where car_descricao = ?";
-            PreparedStatement pstmt = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLPesquisa);
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             pstmt.setString(1, pesquisa);
 
             ResultSet rs = pstmt.executeQuery();
@@ -51,7 +51,7 @@ public class EntregaPedidoModel {
     public int codigoDoItem(String pesquisa) {
         try {
             String SQLPesquisa = "select * from cardapio where car_descricao = ?";
-            PreparedStatement pstmt = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLPesquisa);
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             pstmt.setString(1, pesquisa);
 
             ResultSet rs = pstmt.executeQuery();
@@ -72,7 +72,7 @@ public class EntregaPedidoModel {
         try {
             String SQLInserePedido = "insert into pedido(ped_cli_cod, ped_fun_cod, ped_ent_cod, ped_data, ped_hora, ped_total, ped_status)"
                     + "values (?,?,?,?,?,?,?);";
-            PreparedStatement pstmt = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLInserePedido);
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
             pstmt.setString(1, codigoCliente);
             pstmt.setString(2, codigoFuncioario);
             pstmt.setString(3, "0");
@@ -102,7 +102,7 @@ public class EntregaPedidoModel {
         try {
             String SQLSelection = "select ped_cod from pedido order by ped_cod desc limit 1";
 
-            PreparedStatement pstmt = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLSelection);
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 codigo = rs.getString("ped_cod");
@@ -121,7 +121,7 @@ public class EntregaPedidoModel {
                 String SQLInsertItens = "insert into item(item_ped_ent_cod, item_ped_fun_cod, item_ped_cli_cod, item_ped_cod, item_car_cod, item_quantidade)"
                         +"values(?,?,?,?,?,?);";
                 
-                PreparedStatement pstmt = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLInsertItens);
+                PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
                 pstmt.setString(1, "0");
                 pstmt.setString(2, codigoFuncioario);
                 pstmt.setString(3, codigoCliente);
