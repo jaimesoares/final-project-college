@@ -12,11 +12,15 @@ public class RelatorioClienteController {
         relatorioClieteModel = new RelatorioClienteModel();
     }
     
-    public void controlePeriodoCliente(){
-        
+    public void controlePeriodoCliente(String dataInicial, String dataFinal, DefaultTableModel tabela){
+        relatorioClieteModel.listarCLientePeriodo(dataInicial, dataFinal, tabela);
     }
     
     public void controleClienteDia(String data, DefaultTableModel tabela){
         relatorioClieteModel.listarClienteDia(data, tabela);
+    }
+    
+    public void controleTodosClientes(DefaultTableModel tabela){
+        relatorioClieteModel.listarTodosClientes(tabela);
     }
 }

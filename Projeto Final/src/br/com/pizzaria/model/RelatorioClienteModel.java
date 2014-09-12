@@ -20,7 +20,6 @@ public class RelatorioClienteModel {
      * @param tabela
      */
     public void listarClienteDia(String data, DefaultTableModel tabela) {
-        //String data = "11/09/2014";
         String SqlSelection = "select\n"
                 + "  `cli_cod`,\n"
                 + "  `cli_nome`,\n"
@@ -44,8 +43,7 @@ public class RelatorioClienteModel {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), rs.getString("cli_datacad")});
-                System.out.println(rs.getString("cli_nome"));
+                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad"))});
             }
         } catch (SQLException ex) {
             Logger.getLogger(RelatorioClienteModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -57,7 +55,17 @@ public class RelatorioClienteModel {
      * @param tabela
      */
     public void listarTodosClientes(DefaultTableModel tabela) {
+        String SqlSelection = "select *  from `pizzaria`.`cliente`";
 
+        try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad"))});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RelatorioClienteModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -67,7 +75,34 @@ public class RelatorioClienteModel {
      * @param tabela
      */
     public void listarCLientePeriodo(String dataInicial, String dataFinal, DefaultTableModel tabela) {
+        String SqlSelection = "select\n"
+                + "  `cli_cod`,\n"
+                + "  `cli_nome`,\n"
+                + "  `cli_cep`,\n"
+                + "  `cli_nro_ender`,\n"
+                + "  `cli_email`,\n"
+                + "  `cli_telefone`,\n"
+                + "  `cli_tel_cel`,\n"
+                + "  `cli_aniversario`,\n"
+                + "  `cli_datacad`,\n"
+                + "  `cli_dt_ult_compra`,\n"
+                + "  `cli_stt_inadimp`,\n"
+                + "  `cli_rua`,\n"
+                + "  `cli_bairro`,\n"
+                + "  `cli_obs`,\n"
+                + "  `cli_cidade`\n"
+                + "from `pizzaria`.`cliente`\n"
+                + "WHERE  `cli_datacad`  BETWEEN '" + VerificadoresECorretores.converteParaSql(dataInicial) + "' AND '" + VerificadoresECorretores.converteParaSql(dataFinal) + "';";
 
+        try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad"))    });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RelatorioClienteModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static void main(String[] args) {
