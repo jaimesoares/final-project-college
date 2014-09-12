@@ -121,6 +121,11 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
         jLabel1.setOpaque(true);
 
         btnTodosClientes.setText("Todos os Clientes");
+        btnTodosClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTodosClientesActionPerformed(evt);
+            }
+        });
 
         btnCadastradosHoje.setText("Cadastrados Hoje");
         btnCadastradosHoje.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +153,11 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
         });
 
         jButton3.setText("Listar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -296,6 +306,16 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
         modelo.setNumRows(0);
         relatorioClienteController.controleClienteDia(VerificadoresECorretores.retornoDeDataAtual(), modelo);
     }//GEN-LAST:event_btnCadastradosHojeActionPerformed
+
+    private void btnTodosClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosClientesActionPerformed
+        modelo.setNumRows(0);
+        relatorioClienteController.controleTodosClientes(modelo);
+    }//GEN-LAST:event_btnTodosClientesActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         modelo.setNumRows(0);
+         relatorioClienteController.controlePeriodoCliente(txtDataInicial.getText(),txtDataFinal.getText(), modelo );
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
