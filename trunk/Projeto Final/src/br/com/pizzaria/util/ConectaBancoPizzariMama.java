@@ -9,7 +9,7 @@ public class ConectaBancoPizzariMama implements AutoCloseable {
     private final String url = "jdbc:mysql://localhost/pizzaria_mama";
     private final String driverName = "com.mysql.jdbc.Driver";
     private final String userName = "root";
-    private final String password = "";
+    private final String password = "root";
     private static Connection con;
 
     public ConectaBancoPizzariMama() {
