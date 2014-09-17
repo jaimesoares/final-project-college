@@ -55,11 +55,7 @@ public class ClienteController {
         cliente.setAniversario(nascimento);
         cliente.setNumero(Integer.parseInt(numero));
         cliente.setCep(cep.replace("-", ""));
-        if (clienteModel.cadastrarCliente(cliente)) {
-            return true;
-        } else {
-            return false;
-        }
+        return clienteModel.cadastrarCliente(cliente);
     }
 
     public String controleDeCodigo() {

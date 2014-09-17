@@ -3,7 +3,6 @@ package br.com.pizzaria.model;
 import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import br.com.pizzaria.util.VerificadoresECorretores;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -137,7 +136,7 @@ public class ClienteModel {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                
+
                 clienteBeans.setObservacao(rs.getString("cli_obs"));
                 clienteBeans.setCep(rs.getString("cli_cep"));
                 clienteBeans.setAniversario(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_aniversario")));
@@ -161,13 +160,19 @@ public class ClienteModel {
 
     public void editarCliente(ClienteBeans clienteBeans) {
 
-        String SQLUpdate = "update `pizzaria`.`cliente`"
-                + "`cli_nome` = ?,`cli_cep` = ?,"
-                + "`cli_nro_ender` = ?,`cli_email` = ?,`cli_telefone` = ?,"
-                + "`cli_tel_cel` = ?,`cli_aniversario` = ?,`cli_datacad` = ?,"
-                + "`cli_rua` = ?,"
-                + "`cli_bairro` = ?,`cli_obs` = ?,"
-                + "`cli_cidade` = ?"
+        String SQLUpdate = "update `pizzaria`.`cliente`\n"
+                + "set `cli_nome` = ?,\n"
+                + "  `cli_cep` = ?,\n"
+                + "  `cli_nro_ender` = ?,\n"
+                + "  `cli_email` = ?,\n"
+                + "  `cli_telefone` = ?,\n"
+                + "  `cli_tel_cel` = ?,\n"
+                + "  `cli_aniversario` = ?,\n"
+                + "  `cli_datacad` = ?,\n"
+                + "  `cli_rua` = ?,\n"
+                + "  `cli_bairro` = ?,\n"
+                + "  `cli_obs` = ?,\n"
+                + "  `cli_cidade` = ?\n"
                 + "where `cli_cod` = ?;";
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate)) {
 
@@ -191,7 +196,7 @@ public class ClienteModel {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Editar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 

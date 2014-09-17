@@ -19,16 +19,16 @@ public class ProdutoController {
         return cardapioModel.proximoCardapio();
     }
     
-    public boolean verificarDados(ProdutoBeans cardapio, String valor) {
+    public boolean verificarDados(ProdutoBeans cardapio/*, String valor*/) {
         if (cardapio.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (valor.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo valor não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+//        if (valor.equals("")) {
+//            JOptionPane.showMessageDialog(null, "Campo valor não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+//            return false;
+//        }
 
             cardapioModel.cadastrarCardapio(cardapio);
         return true;
@@ -42,16 +42,16 @@ public class ProdutoController {
         return cardapioModel.preencherCampos(codigo);
     }
     
-    public boolean verificarDadosParaEditar(ProdutoBeans cardapio, String valor) {
+    public boolean verificarDadosParaEditar(ProdutoBeans cardapio/*, String valor*/) {
         if (cardapio.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (valor.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo valor não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+//        if (valor.equals("")) {
+//            JOptionPane.showMessageDialog(null, "Campo valor não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+//            return false;
+//        }
 
             cardapioModel.editarCardapio(cardapio);
         return true;
