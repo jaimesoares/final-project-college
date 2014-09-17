@@ -1,6 +1,7 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.util.FundoDeTela;
+import br.com.pizzaria.util.Global;
 import java.awt.AWTEvent;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -8,7 +9,10 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -29,8 +33,9 @@ public class PrincipalView extends javax.swing.JFrame {
     DefinirModuloView moduloV;
     ModuloView moduloV2;
     FornecedorView fornecedorV;
-    CargoView cargoV;
+    CargoFuncaoView cargoV;
     RelatorioClienteView relatorioClienteV;
+    LoginView2 login;
 
     public PrincipalView() {
         initComponents();
@@ -44,6 +49,7 @@ public class PrincipalView extends javax.swing.JFrame {
         Desktop.setVisible(true);
 
         tipoPedidoV = new TipoDePedidoView(Desktop);
+        habiltaMenu(true);
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
             public void eventDispatched(AWTEvent e) {
@@ -64,8 +70,8 @@ public class PrincipalView extends javax.swing.JFrame {
         mniCardapio = new javax.swing.JMenuItem();
         mniUsuario = new javax.swing.JMenuItem();
         mniModulo = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mniFornecedor = new javax.swing.JMenuItem();
+        mniFuncao = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
@@ -138,21 +144,21 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         JM_Manutencao.add(mniModulo);
 
-        jMenuItem1.setText("Fornecedor");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mniFornecedor.setText("Fornecedor");
+        mniFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mniFornecedorActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(jMenuItem1);
+        JM_Manutencao.add(mniFornecedor);
 
-        jMenuItem2.setText("Cargo");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mniFuncao.setText("Função");
+        mniFuncao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mniFuncaoActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(jMenuItem2);
+        JM_Manutencao.add(mniFuncao);
 
         jMenuBar1.add(JM_Manutencao);
 
@@ -265,7 +271,7 @@ public class PrincipalView extends javax.swing.JFrame {
 //            pedidoV.setVisible(true);
 //        }
 
-        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {            
+        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {
             Desktop.add(tipoPedidoV);
             centralizaForm(tipoPedidoV);
             tipoPedidoV.setVisible(true);
@@ -316,23 +322,23 @@ public class PrincipalView extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_mniModuloActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mniFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFornecedorActionPerformed
         if (fornecedorV == null || !fornecedorV.isShowing()) {
             fornecedorV = new FornecedorView();
             Desktop.add(fornecedorV);
             centralizaForm(fornecedorV);
             fornecedorV.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mniFornecedorActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mniFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFuncaoActionPerformed
         if (cargoV == null || !cargoV.isShowing()) {
-            cargoV = new CargoView();
+            cargoV = new CargoFuncaoView();
             Desktop.add(cargoV);
             centralizaForm(cargoV);
             cargoV.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mniFuncaoActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
@@ -354,6 +360,15 @@ public class PrincipalView extends javax.swing.JFrame {
             relatorioClienteV.setVisible(true);
         }
     }//GEN-LAST:event_mniRelatorioClienteActionPerformed
+
+    private void telaLogin() {
+
+        login = new LoginView2();
+        Desktop.add(login);
+        centralizaForm(login);
+        login.setVisible(true);
+
+    }
 
     public static void main(String args[]) {
 
@@ -379,9 +394,11 @@ public class PrincipalView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        final PrincipalView novo;
-        novo = new PrincipalView();
-        novo.setVisible(true);
+        PrincipalView janela = new PrincipalView();
+        janela.setVisible(true);
+        Global.principal = janela;
+
+        janela.telaLogin();
 
         EventQueue queue = new EventQueue() {
             protected void dispatchEvent(AWTEvent event) {
@@ -408,7 +425,7 @@ public class PrincipalView extends javax.swing.JFrame {
                                 }
                                 break;
                             case 114: //F3
-                                
+
                                 break;
                             case 115: //F4
                                 break;
@@ -425,12 +442,12 @@ public class PrincipalView extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Pressionou F9!");
                                 break;
                             case 121: //F10
-                                novo.moduloView();
+                                Global.principal.moduloView();
                                 break;
                             case 122: //F11
                                 break;
                             case 123: //F12
-                                break;                            
+                                break;
                             default:
                                 break;
                         }
@@ -446,13 +463,13 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu JM_Movimentacao;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnSobre;
     private javax.swing.JMenuItem mniCardapio;
     private javax.swing.JMenuItem mniCliente;
     private javax.swing.JMenuItem mniCozinha;
     private javax.swing.JMenuItem mniEntregador;
+    private javax.swing.JMenuItem mniFornecedor;
+    private javax.swing.JMenuItem mniFuncao;
     private javax.swing.JMenuItem mniFuncionario;
     private javax.swing.JMenuItem mniModulo;
     private javax.swing.JMenuItem mniPedido;
@@ -473,5 +490,24 @@ public class PrincipalView extends javax.swing.JFrame {
             moduloV2 = new ModuloView();
             moduloV2.setVisible(true);
         }
+    }
+
+    public void habiltaMenu(boolean valor) {
+        mniCardapio.setEnabled(valor);
+        mniCliente.setEnabled(valor);
+        mniCozinha.setEnabled(valor);
+        mniEntregador.setEnabled(valor);
+        mniFuncionario.setEnabled(valor);
+        mniModulo.setEnabled(valor);
+        mniPedido.setEnabled(valor);
+        mniRelatorioCliente.setEnabled(valor);
+        mniUsuario.setEnabled(valor);
+        mniFornecedor.setEnabled(valor);
+        mniFuncao.setEnabled(valor);
+
+    }
+
+    public JDesktopPane getDesktop() {
+        return this.Desktop;
     }
 }

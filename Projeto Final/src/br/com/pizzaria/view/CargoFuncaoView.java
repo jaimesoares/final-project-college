@@ -4,13 +4,13 @@ import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.controller.CargoController;
 import javax.swing.DefaultListModel;
 
-public class CargoView extends javax.swing.JInternalFrame {
+public class CargoFuncaoView extends javax.swing.JInternalFrame {
 
     CargoBeans cargoBeans;
     CargoController cargoController;
     DefaultListModel modelo;
 
-    public CargoView() {
+    public CargoFuncaoView() {
         initComponents();
 
         cargoBeans = new CargoBeans();
@@ -35,8 +35,8 @@ public class CargoView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE FUNÇÃO");
-        setPreferredSize(new java.awt.Dimension(300, 300));
+        setTitle("MANUTENÇÃO DE FUNÇÃO/CARGO");
+        setPreferredSize(new java.awt.Dimension(680, 680));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -44,7 +44,7 @@ public class CargoView extends javax.swing.JInternalFrame {
         }
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Função");
+        jLabel1.setText("Função/Cargo");
 
         btnAdicionar.setText("+");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +91,7 @@ public class CargoView extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 487, Short.MAX_VALUE)
                         .addComponent(btnFechar)))
                 .addContainerGap())
         );
@@ -114,7 +114,7 @@ public class CargoView extends javax.swing.JInternalFrame {
                     .addComponent(btnAdicionar)
                     .addComponent(btnRemover)
                     .addComponent(btnFechar))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
         pack();

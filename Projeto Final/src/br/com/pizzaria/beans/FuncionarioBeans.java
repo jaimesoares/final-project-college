@@ -4,10 +4,10 @@ public class FuncionarioBeans {
     
     private int codigo;
     private String nome;
-    private String cargo;
+    private CargoBeans cargo;
     private String permissao;
     private String dataCad;
-    private int cep;
+    private String cep;
     private int numero;
     private String email;
     private String telCelular;
@@ -16,7 +16,7 @@ public class FuncionarioBeans {
     private String rg;
     private String telefone;
     private double salario;
-    private String ctps;
+    private String estado;
     private int codEmpresa;
     private double valeRefeicao;
     private double valeTrans;
@@ -46,11 +46,11 @@ public class FuncionarioBeans {
         this.nome = nome;
     }    
 
-    public String getCargo() {
+    public CargoBeans getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(CargoBeans cargo) {
         this.cargo = cargo;
     }
 
@@ -78,14 +78,14 @@ public class FuncionarioBeans {
     /**
      * @return the cep
      */
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
     /**
      * @param cep the cep to set
      */
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -202,17 +202,17 @@ public class FuncionarioBeans {
     }
 
     /**
-     * @return the ctps
+     * @return the estado
      */
-    public String getCtps() {
-        return ctps;
+    public String getEstado() {
+        return estado;
     }
 
     /**
-     * @param ctps the ctps to set
+     * @param estado the estado to set
      */
-    public void setCtps(String ctps) {
-        this.ctps = ctps;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     /**
