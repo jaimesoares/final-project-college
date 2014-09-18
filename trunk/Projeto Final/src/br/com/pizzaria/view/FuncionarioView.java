@@ -4,10 +4,13 @@ import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.controller.FuncionarioController;
+import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificadoresECorretores;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +25,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     FuncionarioController funcionarioController;
     DefaultTableModel modelo;
     List<CargoBeans> listaCargo;
+    ComboBoxModel<CargoBeans> modeloCargos;
 
     public FuncionarioView() {
         initComponents();
@@ -30,6 +34,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         funcionarioBeans = new FuncionarioBeans();
         funcionarioController = new FuncionarioController();
         modelo = (DefaultTableModel) tblFuncionario.getModel();
+        modeloCargos = (ComboBoxModel) cbCargo.getModel();
         populaCargo();
 
     }
@@ -95,7 +100,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_rua6 = new javax.swing.JLabel();
         cbCargo = new javax.swing.JComboBox();
         lbl_bairro7 = new javax.swing.JLabel();
-        txtPlca = new javax.swing.JTextField();
+        txtPlaca = new javax.swing.JTextField();
         txtCnh = new javax.swing.JTextField();
         lbl_bairro8 = new javax.swing.JLabel();
         txtMoto = new javax.swing.JTextField();
@@ -261,6 +266,20 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro5.setText("RG:");
 
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCpfKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfKeyTyped(evt);
+            }
+        });
+
         lbl_rua6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua6.setText("Função / Cargo:");
 
@@ -274,14 +293,19 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro7.setText("Placa Moto:");
 
-        txtPlca.addActionListener(new java.awt.event.ActionListener() {
+        txtPlaca.setEditable(false);
+        txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPlcaActionPerformed(evt);
+                txtPlacaActionPerformed(evt);
             }
         });
 
+        txtCnh.setEditable(false);
+
         lbl_bairro8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro8.setText("CNH:");
+
+        txtMoto.setEditable(false);
 
         lbl_bairro9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro9.setText("Modelo Moto:");
@@ -368,7 +392,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_bairro7)
-                            .addComponent(txtPlca, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_bairro8)
@@ -464,7 +488,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_bairro7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPlca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_bairro8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -505,14 +529,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-//        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
-//        habilitarCampos(true);
-//        txtNome.requestFocus();
-//        txtCodigo.setText(funcionarioController.controleDeCodigo());
-//        limpaNovo();
-//        CargoBeans cargo = ((CargoBeans) cbCargo.getSelectedItem()).getCodigo();
-//        System.out.println(cargo.getCodigo());
-
+//      
         if (btnNovo.getText().equals("Novo")) {
             btnNovo.setText("Salvar");
             btnFechar.setText("Cancelar");
@@ -522,11 +539,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
             habilitarCampos(true);
             txtNome.requestFocus();
-            //txtCodigo.setText(funcionarioController.controleDeCodigo());
             limpaNovo();
         } else {
 
-            //populaClienteBeans();
             if (funcionarioController.verificarDados(capturaBeans(), cbCargo.getSelectedIndex(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
                 btnNovo.setText("Novo");
                 btnFechar.setText("Fechar");
@@ -549,13 +564,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private void tblFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMousePressed
 
         funcionarioBeans = funcionarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFuncionario.getSelectedRow(), 0).toString()));
-        //txtCodigo.setText(funcionarioBeans.getCodigo() + "");
-        System.out.println(funcionarioBeans.getCargo().getDescricao());
+
+        modeloCargos.setSelectedItem(funcionarioBeans.getCargo());
         txtNome.setText(funcionarioBeans.getNome());
-        //cbCargo.setSelectedItem((CargoBeans) funcionarioBeans.getCargo());
-        //cbCargo.setSelectedIndex(1);
         txtData.setText(funcionarioBeans.getDataCad());
-        //txtCodigo.setText(clienteBeans.getCodigoCliente() + "");
         txtNome.setText(funcionarioBeans.getNome());
         txtRua.setText(funcionarioBeans.getRua());
         txtBairro.setText(funcionarioBeans.getBairro());
@@ -568,19 +580,22 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtEstado.setText("SP");
         txtEmail.setText(funcionarioBeans.getEmail());
         txtNumero.setText(funcionarioBeans.getNumero() + "");
+        txtCnh.setText(funcionarioBeans.getCnh());
+        txtMoto.setText(funcionarioBeans.getMoto());
+        txtPlaca.setText(funcionarioBeans.getPlacaMoto());
+        txtCpf.setText(funcionarioBeans.getCpf());
+        txtRg.setText(funcionarioBeans.getRg());
+
+
     }//GEN-LAST:event_tblFuncionarioMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-//        if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
-//            limpaTudo();
-//            habilitarCampos(false);
-//        }
-
         if (btnEditar.getText().equals("Editar")) {
             btnEditar.setText("Salvar");
             btnFechar.setText("Cancelar");
             btnNovo.setEnabled(false);
             habilitarCampos(true);
+            verificaEntregador();
         } else {
             if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
                 btnEditar.setText("Editar");
@@ -619,12 +634,14 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txfTelCelularActionPerformed
 
     private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-
+        if (cbCargo.isEnabled()) {
+            verificaEntregador();
+        }
     }//GEN-LAST:event_cbCargoActionPerformed
 
-    private void txtPlcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlcaActionPerformed
+    private void txtPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPlcaActionPerformed
+    }//GEN-LAST:event_txtPlacaActionPerformed
 
     private void txfCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfCEPFocusLost
         populaCamposCep();
@@ -640,9 +657,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         String caracteres = "0987654321";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-
             evt.consume();
-
         }
     }//GEN-LAST:event_txfTelefoneKeyTyped
 
@@ -650,9 +665,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         String caracteres = "0987654321";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-
             evt.consume();
-
         }
     }//GEN-LAST:event_txfTelCelularKeyTyped
 
@@ -660,11 +673,37 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         String caracteres = "0987654321";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-
             evt.consume();
-
         }
     }//GEN-LAST:event_txfNascimentoKeyTyped
+
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+        if (ValidaCPF.isCPF(txtCpf.getText())) {
+            txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+        } else {
+            txtCpf.setText("");
+            JOptionPane.showMessageDialog(null, "CPF inválido", "Erro de Preenchimento", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }//GEN-LAST:event_txtCpfFocusLost
+
+    private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfKeyTyped
+
+    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (ValidaCPF.isCPF(txtCpf.getText())) {
+                txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+            } else {
+                txtCpf.setText("");
+                JOptionPane.showMessageDialog(null, "CPF inválido", "Erro de Preenchimento", 0, new ImageIcon("imagens/cancelar.png"));
+            }
+        }
+    }//GEN-LAST:event_txtCpfKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -713,7 +752,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMoto;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtPlca;
+    private javax.swing.JTextField txtPlaca;
     private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
@@ -731,33 +770,30 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtNome.setEditable(valor);
         txtNumero.setEditable(valor);
         txtRua.setEditable(false);
+        txtCpf.setEditable(valor);
+        txtRg.setEditable(valor);
+
     }
 
-//    final void populaClienteBeans() {
-//        funcionarioBeans.setNome(txtNome.getText());
-////        funcionarioBeans.setCargo(txtRua.getText());
-////        funcionarioBeans.setPermissao(txtBairro.getText());
-////        funcionarioBeans.setTelefone(txfTelefone.getText());
-//        funcionarioBeans.setDataCad(txtData.getText());
-//
-//    }
     final FuncionarioBeans capturaBeans() {
-        //funcionarioBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
         funcionarioBeans.setNome(txtNome.getText());
         funcionarioBeans.setCargo(((CargoBeans) cbCargo.getSelectedItem()));
         funcionarioBeans.setPermissao(txtEstado.getText());
         funcionarioBeans.setDataCad(txtData.getText());
-
         funcionarioBeans.setNome(txtNome.getText());
         funcionarioBeans.setRua(txtRua.getText());
         funcionarioBeans.setBairro(txtBairro.getText());
         funcionarioBeans.setNascimento(txfNascimento.getText());
         funcionarioBeans.setTelCelular(txfTelCelular.getText());
         funcionarioBeans.setTelefone(txfTelefone.getText());
-        //clienteBeans.setCodigoCliente(Integer.parseInt(txtCodigo.getText()));
         funcionarioBeans.setEmail(txtEmail.getText());
         funcionarioBeans.setEstado(txtEstado.getText());
         funcionarioBeans.setCidade(txtCidade.getText());
+        funcionarioBeans.setMoto(txtMoto.getText());
+        funcionarioBeans.setPlacaMoto(txtPlaca.getText());
+        funcionarioBeans.setCnh(txtCnh.getText());
+        funcionarioBeans.setCpf(txtCpf.getText());
+        funcionarioBeans.setRg(txtRg.getText());
 
         return funcionarioBeans;
     }
@@ -770,7 +806,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txfTelefone.setText("");
         txtBairro.setText("");
         txtCidade.setText("");
-        //txtCodigo.setText("");
         txtData.setText("");
         txtEmail.setText("");
         txtNome.setText("");
@@ -778,6 +813,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txfPesquisar.setText("");
         txtRua.setText("");
         cbCargo.setSelectedIndex(0);
+        txtCnh.setText("");
+        txtMoto.setText("");
+        txtPlaca.setText("");
+        txtCpf.setText("");
+        txtRg.setText("");
     }
 
     final void limpaNovo() {
@@ -796,6 +836,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtNumero.setText("");
         txfPesquisar.setText("");
         txtRua.setText("");
+        txtCnh.setText("");
+        txtMoto.setText("");
+        txtPlaca.setText("");
+        txtCpf.setText("");
+        txtRg.setText("");
 
     }
 
@@ -815,6 +860,22 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             txtCidade.setText(cepBeans.getCidade());
             txtRua.setText(cepBeans.getEndereco());
             txtEstado.setText(cepBeans.getEstado());
+        }
+    }
+
+    public void verificaEntregador() {
+        System.out.println(modeloCargos.getSelectedItem());
+        if (modeloCargos.getSelectedItem().toString().equals("Entregador")) {
+            txtCnh.setEditable(true);
+            txtMoto.setEditable(true);
+            txtPlaca.setEditable(true);
+        } else {
+            txtCnh.setEditable(false);
+            txtMoto.setEditable(false);
+            txtPlaca.setEditable(false);
+            txtCnh.setText("");
+            txtMoto.setText("");
+            txtPlaca.setText("");
         }
     }
 

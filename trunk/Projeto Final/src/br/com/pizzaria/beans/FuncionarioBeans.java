@@ -24,6 +24,10 @@ public class FuncionarioBeans {
     private String rua;
     private String bairro;
     private String nascimento;
+    private String moto;
+    private String placaMoto;
+    private String cnh;
+            
     
 
     public FuncionarioBeans() {        
@@ -311,6 +315,48 @@ public class FuncionarioBeans {
      */
     public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
+    }
+
+    /**
+     * @return the moto
+     */
+    public String getMoto() {
+        return moto;
+    }
+
+    /**
+     * @param moto the moto to set
+     */
+    public void setMoto(String moto) {
+        this.moto = moto;
+    }
+
+    /**
+     * @return the placaMoto
+     */
+    public String getPlacaMoto() {
+        return placaMoto;
+    }
+
+    /**
+     * @param placaMoto the placaMoto to set
+     */
+    public void setPlacaMoto(String placaMoto) {
+        this.placaMoto = placaMoto;
+    }
+
+    /**
+     * @return the cnh
+     */
+    public String getCnh() {
+        return cnh;
+    }
+
+    /**
+     * @param cnh the cnh to set
+     */
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
     }
     
     

@@ -5,13 +5,11 @@ public class ProdutoBeans {
     private int codigo;
     private String descricao;
     private String tipo;
-    private double valor;
-    int codigoFornecedor;
-    double qtdMinima;
-    char avisaEstoqueMinimo;
-    double valorCompra;
-    double qtdSaldoEstoque;
-
+    private double qtdMinima;
+    private char avisaEstoqueMinimo;
+    private double qtdSaldoEstoque;
+    private String estocavel;
+    private String dataCad;
     /**
      * @return the codigo
      */
@@ -58,20 +56,78 @@ public class ProdutoBeans {
     
     @Override
     public String toString(){
-        return this.codigo+"";
+        return this.descricao;
     }
 
     /**
-     * @return the valor
+     * @return the qtdMinima
      */
-    public double getValor() {
-        return valor;
+    public double getQtdMinima() {
+        return qtdMinima;
     }
 
     /**
-     * @param valor the valor to set
+     * @param qtdMinima the qtdMinima to set
      */
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setQtdMinima(double qtdMinima) {
+        this.qtdMinima = qtdMinima;
     }
+
+    /**
+     * @return the avisaEstoqueMinimo
+     */
+    public char getAvisaEstoqueMinimo() {
+        return avisaEstoqueMinimo;
+    }
+
+    /**
+     * @param avisaEstoqueMinimo the avisaEstoqueMinimo to set
+     */
+    public void setAvisaEstoqueMinimo(char avisaEstoqueMinimo) {
+        this.avisaEstoqueMinimo = avisaEstoqueMinimo;
+    }
+
+    /**
+     * @return the qtdSaldoEstoque
+     */
+    public double getQtdSaldoEstoque() {
+        return qtdSaldoEstoque;
+    }
+
+    /**
+     * @param qtdSaldoEstoque the qtdSaldoEstoque to set
+     */
+    public void setQtdSaldoEstoque(double qtdSaldoEstoque) {
+        this.qtdSaldoEstoque = qtdSaldoEstoque;
+    }
+
+    /**
+     * @return the estocavel
+     */
+    public String getEstocavel() {
+        return estocavel;
+    }
+
+    /**
+     * @param estocavel the estocavel to set
+     */
+    public void setEstocavel(String estocavel) {
+        this.estocavel = estocavel;
+    }
+
+    /**
+     * @return the dataCad
+     */
+    public String getDataCad() {
+        return dataCad;
+    }
+
+    /**
+     * @param dataCad the dataCad to set
+     */
+    public void setDataCad(String dataCad) {
+        this.dataCad = dataCad;
+    }
+
+    
 }

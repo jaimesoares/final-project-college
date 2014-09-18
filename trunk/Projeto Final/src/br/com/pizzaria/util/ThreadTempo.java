@@ -15,7 +15,7 @@ public class ThreadTempo extends Thread {
     @Override
     public void run() {
         try {
-            this.sleep(1500);
+            this.sleep(2000);
             this.lbl.setText("");
         } catch (InterruptedException ex) {
             Logger.getLogger(ThreadTempo.class.getName()).log(Level.SEVERE, null, ex);
