@@ -15,7 +15,8 @@ public class FundoDeTela extends JDesktopPane {
     
     @Override
     public void paintComponent(Graphics g){
-        g.drawImage(Imagem, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(Imagem, 0, 0, getWidth(), getHeight()-20, this);
+        //g.drawString("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", 30, getHeight()-8);
     }
     
 

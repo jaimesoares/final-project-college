@@ -44,7 +44,6 @@ public class ProdutoModel {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
             pstm.setString(1, cardapioBeans.getDescricao());
             pstm.setString(2, cardapioBeans.getTipo());
-            pstm.setDouble(3, cardapioBeans.getValor());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -83,7 +82,6 @@ public class ProdutoModel {
                 cardapioBeans.setCodigo(rs.getInt("car_cod"));
                 cardapioBeans.setDescricao(rs.getString("car_descricao"));
                 cardapioBeans.setTipo(rs.getString("car_tipo"));
-                cardapioBeans.setValor(rs.getDouble("car_valor"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -102,7 +100,6 @@ public class ProdutoModel {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
             pstm.setString(1, cardapioBeans.getDescricao());
             pstm.setString(2, cardapioBeans.getTipo());
-            pstm.setDouble(3, cardapioBeans.getValor());
             pstm.setInt(4, cardapioBeans.getCodigo());
 
             pstm.execute();

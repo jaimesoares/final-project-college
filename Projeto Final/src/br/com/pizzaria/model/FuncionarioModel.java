@@ -31,8 +31,8 @@ public class FuncionarioModel {
                     + "`fun_vale_transp`,`fun_vale_refeicao`,"
                     + "`fun_ctps`,`fun_id_empresa`,"
                     + "`fun_nascimento`,"
-                    + "`fun_rua`,`fun_cep`,`fun_bairro`, fun_cidade)"
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                    + "`fun_rua`,`fun_cep`,`fun_bairro`, fun_cidade, fun_moto, fun_placa_moto, fun_cnh)"
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
             pstm.setString(1, funcionarioBeans.getNome());
             pstm.setString(2, VerificadoresECorretores.converteParaSql(funcionarioBeans.getDataCad()));
@@ -53,6 +53,9 @@ public class FuncionarioModel {
             pstm.setString(17, funcionarioBeans.getCep());
             pstm.setString(18, funcionarioBeans.getBairro());
             pstm.setString(19, funcionarioBeans.getCidade());
+            pstm.setString(20, funcionarioBeans.getMoto());
+            pstm.setString(21, funcionarioBeans.getPlacaMoto());
+            pstm.setString(22, funcionarioBeans.getCnh());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -136,8 +139,11 @@ public class FuncionarioModel {
                 funcionarioBeans.setCidade(rs.getString("fun_cidade"));
                 funcionarioBeans.setCpf(rs.getString("fun_cpf"));
                 funcionarioBeans.setRg(rs.getString("fun_rg"));
+                funcionarioBeans.setMoto(rs.getString("fun_moto"));
+                funcionarioBeans.setPlacaMoto(rs.getString("fun_placa_moto"));
+                funcionarioBeans.setCnh(rs.getString("fun_cnh"));
 
-                String SQLSelect = "select * from cargo where crg_id_cargo = '"+rs.getInt("fun_cargo")+"';";
+                String SQLSelect = "select * from cargo where crg_id_cargo = '" + rs.getInt("fun_cargo") + "';";
 
                 try (PreparedStatement pstmCargo = ConectaBanco.getConnection().prepareStatement(SQLSelect)) {
 
@@ -150,10 +156,8 @@ public class FuncionarioModel {
                         funcionarioBeans.setCargo(novo);
                     }
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Impossível Preencher Campos "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                    JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
                 }
-
-                
 
                 funcionarioBeans.setEstado(rs.getString("fun_ctps"));
                 funcionarioBeans.setSalario(rs.getDouble("fun_salario"));
@@ -187,7 +191,10 @@ public class FuncionarioModel {
                     + "  `fun_cep` = ?,\n"
                     + "  `fun_bairro` = ?,\n"
                     + "  `fun_estado` = ?,\n"
-                    + "  `fun_cidade` = ?\n"
+                    + "  `fun_cidade` = ?,\n"
+                    + "  `fun_moto` = ?,\n"
+                    + "  `fun_placa_moto` = ?,\n"
+                    + "  `fun_cnh` = ?\n"
                     + "where `fun_codigo` = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
 
@@ -206,7 +213,10 @@ public class FuncionarioModel {
             pstm.setString(13, funcionarioBeans.getBairro());
             pstm.setString(14, funcionarioBeans.getEstado());
             pstm.setString(15, funcionarioBeans.getCidade());
-            pstm.setInt(16, funcionarioBeans.getCodigo());
+            pstm.setString(16, funcionarioBeans.getMoto());
+            pstm.setString(17, funcionarioBeans.getPlacaMoto());
+            pstm.setString(18, funcionarioBeans.getCnh());
+            pstm.setInt(19, funcionarioBeans.getCodigo());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -233,7 +243,7 @@ public class FuncionarioModel {
                 lista.add(novo);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista "+ ex, "Erro de SQL " , 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL ", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 

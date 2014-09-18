@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.controller.UsuarioController;
+import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.Som;
 import br.com.pizzaria.util.ThreadTempo;
 import java.awt.event.KeyEvent;
@@ -22,7 +22,7 @@ public class LoginView2 extends javax.swing.JInternalFrame {
     private final UsuarioBeans momentUser;
     private final Som play;
     private final UsuarioController usuarioController;
-    
+
     public LoginView2() {
         initComponents();
         lblMensagem.setVisible(false);
@@ -133,7 +133,7 @@ public class LoginView2 extends javax.swing.JInternalFrame {
                 .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSenha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin1)
                     .addComponent(btnLogin)
@@ -154,16 +154,17 @@ public class LoginView2 extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblMensagem)
-                .addGap(137, 137, 137)
-                .addComponent(lblH2O)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(separador)
-                    .addComponent(painelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblMensagem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblH2O))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(separador)
+                            .addComponent(painelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -247,7 +248,7 @@ public class LoginView2 extends javax.swing.JInternalFrame {
                 thread.start();
                 play.som();
             } else if (usuarioBeans.getSenha().equals(momentUser.getSenha())) {
-                new PrincipalView().setVisible(true);
+                Global.principal.habiltaMenu(true);
                 this.dispose();
             } else {
                 lblMensagem.setText("Mensagem: Senha incorreta!");

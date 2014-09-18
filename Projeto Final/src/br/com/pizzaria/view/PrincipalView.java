@@ -5,12 +5,9 @@ import br.com.pizzaria.util.Global;
 import java.awt.AWTEvent;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -19,6 +16,8 @@ import javax.swing.JOptionPane;
 
 public class PrincipalView extends javax.swing.JFrame {
 
+    
+    
     FundoDeTela Desktop;
     ClienteView clienteV;
     FuncionarioView funcionarioV;
@@ -37,19 +36,19 @@ public class PrincipalView extends javax.swing.JFrame {
     RelatorioClienteView relatorioClienteV;
     LoginView2 login;
 
-    public PrincipalView() {
+    public PrincipalView() {        
         initComponents();
-
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLayout(new GridLayout());
-        mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);        
+        mniCliente.setIcon(new ImageIcon("imagens/mais.png"));        
 
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
         Desktop.setVisible(true);
+        
 
         tipoPedidoV = new TipoDePedidoView(Desktop);
-        habiltaMenu(true);
+        habiltaMenu(false);
+       
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
             public void eventDispatched(AWTEvent e) {
@@ -87,6 +86,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 formKeyPressed(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jMenuBar1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -212,17 +212,6 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(mnSobre);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
