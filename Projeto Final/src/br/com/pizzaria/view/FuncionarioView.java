@@ -294,6 +294,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro7.setText("Placa Moto:");
 
         txtPlaca.setEditable(false);
+        txtPlaca.setEnabled(false);
         txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPlacaActionPerformed(evt);
@@ -301,11 +302,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         });
 
         txtCnh.setEditable(false);
+        txtCnh.setEnabled(false);
 
         lbl_bairro8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro8.setText("CNH:");
 
         txtMoto.setEditable(false);
+        txtMoto.setEnabled(false);
 
         lbl_bairro9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro9.setText("Modelo Moto:");
@@ -590,19 +593,26 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblFuncionarioMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (btnEditar.getText().equals("Editar")) {
-            btnEditar.setText("Salvar");
-            btnFechar.setText("Cancelar");
-            btnNovo.setEnabled(false);
-            habilitarCampos(true);
-            verificaEntregador();
+        if (txtNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
         } else {
-            if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
-                btnEditar.setText("Editar");
-                btnFechar.setText("Fechar");
-                btnNovo.setEnabled(true);
-                limpaTudo();
-                habilitarCampos(false);
+            if (btnEditar.getText().equals("Editar")) {
+                btnEditar.setText("Salvar");
+                btnFechar.setText("Cancelar");
+                btnNovo.setEnabled(false);
+                habilitarCampos(true);
+                verificaEntregador();
+                txfPesquisar.setEnabled(false);
+                modelo.setNumRows(0);
+            } else {
+                if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
+                    btnEditar.setText("Editar");
+                    btnFechar.setText("Fechar");
+                    btnNovo.setEnabled(true);
+                    limpaTudo();
+                    habilitarCampos(false);
+                    txfPesquisar.setEnabled(true);
+                }
             }
         }
 
@@ -777,7 +787,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     final FuncionarioBeans capturaBeans() {
         funcionarioBeans.setNome(txtNome.getText());
-        funcionarioBeans.setCargo(((CargoBeans) cbCargo.getSelectedItem()));
+        if (cbCargo.getSelectedIndex() != 0) {
+            funcionarioBeans.setCargo(((CargoBeans) cbCargo.getSelectedItem()));
+        }
         funcionarioBeans.setPermissao(txtEstado.getText());
         funcionarioBeans.setDataCad(txtData.getText());
         funcionarioBeans.setNome(txtNome.getText());
@@ -864,15 +876,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }
 
     public void verificaEntregador() {
-        System.out.println(modeloCargos.getSelectedItem());
         if (modeloCargos.getSelectedItem().toString().equals("Entregador")) {
+            txtCnh.setEnabled(true);
+            txtMoto.setEnabled(true);
+            txtPlaca.setEnabled(true);
             txtCnh.setEditable(true);
             txtMoto.setEditable(true);
             txtPlaca.setEditable(true);
         } else {
-            txtCnh.setEditable(false);
-            txtMoto.setEditable(false);
-            txtPlaca.setEditable(false);
+            txtCnh.setEnabled(false);
+            txtMoto.setEnabled(false);
+            txtPlaca.setEnabled(false);
             txtCnh.setText("");
             txtMoto.setText("");
             txtPlaca.setText("");

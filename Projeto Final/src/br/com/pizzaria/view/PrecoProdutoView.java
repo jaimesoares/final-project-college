@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 
-public final class DefinirModuloView extends javax.swing.JInternalFrame {
+public final class PrecoProdutoView extends javax.swing.JInternalFrame {
     
     List<UsuarioBeans> listaUsuario;
     List<ModuloBeans> listaModulo;
     DefinirModuloController moduloController;
     DefaultListModel modeloLista;
 
-    public DefinirModuloView() {
+    public PrecoProdutoView() {
         initComponents();
         moduloController = new DefinirModuloController();
         populaUsuario();

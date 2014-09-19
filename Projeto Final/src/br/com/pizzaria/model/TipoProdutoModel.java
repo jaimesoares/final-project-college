@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.CargoBeans;
+import br.com.pizzaria.beans.TipoProdutoBeans;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,16 +9,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class CargoModel {
+public class TipoProdutoModel {
 
-    public CargoModel() {
+    public TipoProdutoModel() {
 
     }
 
-    public void cadastrarCargo(String descricao) {
+    public void cadastrarTipoProduto(String descricao) {
 
-        String SQLInsertion = "insert into `pizzaria`.`cargo`"
-                + "(`crg_descr`)"
+        String SQLInsertion = "insert into `pizzaria`.`tipo_prod`"
+                + "(`tprd_descr`)"
                 + "values (?);";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion)) {
@@ -31,37 +31,37 @@ public class CargoModel {
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Cadastrar" + ex.getMessage(), "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Cadastrar" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
 
     }
 
-    public void populaListaCargo(DefaultListModel modelo) {
+    public void populaListaTipoProduto(DefaultListModel modelo) {
 
-        String SQLSelection = "select * from cargo;";
+        String SQLSelection = "select * from tipo_prod;";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                CargoBeans novo = new CargoBeans();
-                novo.setCodigo(rs.getInt("crg_id_cargo"));
-                novo.setDescricao(rs.getString("crg_descr"));
+                TipoProdutoBeans novo = new TipoProdutoBeans();
+                novo.setCodigo(rs.getInt("tprd_id"));
+                novo.setDescricao(rs.getString("tprd_descr"));
                 modelo.addElement(novo);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 
-    public void editarCargo(CargoBeans cargoBeans) {
+    public void editarTipoProduto(TipoProdutoBeans tipoProdutoBeans) {
 
-        String SQLUpdate = "delete from `pizzaria`.`cargo`"
-                + "where `crg_id_cargo` = ?;";
+        String SQLUpdate = "delete from `pizzaria`.`tipo_prod`"
+                + "where `tprd_id` = ?;";
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate)) {
 
-            pstm.setInt(1, cargoBeans.getCodigo());
+            pstm.setInt(1, tipoProdutoBeans.getCodigo());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -69,7 +69,7 @@ public class CargoModel {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Editar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 }

@@ -4,11 +4,11 @@ public class ProdutoBeans {
     
     private int codigo;
     private String descricao;
-    private String tipo;
+    private TipoProdutoBeans tipoProduto;
     private double qtdMinima;
     private char avisaEstoqueMinimo;
     private double qtdSaldoEstoque;
-    private String estocavel;
+    private char estocavel;
     private String dataCad;
     /**
      * @return the codigo
@@ -39,17 +39,17 @@ public class ProdutoBeans {
     }
 
     /**
-     * @return the tipo
+     * @return the tipoProduto
      */
-    public String getTipo() {
-        return tipo;
+    public TipoProdutoBeans getTipoProduto() {
+        return tipoProduto;
     }
 
     /**
-     * @param tipo the tipo to set
+     * @param tipoProduto the tipoProduto to set
      */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoProduto(TipoProdutoBeans tipoProduto) {
+        this.tipoProduto = tipoProduto;
     }
 
     
@@ -104,14 +104,14 @@ public class ProdutoBeans {
     /**
      * @return the estocavel
      */
-    public String getEstocavel() {
+    public char getEstocavel() {
         return estocavel;
     }
 
     /**
      * @param estocavel the estocavel to set
      */
-    public void setEstocavel(String estocavel) {
+    public void setEstocavel(char estocavel) {
         this.estocavel = estocavel;
     }
 

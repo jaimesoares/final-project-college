@@ -549,6 +549,8 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 btnFechar.setText("Cancelar");
                 btnNovo.setEnabled(false);
                 habilitarCampos(true);
+                txtPesquisar.setEnabled(false);
+                modelo.setNumRows(0);
             } else {
                 if (clienteController.verificarDadosParaEditar(populaClienteBeans(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
                     btnEditar.setText("Editar");
@@ -556,6 +558,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     btnNovo.setEnabled(true);
                     limpaTudo();
                     habilitarCampos(false);
+                    txtPesquisar.setEnabled(true);
                 }
             }
         }

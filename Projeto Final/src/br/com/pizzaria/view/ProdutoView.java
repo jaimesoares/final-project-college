@@ -1,27 +1,34 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ProdutoBeans;
+import br.com.pizzaria.beans.TipoProdutoBeans;
 import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.VerificadoresECorretores;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 
 public class ProdutoView extends javax.swing.JInternalFrame {
 
-    MaskFormatter FormatoTelefone;
     ProdutoBeans produtoBeans;
     ProdutoController produtoController;
     DefaultTableModel modelo;
     DecimalFormat formatoDecimal;
+    List<TipoProdutoBeans> listaTipoProd;
+    ComboBoxModel<TipoProdutoBeans> modeloTipoProd;
 
     public ProdutoView() {
         initComponents();
-        modelo = (DefaultTableModel) tblFuncionario.getModel();
+        modelo = (DefaultTableModel) tblProduto.getModel();
         habilitarCampos(false);
         produtoBeans = new ProdutoBeans();
         produtoController = new ProdutoController();
         formatoDecimal = new DecimalFormat("0.00");
+        modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
+        populaTipoProduto();
 
     }
 
@@ -36,7 +43,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         lbl_data1 = new javax.swing.JLabel();
         sep_pesquisa = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFuncionario = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
         sep_tabela = new javax.swing.JSeparator();
         btnEditar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
@@ -87,7 +94,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Pesquisar:");
 
-        tblFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -103,13 +110,13 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblFuncionario.getTableHeader().setReorderingAllowed(false);
-        tblFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblProduto.getTableHeader().setReorderingAllowed(false);
+        tblProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblFuncionarioMousePressed(evt);
+                tblProdutoMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblFuncionario);
+        jScrollPane1.setViewportView(tblProduto);
 
         btnEditar.setText("Editar");
         btnEditar.setToolTipText("Para edita alguma informação de cliente");
@@ -129,7 +136,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         lblDescricao1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDescricao1.setText("Tipo:");
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refrigerante", "Pizza" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um tipo de produto" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoActionPerformed(evt);
@@ -146,6 +153,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         });
 
         txtData.setEditable(false);
+        txtData.setBackground(new java.awt.Color(255, 255, 204));
         txtData.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_data.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -283,9 +291,6 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-//        habilitarCampos(true);
-//        txtCodigo.setText(produtoController.controleDeCodigo());
-//        limpaNovo();
 
         if (btnNovo.getText().equals("Novo")) {
             btnNovo.setText("Salvar");
@@ -296,16 +301,15 @@ public class ProdutoView extends javax.swing.JInternalFrame {
             txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
             habilitarCampos(true);
             txaDescricao.requestFocus();
-            //txtCodigo.setText(produtoController.controleDeCodigo());
             limpaNovo();
         } else {
 
             capturaBeans();
-            if (produtoController.verificarDados(capturaBeans()/*, txtValor.getText()*/)) {
+            if (produtoController.verificarDados(capturaBeans(), cbTipo.getSelectedIndex())) {
                 btnNovo.setText("Novo");
                 btnFechar.setText("Fechar");
                 btnEditar.setEnabled(true);
-                tblFuncionario.setEnabled(true);
+                tblProduto.setEnabled(true);
                 txfPesquisar.setEnabled(true);
                 limpaTudo();
                 habilitarCampos(false);
@@ -319,33 +323,50 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         produtoController.controlePesquisa(txfPesquisar.getText(), modelo);
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
-    private void tblFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMousePressed
-        produtoBeans = produtoController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFuncionario.getSelectedRow(), 0).toString()));
-        //txtCodigo.setText(produtoBeans.getCodigo() + "");
-        txaDescricao.setText(produtoBeans.getDescricao());
-        //txtValor.setText(produtoBeans.getValor() + "");
-        cbTipo.setSelectedItem(produtoBeans.getTipo());
+    private void tblProdutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMousePressed
+        produtoBeans = produtoController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblProduto.getSelectedRow(), 0).toString()));
 
-    }//GEN-LAST:event_tblFuncionarioMousePressed
+        System.out.println(produtoBeans.getTipoProduto().getDescricao());
+        txaDescricao.setText(produtoBeans.getDescricao());
+        modeloTipoProd.setSelectedItem(produtoBeans.getTipoProduto());
+        if (String.valueOf(produtoBeans.getEstocavel()).equals("S")) {
+            cbEstocavel.setSelectedIndex(0);
+        } else {
+            cbEstocavel.setSelectedIndex(1);
+        }
+        if (String.valueOf(produtoBeans.getAvisaEstoqueMinimo()).equals("S")) {
+            cbAvisa.setSelectedIndex(0);
+        } else {
+            cbAvisa.setSelectedIndex(1);
+        }
+        txtQtd.setText(String.valueOf(produtoBeans.getQtdMinima()));
+        txtQtdEstoque.setText(String.valueOf(produtoBeans.getQtdSaldoEstoque()));
+        txtData.setText(produtoBeans.getDataCad());
+
+    }//GEN-LAST:event_tblProdutoMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-//        if (produtoController.verificarDadosParaEditar(capturaBeans(), txtValor.getText())) {
-//            limpaTudo();
-//            habilitarCampos(false);
-//        }
 
-        if (btnEditar.getText().equals("Editar")) {
-            btnEditar.setText("Salvar");
-            btnFechar.setText("Cancelar");
-            btnNovo.setEnabled(false);
-            habilitarCampos(true);
+        if (txaDescricao.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
         } else {
-            if (produtoController.verificarDadosParaEditar(capturaBeans()/*, txtValor.getText()*/)) {
-                btnEditar.setText("Editar");
-                btnFechar.setText("Fechar");
-                btnNovo.setEnabled(true);
-                limpaTudo();
-                habilitarCampos(false);
+            if (btnEditar.getText().equals("Editar")) {
+                btnEditar.setText("Salvar");
+                btnFechar.setText("Cancelar");
+                btnNovo.setEnabled(false);
+                habilitarCampos(true);
+                verificaPizza(true);
+                txfPesquisar.setEnabled(false);
+                modelo.setNumRows(0);
+            } else {
+                if (produtoController.verificarDadosParaEditar(capturaBeans(), cbTipo.getSelectedIndex())) {
+                    btnEditar.setText("Editar");
+                    btnFechar.setText("Fechar");
+                    btnNovo.setEnabled(true);
+                    limpaTudo();
+                    habilitarCampos(false);
+                    txfPesquisar.setEnabled(true);
+                }
             }
         }
 
@@ -362,7 +383,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                 btnNovo.setText("Novo");
                 btnFechar.setText("Fechar");
                 btnEditar.setEnabled(true);
-                tblFuncionario.setEnabled(true);
+                tblProduto.setEnabled(true);
                 txfPesquisar.setEnabled(true);
                 habilitarCampos(false);
             }
@@ -381,7 +402,10 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtQtdEstoqueFocusLost
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        // TODO add your handling code here:
+
+        if (cbTipo.isEnabled()) {
+            verificaPizza(false);
+        }
     }//GEN-LAST:event_cbTipoActionPerformed
 
 
@@ -404,7 +428,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_formulario;
     private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
-    private javax.swing.JTable tblFuncionario;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextField txaDescricao;
     private javax.swing.JFormattedTextField txfPesquisar;
     private javax.swing.JTextField txtData;
@@ -415,40 +439,72 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     final void habilitarCampos(boolean valor) {
         txaDescricao.setEditable(valor);
         cbTipo.setEnabled(valor);
-        //txtValor.setEnabled(valor);
+        cbAvisa.setEnabled(valor);
+        cbEstocavel.setEnabled(valor);
+        txtQtd.setEditable(valor);
+        txtQtdEstoque.setEditable(valor);
     }
 
-//    final void populaClienteBeans() {
-//        funcionarioBeans.setNome(txtNome.getText());
-////        funcionarioBeans.setCargo(txtRua.getText());
-////        funcionarioBeans.setPermissao(txtBairro.getText());
-////        funcionarioBeans.setTelefone(txfTelefone.getText());
-//        funcionarioBeans.setDataCad(txtData.getText());
-//
-//    }
-//    
     final ProdutoBeans capturaBeans() {
 
         produtoBeans.setDescricao(txaDescricao.getText());
-        produtoBeans.setTipo(cbTipo.getSelectedItem().toString());
-        //produtoBeans.setValor(Double.parseDouble(txtValor.getText()));
-
+        produtoBeans.setDataCad(txtData.getText());
+        produtoBeans.setEstocavel((cbEstocavel.getSelectedItem().toString().charAt(0)));
+        if (!txtQtdEstoque.getText().equals("")) {
+            produtoBeans.setQtdSaldoEstoque(Double.parseDouble(txtQtdEstoque.getText()));
+        }
+        produtoBeans.setAvisaEstoqueMinimo((cbAvisa.getSelectedItem().toString().charAt(0)));
+        if (!txtQtd.getText().equals("")) {
+            produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
+        }
+        if (cbTipo.getSelectedIndex() != 0) {
+            produtoBeans.setTipoProduto((TipoProdutoBeans) cbTipo.getSelectedItem());
+        }
         return produtoBeans;
     }
 
     final void limpaTudo() {
         txaDescricao.setText("");
         cbTipo.setSelectedIndex(0);
-        //txtCodigo.setText("");
-        //txtValor.setText("");
+        cbEstocavel.setSelectedIndex(0);
+        cbAvisa.setSelectedIndex(0);
+        txtQtd.setText("");
+        txtQtdEstoque.setText("");
+        txtData.setText("");
     }
-//    
 
     final void limpaNovo() {
         txaDescricao.setText("");
         cbTipo.setSelectedIndex(0);
-        //txtValor.setText("");
+        cbEstocavel.setSelectedIndex(0);
+        cbAvisa.setSelectedIndex(0);
+        txtQtd.setText("");
+        txtQtdEstoque.setText("");
 
+    }
+
+    public void populaTipoProduto() {
+        listaTipoProd = new ArrayList<>();
+        produtoController.controleListaProduto(listaTipoProd);
+        for (TipoProdutoBeans tipoProdutoBeans : listaTipoProd) {
+            cbTipo.addItem(tipoProdutoBeans);
+        }
+    }
+
+    public void verificaPizza(boolean editar) {
+        if (modeloTipoProd.getSelectedItem().toString().equals("Pizza")) {
+            cbAvisa.setSelectedIndex(1);
+            cbEstocavel.setSelectedIndex(1);
+            cbAvisa.setEnabled(false);
+            cbEstocavel.setEnabled(false);
+        } else {
+            cbAvisa.setEnabled(true);
+            cbEstocavel.setEnabled(true);
+            if (!editar) {
+                cbAvisa.setSelectedIndex(0);
+                cbEstocavel.setSelectedIndex(0);
+            }
+        }
     }
 
 }
