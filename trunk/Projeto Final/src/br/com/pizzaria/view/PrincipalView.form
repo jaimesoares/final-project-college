@@ -70,10 +70,18 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniFuncao">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xe3;o / Cargo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFuncaoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mniTipoProduto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipo de Produto"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniTipoProdutoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

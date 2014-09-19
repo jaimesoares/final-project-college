@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 
 public class PrincipalView extends javax.swing.JFrame {
 
-    
-    
     FundoDeTela Desktop;
     ClienteView clienteV;
     FuncionarioView funcionarioV;
@@ -34,21 +32,20 @@ public class PrincipalView extends javax.swing.JFrame {
     FornecedorView fornecedorV;
     CargoFuncaoView cargoV;
     RelatorioClienteView relatorioClienteV;
-    LoginView2 login;
+    LoginView login;
+    TipoProdutoView tipoProdutoV;
 
-    public PrincipalView() {        
+    public PrincipalView() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);        
-        mniCliente.setIcon(new ImageIcon("imagens/mais.png"));        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
 
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
         Desktop.setVisible(true);
-        
 
         tipoPedidoV = new TipoDePedidoView(Desktop);
         habiltaMenu(false);
-       
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
             public void eventDispatched(AWTEvent e) {
@@ -71,6 +68,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mniModulo = new javax.swing.JMenuItem();
         mniFornecedor = new javax.swing.JMenuItem();
         mniFuncao = new javax.swing.JMenuItem();
+        mniTipoProduto = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
@@ -152,13 +150,21 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         JM_Manutencao.add(mniFornecedor);
 
-        mniFuncao.setText("Função");
+        mniFuncao.setText("Função / Cargo");
         mniFuncao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniFuncaoActionPerformed(evt);
             }
         });
         JM_Manutencao.add(mniFuncao);
+
+        mniTipoProduto.setText("Tipo de Produto");
+        mniTipoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTipoProdutoActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(mniTipoProduto);
 
         jMenuBar1.add(JM_Manutencao);
 
@@ -350,9 +356,18 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mniRelatorioClienteActionPerformed
 
+    private void mniTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTipoProdutoActionPerformed
+        if (tipoProdutoV == null || !tipoProdutoV.isShowing()) {
+            tipoProdutoV = new TipoProdutoView();
+            Desktop.add(tipoProdutoV);
+            centralizaForm(tipoProdutoV);
+            tipoProdutoV.setVisible(true);
+        }
+    }//GEN-LAST:event_mniTipoProdutoActionPerformed
+
     private void telaLogin() {
 
-        login = new LoginView2();
+        login = new LoginView();
         Desktop.add(login);
         centralizaForm(login);
         login.setVisible(true);
@@ -464,6 +479,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniPedido;
     private javax.swing.JMenuItem mniRelatorioCliente;
     private javax.swing.JMenuItem mniSobre;
+    private javax.swing.JMenuItem mniTipoProduto;
     private javax.swing.JMenuItem mniUsuario;
     // End of variables declaration//GEN-END:variables
 

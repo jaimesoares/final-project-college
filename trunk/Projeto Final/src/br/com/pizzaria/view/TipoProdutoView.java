@@ -1,21 +1,21 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CargoBeans;
-import br.com.pizzaria.controller.CargoController;
+import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.controller.TipoProdutoController;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class CargoFuncaoView extends javax.swing.JInternalFrame {
+public class TipoProdutoView extends javax.swing.JInternalFrame {
 
-    CargoBeans cargoBeans;
-    CargoController cargoController;
+    TipoProdutoBeans tipoProdutoBeans;
+    TipoProdutoController tipoProdutoController;
     DefaultListModel modelo;
 
-    public CargoFuncaoView() {
+    public TipoProdutoView() {
         initComponents();
 
-        cargoBeans = new CargoBeans();
-        cargoController = new CargoController();
+        tipoProdutoBeans = new TipoProdutoBeans();
+        tipoProdutoController = new TipoProdutoController();
         modelo = new DefaultListModel();
         carregaListaCargo();
 
@@ -26,7 +26,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtCargo = new javax.swing.JTextField();
+        txtTipo = new javax.swing.JTextField();
         btnAdicionar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
@@ -36,7 +36,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("MANUTENÇÃO DE FUNÇÃO/CARGO");
+        setTitle("MANUTENÇÃO DE TIPO DE PRODUTO");
         setPreferredSize(new java.awt.Dimension(680, 680));
         try {
             setSelected(true);
@@ -45,7 +45,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
         }
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Função/Cargo");
+        jLabel1.setText("Tipo de Produto:");
 
         btnAdicionar.setText("+");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +87,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtCargo)
+                    .addComponent(txtTipo)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -105,7 +105,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -128,30 +128,28 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (cargoController.verificarDados(txtCargo.getText())) {
+        if (tipoProdutoController.verificarDados(txtTipo.getText())) {
             modelo.removeAllElements();
             carregaListaCargo();
-            txtCargo.setText("");
+            txtTipo.setText("");
         }
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        CargoBeans novo = (CargoBeans) lstCargo.getSelectedValue();
-        if (novo.getDescricao().equals("Entregador")||novo.getDescricao().equals("Gerente")) {
+        TipoProdutoBeans novo = (TipoProdutoBeans) lstCargo.getSelectedValue();
+        if(novo.getDescricao().equals("Pizza")){
             JOptionPane.showMessageDialog(null, "Campo não pode ser removido");
-        } else {
-            cargoController.verificarDadosParaEditar(novo);
-            modelo.removeAllElements();
-            carregaListaCargo();
-            txtCargo.setText("");
+        }else{
+        tipoProdutoController.verificarDadosParaEditar(novo);
+        modelo.removeAllElements();
+        carregaListaCargo();
+        txtTipo.setText("");
         }
-
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void lstCargoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCargoMouseReleased
-        CargoBeans novo = (CargoBeans) lstCargo.getSelectedValue();
-        //txtCargo.setText(novo.getDescricao());
+        TipoProdutoBeans novo = (TipoProdutoBeans) lstCargo.getSelectedValue();
     }//GEN-LAST:event_lstCargoMouseReleased
 
 
@@ -163,19 +161,18 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList lstCargo;
     private javax.swing.JSeparator sep_codigo1;
-    private javax.swing.JTextField txtCargo;
+    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 
-    final CargoBeans populaClienteBeans() {
-        cargoBeans.setDescricao(txtCargo.getText());
+    final TipoProdutoBeans populaClienteBeans() {
 
-        System.out.println(cargoBeans);
-        return cargoBeans;
+        System.out.println(tipoProdutoBeans);
+        return tipoProdutoBeans;
 
     }
 
     public void carregaListaCargo() {
-        cargoController.controleListaCargo(modelo);
+        tipoProdutoController.controleListaCargo(modelo);
         lstCargo.setModel(modelo);
     }
 

@@ -174,7 +174,7 @@ public class FuncionarioModel {
         return funcionarioBeans;
     }
 
-    public void editarFuncionario(FuncionarioBeans funcionarioBeans) {
+    public boolean editarFuncionario(FuncionarioBeans funcionarioBeans) {
         try {
             String SQLUpdate = "update `pizzaria`.`funcionario`\n"
                     + "set `fun_nome` = ?,\n"
@@ -222,9 +222,10 @@ public class FuncionarioModel {
             ConectaBanco.getConnection().commit();
 
             JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
-
+            return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
         }
     }
 

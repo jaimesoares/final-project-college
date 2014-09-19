@@ -101,8 +101,8 @@ public class FuncionarioController {
         funcionario.setNumero(Integer.parseInt(numero));
         funcionario.setCep(cep.replace("-", ""));
 
-        funcionarioModel.editarFuncionario(funcionario);
-        return true;
+        return funcionarioModel.editarFuncionario(funcionario);
+
     }
 
     public void controleListaCargo(List<CargoBeans> lista) {
