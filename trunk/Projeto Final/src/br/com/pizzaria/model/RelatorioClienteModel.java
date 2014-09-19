@@ -1,7 +1,7 @@
 package br.com.pizzaria.model;
 
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,13 +37,13 @@ public class RelatorioClienteModel {
                 + "  `cli_obs`,\n"
                 + "  `cli_cidade`\n"
                 + "from `pizzaria`.`cliente`\n"
-                + "where `cli_datacad`='" + VerificadoresECorretores.converteParaSql(data) + "';";
+                + "where `cli_datacad`='" + VerificarData.converteParaSql(data) + "';";
 
         try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad"))});
+                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
             }
         } catch (SQLException ex) {
             Logger.getLogger(RelatorioClienteModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,7 @@ public class RelatorioClienteModel {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad"))});
+                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
             }
         } catch (SQLException ex) {
             Logger.getLogger(RelatorioClienteModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,13 +92,13 @@ public class RelatorioClienteModel {
                 + "  `cli_obs`,\n"
                 + "  `cli_cidade`\n"
                 + "from `pizzaria`.`cliente`\n"
-                + "WHERE  `cli_datacad`  BETWEEN '" + VerificadoresECorretores.converteParaSql(dataInicial) + "' AND '" + VerificadoresECorretores.converteParaSql(dataFinal) + "';";
+                + "WHERE  `cli_datacad`  BETWEEN '" + VerificarData.converteParaSql(dataInicial) + "' AND '" + VerificarData.converteParaSql(dataFinal) + "';";
 
         try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad"))    });
+                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))    });
             }
         } catch (SQLException ex) {
             Logger.getLogger(RelatorioClienteModel.class.getName()).log(Level.SEVERE, null, ex);

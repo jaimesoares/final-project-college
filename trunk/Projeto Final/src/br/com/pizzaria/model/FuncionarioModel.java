@@ -4,7 +4,7 @@ import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +35,7 @@ public class FuncionarioModel {
                     + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
             pstm.setString(1, funcionarioBeans.getNome());
-            pstm.setString(2, VerificadoresECorretores.converteParaSql(funcionarioBeans.getDataCad()));
+            pstm.setString(2, VerificarData.converteParaSql(funcionarioBeans.getDataCad()));
             pstm.setInt(3, funcionarioBeans.getNumero());
             pstm.setString(4, funcionarioBeans.getCpf());
             pstm.setString(5, funcionarioBeans.getRg());
@@ -48,7 +48,7 @@ public class FuncionarioModel {
             pstm.setDouble(12, funcionarioBeans.getValeRefeicao());
             pstm.setString(13, funcionarioBeans.getEstado());
             pstm.setInt(14, 1);
-            pstm.setString(15, VerificadoresECorretores.converteParaSql(funcionarioBeans.getNascimento()));
+            pstm.setString(15, VerificarData.converteParaSql(funcionarioBeans.getNascimento()));
             pstm.setString(16, funcionarioBeans.getRua());
             pstm.setString(17, funcionarioBeans.getCep());
             pstm.setString(18, funcionarioBeans.getBairro());
@@ -131,7 +131,7 @@ public class FuncionarioModel {
                 funcionarioBeans.setNome(rs.getString("fun_nome"));
                 funcionarioBeans.setTelefone(rs.getString("fun_tel"));
                 funcionarioBeans.setTelCelular(rs.getString("tel_cel"));
-                funcionarioBeans.setNascimento(VerificadoresECorretores.converteParaJAVA(rs.getString("fun_nascimento")));
+                funcionarioBeans.setNascimento(VerificarData.converteParaJAVA(rs.getString("fun_nascimento")));
                 funcionarioBeans.setRua(rs.getString("fun_rua"));
                 funcionarioBeans.setNumero(rs.getInt("fun_nro_ender"));
                 funcionarioBeans.setCep(rs.getString("fun_cep"));
@@ -164,7 +164,7 @@ public class FuncionarioModel {
                 funcionarioBeans.setValeRefeicao(rs.getDouble("fun_vale_refeicao"));
                 funcionarioBeans.setValeTrans(rs.getDouble("fun_vale_transp"));
                 funcionarioBeans.setEmail(rs.getString("fun_email"));
-                funcionarioBeans.setDataCad(VerificadoresECorretores.converteParaJAVA(rs.getString("fun_dt_admis")));
+                funcionarioBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("fun_dt_admis")));
 
             }
         } catch (SQLException ex) {
@@ -207,7 +207,7 @@ public class FuncionarioModel {
             pstm.setString(7, funcionarioBeans.getEmail());
             pstm.setInt(8, funcionarioBeans.getCargo().getCodigo());
             pstm.setInt(9, 1);
-            pstm.setString(10, VerificadoresECorretores.converteParaSql(funcionarioBeans.getNascimento()));
+            pstm.setString(10, VerificarData.converteParaSql(funcionarioBeans.getNascimento()));
             pstm.setString(11, funcionarioBeans.getRua());
             pstm.setString(12, funcionarioBeans.getCep());
             pstm.setString(13, funcionarioBeans.getBairro());

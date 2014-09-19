@@ -4,7 +4,7 @@ import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.EntregadorBeans;
 import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +28,7 @@ public class EntregadorModel {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
             pstm.setString(1, entregadorBeans.getNome());
             pstm.setString(2, "ENT");            
-            pstm.setString(3, VerificadoresECorretores.converteParaSql(entregadorBeans.getDataCad()));
+            pstm.setString(3, VerificarData.converteParaSql(entregadorBeans.getDataCad()));
             pstm.setString(4, "Livre");
                 
             pstm.execute();
@@ -90,7 +90,7 @@ public class EntregadorModel {
                 entregadorBeans.setNome(rs.getString("ent_nome"));
                 entregadorBeans.setStatus(rs.getString("ent_status"));
                 entregadorBeans.setPermissao(rs.getString("ent_permissao"));
-                entregadorBeans.setDataCad(VerificadoresECorretores.converteParaJAVA(rs.getString("ent_datacad")));
+                entregadorBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("ent_datacad")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

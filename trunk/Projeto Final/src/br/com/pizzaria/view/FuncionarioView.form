@@ -497,7 +497,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(FormatoTelefone);"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;&#xd;&#xa;    FormatoTelefone = new MaskFormatter(&quot;(##)####-####&quot;);&#xd;&#xa;&#xd;&#xa;}catch (Exception Erro){&#xd;&#xa;    JOptionPane.showMessageDialog(null, &quot;Telefone inv&#xe1;lido&quot;, &quot;ERRO DE FORMATA&#xc7;&#xc3;O&quot;, 0);&#xd;&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;&#xd;&#xa;    FormatoTelefone = new MaskFormatter(&quot;(##)#####-####&quot;);&#xd;&#xa;&#xd;&#xa;}catch (Exception Erro){&#xd;&#xa;    JOptionPane.showMessageDialog(null, &quot;Telefone inv&#xe1;lido&quot;, &quot;ERRO DE FORMATA&#xc7;&#xc3;O&quot;, 0);&#xd;&#xa;}"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_bairro">

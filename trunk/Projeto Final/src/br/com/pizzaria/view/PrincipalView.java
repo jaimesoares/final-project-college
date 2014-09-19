@@ -34,6 +34,7 @@ public class PrincipalView extends javax.swing.JFrame {
     RelatorioClienteView relatorioClienteV;
     LoginView login;
     TipoProdutoView tipoProdutoV;
+    PrecoProdutoView precoProdutoV;
 
     public PrincipalView() {
         initComponents();
@@ -69,6 +70,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mniFornecedor = new javax.swing.JMenuItem();
         mniFuncao = new javax.swing.JMenuItem();
         mniTipoProduto = new javax.swing.JMenuItem();
+        mniPrecoProduto = new javax.swing.JMenuItem();
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
@@ -165,6 +167,14 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         JM_Manutencao.add(mniTipoProduto);
+
+        mniPrecoProduto.setText("Preço Produto");
+        mniPrecoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPrecoProdutoActionPerformed(evt);
+            }
+        });
+        JM_Manutencao.add(mniPrecoProduto);
 
         jMenuBar1.add(JM_Manutencao);
 
@@ -365,6 +375,15 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mniTipoProdutoActionPerformed
 
+    private void mniPrecoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPrecoProdutoActionPerformed
+        if (precoProdutoV == null || !precoProdutoV.isShowing()) {
+            precoProdutoV = new PrecoProdutoView();
+            Desktop.add(precoProdutoV);
+            centralizaForm(precoProdutoV);
+            precoProdutoV.setVisible(true);
+        }
+    }//GEN-LAST:event_mniPrecoProdutoActionPerformed
+
     private void telaLogin() {
 
         login = new LoginView();
@@ -477,6 +496,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniFuncionario;
     private javax.swing.JMenuItem mniModulo;
     private javax.swing.JMenuItem mniPedido;
+    private javax.swing.JMenuItem mniPrecoProduto;
     private javax.swing.JMenuItem mniRelatorioCliente;
     private javax.swing.JMenuItem mniSobre;
     private javax.swing.JMenuItem mniTipoProduto;

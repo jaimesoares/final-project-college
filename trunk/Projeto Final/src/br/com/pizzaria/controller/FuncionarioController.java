@@ -4,6 +4,7 @@ import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.model.FuncionarioModel;
+import br.com.pizzaria.util.VerificarData;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -30,6 +31,11 @@ public class FuncionarioController {
 
         if (nascimento.equals("  /  /    ")) {
             JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+        
+        if (!VerificarData.verificaData(nascimento)) {
+            JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
@@ -79,6 +85,11 @@ public class FuncionarioController {
 
         if (nascimento.equals("  /  /    ")) {
             JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+        
+        if (!VerificarData.verificaData(nascimento)) {
+            JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 

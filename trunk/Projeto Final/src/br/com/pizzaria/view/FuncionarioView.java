@@ -5,7 +5,7 @@ import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.controller.FuncionarioController;
 import br.com.pizzaria.util.ValidaCPF;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtEmail = new javax.swing.JTextField();
         try{
 
-            FormatoTelefone = new MaskFormatter("(##)####-####");
+            FormatoTelefone = new MaskFormatter("(##)#####-####");
 
         }catch (Exception Erro){
             JOptionPane.showMessageDialog(null, "Telefone inválido", "ERRO DE FORMATAÇÃO", 0);
@@ -539,7 +539,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             btnEditar.setEnabled(false);
             txfPesquisar.setEnabled(false);
             modelo.setNumRows(0);
-            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+            txtData.setText(VerificarData.retornoDeDataAtual());
             habilitarCampos(true);
             txtNome.requestFocus();
             limpaNovo();

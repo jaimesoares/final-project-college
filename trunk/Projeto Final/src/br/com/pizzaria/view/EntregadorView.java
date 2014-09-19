@@ -2,7 +2,7 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.EntregadorBeans;
 import br.com.pizzaria.controller.EntregadorController;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -232,7 +232,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         habilitarCampos(true);
-        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+        txtData.setText(VerificarData.retornoDeDataAtual());
         txtNome.requestFocus();
         txtCodigo.setText(entregadorController.controleDeCodigo());
         limpaNovo();
