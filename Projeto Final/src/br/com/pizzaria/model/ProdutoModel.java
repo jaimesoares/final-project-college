@@ -3,7 +3,7 @@ package br.com.pizzaria.model;
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.beans.TipoProdutoBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,7 +62,7 @@ public class ProdutoModel {
             pstm.setString(3, String.valueOf(produtoBeans.getAvisaEstoqueMinimo()));
             pstm.setInt(4, produtoBeans.getTipoProduto().getCodigo());
             pstm.setDouble(5, produtoBeans.getQtdSaldoEstoque());
-            pstm.setString(6, VerificadoresECorretores.converteParaSql(produtoBeans.getDataCad()));
+            pstm.setString(6, VerificarData.converteParaSql(produtoBeans.getDataCad()));
             pstm.setString(7, String.valueOf(produtoBeans.getEstocavel()));
 
             pstm.execute();
@@ -117,7 +117,7 @@ public class ProdutoModel {
                     JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
                 }
 
-                produtoBeans.setDataCad(VerificadoresECorretores.converteParaJAVA(rs.getString("prod_data_cadastro")));
+                produtoBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("prod_data_cadastro")));
                 produtoBeans.setDescricao(rs.getString("prd_descr"));
                 produtoBeans.setEstocavel(rs.getString("prod_estocavel").charAt(0));
                 produtoBeans.setQtdSaldoEstoque(rs.getDouble("prd_qtd_saldo_estoq"));
@@ -149,7 +149,7 @@ public class ProdutoModel {
             pstm.setString(3, String.valueOf(produtoBeans.getAvisaEstoqueMinimo()));
             pstm.setInt(4, produtoBeans.getTipoProduto().getCodigo());
             pstm.setDouble(5, produtoBeans.getQtdSaldoEstoque());
-            pstm.setString(6, VerificadoresECorretores.converteParaSql(produtoBeans.getDataCad()));
+            pstm.setString(6, VerificarData.converteParaSql(produtoBeans.getDataCad()));
             pstm.setString(7, String.valueOf(produtoBeans.getEstocavel()));
             pstm.setInt(8, produtoBeans.getCodigo());
 

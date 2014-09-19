@@ -9,7 +9,7 @@ import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.EntregaPedidoController;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -729,7 +729,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 //            btnContinuarPedido.setEnabled(false);
 //            btnPesquisar.setEnabled(false);
 //            cbSelecionar.removeAllItems();
-//            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+//            txtData.setText(VerificarData.retornoDeDataAtual());
 //            habilitarCampos(true);
 //            txtNome.requestFocus();
 //            txtCodigoCliente.setText(clienteController.controleDeCodigo());

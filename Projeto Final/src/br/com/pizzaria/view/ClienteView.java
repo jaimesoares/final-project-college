@@ -3,7 +3,7 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -519,7 +519,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
             btnEditar.setEnabled(false);
             txtPesquisar.setEnabled(false);
             modelo.setNumRows(0);
-            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+            txtData.setText(VerificarData.retornoDeDataAtual());
             habilitarCampos(true);
             txtNome.requestFocus();
             //txtCodigo.setText(clienteController.controleDeCodigo());

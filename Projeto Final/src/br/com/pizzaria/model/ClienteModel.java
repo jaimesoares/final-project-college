@@ -3,7 +3,7 @@ package br.com.pizzaria.model;
 import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,8 +33,8 @@ public class ClienteModel {
             pstm.setString(4, clienteBeans.getEmail());
             pstm.setString(5, clienteBeans.getTelefone());
             pstm.setString(6, clienteBeans.getTelCelular());
-            pstm.setString(7, VerificadoresECorretores.converteParaSql(clienteBeans.getAniversario()));
-            pstm.setString(8, VerificadoresECorretores.converteParaSql(clienteBeans.getDataCadastro()));
+            pstm.setString(7, VerificarData.converteParaSql(clienteBeans.getAniversario()));
+            pstm.setString(8, VerificarData.converteParaSql(clienteBeans.getDataCadastro()));
             pstm.setString(9, clienteBeans.getRua());
             pstm.setString(10, clienteBeans.getBairro());
             pstm.setString(11, clienteBeans.getObservacao());
@@ -139,7 +139,7 @@ public class ClienteModel {
 
                 clienteBeans.setObservacao(rs.getString("cli_obs"));
                 clienteBeans.setCep(rs.getString("cli_cep"));
-                clienteBeans.setAniversario(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_aniversario")));
+                clienteBeans.setAniversario(VerificarData.converteParaJAVA(rs.getString("cli_aniversario")));
                 clienteBeans.setTelCelular(rs.getString("cli_tel_cel"));
                 clienteBeans.setEmail(rs.getString("cli_email"));
                 clienteBeans.setNumero(rs.getInt("cli_nro_ender"));
@@ -148,7 +148,7 @@ public class ClienteModel {
                 clienteBeans.setRua(rs.getString("cli_rua"));
                 clienteBeans.setBairro(rs.getString("cli_bairro"));
                 clienteBeans.setTelefone(rs.getString("cli_telefone"));
-                clienteBeans.setDataCadastro(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad")));
+                clienteBeans.setDataCadastro(VerificarData.converteParaJAVA(rs.getString("cli_datacad")));
                 clienteBeans.setCidade(rs.getString("cli_cidade"));
             }
         } catch (SQLException ex) {
@@ -182,8 +182,8 @@ public class ClienteModel {
             pstm.setString(4, clienteBeans.getEmail());
             pstm.setString(5, clienteBeans.getTelefone());
             pstm.setString(6, clienteBeans.getTelCelular());
-            pstm.setString(7, VerificadoresECorretores.converteParaSql(clienteBeans.getAniversario()));
-            pstm.setString(8, VerificadoresECorretores.converteParaSql(clienteBeans.getDataCadastro()));
+            pstm.setString(7, VerificarData.converteParaSql(clienteBeans.getAniversario()));
+            pstm.setString(8, VerificarData.converteParaSql(clienteBeans.getDataCadastro()));
             pstm.setString(9, clienteBeans.getRua());
             pstm.setString(10, clienteBeans.getBairro());
             pstm.setString(11, clienteBeans.getObservacao());

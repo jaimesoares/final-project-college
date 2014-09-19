@@ -4,7 +4,7 @@ import br.com.pizzaria.beans.CepBeans;
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.RelatorioClienteController;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -304,7 +304,7 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
 
     private void btnCadastradosHojeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastradosHojeActionPerformed
         modelo.setNumRows(0);
-        relatorioClienteController.controleClienteDia(VerificadoresECorretores.retornoDeDataAtual(), modelo);
+        relatorioClienteController.controleClienteDia(VerificarData.retornoDeDataAtual(), modelo);
     }//GEN-LAST:event_btnCadastradosHojeActionPerformed
 
     private void btnTodosClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosClientesActionPerformed

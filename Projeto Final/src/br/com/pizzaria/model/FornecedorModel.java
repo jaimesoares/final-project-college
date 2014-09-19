@@ -2,7 +2,7 @@ package br.com.pizzaria.model;
 
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +28,7 @@ public class FornecedorModel {
             pstm.setString(2, clienteBeans.getRua());
             pstm.setString(3, clienteBeans.getBairro());
             pstm.setString(4, clienteBeans.getTelefone());
-            pstm.setString(5, VerificadoresECorretores.converteParaSql(clienteBeans.getDataCadastro()));
+            pstm.setString(5, VerificarData.converteParaSql(clienteBeans.getDataCadastro()));
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -90,7 +90,7 @@ public class FornecedorModel {
                 clienteBeans.setRua(rs.getString("cli_rua"));
                 clienteBeans.setBairro(rs.getString("cli_bairro"));
                 clienteBeans.setTelefone(rs.getString("cli_telefone"));
-                clienteBeans.setDataCadastro(VerificadoresECorretores.converteParaJAVA(rs.getString("cli_datacad")));
+                clienteBeans.setDataCadastro(VerificarData.converteParaJAVA(rs.getString("cli_datacad")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

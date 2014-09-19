@@ -3,7 +3,7 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.beans.TipoProdutoBeans;
 import br.com.pizzaria.controller.ProdutoController;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +15,14 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
     ProdutoBeans produtoBeans;
     ProdutoController produtoController;
-    DefaultTableModel modelo;
+    DefaultTableModel modeloTabela;
     DecimalFormat formatoDecimal;
     List<TipoProdutoBeans> listaTipoProd;
     ComboBoxModel<TipoProdutoBeans> modeloTipoProd;
 
     public ProdutoView() {
         initComponents();
-        modelo = (DefaultTableModel) tblProduto.getModel();
+        modeloTabela = (DefaultTableModel) tblProduto.getModel();
         habilitarCampos(false);
         produtoBeans = new ProdutoBeans();
         produtoController = new ProdutoController();
@@ -297,8 +297,8 @@ public class ProdutoView extends javax.swing.JInternalFrame {
             btnFechar.setText("Cancelar");
             btnEditar.setEnabled(false);
             txfPesquisar.setEnabled(false);
-            modelo.setNumRows(0);
-            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
+            modeloTabela.setNumRows(0);
+            txtData.setText(VerificarData.retornoDeDataAtual());
             habilitarCampos(true);
             txaDescricao.requestFocus();
             limpaNovo();
@@ -319,12 +319,12 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
-        modelo.setNumRows(0);
-        produtoController.controlePesquisa(txfPesquisar.getText(), modelo);
+        modeloTabela.setNumRows(0);
+        produtoController.controlePesquisa(txfPesquisar.getText(), modeloTabela);
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void tblProdutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMousePressed
-        produtoBeans = produtoController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblProduto.getSelectedRow(), 0).toString()));
+        produtoBeans = produtoController.controlePreenchimento(Integer.parseInt(modeloTabela.getValueAt(tblProduto.getSelectedRow(), 0).toString()));
 
         System.out.println(produtoBeans.getTipoProduto().getDescricao());
         txaDescricao.setText(produtoBeans.getDescricao());
@@ -357,7 +357,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                 habilitarCampos(true);
                 verificaPizza(true);
                 txfPesquisar.setEnabled(false);
-                modelo.setNumRows(0);
+                modeloTabela.setNumRows(0);
             } else {
                 if (produtoController.verificarDadosParaEditar(capturaBeans(), cbTipo.getSelectedIndex())) {
                     btnEditar.setText("Editar");

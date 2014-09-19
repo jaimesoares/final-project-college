@@ -3,7 +3,7 @@ package br.com.pizzaria.model;
 import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificadoresECorretores;
+import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
