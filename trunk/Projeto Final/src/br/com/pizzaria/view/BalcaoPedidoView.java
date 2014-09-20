@@ -7,8 +7,10 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.controller.BalcaoPedidoController;
 import br.com.pizzaria.controller.ClienteController;
+import br.com.pizzaria.controller.EntregaPedidoController;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
     ClienteBeans clienteBeans;
     ClienteController clienteController;
     List<String> listaDeClientes;
-    private List<String> listaDeItens;
+    private List<ProdutoBeans> listaDeItens;
     PedidoBeans pedidoBeans;
     BalcaoPedidoController balcaoPedidoController;
     DefaultTableModel modeloDeTabela;
@@ -404,14 +406,14 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
         cbSelecionar.removeAllItems();
         listaDeItens.clear();
         balcaoPedidoController.controleDeItens(txtItem.getText(), listaDeItens);
-        for (String string : listaDeItens) {
-            cbSelecionar.addItem(string);
+        for (ProdutoBeans produtoBeans : listaDeItens) {
+            cbSelecionar.addItem(produtoBeans);
         }
     }//GEN-LAST:event_txtItemActionPerformed
 
     private void btnValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorActionPerformed
-        txtValor.setText(balcaoPedidoController.controleDeValor(cbSelecionar.getSelectedItem().toString()) + "");
-        txtCodigoItem.setText(balcaoPedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
+        txtValor.setText(balcaoPedidoController.controleDeValor(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()) + "");
+       // txtCodigoItem.setText(balcaoPedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
     }//GEN-LAST:event_btnValorActionPerformed
 
     private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
@@ -427,9 +429,9 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
     private void btnAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaActionPerformed
         if (cbSelecionar.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Campo 'Selecionar' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-        } else if (balcaoPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), txtCodigoItem.getText(), cbSelecionar.getSelectedItem().toString())) {
+        } else if (balcaoPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), String.valueOf(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()), cbSelecionar.getSelectedItem().toString())) {
             double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
-            modeloDeTabela.addRow(new Object[]{txtCodigoItem.getText(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
+            modeloDeTabela.addRow(new Object[]{((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
             limpaItens();
 
         }
@@ -451,13 +453,16 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
             btnAdiciona.setEnabled(false);
             btnRemove.setEnabled(false);
             btnCalcular.setEnabled(false);
+            cbFormaPagamento.setEditable(true);
+            txtValorRecebido.setEditable(true);
         }
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        balcaoPedidoController.conttroleDePedido(txtTotal.getText(), tblPedido.getRowCount(), pedidoBeans);
+        balcaoPedidoController.conttroleDePedido(String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), pedidoBeans);
         limpaFinaliza();
-        CozinhaView.populaTabela();
+        //limpaTudo();
+//        CozinhaView.populaTabela();
         this.dispose();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -525,7 +530,7 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
 
     final void populaPedidoBeans() {
         dataAtual = new Date();
-        pedidoBeans.setCodigoCliente(1);
+        //pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
         pedidoBeans.setCodigoUsuario(codigoFuncionario);
         pedidoBeans.setCodigoEntregador(0);
         pedidoBeans.setData(formatoData.format(dataAtual));
