@@ -1,6 +1,7 @@
 package br.com.pizzaria.controller;
 
 import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.EntregaPedidoModel;
 import java.util.List;
@@ -17,12 +18,12 @@ public class EntregaPedidoController {
         clienteModel = new ClienteModel();
     }
 
-    public void controleDeItens(String pesquisa, List<String> listaDeItens) {
+    public void controleDeItens(String pesquisa, List<ProdutoBeans> listaDeItens) {
         entregaPedidoModel.pesquisaItens(pesquisa, listaDeItens);
     }
 
-    public double controleDeValor(String valor) {
-        return entregaPedidoModel.valorDoItem(valor);
+    public double controleDeValor(int codigoProduto) {
+        return entregaPedidoModel.valorDoItem(codigoProduto);
     }
 
     public int controleDeCodigo(String codigo) {
@@ -57,10 +58,7 @@ public class EntregaPedidoController {
             return false;
         }
 
-        if (codigo.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'código' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+        
 
         return true;
     }

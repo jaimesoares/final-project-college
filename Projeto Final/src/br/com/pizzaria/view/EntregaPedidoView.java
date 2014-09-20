@@ -7,9 +7,9 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.EntregaPedidoController;
-import br.com.pizzaria.util.VerificarData;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     ClienteBeans clienteBeans;
     ClienteController clienteController;
     List<String> listaDeClientes;
-    private List<String> listaDeItens;
+    private List<ProdutoBeans> listaDeItens;
     PedidoBeans pedidoBeans;
     EntregaPedidoController entregaPedidoController;
     DefaultTableModel modeloDeTabela;
@@ -44,6 +44,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PedidoView
+     * @param codigoFuncionario
      */
     public EntregaPedidoView(int codigoFuncionario) {
         initComponents();
@@ -86,8 +87,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         pnlCliente = new javax.swing.JPanel();
         btnPesquisar = new javax.swing.JButton();
         cbPesquisa = new javax.swing.JComboBox();
-        lbl_codigo = new javax.swing.JLabel();
-        txtCodigoCliente = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         txtRua = new javax.swing.JTextField();
         sep_codigo = new javax.swing.JSeparator();
@@ -166,15 +165,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             }
         });
 
-        lbl_codigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_codigo.setText("Código");
-
-        txtCodigoCliente.setEditable(false);
-        txtCodigoCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtCodigoCliente.setForeground(new java.awt.Color(255, 51, 51));
-        txtCodigoCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         lbl_telefone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_telefone.setText("Telefone:");
 
@@ -233,8 +223,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sep_codigo)
             .addComponent(sep_formulario, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(txtCodigoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(lbl_codigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,11 +276,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                     .addComponent(rbEndereco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(lbl_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(85, 85, 85)
                 .addComponent(sep_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -631,7 +615,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             String codigo = cbPesquisa.getSelectedItem().toString();
             codigo = codigo.substring(0, codigo.indexOf(" "));
             clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(codigo));
-            txtCodigoCliente.setText(clienteBeans.getCodigoCliente() + "");
+            //txtCodigoCliente.setText(clienteBeans.getCodigoCliente() + "");
             txtNome.setText(clienteBeans.getNome());
             txtRua.setText(clienteBeans.getRua());
             txtBairro.setText(clienteBeans.getBairro());
@@ -662,14 +646,14 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         cbSelecionar.removeAllItems();
         listaDeItens.clear();
         entregaPedidoController.controleDeItens(txtItem.getText(), listaDeItens);
-        for (String string : listaDeItens) {
-            cbSelecionar.addItem(string);
+        for (ProdutoBeans produtoBeans : listaDeItens) {
+            cbSelecionar.addItem(produtoBeans);
         }
     }//GEN-LAST:event_txtItemActionPerformed
 
     private void btnValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorActionPerformed
-        txtValor.setText(entregaPedidoController.controleDeValor(cbSelecionar.getSelectedItem().toString()) + "");
-        txtCodigoItem.setText(entregaPedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
+        txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()) + "");
+        //txtCodigoItem.setText(entregaPedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
     }//GEN-LAST:event_btnValorActionPerformed
 
     private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
@@ -685,9 +669,9 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     private void btnAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaActionPerformed
         if (cbSelecionar.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Campo 'Selecionar' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-        } else if (entregaPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), txtCodigoItem.getText(), cbSelecionar.getSelectedItem().toString())) {
+        } else if (entregaPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), String.valueOf(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()), cbSelecionar.getSelectedItem().toString())) {
             double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
-            modeloDeTabela.addRow(new Object[]{txtCodigoItem.getText(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
+            modeloDeTabela.addRow(new Object[]{((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
             limpaItens();
 
         }
@@ -715,10 +699,10 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        entregaPedidoController.conttroleDePedido(txtCodigoCliente.getText(), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), pedidoBeans);
+        entregaPedidoController.conttroleDePedido(String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), pedidoBeans);
         limpaFinaliza();
         limpaTudo();
-        CozinhaView.populaTabela();
+//        CozinhaView.populaTabela();
         this.dispose();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -792,7 +776,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblValor;
     private javax.swing.JLabel lblValor1;
     private javax.swing.JLabel lbl_bairro;
-    private javax.swing.JLabel lbl_codigo;
     private javax.swing.JLabel lbl_data;
     private javax.swing.JLabel lbl_rua;
     private javax.swing.JLabel lbl_telefone;
@@ -808,7 +791,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txfTelefone;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtCodigoCliente;
     private javax.swing.JTextField txtCodigoItem;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtItem;
@@ -845,7 +827,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     final void populaPedidoBeans() {
         dataAtual = new Date();
-        pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
+        //pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
         pedidoBeans.setCodigoUsuario(codigoFuncionario);
         pedidoBeans.setCodigoEntregador(0);
         pedidoBeans.setData(formatoData.format(dataAtual));
@@ -896,7 +878,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtRua.setText("");
         txtBairro.setText("");
         txfTelefone.setText("");
-        txtCodigoCliente.setText("");
+        //txtCodigoCliente.setText("");
         txtData.setText("");
         cbPesquisa.removeAllItems();
     }
