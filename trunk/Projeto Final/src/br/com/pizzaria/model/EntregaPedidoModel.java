@@ -4,10 +4,12 @@ import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.ConectaBancoPizzariMama;
+import br.com.pizzaria.util.GeneratorPDF;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,19 +25,6 @@ public class EntregaPedidoModel {
     public void pesquisaItens(String pesquisa, List<ProdutoBeans> listaDeItens) {
         try {
 //            
-//            String SQLPesquisa ="SELECT \n"
-//                    + "  i.prd_descr,\n"
-//                    + "  p.`tprc_vigencia`,\n"
-//                    + "  p.`tprc_preco` ,\n"
-//                    + "  p.`tprc_cod_prod` \n"
-//                    + "FROM\n"
-//                    + "  tab_precos_venda p \n"
-//                    + "  JOIN produtos i \n"
-//                    + "    ON i.prd_prod = p.`tprc_cod_prod` \n"
-//                    + "WHERE i.`prd_descr`like '%" + pesquisa + "%' \n"
-//                    + "ORDER BY `tprc_vigencia` desc ;";
-//            
-
             String SQLPesquisa = "select * from produtos where prd_descr like '%" + pesquisa + "%';";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
@@ -85,6 +74,7 @@ public class EntregaPedidoModel {
     }
 
     public void cadastrarPedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
+
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
@@ -120,6 +110,7 @@ public class EntregaPedidoModel {
             //codigoDoPedido();
             ConectaBanco.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+
         } catch (SQLException ex) {
             try {
                 ConectaBanco.getConnection().rollback();
@@ -150,9 +141,12 @@ public class EntregaPedidoModel {
     }
 
     public void cadastrarItens(String codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBeans pedidoBeans) {
+        List<String> novo = new ArrayList<>();
+        novo.add("------------------------------------------------------------");
+        novo.add("--------------CUPOM NÃO FISCAL----------------");
+        novo.add("Prod--------Qtd---------Valor Unt.------Valor Total");
         for (int i = 0; i < tamanhoTabela; i++) {
             try {
-                
 
                 String SQLInsertItens = "insert into `pizzaria`.`item`\n"
                         + "            (`item_ped_cod`,\n"
@@ -173,6 +167,9 @@ public class EntregaPedidoModel {
                 pstmt.setDouble(4, pedidoBeans.getValor());
 
                 pstmt.execute();
+
+                novo.add(pesquisaProduto(pedidoBeans.getCodProduto(i)) + "------" + pedidoBeans.getQuantidade(i) + "------" + pedidoBeans.getValor() + "-----" + (pedidoBeans.getQuantidade(i) * pedidoBeans.getValor()));
+                
             } catch (SQLException ex) {
                 try {
                     ConectaBanco.getConnection().rollback();
@@ -182,6 +179,22 @@ public class EntregaPedidoModel {
                 }
             }
         }
+        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(novo));
+    }
+
+    public String pesquisaProduto(int codigo) {
+        try {
+//            
+            String SQLPesquisa = "select * from produtos where prd_prod =" + codigo + ";";
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("prd_descr");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 
 }

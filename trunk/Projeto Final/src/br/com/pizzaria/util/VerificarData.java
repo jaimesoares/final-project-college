@@ -45,6 +45,13 @@ public class VerificarData {
         }
 
     }
+    
+    public static String retornaHoraAtual(){
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        Date horaAtual = new Date();
+
+        return formatoHora.format(horaAtual);
+    }
 
     public static void main(String[] args) {
         //VerificarData.verificaData("29/02/2014");
