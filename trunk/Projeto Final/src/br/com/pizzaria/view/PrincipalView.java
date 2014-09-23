@@ -422,6 +422,7 @@ public class PrincipalView extends javax.swing.JFrame {
         Global.principal = janela;
 
         janela.telaLogin();
+        
 
         EventQueue queue = new EventQueue() {
             protected void dispatchEvent(AWTEvent event) {

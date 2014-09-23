@@ -1,7 +1,7 @@
 package br.com.pizzaria.beans;
 
 public class FuncionarioBeans {
-    
+
     private int codigo;
     private String nome;
     private CargoBeans cargo;
@@ -27,11 +27,10 @@ public class FuncionarioBeans {
     private String moto;
     private String placaMoto;
     private String cnh;
-            
-    
+    private UsuarioBeans usuarioBeans;
 
-    public FuncionarioBeans() {        
-        
+    public FuncionarioBeans() {
+
     }
 
     public int getCodigo() {
@@ -48,7 +47,7 @@ public class FuncionarioBeans {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }    
+    }
 
     public CargoBeans getCargo() {
         return cargo;
@@ -73,10 +72,10 @@ public class FuncionarioBeans {
     public void setDataCad(String dataCad) {
         this.dataCad = dataCad;
     }
-    
+
     @Override
-    public String toString(){
-        return this.codigo+"";
+    public String toString() {
+        return this.codigo + "";
     }
 
     /**
@@ -358,6 +357,19 @@ public class FuncionarioBeans {
     public void setCnh(String cnh) {
         this.cnh = cnh;
     }
-    
-    
+
+    /**
+     * @return the usuarioBeans
+     */
+    public UsuarioBeans getUsuarioBeans() {
+        return usuarioBeans;
+    }
+
+    /**
+     * @param usuarioBeans the usuarioBeans to set
+     */
+    public void setUsuarioBeans(UsuarioBeans usuarioBeans) {
+        this.usuarioBeans = usuarioBeans;
+    }
+
 }

@@ -1,15 +1,12 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.FuncionarioBeans;
 import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class UsuarioModel {
 
@@ -30,6 +27,7 @@ public class UsuarioModel {
                 usuarioBeans.setCodigoFuncionario(rs.getInt("usu_fun_cod"));
                 usuarioBeans.setLogin(rs.getString("usu_login"));
                 usuarioBeans.setSenha(rs.getString("usu_senha"));
+                usuarioBeans.setCodigoFuncionario(rs.getInt("usu_fun_cod"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar usuario", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

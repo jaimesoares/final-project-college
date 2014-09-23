@@ -1,12 +1,12 @@
 package br.com.pizzaria.controller;
 
+import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.PedidoModel;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -74,7 +74,7 @@ public class PedidoController {
         pedidoModel.cadastrarPedido(codigoCliente, codigoFuncioario, total, tamanhoTabela, pedidobeans);
     }
 
-    public void controlePesquisa(String pesquisa, String tipo, List<String> lista) {
+    public void controlePesquisa(String pesquisa, String tipo, List<ClienteBeans> lista) {
         clienteModel.procuraCliente(pesquisa, tipo, lista);
     }
 }

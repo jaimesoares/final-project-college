@@ -541,7 +541,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         cbPesquisa.removeAllItems();
         listaDeClientes.clear();
         String pesquisa = JOptionPane.showInputDialog(null, "Entre com " + tipoPesquisa + " do cliente:", "PESQUISA DE CLIENTE", 3);
-        pedidoController.controlePesquisa(pesquisa, tipoPesquisa, listaDeClientes);
+        //pedidoController.controlePesquisa(pesquisa, tipoPesquisa, listaDeClientes);
         for (String string : listaDeClientes) {
             cbPesquisa.addItem(string);
         }
@@ -739,12 +739,12 @@ public class PedidoView extends javax.swing.JInternalFrame {
     final void populaPedidoBeans() {
         dataAtual = new Date();
         pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
-        pedidoBeans.setCodigoUsuario(codigoFuncionario);
+        //pedidoBeans.setLoginUsuario(codigoFuncionario);
         pedidoBeans.setCodigoEntregador(0);
         pedidoBeans.setData(formatoData.format(dataAtual));
         pedidoBeans.setData(formatoHora.format(dataAtual));
         pedidoBeans.setStatus("Pedido aberto");
-        pedidoBeans.setValor(Double.parseDouble(txtTotal.getText()));
+        pedidoBeans.setValorTotalPedido(Double.parseDouble(txtTotal.getText()));
         for (int i = 0; i < tblPedido.getRowCount(); i++) {
             pedidoBeans.setCodProduto(Integer.parseInt(modeloDeTabela.getValueAt(i, 0).toString()));
             pedidoBeans.setQuantidade(Integer.parseInt(modeloDeTabela.getValueAt(i, 3).toString()));

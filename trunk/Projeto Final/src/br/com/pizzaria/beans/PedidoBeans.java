@@ -7,20 +7,22 @@ public class PedidoBeans {
     
     private int codigoPedido;
     private int codigoCliente;
-    private int codigoUsuario;
+    private String loginUsuario;
     private int codigoEntregador;
     private String data;
     private String hora;
-    private double valor;
+    private double valorTotalPedido;
     private String status;
     private List<Integer> codProduto;
     private List<Integer> quantidade;
-    String obs;
-    double valorDesc;
+    private String obs;
+    private double valorDesc;
+    private List<ItemPedidoBeans> itensPedido;
 
     public PedidoBeans() {
         codProduto = new ArrayList<>();
         quantidade = new ArrayList<>();
+        itensPedido = new ArrayList<>();
     }
 
     public int getCodProduto(int posicao) {
@@ -68,17 +70,17 @@ public class PedidoBeans {
     }
 
     /**
-     * @return the codigoUsuario
+     * @return the loginUsuario
      */
-    public int getCodigoUsuario() {
-        return codigoUsuario;
+    public String getLoginUsuario() {
+        return loginUsuario;
     }
 
     /**
-     * @param codigoUsuario the codigoUsuario to set
+     * @param loginUsuario the loginUsuario to set
      */
-    public void setCodigoUsuario(int codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public void setLoginUsuario(String loginUsuario) {
+        this.loginUsuario = loginUsuario;
     }
 
     /**
@@ -124,17 +126,17 @@ public class PedidoBeans {
     }
 
     /**
-     * @return the valor
+     * @return the valorTotalPedido
      */
-    public double getValor() {
-        return valor;
+    public double getValorTotalPedido() {
+        return valorTotalPedido;
     }
 
     /**
-     * @param valor the valor to set
+     * @param valorTotalPedido the valorTotalPedido to set
      */
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValorTotalPedido(double valorTotalPedido) {
+        this.valorTotalPedido = valorTotalPedido;
     }
 
     /**
@@ -154,6 +156,48 @@ public class PedidoBeans {
     @Override
     public String toString(){
         return codigoPedido+"";
+    }
+
+    /**
+     * @return the obs
+     */
+    public String getObs() {
+        return obs;
+    }
+
+    /**
+     * @param obs the obs to set
+     */
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+    /**
+     * @return the valorDesc
+     */
+    public double getValorDesc() {
+        return valorDesc;
+    }
+
+    /**
+     * @param valorDesc the valorDesc to set
+     */
+    public void setValorDesc(double valorDesc) {
+        this.valorDesc = valorDesc;
+    }
+
+    /**
+     * @return the itensPedido
+     */
+    public List<ItemPedidoBeans> getItensPedido() {
+        return itensPedido;
+    }
+
+    /**
+     * @param itensPedido the itensPedido to set
+     */
+    public void setItensPedido(List<ItemPedidoBeans> itensPedido) {
+        this.itensPedido = itensPedido;
     }
     
 }

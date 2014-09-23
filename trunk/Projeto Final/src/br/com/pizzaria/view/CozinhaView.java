@@ -17,7 +17,7 @@ public class CozinhaView extends javax.swing.JFrame {
 
     public CozinhaView() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         cozinhaController = new CozinhaController();
         modelo = (DefaultTableModel) tblPedido.getModel();
         populaTabela();

@@ -8,6 +8,7 @@ import br.com.pizzaria.util.GeneratorPDF;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,14 +25,29 @@ public class EntregaPedidoModel {
 
     public void pesquisaItens(String pesquisa, List<ProdutoBeans> listaDeItens) {
         try {
-//            
-            String SQLPesquisa = "select * from produtos where prd_descr like '%" + pesquisa + "%';";
+            String SQLPesquisa = "SELECT \n"
+                    + "  t.`tprd_id`,\n"
+                    + "  t.`tprd_descr`,\n"
+                    + "  p.`prd_prod`,\n"
+                    + "  p.`prd_descr`,\n"
+                    + "  c.`tprc_preco` \n"
+                    + "FROM\n"
+                    + "  `pizzaria`.`tipo_prod` t \n"
+                    + "  JOIN `pizzaria`.`produtos` p \n"
+                    + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
+                    + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
+                    + "    ON c.tprc_cod_prod = p.prd_prod \n"
+                    + "WHERE p.`prd_descr` like '%" + pesquisa + "%' || t.`tprd_descr` LIKE '%" + pesquisa + "%' ;";
+
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 ProdutoBeans novo = new ProdutoBeans();
                 novo.setCodigo(rs.getInt("prd_prod"));
                 novo.setDescricao(rs.getString("prd_descr"));
+                novo.getPrecoProduto().setPreco(rs.getDouble("tprc_preco"));
+                novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
+                novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
                 listaDeItens.add(novo);
             }
         } catch (SQLException ex) {
@@ -73,7 +89,7 @@ public class EntregaPedidoModel {
         return 0;
     }
 
-    public void cadastrarPedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
+    public void cadastrarPedido(/*int codigoCliente, String codigoFuncioario, String total, int tamanhoTabela,*/PedidoBeans pedidobeans) {
 
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
@@ -87,26 +103,29 @@ public class EntregaPedidoModel {
                     + "             `ped_vlr_tot`,\n"
                     // + "             `ped_vlr_desc`,\n"
                     + "             `ped_cli_cod`,\n"
-                    + "             `ped_id_usuario`,\n"
+                    + "             `ped_id_usuario`,\n"   
+                            + "             `ped_stt_canc`,\n"
                     + "             `ped_obs`)\n"
                     + "values (\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                    // + "        'ped_vlr_desc',\n"
+                   // + "        'ped_vlr_desc',\n"
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
-            pstmt.setString(4, codigoCliente);
-            pstmt.setString(5, "Jaime");
+            pstmt.setInt(4, pedidobeans.getCodigoCliente());
+            pstmt.setString(5, pedidobeans.getLoginUsuario());
             pstmt.setString(1, formatoData.format(data));
             pstmt.setString(2, formatoHora.format(data));
-            pstmt.setString(3, total);
-            pstmt.setString(6, "Pedido aberto");
+            pstmt.setDouble(3, pedidobeans.getValorTotalPedido());
+            pstmt.setString(7, pedidobeans.getObs());
+            pstmt.setString(6, pedidobeans.getStatus());
 
             pstmt.execute();
-            cadastrarItens(codigoCliente, codigoFuncioario, codigoDoPedido(), tamanhoTabela, pedidobeans);
+            cadastrarItens(/*codigoCliente, codigoFuncioario, tamanhoTabela,*/codigoDoPedido(), pedidobeans);
             //codigoDoPedido();
             ConectaBanco.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
@@ -121,8 +140,8 @@ public class EntregaPedidoModel {
         }
     }
 
-    public String codigoDoPedido() {
-        String codigo = "0";
+    public int codigoDoPedido() {
+        int codigo = 0;
 
         try {
             String SQLSelection = "select ped_cod from pedido order by ped_cod desc limit 1";
@@ -130,7 +149,7 @@ public class EntregaPedidoModel {
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                codigo = rs.getString("ped_cod");
+                codigo = rs.getInt("ped_cod");
             }
 
         } catch (SQLException ex) {
@@ -140,36 +159,43 @@ public class EntregaPedidoModel {
         return codigo;
     }
 
-    public void cadastrarItens(String codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBeans pedidoBeans) {
+    public void cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBeans pedidoBeans) {
+        DecimalFormat formatoDecimal = new DecimalFormat("0.00");
         List<String> novo = new ArrayList<>();
         novo.add("------------------------------------------------------------");
-        novo.add("--------------CUPOM NÃO FISCAL----------------");
-        novo.add("Prod--------Qtd---------Valor Unt.------Valor Total");
-        for (int i = 0; i < tamanhoTabela; i++) {
+        novo.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
+        novo.add("PROD         QTD      VL UNIT.    VL TOTAL    ");
+        for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
             try {
 
                 String SQLInsertItens = "insert into `pizzaria`.`item`\n"
                         + "            (`item_ped_cod`,\n"
                         + "             `item_cod_prod`,\n"
                         + "             `item_quantidade`,\n"
-                        + "             `item_preco_unit`\n"
+                        + "             `item_preco_unit`,\n"
+                        + "             `item_preco_tot`\n"
                         + "             )\n"
                         + "values (?,\n"
+                        + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?\n"
                         + "        );";
 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
-                pstmt.setString(1, codigoPedido);
-                pstmt.setInt(2, pedidoBeans.getCodProduto(i));
-                pstmt.setInt(3, pedidoBeans.getQuantidade(i));
-                pstmt.setDouble(4, pedidoBeans.getValor());
+                pstmt.setInt(1, codigoPedido);
+                pstmt.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
+                pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
+                pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());
+                pstmt.setDouble(5, pedidoBeans.getItensPedido().get(i).getPrecoTotal());
 
                 pstmt.execute();
 
-                novo.add(pesquisaProduto(pedidoBeans.getCodProduto(i)) + "------" + pedidoBeans.getQuantidade(i) + "------" + pedidoBeans.getValor() + "-----" + (pedidoBeans.getQuantidade(i) * pedidoBeans.getValor()));
                 
+                
+                
+                novo.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao())+ "" + campoNota(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
+
             } catch (SQLException ex) {
                 try {
                     ConectaBanco.getConnection().rollback();
@@ -195,6 +221,15 @@ public class EntregaPedidoModel {
             Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
+    }
+    
+    public String campoNota(String campo){
+        int espaco = 15-campo.length();
+                
+                for(int j=0; j<espaco;j++){
+                    campo = campo.concat(" ");
+                }
+        return campo;
     }
 
 }

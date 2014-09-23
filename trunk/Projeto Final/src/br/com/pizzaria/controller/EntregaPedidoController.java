@@ -1,5 +1,6 @@
 package br.com.pizzaria.controller;
 
+import br.com.pizzaria.beans.ClienteBeans;
 import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.model.ClienteModel;
@@ -30,17 +31,8 @@ public class EntregaPedidoController {
         return entregaPedidoModel.codigoDoItem(codigo);
     }
 
-    public boolean verificaItens(String valor, String quantidade, String codigo, String item) {
+    public boolean verificaItens(String quantidade) {
 
-        if (item.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'item' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        if (valor.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'valor' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
 
         try {
             int x = Integer.parseInt(quantidade);
@@ -63,11 +55,11 @@ public class EntregaPedidoController {
         return true;
     }
 
-    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
-        entregaPedidoModel.cadastrarPedido(codigoCliente, codigoFuncioario, total, tamanhoTabela, pedidobeans);
+    public void conttroleDePedido(/*String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, */PedidoBeans pedidobeans) {
+        entregaPedidoModel.cadastrarPedido(/*codigoCliente, codigoFuncioario, total, tamanhoTabela, */pedidobeans);
     }
 
-    public void controlePesquisa(String pesquisa, String tipo, List<String> lista) {
+    public void controlePesquisa(String pesquisa, String tipo, List<ClienteBeans> lista) {
         clienteModel.procuraCliente(pesquisa, tipo, lista);
     }
 }
