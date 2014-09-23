@@ -1,7 +1,7 @@
 package br.com.pizzaria.beans;
 
 public class ProdutoBeans {
-    
+
     private int codigo;
     private String descricao;
     private TipoProdutoBeans tipoProduto;
@@ -10,6 +10,13 @@ public class ProdutoBeans {
     private double qtdSaldoEstoque;
     private char estocavel;
     private String dataCad;
+    private PrecoProdutoBeans precoProduto;
+
+    public ProdutoBeans() {
+        tipoProduto = new TipoProdutoBeans();
+        precoProduto = new PrecoProdutoBeans();
+    }
+
     /**
      * @return the codigo
      */
@@ -52,10 +59,8 @@ public class ProdutoBeans {
         this.tipoProduto = tipoProduto;
     }
 
-    
-    
     @Override
-    public String toString(){
+    public String toString() {
         return this.descricao;
     }
 
@@ -129,5 +134,18 @@ public class ProdutoBeans {
         this.dataCad = dataCad;
     }
 
-    
+    /**
+     * @return the precoProduto
+     */
+    public PrecoProdutoBeans getPrecoProduto() {
+        return precoProduto;
+    }
+
+    /**
+     * @param precoProduto the precoProduto to set
+     */
+    public void setPrecoProduto(PrecoProdutoBeans precoProduto) {
+        this.precoProduto = precoProduto;
+    }
+
 }

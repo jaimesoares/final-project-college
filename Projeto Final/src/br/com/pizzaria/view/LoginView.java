@@ -255,6 +255,9 @@ public class LoginView extends javax.swing.JInternalFrame {
                 play.som();
             } else if (usuarioBeans.getSenha().equals(momentUser.getSenha())) {
                 Global.principal.habiltaMenu(true);
+                Global.usuario = usuarioBeans;
+                CozinhaView cozinhaV = new CozinhaView();
+                    cozinhaV.setVisible(true);
                 this.dispose();
             } else {
                 lblMensagem.setText("Mensagem: Senha incorreta!");

@@ -169,7 +169,7 @@ public class BalcaoPedidoModel {
                 pstmt.setString(1, codigoPedido);
                 pstmt.setInt(2, pedidoBeans.getCodProduto(i));
                 pstmt.setInt(3, pedidoBeans.getQuantidade(i));
-                pstmt.setDouble(4, pedidoBeans.getValor());
+                pstmt.setDouble(4, pedidoBeans.getValorTotalPedido());
 
                 pstmt.execute();
             } catch (SQLException ex) {

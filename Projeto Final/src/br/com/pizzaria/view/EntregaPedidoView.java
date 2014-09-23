@@ -6,10 +6,12 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.ItemPedidoBeans;
 import br.com.pizzaria.beans.PedidoBeans;
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.EntregaPedidoController;
+import br.com.pizzaria.util.Global;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,8 +33,9 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     MaskFormatter formatoTelefone;
     ClienteBeans clienteBeans;
     ClienteController clienteController;
-    List<String> listaDeClientes;
-    private List<ProdutoBeans> listaDeItens;
+    List<ClienteBeans> listaDeClientes;
+    private List<ProdutoBeans> listaDeProdutos;
+    List<ItemPedidoBeans> listaDeItens;
     PedidoBeans pedidoBeans;
     EntregaPedidoController entregaPedidoController;
     DefaultTableModel modeloDeTabela;
@@ -44,6 +47,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PedidoView
+     *
      * @param codigoFuncionario
      */
     public EntregaPedidoView(int codigoFuncionario) {
@@ -51,11 +55,12 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         this.codigoFuncionario = codigoFuncionario;
         habilitarCampos(false);
         txtValor.setEditable(false);
-        txtCodigoItem.setEditable(false);
+
         btnFinalizar.setEnabled(false);
         clienteController = new ClienteController();
         clienteBeans = new ClienteBeans();
         listaDeClientes = new ArrayList<>();
+        listaDeProdutos = new ArrayList<>();
         listaDeItens = new ArrayList<>();
         pnlPai.setEnabledAt(1, false);
         pedidoBeans = new PedidoBeans();
@@ -119,23 +124,19 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtItem = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cbSelecionar = new javax.swing.JComboBox();
-        btnValor = new javax.swing.JButton();
+        cbProdutos = new javax.swing.JComboBox();
         lblValor = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
         lblQuantidade = new javax.swing.JLabel();
-        txtCodigoItem = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         btnAdiciona = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
-        btnCalcular = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedido = new javax.swing.JTable();
         btnCancelarPedido = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
         lblObservacao1 = new javax.swing.JLabel();
         txtObservacao1 = new javax.swing.JTextField();
@@ -331,21 +332,16 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Item:");
 
-        cbSelecionar.addActionListener(new java.awt.event.ActionListener() {
+        cbProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSelecionarActionPerformed(evt);
-            }
-        });
-
-        btnValor.setText("Valor");
-        btnValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValorActionPerformed(evt);
+                cbProdutosActionPerformed(evt);
             }
         });
 
         lblValor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor.setText("Valor:");
+
+        txtValor.setEditable(false);
 
         lblQuantidade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblQuantidade.setText("Quantidade:");
@@ -364,26 +360,21 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCalcular.setText("Calcular");
-        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcularActionPerformed(evt);
-            }
-        });
-
         lblTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTotal.setText("Total:");
+
+        txtTotal.setEditable(false);
 
         tblPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código Item", "Descrição", "Valor UNT", "Quantidade", "subTotal"
+                "Descrição", "Valor UNT", "Quantidade", "subTotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -412,9 +403,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setText("Código:");
-
         txtQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtQuantidadeFocusLost(evt);
@@ -442,6 +430,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         lblValor1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor1.setText("Troco:");
 
+        txtTroco.setEditable(false);
         txtTroco.setBackground(new java.awt.Color(255, 255, 204));
 
         javax.swing.GroupLayout pnlPedidoLayout = new javax.swing.GroupLayout(pnlPedido);
@@ -460,8 +449,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtItem))
                             .addGroup(pnlPedidoLayout.createSequentialGroup()
-                                .addComponent(btnValor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(61, 61, 61)
                                 .addComponent(lblValor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -473,18 +461,13 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                         .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPedidoLayout.createSequentialGroup()
                                 .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoItem))
-                            .addComponent(cbSelecionar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cbProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlPedidoLayout.createSequentialGroup()
                         .addComponent(btnAdiciona)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemove)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCalcular)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTotal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -523,17 +506,14 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnValor)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor)
                     .addComponent(lblQuantidade)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtCodigoItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -541,7 +521,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                     .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAdiciona)
                         .addComponent(btnRemove)
-                        .addComponent(btnCalcular)
                         .addComponent(lblTotal))
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
@@ -564,7 +543,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarPedido)
                     .addComponent(btnFinalizar))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pnlPai.addTab("Pedido", pnlPedido);
@@ -605,16 +584,16 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         listaDeClientes.clear();
         String pesquisa = JOptionPane.showInputDialog(null, "Entre com " + tipoPesquisa + " do cliente:", "PESQUISA DE CLIENTE", 3);
         entregaPedidoController.controlePesquisa(pesquisa, tipoPesquisa, listaDeClientes);
-        for (String string : listaDeClientes) {
-            cbPesquisa.addItem(string);
+        for (ClienteBeans clienteB : listaDeClientes) {
+            cbPesquisa.addItem(clienteB);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void cbPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPesquisaActionPerformed
         if (!(cbPesquisa.getSelectedItem() == null)) {
-            String codigo = cbPesquisa.getSelectedItem().toString();
-            codigo = codigo.substring(0, codigo.indexOf(" "));
-            clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(codigo));
+            //String codigo = cbPesquisa.getSelectedItem().toString();
+            //codigo = codigo.substring(0, codigo.indexOf(" "));
+            clienteBeans = clienteController.controlePreenchimento(((ClienteBeans)cbPesquisa.getSelectedItem()).getCodigoCliente());
             //txtCodigoCliente.setText(clienteBeans.getCodigoCliente() + "");
             txtNome.setText(clienteBeans.getNome());
             txtRua.setText(clienteBeans.getRua());
@@ -630,6 +609,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         pnlPai.setEnabledAt(1, true);
         pnlPai.setEnabledAt(0, false);
         pnlPai.setSelectedIndex(1);
+        
+        
     }//GEN-LAST:event_btnContinuarPedidoActionPerformed
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
@@ -641,69 +622,90 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void txtItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemActionPerformed
         txtValor.setText("");
-        txtCodigoItem.setText("");
+
         txtQuantidade.setText("");
-        cbSelecionar.removeAllItems();
-        listaDeItens.clear();
-        entregaPedidoController.controleDeItens(txtItem.getText(), listaDeItens);
-        for (ProdutoBeans produtoBeans : listaDeItens) {
-            cbSelecionar.addItem(produtoBeans);
+        cbProdutos.removeAllItems();
+        listaDeProdutos.clear();
+        entregaPedidoController.controleDeItens(txtItem.getText(), listaDeProdutos);
+        for (ProdutoBeans produtoBeans : listaDeProdutos) {
+            cbProdutos.addItem(produtoBeans);
         }
     }//GEN-LAST:event_txtItemActionPerformed
 
-    private void btnValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorActionPerformed
-        txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()) + "");
-        //txtCodigoItem.setText(entregaPedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
-    }//GEN-LAST:event_btnValorActionPerformed
-
-    private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
+    private void cbProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdutosActionPerformed
         txtValor.setText("");
-        txtCodigoItem.setText("");//20:56 OK
+        //00:09 OK
         txtQuantidade.setText("");
-    }//GEN-LAST:event_cbSelecionarActionPerformed
+        if (cbProdutos.getSelectedItem() != null) {
+            //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBeans) cbProdutos.getSelectedItem()).getCodigo()) + "");
+            txtValor.setText(decimalFormato.format(((ProdutoBeans) cbProdutos.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
+        }
+        /*
+         decimalFormato.format(((ProdutoBeans)cbProdutos.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")
+         (ProdutoBeans)cbProdutos.getSelectedItem() retorna o produto do comboBox
+         .getPrecoProduto().getPreco() chama a classe precoprodutobeans dentro da classe prdutobeans e retorno o valor unitario do produto do comboBox
+         */
+    }//GEN-LAST:event_cbProdutosActionPerformed
 
     private void txtQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusLost
 
     }//GEN-LAST:event_txtQuantidadeFocusLost
 
     private void btnAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaActionPerformed
-        if (cbSelecionar.getSelectedItem() == null) {
+        if (cbProdutos.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Campo 'Selecionar' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-        } else if (entregaPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), String.valueOf(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()), cbSelecionar.getSelectedItem().toString())) {
+        } else if (entregaPedidoController.verificaItens(txtQuantidade.getText())) {
             double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
-            modeloDeTabela.addRow(new Object[]{((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
+            modeloDeTabela.addRow(new Object[]{cbProdutos.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
+            txtValorRecebido.setEditable(true);
+            txtValorRecebido.setText("");
+            txtTroco.setText("");
+            btnFinalizar.setEnabled(false);
+            adicionaItem();
             limpaItens();
+            calculaTotal();
 
         }
     }//GEN-LAST:event_btnAdicionaActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        modeloDeTabela.removeRow(tblPedido.getSelectedRow());
+        int linha = tblPedido.getSelectedRow();
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item na lista para remover", "ERRO", 0, new ImageIcon("imagens/cancelar.png"));
+        } else {
+            switch (JOptionPane.showConfirmDialog(null, "Remover Item " + listaDeItens.get(linha), "Remover item de pedido", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    modeloDeTabela.removeRow(linha);
+                    listaDeItens.remove(linha);
+                    calculaTotal();
+                    if (Double.parseDouble(txtTotal.getText()) > 0) {
+                        txtValorRecebido.setEditable(true);
+                        txtValorRecebido.setText("");
+                        txtTroco.setText("");
+                        btnFinalizar.setEnabled(false);
+                    } else {
+                        txtValorRecebido.setEditable(false);
+                    }
+                    break;
+            }
+
+        }
+
     }//GEN-LAST:event_btnRemoveActionPerformed
 
-    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        double totalDoPedido = 0;
-        for (int i = 0; i < tblPedido.getRowCount(); i++) {
-            totalDoPedido += Double.parseDouble(modeloDeTabela.getValueAt(i, 4).toString());
-        }
-        txtTotal.setText(decimalFormato.format(totalDoPedido).replace(",", "."));
-        populaPedidoBeans();
-        if (totalDoPedido > 0) {
-            btnFinalizar.setEnabled(true);
-            btnAdiciona.setEnabled(false);
-            btnRemove.setEnabled(false);
-            btnCalcular.setEnabled(false);
-            cbFormaPagamento.setEditable(true);
-            txtValorRecebido.setEditable(true);
-        }
-    }//GEN-LAST:event_btnCalcularActionPerformed
-
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        entregaPedidoController.conttroleDePedido(String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), pedidoBeans);
-        limpaFinaliza();
-        limpaTudo();
-//        CozinhaView.populaTabela();
-        this.dispose();
+        switch (JOptionPane.showConfirmDialog(null, "Finalizar Pedido!", "Finalizar Pedido", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                populaPedidoBeans();
+                entregaPedidoController.conttroleDePedido(/*String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), */pedidoBeans);
+                limpaFinaliza();
+                limpaTudo();
+                CozinhaView.populaTabela();
+                this.dispose();
+                break;
+        }
+
+
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
@@ -712,7 +714,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 //            btnFechar.setText("Cancelar");
 //            btnContinuarPedido.setEnabled(false);
 //            btnPesquisar.setEnabled(false);
-//            cbSelecionar.removeAllItems();
+//            cbProdutos.removeAllItems();
 //            txtData.setText(VerificarData.retornoDeDataAtual());
 //            habilitarCampos(true);
 //            txtNome.requestFocus();
@@ -737,6 +739,11 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             double verifica = Double.parseDouble(txtValorRecebido.getText().replace(",", "."));
             double troco = verifica - Double.parseDouble(txtTotal.getText().replace(",", "."));
             txtTroco.setText(decimalFormato.format(troco).replace(",", "."));
+            if (Double.parseDouble(txtTroco.getText()) >= 0) {
+                btnFinalizar.setEnabled(true);
+            } else {
+                btnFinalizar.setEnabled(false);
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Campo valor deve conter apenas número!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             txtValorRecebido.setText("");
@@ -748,7 +755,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdiciona;
-    private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCancelarPedido;
     private javax.swing.JButton btnContinuarPedido;
     private javax.swing.JButton btnFechar;
@@ -756,15 +762,13 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovoCliente;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JButton btnValor;
     private javax.swing.JComboBox cbFormaPagamento;
     private javax.swing.JComboBox cbPesquisa;
-    private javax.swing.JComboBox cbSelecionar;
+    private javax.swing.JComboBox cbProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblFormaPagamento;
@@ -791,7 +795,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txfTelefone;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtCodigoItem;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtItem;
     private javax.swing.JTextField txtNome;
@@ -821,24 +824,26 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtItem.setText("");
         txtQuantidade.setText("");
         txtValor.setText("");
-        txtCodigoItem.setText("");
-        cbSelecionar.removeAllItems();
+
+        cbProdutos.removeAllItems();
     }
 
     final void populaPedidoBeans() {
-        dataAtual = new Date();
-        //pedidoBeans.setCodigoCliente(Integer.parseInt(txtCodigoCliente.getText()));
-        pedidoBeans.setCodigoUsuario(codigoFuncionario);
+        //dataAtual = new Date();
+        pedidoBeans.setCodigoCliente(clienteBeans.getCodigoCliente());
+        pedidoBeans.setLoginUsuario(Global.usuario.getLogin());
         pedidoBeans.setCodigoEntregador(0);
-        pedidoBeans.setData(formatoData.format(dataAtual));
-        pedidoBeans.setData(formatoHora.format(dataAtual));
-        pedidoBeans.setStatus("Pedido aberto");
-        pedidoBeans.setValor(Double.parseDouble(txtTotal.getText()));
-        for (int i = 0; i < tblPedido.getRowCount(); i++) {
-            pedidoBeans.setCodProduto(Integer.parseInt(modeloDeTabela.getValueAt(i, 0).toString()));
-            pedidoBeans.setQuantidade(Integer.parseInt(modeloDeTabela.getValueAt(i, 3).toString()));
+//        pedidoBeans.setData(formatoData.format(dataAtual));
+//        pedidoBeans.setData(formatoHora.format(dataAtual));
+        pedidoBeans.setStatus("A");
+        pedidoBeans.setObs(txtObservacao1.getText());
+        pedidoBeans.setValorTotalPedido(Double.parseDouble(txtTotal.getText()));
+        pedidoBeans.setItensPedido(listaDeItens);
+//        for (int i = 0; i < tblPedido.getRowCount(); i++) {
+//            pedidoBeans.setCodProduto(Integer.parseInt(modeloDeTabela.getValueAt(i, 0).toString()));
+//            pedidoBeans.setQuantidade(Integer.parseInt(modeloDeTabela.getValueAt(i, 3).toString()));
 
-        }
+//        }
     }
 
     final void limpaFinaliza() {
@@ -848,7 +853,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtCliente.setText("");
         btnAdiciona.setEnabled(true);
         btnRemove.setEnabled(true);
-        btnCalcular.setEnabled(true);
         pnlPai.setEnabledAt(0, true);
         pnlPai.setEnabledAt(1, false);
         pnlPai.setSelectedIndex(0);
@@ -881,5 +885,28 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         //txtCodigoCliente.setText("");
         txtData.setText("");
         cbPesquisa.removeAllItems();
+    }
+
+    public void adicionaItem() {
+        double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
+        ItemPedidoBeans itemPedido = new ItemPedidoBeans();
+        itemPedido.setCodigoProduto(((ProdutoBeans) cbProdutos.getSelectedItem()).getCodigo());
+        itemPedido.setPrecoUnitario(((ProdutoBeans) cbProdutos.getSelectedItem()).getPrecoProduto().getPreco());
+        itemPedido.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        itemPedido.setPrecoTotal(subTotal);
+        itemPedido.setDescricao(((ProdutoBeans) cbProdutos.getSelectedItem()).getDescricao());
+
+        listaDeItens.add(itemPedido);
+    }
+
+    public void calculaTotal() {
+        double totalDoPedido = 0;
+        for (ItemPedidoBeans listaDeIten : listaDeItens) {
+            totalDoPedido += listaDeIten.getPrecoTotal();
+        }
+//        for (int i = 0; i < tblPedido.getRowCount(); i++) {
+//            totalDoPedido += Double.parseDouble(modeloDeTabela.getValueAt(i, 4).toString());
+//        }
+        txtTotal.setText(decimalFormato.format(totalDoPedido).replace(",", "."));
     }
 }

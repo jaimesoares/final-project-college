@@ -27,15 +27,15 @@ public class CozinhaModel {
     
     public static void populaTabela(DefaultTableModel modelo) {
         try {
-            String SQLSelection = "SELECT p.ped_cod, c.car_descricao, i.`item_quantidade`, p.ped_hora "
-                    +"FROM pedido p JOIN item i ON i.item_ped_cod = p.`ped_cod` "
-                    +"JOIN cardapio c ON c.`car_cod` = i.`item_car_cod` "
-                    +"WHERE p.`ped_status` = 'Pedido aberto' AND c.`car_tipo` = 'Pizza'"
-                    +"ORDER BY p.`ped_hora`;";
-            PreparedStatement pstm = ConectaBancoPizzariMama.getConnection().prepareStatement(SQLSelection);
+            String SQLSelection = "SELECT p.ped_cod, c.prd_descr, i.`item_quantidade`, p.ped_hr \n" +
+"                    FROM pedido p JOIN item i ON i.item_ped_cod = p.`ped_cod` \n" +
+"                    JOIN produtos c ON c.`prd_prod` = i.`item_cod_prod` \n" +
+"                    WHERE p.`ped_stt_canc` = 'A' \n" +
+"                    ORDER BY p.`ped_hr`;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("ped_cod"),rs.getString("car_descricao"), rs.getInt("item_quantidade"), rs.getString("ped_hora")});
+                modelo.addRow(new Object[]{rs.getString("ped_cod"),rs.getString("prd_descr"), rs.getInt("item_quantidade"), rs.getString("ped_hr")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar "+ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

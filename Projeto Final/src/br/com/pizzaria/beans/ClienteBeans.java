@@ -74,7 +74,7 @@ public class ClienteBeans {
 
     @Override
     public String toString() {
-        return this.codigoCliente + "";
+        return this.nome;
     }
 
     /**

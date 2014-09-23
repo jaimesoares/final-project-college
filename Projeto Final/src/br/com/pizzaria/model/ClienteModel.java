@@ -100,8 +100,9 @@ public class ClienteModel {
      * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
-    public void procuraCliente(String pesquisa, String tipo, List<String> lista) {
-        String SQLSelection = "";
+    public void procuraCliente(String pesquisa, String tipo, List<ClienteBeans> lista) {
+        String SQLSelection;
+        
         switch (tipo) {
             case "nome":
                 SQLSelection = "select * from cliente where cli_nome like '%" + pesquisa + "%';";
@@ -120,7 +121,21 @@ public class ClienteModel {
                 rs.next();
             }
             while (rs.next()) {
-                lista.add(rs.getString("cli_cod") + " - " + rs.getString("cli_nome"));
+                ClienteBeans clienteBeans = new ClienteBeans();
+                clienteBeans.setObservacao(rs.getString("cli_obs"));
+                clienteBeans.setCep(rs.getString("cli_cep"));
+                clienteBeans.setAniversario(VerificarData.converteParaJAVA(rs.getString("cli_aniversario")));
+                clienteBeans.setTelCelular(rs.getString("cli_tel_cel"));
+                clienteBeans.setEmail(rs.getString("cli_email"));
+                clienteBeans.setNumero(rs.getInt("cli_nro_ender"));
+                clienteBeans.setCodigoCliente(rs.getInt("cli_cod"));
+                clienteBeans.setNome(rs.getString("cli_nome"));
+                clienteBeans.setRua(rs.getString("cli_rua"));
+                clienteBeans.setBairro(rs.getString("cli_bairro"));
+                clienteBeans.setTelefone(rs.getString("cli_telefone"));
+                clienteBeans.setDataCadastro(VerificarData.converteParaJAVA(rs.getString("cli_datacad")));
+                clienteBeans.setCidade(rs.getString("cli_cidade"));
+                lista.add(clienteBeans);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

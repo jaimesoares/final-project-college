@@ -338,8 +338,7 @@
                                       <Component id="txtItem" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btnValor" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                                       <Component id="lblValor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtValor" min="-2" pref="130" max="-2" attributes="0"/>
@@ -354,12 +353,9 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="txtQuantidade" min="-2" pref="55" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtCodigoItem" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="cbSelecionar" max="32767" attributes="0"/>
+                                  <Component id="cbProdutos" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -367,8 +363,6 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnRemove" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnCalcular" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblTotal" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtTotal" min="-2" pref="87" max="-2" attributes="0"/>
@@ -417,18 +411,15 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtItem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbSelecionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnValor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtValor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblValor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCodigoItem" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
@@ -437,7 +428,6 @@
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="btnAdiciona" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnRemove" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="txtTotal" min="-2" pref="37" max="-2" attributes="0"/>
@@ -466,7 +456,7 @@
                           <Component id="btnCancelarPedido" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnFinalizar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -505,22 +495,14 @@
                 <Property name="text" type="java.lang.String" value="Item:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbSelecionar">
+            <Component class="javax.swing.JComboBox" name="cbProdutos">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSelecionarActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnValor">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Valor"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnValorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbProdutosActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblValor">
@@ -532,6 +514,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtValor">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblQuantidade">
               <Properties>
@@ -540,8 +525,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Quantidade:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtCodigoItem">
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
             </Component>
@@ -561,14 +544,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnCalcular">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Calcular"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcularActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblTotal">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -578,6 +553,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotal">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
@@ -589,8 +567,7 @@
                 <Component class="javax.swing.JTable" name="tblPedido">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
-                        <Column editable="false" title="C&#xf3;digo Item" type="java.lang.Object"/>
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
                         <Column editable="false" title="Valor UNT" type="java.lang.Object"/>
                         <Column editable="false" title="Quantidade" type="java.lang.Object"/>
@@ -599,11 +576,6 @@
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -654,14 +626,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtQuantidade">
               <Events>
@@ -726,6 +690,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtTroco">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="ff" type="rgb"/>
                 </Property>
