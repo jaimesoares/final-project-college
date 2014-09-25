@@ -30,6 +30,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         momentUser = new UsuarioBeans();
         usuarioController = new UsuarioController();
         play = new Som();
+        this.login();
     }
 
     /**

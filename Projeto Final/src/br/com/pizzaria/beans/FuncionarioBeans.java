@@ -30,7 +30,7 @@ public class FuncionarioBeans {
     private UsuarioBeans usuarioBeans;
 
     public FuncionarioBeans() {
-
+        cargo = new CargoBeans();
     }
 
     public int getCodigo() {
@@ -75,7 +75,7 @@ public class FuncionarioBeans {
 
     @Override
     public String toString() {
-        return this.codigo + "";
+        return this.nome;
     }
 
     /**

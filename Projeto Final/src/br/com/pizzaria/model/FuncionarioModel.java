@@ -105,11 +105,23 @@ public class FuncionarioModel {
 
     public void listaFuncionario(DefaultTableModel modelo) {
         try {
-            String SQLSelection = "select * from funcionario;";
+            String SQLSelection = "SELECT \n"
+                    + "  f.`fun_codigo`,\n"
+                    + "  f.`fun_nome`,\n"
+                    + "  c.`crg_descr` \n"
+                    + "FROM\n"
+                    + "  `funcionario` f \n"
+                    + "  JOIN `cargo` c \n"
+                    + "    ON c.`crg_id_cargo` = f.`fun_cargo` ;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("fun_codigo"), rs.getString("fun_nome")});
+                FuncionarioBeans novo = new FuncionarioBeans();
+                novo.setCodigo(rs.getInt("fun_codigo"));
+                
+                novo.setNome(rs.getString("fun_nome"));
+                novo.getCargo().setDescricao(rs.getString("crg_descr"));
+                modelo.addRow(new Object[]{novo, rs.getString("crg_descr")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível listar funcionário " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

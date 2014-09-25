@@ -1,6 +1,5 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.CargoBeans;
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.beans.TipoProdutoBeans;
 import br.com.pizzaria.util.ConectaBanco;
@@ -8,15 +7,18 @@ import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class PrecoProdutoModel {
 
+    DecimalFormat decimalFormato;
+
     public PrecoProdutoModel() {
+        decimalFormato = new DecimalFormat("0.00");
 
     }
 
@@ -28,9 +30,9 @@ public class PrecoProdutoModel {
      * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
-    public void populaProduto(List<ProdutoBeans> lista) {
+    public void populaProduto(List<ProdutoBeans> lista, int tipoProduto) {
         try {
-            String SQLSelection = "select * from produtos;";
+            String SQLSelection = "select * from produtos where prd_tipo_prod = '" + tipoProduto + "';";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
@@ -96,17 +98,20 @@ public class PrecoProdutoModel {
             String SQLSelection = "SELECT \n"
                     + "  i.prd_descr,\n"
                     + "  p.`tprc_vigencia`,\n"
-                    + "  p.`tprc_preco` \n"
+                    + "  p.`tprc_preco` ,\n"
+                    + "  t.`tprd_descr`\n"
                     + "FROM\n"
                     + "  tab_precos_venda p \n"
                     + "  JOIN produtos i \n"
                     + "    ON i.prd_prod = p.`tprc_cod_prod` \n"
-                    + "WHERE i.`prd_prod` = '"+codigo+"' \n"
+                    + "  join `tipo_prod` t \n"
+                    + "    on t.`tprd_id` = i.`prd_tipo_prod` \n"
+                    + "WHERE i.`prd_prod` = '" + codigo + "' \n"
                     + "ORDER BY `tprc_vigencia` desc ;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("prd_descr"), rs.getDate("tprc_vigencia"), rs.getDouble("tprc_preco")});
+                modelo.addRow(new Object[]{rs.getString("prd_descr"), rs.getString("tprd_descr"), decimalFormato.format(rs.getDouble("tprc_preco")), VerificarData.converteParaJAVA(String.valueOf(rs.getDate("tprc_vigencia")))});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
