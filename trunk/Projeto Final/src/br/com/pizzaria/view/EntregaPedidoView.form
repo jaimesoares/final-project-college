@@ -678,6 +678,7 @@
               </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorRecebidoKeyReleased"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorRecebidoKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblValor1">
