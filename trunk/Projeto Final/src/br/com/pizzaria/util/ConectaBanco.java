@@ -11,6 +11,7 @@ public class ConectaBanco implements AutoCloseable {
     private final String userName = "root";
     private final String password = "root";
     private static Connection con;
+    private static String status;
 
     public ConectaBanco() {
         try {
@@ -18,10 +19,13 @@ public class ConectaBanco implements AutoCloseable {
             con = DriverManager.getConnection(url, userName, password);
             con.setAutoCommit(false);
             System.out.println("Conectou");
+            status="Conectou";
         } catch (ClassNotFoundException e) {
             System.out.println("Driver não encontrado");
+            status="Driver não encontrado";
         } catch (SQLException e) {
             System.out.println("Erro ao conectar ao banco");
+            status="Erro ao conectar ao banco";
         }
 
     }
@@ -37,6 +41,10 @@ public class ConectaBanco implements AutoCloseable {
         if (!con.isClosed()) {
             con.close();
         }
+    }
+    
+    public static String statusBanco(){
+        return ConectaBanco.status;
     }
 
     public static void main(String args[]) {

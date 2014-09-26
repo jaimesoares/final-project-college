@@ -8,6 +8,7 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.beans.UsuarioBeans;
 import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Global;
+import br.com.pizzaria.util.Relogio;
 import br.com.pizzaria.util.Som;
 import br.com.pizzaria.util.ThreadTempo;
 import java.awt.event.KeyEvent;
@@ -30,7 +31,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         momentUser = new UsuarioBeans();
         usuarioController = new UsuarioController();
         play = new Som();
-        this.login();
+        //this.login();
     }
 
     /**
@@ -259,6 +260,8 @@ public class LoginView extends javax.swing.JInternalFrame {
                 Global.usuario = usuarioBeans;
                 CozinhaView cozinhaV = new CozinhaView();
                     cozinhaV.setVisible(true);
+                    Relogio relogio = new Relogio();
+                    relogio.setVisible(true);
                 this.dispose();
             } else {
                 lblMensagem.setText("Mensagem: Senha incorreta!");
