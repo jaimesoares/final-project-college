@@ -596,7 +596,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         if (!(cbPesquisa.getSelectedItem() == null)) {
             //String codigo = cbPesquisa.getSelectedItem().toString();
             //codigo = codigo.substring(0, codigo.indexOf(" "));
-            clienteBeans = clienteController.controlePreenchimento(((ClienteBeans)cbPesquisa.getSelectedItem()).getCodigoCliente());
+            clienteBeans = clienteController.controlePreenchimento(((ClienteBeans) cbPesquisa.getSelectedItem()).getCodigoCliente());
             //txtCodigoCliente.setText(clienteBeans.getCodigoCliente() + "");
             txtNome.setText(clienteBeans.getNome());
             txtRua.setText(clienteBeans.getRua());
@@ -612,8 +612,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         pnlPai.setEnabledAt(1, true);
         pnlPai.setEnabledAt(0, false);
         pnlPai.setSelectedIndex(1);
-        
-        
+
+
     }//GEN-LAST:event_btnContinuarPedidoActionPerformed
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
@@ -738,21 +738,30 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoClienteActionPerformed
 
     private void txtValorRecebidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyReleased
-//        try {
-//            double verifica = Double.parseDouble(txtValorRecebido.getText().replace(",", "."));
-//            double troco = verifica - Double.parseDouble(txtTotal.getText().replace(",", "."));
-//            txtTroco.setText(decimalFormato.format(troco).replace(",", "."));
-//            if (Double.parseDouble(txtTroco.getText()) >= 0) {
-//                btnFinalizar.setEnabled(true);
-//            } else {
-//                btnFinalizar.setEnabled(false);
-//            }
-//        } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(null, "Campo valor deve conter apenas número!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-//            txtValorRecebido.setText("");
-//            txtValorRecebido.requestFocus();
-//            txtTroco.setText("");
-//        }
+        String caracteres = "0987654321,.";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+
+            evt.consume();
+
+        } else {
+
+            try {
+                double verifica = Double.parseDouble(txtValorRecebido.getText().replace(",", "."));
+                double troco = verifica - Double.parseDouble(txtTotal.getText().replace(",", "."));
+                txtTroco.setText(decimalFormato.format(troco).replace(",", "."));
+                if (Double.parseDouble(txtTroco.getText()) >= 0) {
+                    btnFinalizar.setEnabled(true);
+                } else {
+                    btnFinalizar.setEnabled(false);
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Campo valor deve conter apenas número!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+                txtValorRecebido.setText("");
+                txtValorRecebido.requestFocus();
+                txtTroco.setText("");
+            }
+        }
     }//GEN-LAST:event_txtValorRecebidoKeyReleased
 
     private void txtValorRecebidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyTyped
@@ -762,9 +771,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
             evt.consume();
 
-        }else{
-            valorRecebido();
         }
+
     }//GEN-LAST:event_txtValorRecebidoKeyTyped
 
 
@@ -919,27 +927,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         for (ItemPedidoBeans listaDeIten : listaDeItens) {
             totalDoPedido += listaDeIten.getPrecoTotal();
         }
-//        for (int i = 0; i < tblPedido.getRowCount(); i++) {
-//            totalDoPedido += Double.parseDouble(modeloDeTabela.getValueAt(i, 4).toString());
-//        }
+
         txtTotal.setText(decimalFormato.format(totalDoPedido).replace(",", "."));
     }
-    
-    public void valorRecebido(){
-        try {
-            double verifica = Double.parseDouble(txtValorRecebido.getText().replace(",", "."));
-            double troco = verifica - Double.parseDouble(txtTotal.getText().replace(",", "."));
-            txtTroco.setText(decimalFormato.format(troco).replace(",", "."));
-            if (Double.parseDouble(txtTroco.getText()) >= 0) {
-                btnFinalizar.setEnabled(true);
-            } else {
-                btnFinalizar.setEnabled(false);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Campo valor deve conter apenas número!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            txtValorRecebido.setText("");
-            txtValorRecebido.requestFocus();
-            txtTroco.setText("");
-        }
-    }
+
 }
