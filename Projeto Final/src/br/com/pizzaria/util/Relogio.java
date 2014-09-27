@@ -146,6 +146,6 @@ public class Relogio extends javax.swing.JFrame {
     public final void centralizarComponente() {  
         Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();  
         Dimension dw = getSize();  
-        setLocation((ds.width - dw.width), 0);  
+        setLocation((ds.width - dw.width), 40);  
     }
 }

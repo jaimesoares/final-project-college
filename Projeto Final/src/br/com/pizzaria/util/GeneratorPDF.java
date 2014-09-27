@@ -17,7 +17,7 @@ import java.util.List;
 public class GeneratorPDF {
 
     public static String gerarPDF(List<String> conteudo) {
-        String path = "J:\\Documentos\\Faculdade";
+        String path = "C:\\Users\\Jaime\\Desktop";
 // criação do documento
         Document document = new Document();
         try {

@@ -161,10 +161,11 @@ public class EntregaPedidoModel {
 
     public void cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBeans pedidoBeans) {
         DecimalFormat formatoDecimal = new DecimalFormat("0.00");
-        List<String> novo = new ArrayList<>();
-        novo.add("------------------------------------------------------------");
-        novo.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
-        novo.add("PROD         QTD      VL UNIT.    VL TOTAL    ");
+        List<String> cupom = new ArrayList<>();
+        String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
+        cupom.add("------------------------------------------------------------");
+        cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
+        cupom.add("PROD         QTD      VL UNIT.    VL TOTAL    ");
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
             try {
 
@@ -194,7 +195,7 @@ public class EntregaPedidoModel {
                 
                 
                 
-                novo.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao())+ "" + campoNota(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
+                cupom.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao())+ "" + campoNota(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
 
             } catch (SQLException ex) {
                 try {
@@ -205,7 +206,9 @@ public class EntregaPedidoModel {
                 }
             }
         }
-        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(novo));
+        cupom.add("------------------------------------------------------------");
+        cupom.add("Total:                                            R$"+totalPedido);
+        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
     }
 
     public String pesquisaProduto(int codigo) {
