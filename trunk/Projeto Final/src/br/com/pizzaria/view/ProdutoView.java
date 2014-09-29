@@ -2,6 +2,7 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.beans.ProdutoBeans;
 import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.controller.PrecoProdutoController;
 import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.VerificarData;
 import java.text.DecimalFormat;
@@ -19,6 +20,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     DecimalFormat formatoDecimal;
     List<TipoProdutoBeans> listaTipoProd;
     ComboBoxModel<TipoProdutoBeans> modeloTipoProd;
+    PrecoProdutoController precoProdutoController;
 
     public ProdutoView() {
         initComponents();
@@ -28,6 +30,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         produtoController = new ProdutoController();
         formatoDecimal = new DecimalFormat("0.00");
         modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
+        precoProdutoController = new PrecoProdutoController();
         populaTipoProduto();
 
     }
@@ -60,6 +63,8 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         cbEstocavel = new javax.swing.JComboBox();
         lblValor2 = new javax.swing.JLabel();
         txtQtdEstoque = new javax.swing.JTextField();
+        lblValor3 = new javax.swing.JLabel();
+        txtPreco = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -178,6 +183,21 @@ public class ProdutoView extends javax.swing.JInternalFrame {
             }
         });
 
+        lblValor3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblValor3.setText("Valor:");
+
+        txtPreco.setEditable(false);
+        txtPreco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrecoFocusLost(evt);
+            }
+        });
+        txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,7 +247,9 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lbl_data)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblValor3)
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblValor2)
@@ -257,34 +279,37 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbEstocavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbAvisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addComponent(lbl_data)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtData)
-                        .addGap(18, 18, 18)
-                        .addComponent(sep_formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_data1)
-                            .addComponent(txfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sep_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnNovo)
-                            .addComponent(btnEditar)
-                            .addComponent(btnFechar))
-                        .addGap(58, 58, 58))
+                            .addComponent(cbAvisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblValor2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(lblValor3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(lbl_data)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtData)
+                .addGap(18, 18, 18)
+                .addComponent(sep_formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_data1)
+                    .addComponent(txfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sep_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovo)
+                    .addComponent(btnEditar)
+                    .addComponent(btnFechar))
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -306,6 +331,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
             capturaBeans();
             if (produtoController.verificarDados(capturaBeans(), cbTipo.getSelectedIndex())) {
+                precoProdutoController.verificarDados(produtoBeans.getCodigo(), txtPreco.getText());
                 btnNovo.setText("Novo");
                 btnFechar.setText("Fechar");
                 btnEditar.setEnabled(true);
@@ -329,6 +355,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         System.out.println(produtoBeans.getTipoProduto().getDescricao());
         txaDescricao.setText(produtoBeans.getDescricao());
         modeloTipoProd.setSelectedItem(produtoBeans.getTipoProduto());
+        txtPreco.setText(String.valueOf(formatoDecimal.format(produtoBeans.getPrecoProduto().getPreco())));
         if (String.valueOf(produtoBeans.getEstocavel()).equals("S")) {
             cbEstocavel.setSelectedIndex(0);
         } else {
@@ -408,6 +435,20 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbTipoActionPerformed
 
+    private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecoFocusLost
+
+    private void txtPrecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyTyped
+       String caracteres = "0987654321,.";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtPrecoKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
@@ -423,6 +464,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblDescricao3;
     private javax.swing.JLabel lblValor1;
     private javax.swing.JLabel lblValor2;
+    private javax.swing.JLabel lblValor3;
     private javax.swing.JLabel lbl_data;
     private javax.swing.JLabel lbl_data1;
     private javax.swing.JSeparator sep_formulario;
@@ -432,6 +474,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txaDescricao;
     private javax.swing.JFormattedTextField txfPesquisar;
     private javax.swing.JTextField txtData;
+    private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQtd;
     private javax.swing.JTextField txtQtdEstoque;
     // End of variables declaration//GEN-END:variables
@@ -443,10 +486,12 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         cbEstocavel.setEnabled(valor);
         txtQtd.setEditable(valor);
         txtQtdEstoque.setEditable(valor);
+        txtPreco.setEditable(valor);
     }
 
     final ProdutoBeans capturaBeans() {
 
+        produtoBeans.setCodigo(Integer.parseInt(produtoController.controleDeCodigo()));
         produtoBeans.setDescricao(txaDescricao.getText());
         produtoBeans.setDataCad(txtData.getText());
         produtoBeans.setEstocavel((cbEstocavel.getSelectedItem().toString().charAt(0)));
@@ -471,6 +516,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         txtQtd.setText("");
         txtQtdEstoque.setText("");
         txtData.setText("");
+        txtPreco.setText("");
     }
 
     final void limpaNovo() {
@@ -480,6 +526,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         cbAvisa.setSelectedIndex(0);
         txtQtd.setText("");
         txtQtdEstoque.setText("");
+        txtPreco.setText("");
 
     }
 
