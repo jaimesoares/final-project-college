@@ -29,14 +29,14 @@ public class EntregaPedidoModel {
                     + "  t.`tprd_id`,\n"
                     + "  t.`tprd_descr`,\n"
                     + "  p.`prd_prod`,\n"
-                    + "  p.`prd_descr`,\n"
-                    + "  c.`tprc_preco` \n"
+                    + "  p.`prd_descr`\n"
+                    //+ "  c.`tprc_preco` \n"
                     + "FROM\n"
                     + "  `pizzaria`.`tipo_prod` t \n"
                     + "  JOIN `pizzaria`.`produtos` p \n"
                     + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
-                    + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
-                    + "    ON c.tprc_cod_prod = p.prd_prod \n"
+                   // + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
+                    //+ "    ON c.tprc_cod_prod = p.prd_prod \n"
                     + "WHERE p.`prd_descr` like '%" + pesquisa + "%' || t.`tprd_descr` LIKE '%" + pesquisa + "%' ;";
 
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
@@ -45,7 +45,7 @@ public class EntregaPedidoModel {
                 ProdutoBeans novo = new ProdutoBeans();
                 novo.setCodigo(rs.getInt("prd_prod"));
                 novo.setDescricao(rs.getString("prd_descr"));
-                novo.getPrecoProduto().setPreco(rs.getDouble("tprc_preco"));
+                novo.getPrecoProduto().setPreco(valorDoItem(rs.getInt("prd_prod")));
                 novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
                 novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
                 listaDeItens.add(novo);
@@ -59,7 +59,7 @@ public class EntregaPedidoModel {
         try {
 
 //                    
-            String SQLPesquisa = "select * from tab_precos_venda where tprc_cod_prod = ?";
+            String SQLPesquisa = "select * from tab_precos_venda where tprc_cod_prod = ? order by `tprc_vigencia` DESC";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             pstmt.setInt(1, codigoProduto);
 

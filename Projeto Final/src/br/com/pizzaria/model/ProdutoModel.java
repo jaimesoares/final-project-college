@@ -19,14 +19,14 @@ public class ProdutoModel {
 
     public String proximoProduto() {
         try {
-            String SQLSelection = "SELECT * FROM produtos order by car_cod desc limit 1";
+            String SQLSelection = "SELECT * FROM produtos order by prd_prod desc limit 1";
 
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 return (Integer.parseInt(rs.getString("prd_prod")) + 1) + "";
             } else {
-                String SQLResetIncrement = "alter table cardapio auto_increment = 1";
+                String SQLResetIncrement = "alter table produtos auto_increment = 1";
                 PreparedStatement pstmIncrement = ConectaBanco.getConnection().prepareStatement(SQLResetIncrement);
                 pstmIncrement.execute();
                 ConectaBanco.getConnection().commit();
@@ -95,7 +95,27 @@ public class ProdutoModel {
         ProdutoBeans produtoBeans = new ProdutoBeans();
 
         try {
-            String SQLSelection = "select * from produtos where prd_prod = ?;";
+            //String SQLSelection = "select * from produtos where prd_prod = ?;";
+            String SQLSelection = "select \n"
+                    + "p.`prd_prod`,\n"
+                    + "  p.`prd_descr`,\n"
+                    + "  p.`prd_id_fornec`,\n"
+                    + "  p.`prd_qtd_min_estoq`,\n"
+                    + "  p.`prd_stt_avisa_estoq_min`,\n"
+                    + "  p.`prd_vlr_compra`,\n"
+                    + "  p.`prd_tipo_prod`,\n"
+                    + "  p.`prd_qtd_saldo_estoq`,\n"
+                    + "  p.`prod_data_cadastro`,\n"
+                    + "  p.`prod_estocavel`,"
+                    + "  v.`tprc_preco` \n"
+                    + "from\n"
+                    + "  `pizzaria`.`tab_precos_venda` v \n"
+                    + "  join `produtos` p \n"
+                    + "    on v.`tprc_cod_prod` = p.`prd_prod` \n"
+                    + "where p.`prd_prod` = ? \n"
+                    + "order by v.`tprc_vigencia` desc \n"
+                    + "limit 1 ;\n"
+                    + "";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
@@ -124,6 +144,7 @@ public class ProdutoModel {
                 produtoBeans.setAvisaEstoqueMinimo(rs.getString("prd_stt_avisa_estoq_min").charAt(0));
                 produtoBeans.setQtdMinima(rs.getDouble("prd_qtd_min_estoq"));
                 produtoBeans.setCodigo(rs.getInt("prd_prod"));
+                produtoBeans.getPrecoProduto().setPreco(rs.getDouble("tprc_preco"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
