@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class FornecedorModel {
 
     }
 
-    public void cadastrarCliente(ClienteBeans clienteBeans) {
+    public void cadastrarCliente(ClienteBean clienteBeans) {
         try {
             String SQLInsertion = "INSERT INTO `cliente`(`cli_nome`,`cli_rua`,`cli_bairro`,"
                     + "`cli_telefone`,`cli_datacad`)"
@@ -75,9 +75,9 @@ public class FornecedorModel {
         }
     }
 
-    public ClienteBeans preencherCampos(int codigo) {
+    public ClienteBean preencherCampos(int codigo) {
 
-        ClienteBeans clienteBeans = new ClienteBeans();
+        ClienteBean clienteBeans = new ClienteBean();
 
         try {
             String SQLSelection = "select * from cliente where cli_cod = ?;";
@@ -99,7 +99,7 @@ public class FornecedorModel {
         return clienteBeans;
     }
 
-    public void editarCliente(ClienteBeans clienteBeans) {
+    public void editarCliente(ClienteBean clienteBeans) {
         try {
             String SQLUpdate = "UPDATE `cliente` SET `cli_nome` = ?,`cli_rua` = ?,"
                     + "`cli_bairro` = ?,`cli_telefone` = ?"

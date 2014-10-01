@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ProdutoBeans;
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.controller.PrecoProdutoController;
 import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.VerificarData;
@@ -14,19 +14,19 @@ import javax.swing.table.DefaultTableModel;
 
 public class ProdutoView extends javax.swing.JInternalFrame {
 
-    ProdutoBeans produtoBeans;
+    ProdutoBean produtoBeans;
     ProdutoController produtoController;
     DefaultTableModel modeloTabela;
     DecimalFormat formatoDecimal;
-    List<TipoProdutoBeans> listaTipoProd;
-    ComboBoxModel<TipoProdutoBeans> modeloTipoProd;
+    List<TipoProdutoBean> listaTipoProd;
+    ComboBoxModel<TipoProdutoBean> modeloTipoProd;
     PrecoProdutoController precoProdutoController;
 
     public ProdutoView() {
         initComponents();
         modeloTabela = (DefaultTableModel) tblProduto.getModel();
         habilitarCampos(false);
-        produtoBeans = new ProdutoBeans();
+        produtoBeans = new ProdutoBean();
         produtoController = new ProdutoController();
         formatoDecimal = new DecimalFormat("0.00");
         modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
@@ -489,7 +489,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         txtPreco.setEditable(valor);
     }
 
-    final ProdutoBeans capturaBeans() {
+    final ProdutoBean capturaBeans() {
 
         produtoBeans.setCodigo(Integer.parseInt(produtoController.controleDeCodigo()));
         produtoBeans.setDescricao(txaDescricao.getText());
@@ -503,7 +503,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
             produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
         }
         if (cbTipo.getSelectedIndex() != 0) {
-            produtoBeans.setTipoProduto((TipoProdutoBeans) cbTipo.getSelectedItem());
+            produtoBeans.setTipoProduto((TipoProdutoBean) cbTipo.getSelectedItem());
         }
         return produtoBeans;
     }
@@ -533,7 +533,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     public void populaTipoProduto() {
         listaTipoProd = new ArrayList<>();
         produtoController.controleListaProduto(listaTipoProd);
-        for (TipoProdutoBeans tipoProdutoBeans : listaTipoProd) {
+        for (TipoProdutoBean tipoProdutoBeans : listaTipoProd) {
             cbTipo.addItem(tipoProdutoBeans);
         }
     }

@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +45,7 @@ public class TipoProdutoModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                TipoProdutoBeans novo = new TipoProdutoBeans();
+                TipoProdutoBean novo = new TipoProdutoBean();
                 novo.setCodigo(rs.getInt("tprd_id"));
                 novo.setDescricao(rs.getString("tprd_descr"));
                 modelo.addElement(novo);
@@ -55,7 +55,7 @@ public class TipoProdutoModel {
         }
     }
 
-    public void editarTipoProduto(TipoProdutoBeans tipoProdutoBeans) {
+    public void editarTipoProduto(TipoProdutoBean tipoProdutoBeans) {
 
         String SQLUpdate = "delete from `pizzaria`.`tipo_prod`"
                 + "where `tprd_id` = ?;";

@@ -1,6 +1,6 @@
 package br.com.pizzaria.beans;
 
-public class UsuarioBeans {
+public class UsuarioBean {
 
     private int codigoFuncionario;
     private String login;

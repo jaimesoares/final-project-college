@@ -1,19 +1,19 @@
 package br.com.pizzaria.beans;
 
-public class PrecoProdutoBeans {
+public class PrecoProdutoBean {
 
-    private ProdutoBeans produtoBeans;
+    private ProdutoBean produtoBeans;
     private String dataVigencia;
     private double preco;
 
-    public ProdutoBeans getProdutoBeans() {
+    public ProdutoBean getProdutoBeans() {
         return produtoBeans;
     }
 
     /**
      * @param produtoBeans
      */
-    public void setProdutoBeans(ProdutoBeans produtoBeans) {
+    public void setProdutoBeans(ProdutoBean produtoBeans) {
         this.produtoBeans = produtoBeans;
     }
 
@@ -43,7 +43,7 @@ public class PrecoProdutoBeans {
         this.preco = preco;
     }
     
-    public ProdutoBeans toSting(){
+    public ProdutoBean toSting(){
         return this.produtoBeans;
     }
     

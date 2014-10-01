@@ -1,8 +1,8 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.CargoBeans;
-import br.com.pizzaria.beans.CepBeans;
-import br.com.pizzaria.beans.FuncionarioBeans;
+import br.com.pizzaria.beans.CargoBean;
+import br.com.pizzaria.beans.CepBean;
+import br.com.pizzaria.beans.FuncionarioBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -19,7 +19,7 @@ public class FuncionarioModel {
 
     }
 
-    public boolean cadastrarFuncionario(FuncionarioBeans funcionarioBeans) {
+    public boolean cadastrarFuncionario(FuncionarioBean funcionarioBeans) {
         try {
             String SQLInsertion = "insert into `pizzaria`.`funcionario`"
                     + "(`fun_nome`,"
@@ -116,7 +116,7 @@ public class FuncionarioModel {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                FuncionarioBeans novo = new FuncionarioBeans();
+                FuncionarioBean novo = new FuncionarioBean();
                 novo.setCodigo(rs.getInt("fun_codigo"));
                 
                 novo.setNome(rs.getString("fun_nome"));
@@ -128,9 +128,9 @@ public class FuncionarioModel {
         }
     }
 
-    public FuncionarioBeans preencherCampos(int codigo) {
+    public FuncionarioBean preencherCampos(int codigo) {
 
-        FuncionarioBeans funcionarioBeans = new FuncionarioBeans();
+        FuncionarioBean funcionarioBeans = new FuncionarioBean();
 
         try {
             String SQLSelection = "select * from funcionario where fun_codigo = ?;";
@@ -162,7 +162,7 @@ public class FuncionarioModel {
                     ResultSet rsCargo = pstmCargo.executeQuery();
 
                     if (rsCargo.next()) {
-                        CargoBeans novo = new CargoBeans();
+                        CargoBean novo = new CargoBean();
                         novo.setCodigo(rsCargo.getInt("crg_id_cargo"));
                         novo.setDescricao(rsCargo.getString("crg_descr"));
                         funcionarioBeans.setCargo(novo);
@@ -186,7 +186,7 @@ public class FuncionarioModel {
         return funcionarioBeans;
     }
 
-    public boolean editarFuncionario(FuncionarioBeans funcionarioBeans) {
+    public boolean editarFuncionario(FuncionarioBean funcionarioBeans) {
         try {
             String SQLUpdate = "update `pizzaria`.`funcionario`\n"
                     + "set `fun_nome` = ?,\n"
@@ -241,7 +241,7 @@ public class FuncionarioModel {
         }
     }
 
-    public void populaListaCargo(List<CargoBeans> lista) {
+    public void populaListaCargo(List<CargoBean> lista) {
 
         String SQLSelection = "select * from cargo;";
 
@@ -250,7 +250,7 @@ public class FuncionarioModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                CargoBeans novo = new CargoBeans();
+                CargoBean novo = new CargoBean();
                 novo.setCodigo(rs.getInt("crg_id_cargo"));
                 novo.setDescricao(rs.getString("crg_descr"));
                 lista.add(novo);
@@ -260,8 +260,8 @@ public class FuncionarioModel {
         }
     }
 
-    public CepBeans populaCamposCep(String cep) {
-        CepBeans cepBeans = new CepBeans();
+    public CepBean populaCamposCep(String cep) {
+        CepBean cepBeans = new CepBean();
         String SQLSelection = "select "
                 + "c.`cep_cod`,"
                 + "c.`cep_ender`,"

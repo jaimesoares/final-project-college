@@ -1,8 +1,8 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.PrecoProdutoBeans;
-import br.com.pizzaria.beans.ProdutoBeans;
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.PrecoProdutoBean;
+import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.controller.PrecoProdutoController;
 import br.com.pizzaria.controller.ProdutoController;
 import java.text.DecimalFormat;
@@ -14,14 +14,14 @@ import javax.swing.table.DefaultTableModel;
 
 public final class PrecoProdutoView extends javax.swing.JInternalFrame {
 
-    List<ProdutoBeans> listaProduto;
+    List<ProdutoBean> listaProduto;
     PrecoProdutoController precoProdutoController;
     DefaultListModel modeloListaProd;
-    ComboBoxModel<PrecoProdutoBeans> modeloComboProd;
+    ComboBoxModel<PrecoProdutoBean> modeloComboProd;
     DefaultTableModel modeloTabelaPrecoProd;
     DecimalFormat decimalFormato;
-    ComboBoxModel<TipoProdutoBeans> modeloTipoProd;
-    List<TipoProdutoBeans> listaTipoProd;
+    ComboBoxModel<TipoProdutoBean> modeloTipoProd;
+    List<TipoProdutoBean> listaTipoProd;
     ProdutoController produtoController;
 
     public PrecoProdutoView() {
@@ -185,13 +185,15 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-
-        if (precoProdutoController.verificarDados(((ProdutoBeans) modeloComboProd.getSelectedItem()).getCodigo(), txtPreco.getText())) {
+        if (precoProdutoController.controlePrecoData(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), txtPreco.getText().toString().replace(",", "."))) {
+        } else if (precoProdutoController.verificarDados(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), txtPreco.getText())) {
             modeloListaProd.removeAllElements();
             modeloTabelaPrecoProd.setNumRows(0);
-            precoProdutoController.controlePesquisaPrecoProdutos(((ProdutoBeans) modeloComboProd.getSelectedItem()).getCodigo(), modeloTabelaPrecoProd);
+            precoProdutoController.controlePesquisaPrecoProdutos(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), modeloTabelaPrecoProd);
             txtPreco.setText("");
         }
+
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -209,7 +211,7 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
     private void cbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdutoActionPerformed
         if (cbProduto.getSelectedIndex() >= 0) {
             modeloTabelaPrecoProd.setNumRows(0);
-            precoProdutoController.controlePesquisaPrecoProdutos(((ProdutoBeans) modeloComboProd.getSelectedItem()).getCodigo(), modeloTabelaPrecoProd);
+            precoProdutoController.controlePesquisaPrecoProdutos(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), modeloTabelaPrecoProd);
         }
     }//GEN-LAST:event_cbProdutoActionPerformed
 
@@ -246,8 +248,8 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
 
     public void populaListaProduto() {
         listaProduto = new ArrayList<>();
-        precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBeans) modeloTipoProd.getSelectedItem()).getCodigo());
-        for (ProdutoBeans prdutoBeans : listaProduto) {
+        precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
+        for (ProdutoBean prdutoBeans : listaProduto) {
             cbProduto.addItem(prdutoBeans);
         }
     }
@@ -255,7 +257,7 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
     public void populaTipoProduto() {
         listaTipoProd = new ArrayList<>();
         produtoController.controleListaProduto(listaTipoProd);
-        for (TipoProdutoBeans tipoProdutoBeans : listaTipoProd) {
+        for (TipoProdutoBean tipoProdutoBeans : listaTipoProd) {
             cbTipo.addItem(tipoProdutoBeans);
         }
     }

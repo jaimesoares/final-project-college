@@ -5,8 +5,8 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.PedidoBean;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.PedidoController;
 import java.text.DecimalFormat;
@@ -28,11 +28,11 @@ import javax.swing.text.MaskFormatter;
 public class PedidoView extends javax.swing.JInternalFrame {
 
     MaskFormatter formatoTelefone;
-    ClienteBeans clienteBeans;
+    ClienteBean clienteBeans;
     ClienteController clienteController;
     List<String> listaDeClientes;
     private List<String> listaDeItens;
-    PedidoBeans pedidoBeans;
+    PedidoBean pedidoBeans;
     PedidoController pedidoController;
     DefaultTableModel modeloDeTabela;
     DecimalFormat decimalFormato;
@@ -52,11 +52,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
         txtCodigoItem.setEditable(false);
         btnFinalizar.setEnabled(false);
         clienteController = new ClienteController();
-        clienteBeans = new ClienteBeans();
+        clienteBeans = new ClienteBean();
         listaDeClientes = new ArrayList<>();
         listaDeItens = new ArrayList<>();
         pnlPai.setEnabledAt(1, false);
-        pedidoBeans = new PedidoBeans();
+        pedidoBeans = new PedidoBean();
         pedidoController = new PedidoController();
         modeloDeTabela = (DefaultTableModel) tblPedido.getModel();
         decimalFormato = new DecimalFormat("0.00");
@@ -637,7 +637,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         limpaFinaliza();
         limpaTudo();
         CozinhaView.populaTabela();
-        pedidoBeans = new PedidoBeans();
+        pedidoBeans = new PedidoBean();
         
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -773,7 +773,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         txfTelefone.setText("");
     }
 
-    final ClienteBeans populaClienteBeans() {
+    final ClienteBean populaClienteBeans() {
         clienteBeans.setNome(txtNome.getText());
         clienteBeans.setRua(txtRua.getText());
         clienteBeans.setBairro(txtBairro.getText());

@@ -1,8 +1,8 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.PedidoBeans;
-import br.com.pizzaria.beans.ProdutoBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.PedidoBean;
+import br.com.pizzaria.beans.ProdutoBean;
 import br.com.pizzaria.model.BalcaoPedidoModel;
 import br.com.pizzaria.model.ClienteModel;
 import java.util.List;
@@ -19,7 +19,7 @@ public class BalcaoPedidoController {
         clienteModel = new ClienteModel();
     }
 
-   public void controleDeItens(String pesquisa, List<ProdutoBeans> listaDeItens) {
+   public void controleDeItens(String pesquisa, List<ProdutoBean> listaDeItens) {
         balcaoPedidoModel.pesquisaItens(pesquisa, listaDeItens);
     }
 
@@ -64,11 +64,11 @@ public class BalcaoPedidoController {
         return true;
     }
 
-    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
+    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBean pedidobeans) {
         balcaoPedidoModel.cadastrarPedido(codigoCliente, codigoFuncioario, total, tamanhoTabela, pedidobeans);
     }
 
-    public void controlePesquisa(String pesquisa, String tipo, List<ClienteBeans> lista) {
+    public void controlePesquisa(String pesquisa, String tipo, List<ClienteBean> lista) {
         clienteModel.procuraCliente(pesquisa, tipo, lista);
     }
 }

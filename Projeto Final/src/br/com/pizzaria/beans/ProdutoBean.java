@@ -1,20 +1,20 @@
 package br.com.pizzaria.beans;
 
-public class ProdutoBeans {
+public class ProdutoBean {
 
     private int codigo;
     private String descricao;
-    private TipoProdutoBeans tipoProduto;
+    private TipoProdutoBean tipoProduto;
     private double qtdMinima;
     private char avisaEstoqueMinimo;
     private double qtdSaldoEstoque;
     private char estocavel;
     private String dataCad;
-    private PrecoProdutoBeans precoProduto;
+    private PrecoProdutoBean precoProduto;
 
-    public ProdutoBeans() {
-        tipoProduto = new TipoProdutoBeans();
-        precoProduto = new PrecoProdutoBeans();
+    public ProdutoBean() {
+        tipoProduto = new TipoProdutoBean();
+        precoProduto = new PrecoProdutoBean();
     }
 
     /**
@@ -48,14 +48,14 @@ public class ProdutoBeans {
     /**
      * @return the tipoProduto
      */
-    public TipoProdutoBeans getTipoProduto() {
+    public TipoProdutoBean getTipoProduto() {
         return tipoProduto;
     }
 
     /**
      * @param tipoProduto the tipoProduto to set
      */
-    public void setTipoProduto(TipoProdutoBeans tipoProduto) {
+    public void setTipoProduto(TipoProdutoBean tipoProduto) {
         this.tipoProduto = tipoProduto;
     }
 
@@ -137,14 +137,14 @@ public class ProdutoBeans {
     /**
      * @return the precoProduto
      */
-    public PrecoProdutoBeans getPrecoProduto() {
+    public PrecoProdutoBean getPrecoProduto() {
         return precoProduto;
     }
 
     /**
      * @param precoProduto the precoProduto to set
      */
-    public void setPrecoProduto(PrecoProdutoBeans precoProduto) {
+    public void setPrecoProduto(PrecoProdutoBean precoProduto) {
         this.precoProduto = precoProduto;
     }
 

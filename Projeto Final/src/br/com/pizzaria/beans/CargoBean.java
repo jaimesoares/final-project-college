@@ -1,11 +1,11 @@
 package br.com.pizzaria.beans;
 
-public class CargoBeans {
+public class CargoBean {
 
     private int codigo;
     private String descricao;    
 
-    public CargoBeans() {
+    public CargoBean() {
 
     }
 

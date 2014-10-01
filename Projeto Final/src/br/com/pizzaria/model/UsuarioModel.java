@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.UsuarioBeans;
+import br.com.pizzaria.beans.UsuarioBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,9 +14,9 @@ public class UsuarioModel {
 
     }
 
-    public UsuarioBeans selectUser(UsuarioBeans user) {
+    public UsuarioBean selectUser(UsuarioBean user) {
 
-        UsuarioBeans usuarioBeans = new UsuarioBeans();
+        UsuarioBean usuarioBeans = new UsuarioBean();
 
         try {
             String SQLSelection = "SELECT * FROM usuario WHERE usu_login = '" + user.getLogin() + "';";
@@ -35,9 +35,9 @@ public class UsuarioModel {
         return usuarioBeans;
     }
     
-    public UsuarioBeans preencherCampos(int codigo) {
+    public UsuarioBean preencherCampos(int codigo) {
 
-        UsuarioBeans usuarioBeans = new UsuarioBeans();
+        UsuarioBean usuarioBeans = new UsuarioBean();
 
         try {
             String SQLSelection = "select * from usuario where usu_fun_cod = ?;";
@@ -56,7 +56,7 @@ public class UsuarioModel {
         return usuarioBeans;
     }
     
-    public void cadastrarUsuario(UsuarioBeans usuarioBeans) {
+    public void cadastrarUsuario(UsuarioBean usuarioBeans) {
         try {
             String SQLInsertion = "INSERT INTO `usuario`(`usu_login`,`usu_senha`,`usu_fun_cod`)"
                     + "VALUES (?,?,?);";
@@ -76,7 +76,7 @@ public class UsuarioModel {
 
     }
     
-    public void editarUsuario(UsuarioBeans usuarioBeans) {
+    public void editarUsuario(UsuarioBean usuarioBeans) {
         try {
             String SQLUpdate = "UPDATE `usuario` SET `usu_login` = ?,`usu_senha` = ?"
                     + "WHERE `usu_fun_cod` = ?;";
@@ -99,10 +99,10 @@ public class UsuarioModel {
 
     /*public static void main(String args[]){
      UsuarioModel user =new UsuarioModel();
-     UsuarioBeans beans = new UsuarioBeans();
+     UsuarioBean beans = new UsuarioBean();
      beans.setSenha("123");
      beans.setUsuario("jaime");
-     UsuarioBeans user2 = user.selectUser(beans);
+     UsuarioBean user2 = user.selectUser(beans);
      System.out.print(user2.getCodigo());
      }*/
 }

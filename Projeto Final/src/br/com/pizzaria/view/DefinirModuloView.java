@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ModuloBeans;
-import br.com.pizzaria.beans.UsuarioBeans;
+import br.com.pizzaria.beans.ModuloBean;
+import br.com.pizzaria.beans.UsuarioBean;
 import br.com.pizzaria.controller.DefinirModuloController;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.swing.DefaultListModel;
 
 public final class DefinirModuloView extends javax.swing.JInternalFrame {
     
-    List<UsuarioBeans> listaUsuario;
-    List<ModuloBeans> listaModulo;
+    List<UsuarioBean> listaUsuario;
+    List<ModuloBean> listaModulo;
     DefinirModuloController moduloController;
     DefaultListModel modeloLista;
 
@@ -142,7 +142,7 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
     public void populaUsuario(){
         listaUsuario = new ArrayList<>();
         moduloController.controleUsuario(listaUsuario);
-        for(UsuarioBeans usuarioBeans : listaUsuario){
+        for(UsuarioBean usuarioBeans : listaUsuario){
             cbUsuario.addItem(usuarioBeans.getLogin());
         }
     }
@@ -150,7 +150,7 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
     public void populaModulo(){
         listaModulo = new ArrayList<>();
         moduloController.controleModulo(listaModulo);
-        for(ModuloBeans moduloBeans : listaModulo){
+        for(ModuloBean moduloBeans : listaModulo){
             cbModulo.addItem(moduloBeans.getNome());
         }
     }

@@ -1,7 +1,7 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.CepBeans;
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.CepBean;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.util.VerificarData;
 import javax.swing.ImageIcon;
@@ -16,7 +16,7 @@ public class ClienteController {
         clienteModel = new ClienteModel();
     }
 
-    public boolean verificarDados(ClienteBeans cliente, String cep, String numero, String nascimento) {
+    public boolean verificarDados(ClienteBean cliente, String cep, String numero, String nascimento) {
         if (cliente.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'NOME' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -81,11 +81,11 @@ public class ClienteController {
 //    public void controlePesquisa(String pesquisa, List<String> lista) {
 //        clienteModel.procuraCliente(pesquisa, lista);
 //    }
-    public ClienteBeans controlePreenchimento(int codigo) {
+    public ClienteBean controlePreenchimento(int codigo) {
         return clienteModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(ClienteBeans cliente, String cep, String numero, String nascimento) {
+    public boolean verificarDadosParaEditar(ClienteBean cliente, String cep, String numero, String nascimento) {
         if (cliente.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo \"NOME\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -132,11 +132,11 @@ public class ClienteController {
         return true;
     }
 
-    public CepBeans controleCep(String cep) {
+    public CepBean controleCep(String cep) {
         return clienteModel.populaCamposCep(cep);
     }
 
-    public boolean controleCepValido(CepBeans cepBeans) {
+    public boolean controleCepValido(CepBean cepBeans) {
         if (cepBeans.getCep() == null) {
             JOptionPane.showMessageDialog(null, "CEP Inválido", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;

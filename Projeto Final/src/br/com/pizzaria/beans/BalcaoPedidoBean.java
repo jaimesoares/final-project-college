@@ -3,7 +3,7 @@ package br.com.pizzaria.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntregaPedidoBeans {
+public class BalcaoPedidoBean {
     
     private int codigoPedido;
     private int codigoCliente;
@@ -11,16 +11,14 @@ public class EntregaPedidoBeans {
     private int codigoEntregador;
     private String data;
     private String hora;
-    private double valorTotalPedido;
+    private double valor;
     private String status;
     private List<Integer> codProduto;
     private List<Integer> quantidade;
-    private List<ProdutoBeans> produto;
 
-    public EntregaPedidoBeans() {
+    public BalcaoPedidoBean() {
         codProduto = new ArrayList<>();
         quantidade = new ArrayList<>();
-        produto = new ArrayList<>();
     }
 
     public int getCodProduto(int posicao) {
@@ -32,11 +30,11 @@ public class EntregaPedidoBeans {
     }
 
     public int getQuantidade(int posicao) {
-        return getQuantidade().get(posicao);
+        return quantidade.get(posicao);
     }
 
     public void setQuantidade(int quantidade) {
-        this.getQuantidade().add(quantidade);
+        this.quantidade.add(quantidade);
     }
 
     /**
@@ -124,17 +122,17 @@ public class EntregaPedidoBeans {
     }
 
     /**
-     * @return the valorTotalPedido
+     * @return the valor
      */
-    public double getValorTotalPedido() {
-        return valorTotalPedido;
+    public double getValor() {
+        return valor;
     }
 
     /**
-     * @param valorTotalPedido the valorTotalPedido to set
+     * @param valor the valor to set
      */
-    public void setValorTotalPedido(double valorTotalPedido) {
-        this.valorTotalPedido = valorTotalPedido;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     /**
@@ -154,34 +152,6 @@ public class EntregaPedidoBeans {
     @Override
     public String toString(){
         return codigoPedido+"";
-    }
-
-    /**
-     * @return the quantidade
-     */
-    public List<Integer> getQuantidade() {
-        return quantidade;
-    }
-
-    /**
-     * @param quantidade the quantidade to set
-     */
-    public void setQuantidade(List<Integer> quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    /**
-     * @return the produto
-     */
-    public List<ProdutoBeans> getProduto() {
-        return produto;
-    }
-
-    /**
-     * @param produto the produto to set
-     */
-    public void setProduto(List<ProdutoBeans> produto) {
-        this.produto = produto;
     }
     
 }

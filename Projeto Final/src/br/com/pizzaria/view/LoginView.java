@@ -5,7 +5,7 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.UsuarioBeans;
+import br.com.pizzaria.beans.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.Relogio;
@@ -21,14 +21,14 @@ import javax.swing.JOptionPane;
 public class LoginView extends javax.swing.JInternalFrame {
 
     private ThreadTempo thread;
-    private final UsuarioBeans momentUser;
+    private final UsuarioBean momentUser;
     private final Som play;
     private final UsuarioController usuarioController;
 
     public LoginView() {
         initComponents();
         lblMensagem.setVisible(false);
-        momentUser = new UsuarioBeans();
+        momentUser = new UsuarioBean();
         usuarioController = new UsuarioController();
         play = new Som();
         //this.login();
@@ -247,7 +247,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         populaUsuarioBeans();
         if (usuarioController.verificaDados(momentUser)) {
 
-            UsuarioBeans usuarioBeans = usuarioController.controlePesquisaLogin(momentUser);
+            UsuarioBean usuarioBeans = usuarioController.controlePesquisaLogin(momentUser);
 
             if (usuarioBeans.getCodigoFuncionario() == 0) {
                 lblMensagem.setText("Mensagem: Usuário não cadastrado!");

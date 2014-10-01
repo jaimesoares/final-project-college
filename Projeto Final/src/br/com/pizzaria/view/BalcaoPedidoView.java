@@ -5,9 +5,9 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.PedidoBeans;
-import br.com.pizzaria.beans.ProdutoBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.PedidoBean;
+import br.com.pizzaria.beans.ProdutoBean;
 import br.com.pizzaria.controller.BalcaoPedidoController;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.EntregaPedidoController;
@@ -29,11 +29,11 @@ import javax.swing.text.MaskFormatter;
 public class BalcaoPedidoView extends javax.swing.JInternalFrame {
 
     MaskFormatter formatoTelefone;
-    ClienteBeans clienteBeans;
+    ClienteBean clienteBeans;
     ClienteController clienteController;
     List<String> listaDeClientes;
-    private List<ProdutoBeans> listaDeItens;
-    PedidoBeans pedidoBeans;
+    private List<ProdutoBean> listaDeItens;
+    PedidoBean pedidoBeans;
     BalcaoPedidoController balcaoPedidoController;
     DefaultTableModel modeloDeTabela;
     DecimalFormat decimalFormato;
@@ -52,10 +52,10 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
         txtCodigoItem.setEditable(false);
         btnFinalizar.setEnabled(false);
         clienteController = new ClienteController();
-        clienteBeans = new ClienteBeans();
+        clienteBeans = new ClienteBean();
         listaDeClientes = new ArrayList<>();
         listaDeItens = new ArrayList<>();
-        pedidoBeans = new PedidoBeans();
+        pedidoBeans = new PedidoBean();
         balcaoPedidoController = new BalcaoPedidoController();
         modeloDeTabela = (DefaultTableModel) tblPedido.getModel();
         decimalFormato = new DecimalFormat("0.00");
@@ -406,13 +406,13 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
         cbSelecionar.removeAllItems();
         listaDeItens.clear();
         balcaoPedidoController.controleDeItens(txtItem.getText(), listaDeItens);
-        for (ProdutoBeans produtoBeans : listaDeItens) {
+        for (ProdutoBean produtoBeans : listaDeItens) {
             cbSelecionar.addItem(produtoBeans);
         }
     }//GEN-LAST:event_txtItemActionPerformed
 
     private void btnValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorActionPerformed
-        txtValor.setText(balcaoPedidoController.controleDeValor(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()) + "");
+        txtValor.setText(balcaoPedidoController.controleDeValor(((ProdutoBean)cbSelecionar.getSelectedItem()).getCodigo()) + "");
        // txtCodigoItem.setText(balcaoPedidoController.controleDeCodigo(cbSelecionar.getSelectedItem().toString()) + "");
     }//GEN-LAST:event_btnValorActionPerformed
 
@@ -429,9 +429,9 @@ public class BalcaoPedidoView extends javax.swing.JInternalFrame {
     private void btnAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaActionPerformed
         if (cbSelecionar.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Campo 'Selecionar' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-        } else if (balcaoPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), String.valueOf(((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo()), cbSelecionar.getSelectedItem().toString())) {
+        } else if (balcaoPedidoController.verificaItens(txtValor.getText(), txtQuantidade.getText(), String.valueOf(((ProdutoBean)cbSelecionar.getSelectedItem()).getCodigo()), cbSelecionar.getSelectedItem().toString())) {
             double subTotal = Double.parseDouble(txtValor.getText()) * Integer.parseInt(txtQuantidade.getText());
-            modeloDeTabela.addRow(new Object[]{((ProdutoBeans)cbSelecionar.getSelectedItem()).getCodigo(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
+            modeloDeTabela.addRow(new Object[]{((ProdutoBean)cbSelecionar.getSelectedItem()).getCodigo(), cbSelecionar.getSelectedItem(), txtValor.getText(), txtQuantidade.getText(), decimalFormato.format(subTotal).replace(",", ".")});
             limpaItens();
 
         }

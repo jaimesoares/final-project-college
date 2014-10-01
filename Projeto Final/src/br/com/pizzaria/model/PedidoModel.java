@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.beans.PedidoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import java.sql.PreparedStatement;
@@ -64,7 +64,7 @@ public class PedidoModel {
         return 0;
     }
 
-    public void cadastrarPedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
+    public void cadastrarPedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBean pedidobeans) {
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
@@ -115,7 +115,7 @@ public class PedidoModel {
         return codigo;
     }
     
-    public void cadastrarItens(int codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBeans pedidoBeans){
+    public void cadastrarItens(int codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBean pedidoBeans){
         for(int i=0; i< tamanhoTabela; i++){
             try {
                 String SQLInsertItens = "insert into item(item_ped_ent_cod, item_ped_fun_cod, item_ped_cli_cod, item_ped_cod, item_car_cod, item_quantidade)"

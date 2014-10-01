@@ -5,20 +5,20 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ModuloBeans;
+import br.com.pizzaria.beans.ModuloBean;
 import br.com.pizzaria.controller.ModuloController;
 import javax.swing.DefaultListModel;
 
 public class ModuloView extends javax.swing.JFrame {
 
-    ModuloBeans moduloBeans;
+    ModuloBean moduloBeans;
     ModuloController moduloController;
     DefaultListModel modelo;
 
     public ModuloView() {
         initComponents();
 
-        moduloBeans = new ModuloBeans();
+        moduloBeans = new ModuloBean();
         moduloController = new ModuloController();
         modelo = new DefaultListModel();
         carregaListaModulo();
@@ -139,7 +139,7 @@ public class ModuloView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeKeyPressed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        ModuloBeans novo = (ModuloBeans) lstModulo.getSelectedValue();
+        ModuloBean novo = (ModuloBean) lstModulo.getSelectedValue();
         moduloController.verificarDadosParaEditar(novo);
         modelo.removeAllElements();
         carregaListaModulo();
@@ -213,7 +213,7 @@ public class ModuloView extends javax.swing.JFrame {
         lstModulo.setModel(modelo);
     }
 
-    final ModuloBeans populaModuloBeans() {
+    final ModuloBean populaModuloBeans() {
         moduloBeans.setNome(txtNome.getText());
         moduloBeans.setTitulo(txtTitulo.getText());
 

@@ -1,7 +1,7 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.CargoBeans;
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.CargoBean;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.model.CargoModel;
 import br.com.pizzaria.model.ClienteModel;
 import javax.swing.DefaultListModel;
@@ -31,7 +31,7 @@ public class CargoController {
         cargoModel.populaListaCargo(modelo);
     }
 
-    public boolean verificarDadosParaEditar(CargoBeans cargo) {
+    public boolean verificarDadosParaEditar(CargoBean cargo) {
         if (cargo.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo \"Descrição\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;

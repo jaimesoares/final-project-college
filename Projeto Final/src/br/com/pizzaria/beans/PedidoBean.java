@@ -3,7 +3,7 @@ package br.com.pizzaria.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PedidoBeans {
+public class PedidoBean {
     
     private int codigoPedido;
     private int codigoCliente;
@@ -17,9 +17,9 @@ public class PedidoBeans {
     private List<Integer> quantidade;
     private String obs;
     private double valorDesc;
-    private List<ItemPedidoBeans> itensPedido;
+    private List<ItemPedidoBean> itensPedido;
 
-    public PedidoBeans() {
+    public PedidoBean() {
         codProduto = new ArrayList<>();
         quantidade = new ArrayList<>();
         itensPedido = new ArrayList<>();
@@ -189,14 +189,14 @@ public class PedidoBeans {
     /**
      * @return the itensPedido
      */
-    public List<ItemPedidoBeans> getItensPedido() {
+    public List<ItemPedidoBean> getItensPedido() {
         return itensPedido;
     }
 
     /**
      * @param itensPedido the itensPedido to set
      */
-    public void setItensPedido(List<ItemPedidoBeans> itensPedido) {
+    public void setItensPedido(List<ItemPedidoBean> itensPedido) {
         this.itensPedido = itensPedido;
     }
     

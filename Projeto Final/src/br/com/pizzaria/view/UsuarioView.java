@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.FuncionarioBeans;
-import br.com.pizzaria.beans.UsuarioBeans;
+import br.com.pizzaria.beans.FuncionarioBean;
+import br.com.pizzaria.beans.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -11,12 +11,12 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
     UsuarioController usuarioController;
     DefaultTableModel modelo;
-    UsuarioBeans usuarioBeans;
+    UsuarioBean usuarioBeans;
 
     public UsuarioView() {
         initComponents();
         usuarioController = new UsuarioController();
-        usuarioBeans = new UsuarioBeans();
+        usuarioBeans = new UsuarioBean();
         modelo = (DefaultTableModel) tblFucnionario.getModel();
         populaListaFuncionario();
     }
@@ -212,7 +212,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblFucnionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFucnionarioMousePressed
-        usuarioBeans = usuarioController.controlePreenchimento(((FuncionarioBeans) modelo.getValueAt(tblFucnionario.getSelectedRow(), 0)).getCodigo());
+        usuarioBeans = usuarioController.controlePreenchimento(((FuncionarioBean) modelo.getValueAt(tblFucnionario.getSelectedRow(), 0)).getCodigo());
         txtLogin.setText(usuarioBeans.getLogin());
     }//GEN-LAST:event_tblFucnionarioMousePressed
 
@@ -334,10 +334,10 @@ public class UsuarioView extends javax.swing.JInternalFrame {
         pswSenhaConfirma.setEditable(valor);
     }
 
-    public UsuarioBeans populaUsuarioBeans() {
+    public UsuarioBean populaUsuarioBeans() {
         usuarioBeans.setSenha(new String(pswSenha.getPassword()));
         usuarioBeans.setLogin(txtLogin.getText());
-        usuarioBeans.setCodigoFuncionario(((FuncionarioBeans) modelo.getValueAt(tblFucnionario.getSelectedRow(), 0)).getCodigo());
+        usuarioBeans.setCodigoFuncionario(((FuncionarioBean) modelo.getValueAt(tblFucnionario.getSelectedRow(), 0)).getCodigo());
         return usuarioBeans;
     }
 

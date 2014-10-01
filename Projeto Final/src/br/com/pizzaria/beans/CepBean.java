@@ -1,6 +1,6 @@
 package br.com.pizzaria.beans;
 
-public class CepBeans {
+public class CepBean {
     private String endereco;
     private String cidade;
     private String bairro;

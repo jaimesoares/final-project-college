@@ -1,7 +1,7 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.PedidoBeans;
-import br.com.pizzaria.beans.ProdutoBeans;
+import br.com.pizzaria.beans.PedidoBean;
+import br.com.pizzaria.beans.ProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import br.com.pizzaria.util.GeneratorPDF;
@@ -23,7 +23,7 @@ public class EntregaPedidoModel {
     public EntregaPedidoModel() {
     }
 
-    public void pesquisaItens(String pesquisa, List<ProdutoBeans> listaDeItens) {
+    public void pesquisaItens(String pesquisa, List<ProdutoBean> listaDeItens) {
         try {
             String SQLPesquisa = "SELECT \n"
                     + "  t.`tprd_id`,\n"
@@ -42,7 +42,7 @@ public class EntregaPedidoModel {
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                ProdutoBeans novo = new ProdutoBeans();
+                ProdutoBean novo = new ProdutoBean();
                 novo.setCodigo(rs.getInt("prd_prod"));
                 novo.setDescricao(rs.getString("prd_descr"));
                 novo.getPrecoProduto().setPreco(valorDoItem(rs.getInt("prd_prod")));
@@ -89,7 +89,7 @@ public class EntregaPedidoModel {
         return 0;
     }
 
-    public void cadastrarPedido(/*int codigoCliente, String codigoFuncioario, String total, int tamanhoTabela,*/PedidoBeans pedidobeans) {
+    public void cadastrarPedido(/*int codigoCliente, String codigoFuncioario, String total, int tamanhoTabela,*/PedidoBean pedidobeans) {
 
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
@@ -159,7 +159,7 @@ public class EntregaPedidoModel {
         return codigo;
     }
 
-    public void cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBeans pedidoBeans) {
+    public void cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*//*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBean pedidoBeans) {
         DecimalFormat formatoDecimal = new DecimalFormat("0.00");
         List<String> cupom = new ArrayList<>();
         String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());

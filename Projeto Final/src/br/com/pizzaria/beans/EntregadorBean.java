@@ -1,6 +1,6 @@
 package br.com.pizzaria.beans;
 
-public class EntregadorBeans {
+public class EntregadorBean {
     
     private int codigo;
     private String nome;
@@ -8,7 +8,7 @@ public class EntregadorBeans {
     private String dataCad;
     private String permissao;
 
-    public EntregadorBeans() {        
+    public EntregadorBean() {        
         
     }
 

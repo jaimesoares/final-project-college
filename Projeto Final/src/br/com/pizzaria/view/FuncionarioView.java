@@ -1,8 +1,8 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CargoBeans;
-import br.com.pizzaria.beans.CepBeans;
-import br.com.pizzaria.beans.FuncionarioBeans;
+import br.com.pizzaria.beans.CargoBean;
+import br.com.pizzaria.beans.CepBean;
+import br.com.pizzaria.beans.FuncionarioBean;
 import br.com.pizzaria.controller.FuncionarioController;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificarData;
@@ -21,17 +21,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTelefone;
     MaskFormatter formatoNascimento;
     MaskFormatter formatoCEP;
-    FuncionarioBeans funcionarioBeans;
+    FuncionarioBean funcionarioBeans;
     FuncionarioController funcionarioController;
     DefaultTableModel modelo;
-    List<CargoBeans> listaCargo;
-    ComboBoxModel<CargoBeans> modeloCargos;
+    List<CargoBean> listaCargo;
+    ComboBoxModel<CargoBean> modeloCargos;
 
     public FuncionarioView() {
         initComponents();
 
         habilitarCampos(false);
-        funcionarioBeans = new FuncionarioBeans();
+        funcionarioBeans = new FuncionarioBean();
         funcionarioController = new FuncionarioController();
         modelo = (DefaultTableModel) tblFuncionario.getModel();
         modeloCargos = (ComboBoxModel) cbCargo.getModel();
@@ -785,10 +785,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     }
 
-    final FuncionarioBeans capturaBeans() {
+    final FuncionarioBean capturaBeans() {
         funcionarioBeans.setNome(txtNome.getText());
         if (cbCargo.getSelectedIndex() != 0) {
-            funcionarioBeans.setCargo(((CargoBeans) cbCargo.getSelectedItem()));
+            funcionarioBeans.setCargo(((CargoBean) cbCargo.getSelectedItem()));
         }
         funcionarioBeans.setPermissao(txtEstado.getText());
         funcionarioBeans.setDataCad(txtData.getText());
@@ -859,13 +859,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     public void populaCargo() {
         listaCargo = new ArrayList<>();
         funcionarioController.controleListaCargo(listaCargo);
-        for (CargoBeans cargoBeans : listaCargo) {
+        for (CargoBean cargoBeans : listaCargo) {
             cbCargo.addItem(cargoBeans);
         }
     }
 
     public void populaCamposCep() {
-        CepBeans cepBeans;
+        CepBean cepBeans;
 
         if (funcionarioController.controleCepValido(cepBeans = funcionarioController.controleCep(txfCEP.getText().replace("-", "")))) {
             txtBairro.setText(cepBeans.getBairro());

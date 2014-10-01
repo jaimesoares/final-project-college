@@ -1,10 +1,10 @@
 package br.com.pizzaria.beans;
 
-public class FuncionarioBeans {
+public class FuncionarioBean {
 
     private int codigo;
     private String nome;
-    private CargoBeans cargo;
+    private CargoBean cargo;
     private String permissao;
     private String dataCad;
     private String cep;
@@ -27,10 +27,10 @@ public class FuncionarioBeans {
     private String moto;
     private String placaMoto;
     private String cnh;
-    private UsuarioBeans usuarioBeans;
+    private UsuarioBean usuarioBeans;
 
-    public FuncionarioBeans() {
-        cargo = new CargoBeans();
+    public FuncionarioBean() {
+        cargo = new CargoBean();
     }
 
     public int getCodigo() {
@@ -49,11 +49,11 @@ public class FuncionarioBeans {
         this.nome = nome;
     }
 
-    public CargoBeans getCargo() {
+    public CargoBean getCargo() {
         return cargo;
     }
 
-    public void setCargo(CargoBeans cargo) {
+    public void setCargo(CargoBean cargo) {
         this.cargo = cargo;
     }
 
@@ -361,14 +361,14 @@ public class FuncionarioBeans {
     /**
      * @return the usuarioBeans
      */
-    public UsuarioBeans getUsuarioBeans() {
+    public UsuarioBean getUsuarioBeans() {
         return usuarioBeans;
     }
 
     /**
      * @param usuarioBeans the usuarioBeans to set
      */
-    public void setUsuarioBeans(UsuarioBeans usuarioBeans) {
+    public void setUsuarioBeans(UsuarioBean usuarioBeans) {
         this.usuarioBeans = usuarioBeans;
     }
 

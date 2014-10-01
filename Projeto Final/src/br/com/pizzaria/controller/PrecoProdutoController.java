@@ -1,8 +1,8 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.ModuloBeans;
-import br.com.pizzaria.beans.ProdutoBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.ModuloBean;
+import br.com.pizzaria.beans.ProdutoBean;
 import br.com.pizzaria.model.PrecoProdutoModel;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -30,16 +30,24 @@ public class PrecoProdutoController {
             return false;
         }
         
+//        if(!precoProdutoModel.pesquisaPrecoData(codigo)){
+//            return false;
+//        }
+        
         precoProdutoModel.cadastrarPrecoProduto(codigo, preco);
         return true;
     }
     
-    public void controleListaProduto(List<ProdutoBeans> lista, int tipoProduto) {
+    public void controleListaProduto(List<ProdutoBean> lista, int tipoProduto) {
         precoProdutoModel.populaProduto(lista, tipoProduto);
     }
     
     public void controlePesquisaPrecoProdutos(int codigo, DefaultTableModel modelo) {
         precoProdutoModel.pesquisaPrecoProduto(codigo, modelo);
+    }
+    
+    public boolean controlePrecoData(int codigo, String precoNovo) {
+        return precoProdutoModel.pesquisaPrecoData(codigo, precoNovo);
     }
     
 }

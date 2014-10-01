@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.CargoBeans;
+import br.com.pizzaria.beans.CargoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +45,7 @@ public class CargoModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                CargoBeans novo = new CargoBeans();
+                CargoBean novo = new CargoBean();
                 novo.setCodigo(rs.getInt("crg_id_cargo"));
                 novo.setDescricao(rs.getString("crg_descr"));
                 modelo.addElement(novo);
@@ -55,7 +55,7 @@ public class CargoModel {
         }
     }
 
-    public void editarCargo(CargoBeans cargoBeans) {
+    public void editarCargo(CargoBean cargoBeans) {
 
         String SQLUpdate = "delete from `pizzaria`.`cargo`"
                 + "where `crg_id_cargo` = ?;";

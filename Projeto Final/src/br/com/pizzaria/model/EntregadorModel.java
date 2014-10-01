@@ -1,8 +1,8 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.EntregadorBeans;
-import br.com.pizzaria.beans.FuncionarioBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.EntregadorBean;
+import br.com.pizzaria.beans.FuncionarioBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class EntregadorModel {
 
     }
 
-    public void cadastrarEntregador(EntregadorBeans entregadorBeans) {
+    public void cadastrarEntregador(EntregadorBean entregadorBeans) {
         try {
             String SQLInsertion = "INSERT INTO `entregador`(`ent_nome`,`ent_permissao`,`ent_datacad`,"
                     + "`ent_status`)"
@@ -76,9 +76,9 @@ public class EntregadorModel {
         }
     }
 
-    public EntregadorBeans preencherCampos(int codigo) {
+    public EntregadorBean preencherCampos(int codigo) {
 
-        EntregadorBeans entregadorBeans = new EntregadorBeans();
+        EntregadorBean entregadorBeans = new EntregadorBean();
 
         try {
             String SQLSelection = "select * from entregador where ent_cod = ?;";
@@ -99,7 +99,7 @@ public class EntregadorModel {
         return entregadorBeans;
     }
 
-    public void editarEntregador(EntregadorBeans entregadorBeans) {
+    public void editarEntregador(EntregadorBean entregadorBeans) {
         try {
             String SQLUpdate = "UPDATE `entregador` SET `ent_nome` = ?"
                     + "WHERE `ent_cod` = ?;";

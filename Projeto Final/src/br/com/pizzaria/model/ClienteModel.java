@@ -1,7 +1,7 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.CepBeans;
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.CepBean;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class ClienteModel {
 
     }
 
-    public boolean cadastrarCliente(ClienteBeans clienteBeans) {
+    public boolean cadastrarCliente(ClienteBean clienteBeans) {
 
         String SQLInsertion = "INSERT INTO `cliente`(`cli_nome`,`cli_cep`,`cli_nro_ender`,"
                 + "`cli_email`,`cli_telefone`,`cli_tel_cel`,`cli_aniversario`,`cli_datacad`,"
@@ -100,7 +100,7 @@ public class ClienteModel {
      * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
-    public void procuraCliente(String pesquisa, String tipo, List<ClienteBeans> lista) {
+    public void procuraCliente(String pesquisa, String tipo, List<ClienteBean> lista) {
         String SQLSelection;
         
         switch (tipo) {
@@ -121,7 +121,7 @@ public class ClienteModel {
                 rs.next();
             }
             while (rs.next()) {
-                ClienteBeans clienteBeans = new ClienteBeans();
+                ClienteBean clienteBeans = new ClienteBean();
                 clienteBeans.setObservacao(rs.getString("cli_obs"));
                 clienteBeans.setCep(rs.getString("cli_cep"));
                 clienteBeans.setAniversario(VerificarData.converteParaJAVA(rs.getString("cli_aniversario")));
@@ -142,9 +142,9 @@ public class ClienteModel {
         }
     }
 
-    public ClienteBeans preencherCampos(int codigo) {
+    public ClienteBean preencherCampos(int codigo) {
 
-        ClienteBeans clienteBeans = new ClienteBeans();
+        ClienteBean clienteBeans = new ClienteBean();
         String SQLSelection = "select * from cliente where cli_cod = ?;";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
@@ -173,7 +173,7 @@ public class ClienteModel {
         return clienteBeans;
     }
 
-    public void editarCliente(ClienteBeans clienteBeans) {
+    public void editarCliente(ClienteBean clienteBeans) {
 
         String SQLUpdate = "update `pizzaria`.`cliente`\n"
                 + "set `cli_nome` = ?,\n"
@@ -215,8 +215,8 @@ public class ClienteModel {
         }
     }
 
-    public CepBeans populaCamposCep(String cep) {
-        CepBeans cepBeans = new CepBeans();
+    public CepBean populaCamposCep(String cep) {
+        CepBean cepBeans = new CepBean();
         String SQLSelection = "select "
                 + "c.`cep_cod`,"
                 + "c.`cep_ender`,"
