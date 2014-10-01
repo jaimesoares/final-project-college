@@ -10,7 +10,7 @@ package br.com.pizzaria.beans;
  *
  * @author katia
  */
-public class ItemPedidoBeans {
+public class ItemPedidoBean {
     private int codigoPedido;//resgatar no processo de registrar o pedido
     private int codigoItem;//auto incremento
     private int codigoProduto;

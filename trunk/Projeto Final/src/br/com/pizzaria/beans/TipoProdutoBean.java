@@ -6,7 +6,7 @@
 
 package br.com.pizzaria.beans;
 
-public class TipoProdutoBeans {
+public class TipoProdutoBean {
     private int codigo;
     private String descricao;
 

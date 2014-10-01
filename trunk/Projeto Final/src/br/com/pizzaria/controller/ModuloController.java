@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ModuloBeans;
+import br.com.pizzaria.beans.ModuloBean;
 import br.com.pizzaria.model.ModuloModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -14,7 +14,7 @@ public class ModuloController {
         moduloModel = new ModuloModel();
     }
 
-    public boolean verificarDados(ModuloBeans moduloBeans) {
+    public boolean verificarDados(ModuloBean moduloBeans) {
         if (moduloBeans.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Nome' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -32,7 +32,7 @@ public class ModuloController {
         moduloModel.populaListaModulo(modelo);
     }
 
-    public boolean verificarDadosParaEditar(ModuloBeans modulo) {
+    public boolean verificarDadosParaEditar(ModuloBean modulo) {
         if (modulo.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo \"Nome\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;

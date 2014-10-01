@@ -1,6 +1,6 @@
 package br.com.pizzaria.beans;
 
-public class FornecedorBeans {
+public class FornecedorBean {
     
     private int codigo;
     private String nome;
@@ -14,7 +14,7 @@ public class FornecedorBeans {
     private String contato;
     private String cidade;
 
-    public FornecedorBeans() {        
+    public FornecedorBean() {        
         
     }
 

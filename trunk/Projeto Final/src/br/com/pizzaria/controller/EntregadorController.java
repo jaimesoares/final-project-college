@@ -1,8 +1,8 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.EntregadorBeans;
-import br.com.pizzaria.beans.FuncionarioBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.EntregadorBean;
+import br.com.pizzaria.beans.FuncionarioBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.EntregadorModel;
 import br.com.pizzaria.model.FuncionarioModel;
@@ -18,7 +18,7 @@ public class EntregadorController {
         entregadorModel = new EntregadorModel();
     }
 
-    public boolean verificarDados(EntregadorBeans entregador) {
+    public boolean verificarDados(EntregadorBean entregador) {
         if (entregador.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -36,11 +36,11 @@ public class EntregadorController {
         entregadorModel.procuraEntregador(pesquisa, modelo);
     }
 
-    public EntregadorBeans controlePreenchimento(int codigo) {
+    public EntregadorBean controlePreenchimento(int codigo) {
         return entregadorModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(EntregadorBeans entregador) {
+    public boolean verificarDadosParaEditar(EntregadorBean entregador) {
         if (entregador.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;

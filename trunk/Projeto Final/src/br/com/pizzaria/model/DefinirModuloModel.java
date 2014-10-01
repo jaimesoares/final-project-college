@@ -1,8 +1,8 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.ModuloBeans;
-import br.com.pizzaria.beans.UsuarioBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.ModuloBean;
+import br.com.pizzaria.beans.UsuarioBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -30,13 +30,13 @@ public class DefinirModuloModel {
      * @param tipo
      * @param lista para popular o comboBox da pesquisa
      */
-    public void populaCliente(List<UsuarioBeans> lista) {
+    public void populaCliente(List<UsuarioBean> lista) {
         try {
             String SQLSelection = "select * from usuario;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                UsuarioBeans usuarioBeans = new UsuarioBeans();
+                UsuarioBean usuarioBeans = new UsuarioBean();
                 usuarioBeans.setCodigoFuncionario(rs.getInt("usu_fun_cod"));
                 usuarioBeans.setSenha(rs.getString("usu_senha"));
                 usuarioBeans.setLogin(rs.getString("usu_login"));
@@ -47,7 +47,7 @@ public class DefinirModuloModel {
         }
     }
     
-    public void populaModulo(List<ModuloBeans> modelo) {
+    public void populaModulo(List<ModuloBean> modelo) {
 
         String SQLSelection = "select * from programas;";
 
@@ -56,7 +56,7 @@ public class DefinirModuloModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                ModuloBeans novo = new ModuloBeans();
+                ModuloBean novo = new ModuloBean();
                 novo.setCodigo(rs.getInt("pgm_id"));
                 novo.setNome(rs.getString("pgm_nome"));
                 novo.setTitulo(rs.getString("pgm_titulo"));
@@ -67,9 +67,9 @@ public class DefinirModuloModel {
         }
     }
 
-    public ClienteBeans preencherCampos(int codigo) {
+    public ClienteBean preencherCampos(int codigo) {
 
-        ClienteBeans clienteBeans = new ClienteBeans();
+        ClienteBean clienteBeans = new ClienteBean();
 
         try {
             String SQLSelection = "select * from cliente where cli_cod = ?;";
@@ -91,7 +91,7 @@ public class DefinirModuloModel {
         return clienteBeans;
     }
 
-    public void editarCliente(ClienteBeans clienteBeans) {
+    public void editarCliente(ClienteBean clienteBeans) {
         try {
             String SQLUpdate = "UPDATE `cliente` SET `cli_nome` = ?,`cli_rua` = ?,"
                     + "`cli_bairro` = ?,`cli_telefone` = ?"

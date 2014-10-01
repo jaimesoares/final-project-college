@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.model.TipoProdutoModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -28,7 +28,7 @@ public class TipoProdutoController {
         tipoProdutoModel.populaListaTipoProduto(modelo);
     }
 
-    public boolean verificarDadosParaEditar(TipoProdutoBeans tipoProduto) {
+    public boolean verificarDadosParaEditar(TipoProdutoBean tipoProduto) {
         if (tipoProduto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo \"Descrição\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;

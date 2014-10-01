@@ -1,6 +1,6 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +14,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTelefone;
     SimpleDateFormat FormatoData;
     Date DataAtual;
-    ClienteBeans clienteBeans;
+    ClienteBean clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
 
@@ -23,7 +23,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         habilitarCampos(false);
         FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
-        clienteBeans = new ClienteBeans();
+        clienteBeans = new ClienteBean();
         clienteController = new ClienteController();
 //        modelo = (DefaultTableModel) tblCliente.getModel();
     }

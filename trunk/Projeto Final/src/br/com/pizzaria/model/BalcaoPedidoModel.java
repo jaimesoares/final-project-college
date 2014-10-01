@@ -1,7 +1,7 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.PedidoBeans;
-import br.com.pizzaria.beans.ProdutoBeans;
+import br.com.pizzaria.beans.PedidoBean;
+import br.com.pizzaria.beans.ProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ public class BalcaoPedidoModel {
     public BalcaoPedidoModel() {
     }
 
-    public void pesquisaItens(String pesquisa, List<ProdutoBeans> listaDeItens) {
+    public void pesquisaItens(String pesquisa, List<ProdutoBean> listaDeItens) {
         try {
 //            
 //            String SQLPesquisa ="SELECT \n"
@@ -39,7 +39,7 @@ public class BalcaoPedidoModel {
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                ProdutoBeans novo = new ProdutoBeans();
+                ProdutoBean novo = new ProdutoBean();
                 novo.setCodigo(rs.getInt("prd_prod"));
                 novo.setDescricao(rs.getString("prd_descr"));
                 listaDeItens.add(novo);
@@ -83,7 +83,7 @@ public class BalcaoPedidoModel {
         return 0;
     }
 
-    public void cadastrarPedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
+    public void cadastrarPedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBean pedidobeans) {
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
@@ -148,7 +148,7 @@ public class BalcaoPedidoModel {
         return codigo;
     }
 
-    public void cadastrarItens(String codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBeans pedidoBeans) {
+    public void cadastrarItens(String codigoCliente, String codigoFuncioario, String codigoPedido, int tamanhoTabela, PedidoBean pedidoBeans) {
         for (int i = 0; i < tamanhoTabela; i++) {
             try {
                 

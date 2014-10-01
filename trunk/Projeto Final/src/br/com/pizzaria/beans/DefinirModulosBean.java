@@ -1,6 +1,6 @@
 package br.com.pizzaria.beans;
 
-public class DefinirModulosBeans {
+public class DefinirModulosBean {
 
     private String usuario;
     private int codigoModulo;

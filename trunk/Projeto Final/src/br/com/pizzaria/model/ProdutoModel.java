@@ -1,7 +1,7 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.ProdutoBeans;
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -38,7 +38,7 @@ public class ProdutoModel {
         }
     }
 
-    public boolean cadastrarProduto(ProdutoBeans produtoBeans) {
+    public boolean cadastrarProduto(ProdutoBean produtoBeans) {
         try {
             String SQLInsertion = "insert into `pizzaria`.`produtos`\n"
                     + "             (`prd_descr`,\n"
@@ -90,9 +90,9 @@ public class ProdutoModel {
         }
     }
 
-    public ProdutoBeans preencherCampos(int codigo) {
+    public ProdutoBean preencherCampos(int codigo) {
 
-        ProdutoBeans produtoBeans = new ProdutoBeans();
+        ProdutoBean produtoBeans = new ProdutoBean();
 
         try {
             //String SQLSelection = "select * from produtos where prd_prod = ?;";
@@ -128,7 +128,7 @@ public class ProdutoModel {
                     ResultSet rsProduto = pstmProduto.executeQuery();
 
                     if (rsProduto.next()) {
-                        TipoProdutoBeans novo = new TipoProdutoBeans();
+                        TipoProdutoBean novo = new TipoProdutoBean();
                         novo.setCodigo(rsProduto.getInt("tprd_id"));
                         novo.setDescricao(rsProduto.getString("tprd_descr"));
                         produtoBeans.setTipoProduto(novo);
@@ -153,7 +153,7 @@ public class ProdutoModel {
         return produtoBeans;
     }
 
-    public boolean editarProduto(ProdutoBeans produtoBeans) {
+    public boolean editarProduto(ProdutoBean produtoBeans) {
         try {
             String SQLUpdate = "update `pizzaria`.`produtos` set\n"
                     + "  `prd_descr` = ?,\n"
@@ -185,7 +185,7 @@ public class ProdutoModel {
         }
     }
 
-    public void populaListaTipoProduto(List<TipoProdutoBeans> lista) {
+    public void populaListaTipoProduto(List<TipoProdutoBean> lista) {
         String SQLSelection = "select * from tipo_prod;";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
@@ -193,7 +193,7 @@ public class ProdutoModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                TipoProdutoBeans novo = new TipoProdutoBeans();
+                TipoProdutoBean novo = new TipoProdutoBean();
                 novo.setCodigo(rs.getInt("tprd_id"));
                 novo.setDescricao(rs.getString("tprd_descr"));
                 lista.add(novo);

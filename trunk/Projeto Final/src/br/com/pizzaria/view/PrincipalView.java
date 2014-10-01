@@ -21,7 +21,7 @@ public class PrincipalView extends javax.swing.JFrame {
     FuncionarioView funcionarioV;
     EntregadorView entregadorV;
     ProdutoView produtoV;
-    PedidoView pedidoV;
+    EntregaPedidoView pedidoV;
     SobreView sobreV;
     UsuarioView usuarioV;
     CozinhaView cozinhaV;
@@ -269,18 +269,18 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCardapioActionPerformed
 
     private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
-//        if (pedidoV == null || !pedidoV.isShowing()) {
-//            pedidoV = new PedidoView(1);
-//            Desktop.add(pedidoV);
-//            centralizaForm(pedidoV);
-//            pedidoV.setVisible(true);
-//        }
-
-        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {
-            Desktop.add(tipoPedidoV);
-            centralizaForm(tipoPedidoV);
-            tipoPedidoV.setVisible(true);
+        if (pedidoV == null || !pedidoV.isShowing()) {
+            pedidoV = new EntregaPedidoView(1);
+            Desktop.add(pedidoV);
+            centralizaForm(pedidoV);
+            pedidoV.setVisible(true);
         }
+
+//        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {
+//            Desktop.add(tipoPedidoV);
+//            centralizaForm(tipoPedidoV);
+//            tipoPedidoV.setVisible(true);
+//        }
 //        if (balcaoV == null || !balcaoV.isShowing()) {
 //            balcaoV = new BalcaoPedidoView(1);
 //            Desktop.add(balcaoV);

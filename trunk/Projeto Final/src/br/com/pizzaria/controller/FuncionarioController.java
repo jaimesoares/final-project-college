@@ -1,8 +1,8 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.CargoBeans;
-import br.com.pizzaria.beans.CepBeans;
-import br.com.pizzaria.beans.FuncionarioBeans;
+import br.com.pizzaria.beans.CargoBean;
+import br.com.pizzaria.beans.CepBean;
+import br.com.pizzaria.beans.FuncionarioBean;
 import br.com.pizzaria.model.FuncionarioModel;
 import br.com.pizzaria.util.VerificarData;
 import java.util.List;
@@ -18,7 +18,7 @@ public class FuncionarioController {
         funcionarioModel = new FuncionarioModel();
     }
 
-    public boolean verificarDados(FuncionarioBeans funcionario, int cargo, String cep, String numero, String nascimento) {
+    public boolean verificarDados(FuncionarioBean funcionario, int cargo, String cep, String numero, String nascimento) {
         if (funcionario.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -68,11 +68,11 @@ public class FuncionarioController {
         funcionarioModel.procuraFuncionario(pesquisa, modelo);
     }
 
-    public FuncionarioBeans controlePreenchimento(int codigo) {
+    public FuncionarioBean controlePreenchimento(int codigo) {
         return funcionarioModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(FuncionarioBeans funcionario, int cargo, String cep, String numero, String nascimento) {
+    public boolean verificarDadosParaEditar(FuncionarioBean funcionario, int cargo, String cep, String numero, String nascimento) {
         if (funcionario.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -116,11 +116,11 @@ public class FuncionarioController {
 
     }
 
-    public void controleListaCargo(List<CargoBeans> lista) {
+    public void controleListaCargo(List<CargoBean> lista) {
         funcionarioModel.populaListaCargo(lista);
     }
 
-    public boolean controleCepValido(CepBeans cepBeans) {
+    public boolean controleCepValido(CepBean cepBeans) {
         if (cepBeans.getCep() == null) {
             JOptionPane.showMessageDialog(null, "CEP Inválido", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -129,7 +129,7 @@ public class FuncionarioController {
         }
     }
 
-    public CepBeans controleCep(String cep) {
+    public CepBean controleCep(String cep) {
         return funcionarioModel.populaCamposCep(cep);
     }
 }

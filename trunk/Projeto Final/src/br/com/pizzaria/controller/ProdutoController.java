@@ -1,7 +1,7 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ProdutoBeans;
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.model.ProdutoModel;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -20,7 +20,7 @@ public class ProdutoController {
         return produtoModel.proximoProduto();
     }
 
-    public boolean verificarDados(ProdutoBeans produto, int tipo) {
+    public boolean verificarDados(ProdutoBean produto, int tipo) {
         if (produto.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -38,11 +38,11 @@ public class ProdutoController {
         produtoModel.procuraProduto(pesquisa, modelo);
     }
 
-    public ProdutoBeans controlePreenchimento(int codigo) {
+    public ProdutoBean controlePreenchimento(int codigo) {
         return produtoModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(ProdutoBeans cardapio, int tipo) {
+    public boolean verificarDadosParaEditar(ProdutoBean cardapio, int tipo) {
         if (cardapio.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -57,7 +57,7 @@ public class ProdutoController {
 
     }
 
-    public void controleListaProduto(List<TipoProdutoBeans> lista) {
+    public void controleListaProduto(List<TipoProdutoBean> lista) {
         produtoModel.populaListaTipoProduto(lista);
     }
 }

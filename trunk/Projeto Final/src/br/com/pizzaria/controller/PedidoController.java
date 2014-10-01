@@ -1,7 +1,7 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBeans;
-import br.com.pizzaria.beans.PedidoBeans;
+import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.beans.PedidoBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.PedidoModel;
 import java.util.List;
@@ -70,11 +70,11 @@ public class PedidoController {
         return true;
     }
 
-    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBeans pedidobeans) {
+    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBean pedidobeans) {
         pedidoModel.cadastrarPedido(codigoCliente, codigoFuncioario, total, tamanhoTabela, pedidobeans);
     }
 
-    public void controlePesquisa(String pesquisa, String tipo, List<ClienteBeans> lista) {
+    public void controlePesquisa(String pesquisa, String tipo, List<ClienteBean> lista) {
         clienteModel.procuraCliente(pesquisa, tipo, lista);
     }
 }

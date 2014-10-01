@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.UsuarioBeans;
+import br.com.pizzaria.beans.UsuarioBean;
 import br.com.pizzaria.model.FuncionarioModel;
 import br.com.pizzaria.model.UsuarioModel;
 import br.com.pizzaria.util.Som;
@@ -21,7 +21,7 @@ public class UsuarioController {
         funcionarioModel = new FuncionarioModel();
     }
 
-    public boolean verificaDados(UsuarioBeans usuarioBeans) {
+    public boolean verificaDados(UsuarioBean usuarioBeans) {
 
         if (usuarioBeans.getLogin().equals("")) {
             play.som();
@@ -37,7 +37,7 @@ public class UsuarioController {
 
     }
 
-    public UsuarioBeans controlePesquisaLogin(UsuarioBeans usuario) {
+    public UsuarioBean controlePesquisaLogin(UsuarioBean usuario) {
         return usuarioModel.selectUser(usuario);
     }
 
@@ -45,7 +45,7 @@ public class UsuarioController {
         funcionarioModel.listaFuncionario(modelo);
     }
     
-    public UsuarioBeans controlePreenchimento(int codigo){
+    public UsuarioBean controlePreenchimento(int codigo){
         return usuarioModel.preencherCampos(codigo);
     }
     
@@ -86,7 +86,7 @@ public class UsuarioController {
         }
     }
     
-    public boolean controleDadosNovo(UsuarioBeans usuarioBeans) {
+    public boolean controleDadosNovo(UsuarioBean usuarioBeans) {
 
         if (usuarioBeans.getLogin().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Login' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
@@ -101,7 +101,7 @@ public class UsuarioController {
 
     }
     
-    public boolean controleDadosEditar(UsuarioBeans usuarioBeans) {
+    public boolean controleDadosEditar(UsuarioBean usuarioBeans) {
 
         if (usuarioBeans.getLogin().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Login' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));

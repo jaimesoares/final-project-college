@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.ModuloBeans;
+import br.com.pizzaria.beans.ModuloBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ public class ModuloModel {
 
     }
 
-    public void cadastrarModulo(ModuloBeans moduloView) {
+    public void cadastrarModulo(ModuloBean moduloView) {
 
         String SQLInsertion = "insert into `pizzaria`.`programas`"
                 + "(`pgm_nome`,`pgm_titulo`)"
@@ -46,7 +46,7 @@ public class ModuloModel {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                ModuloBeans novo = new ModuloBeans();
+                ModuloBean novo = new ModuloBean();
                 novo.setCodigo(rs.getInt("pgm_id"));
                 novo.setNome(rs.getString("pgm_nome"));
                 novo.setTitulo(rs.getString("pgm_titulo"));
@@ -57,7 +57,7 @@ public class ModuloModel {
         }
     }
 
-    public void editarModulo(ModuloBeans moduloBeans) {
+    public void editarModulo(ModuloBean moduloBeans) {
 
         String SQLUpdate = "delete from `pizzaria`.`programas`"
                 + "where `pgm_id` = ?;";

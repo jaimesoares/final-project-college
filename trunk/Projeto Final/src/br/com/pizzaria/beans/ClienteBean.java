@@ -1,6 +1,6 @@
 package br.com.pizzaria.beans;
 
-public class ClienteBeans {
+public class ClienteBean {
 
     private int codigoCliente;
     private String nome;
@@ -20,7 +20,7 @@ public class ClienteBeans {
     private String estado;
     
 
-    public ClienteBeans() {
+    public ClienteBean() {
 
     }
 

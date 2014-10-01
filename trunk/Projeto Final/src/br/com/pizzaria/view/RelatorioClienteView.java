@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CepBeans;
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.CepBean;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.RelatorioClienteController;
 import br.com.pizzaria.util.VerificarData;
@@ -17,7 +17,7 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTelefone;
     MaskFormatter formatoData;
     MaskFormatter formatoCEP;
-    ClienteBeans clienteBeans;
+    ClienteBean clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
     JFrame frame;
@@ -29,7 +29,7 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
         this.frame = frame;
         habilitarCampos(false);
 
-        clienteBeans = new ClienteBeans();
+        clienteBeans = new ClienteBean();
         relatorioClienteController = new RelatorioClienteController();
         modelo = (DefaultTableModel) tblCliente.getModel();
         
@@ -350,7 +350,7 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
 //        txtRua.setEditable(false);
     }
 
-    final ClienteBeans populaClienteBeans() {
+    final ClienteBean populaClienteBeans() {
 //        clienteBeans.setNome(txtNome.getText());
 //        clienteBeans.setRua(txtRua.getText());
 //        clienteBeans.setBairro(txtBairro.getText());
@@ -403,7 +403,7 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
     }
     
     public void populaCamposCep(){
-        CepBeans cepBeans;
+        CepBean cepBeans;
         
 //        if (clienteController.controleCepValido(cepBeans = clienteController.controleCep(txfCEP.getText().replace("-", "")))) {
 //            txtBairro.setText(cepBeans.getBairro());

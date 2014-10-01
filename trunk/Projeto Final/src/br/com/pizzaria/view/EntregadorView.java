@@ -1,6 +1,6 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.EntregadorBeans;
+import br.com.pizzaria.beans.EntregadorBean;
 import br.com.pizzaria.controller.EntregadorController;
 import br.com.pizzaria.util.VerificarData;
 import javax.swing.table.DefaultTableModel;
@@ -10,14 +10,14 @@ public class EntregadorView extends javax.swing.JInternalFrame {
 
     MaskFormatter FormatoTelefone;
     DefaultTableModel modelo;
-    EntregadorBeans entregadorBeans;
+    EntregadorBean entregadorBeans;
     EntregadorController entregadorController;
 
     public EntregadorView() {
         initComponents();
 
         habilitarCampos(false);
-        entregadorBeans = new EntregadorBeans();
+        entregadorBeans = new EntregadorBean();
         entregadorController = new EntregadorController();
         modelo = (DefaultTableModel) tblEntregador.getModel();
     }
@@ -307,7 +307,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
 
     }
 
-    final EntregadorBeans capturaBeans() {
+    final EntregadorBean capturaBeans() {
         entregadorBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
         entregadorBeans.setNome(txtNome.getText());
         entregadorBeans.setDataCad(txtData.getText());

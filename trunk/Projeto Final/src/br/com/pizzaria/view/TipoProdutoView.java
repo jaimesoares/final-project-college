@@ -1,20 +1,20 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.TipoProdutoBeans;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.controller.TipoProdutoController;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class TipoProdutoView extends javax.swing.JInternalFrame {
 
-    TipoProdutoBeans tipoProdutoBeans;
+    TipoProdutoBean tipoProdutoBeans;
     TipoProdutoController tipoProdutoController;
     DefaultListModel modelo;
 
     public TipoProdutoView() {
         initComponents();
 
-        tipoProdutoBeans = new TipoProdutoBeans();
+        tipoProdutoBeans = new TipoProdutoBean();
         tipoProdutoController = new TipoProdutoController();
         modelo = new DefaultListModel();
         carregaListaCargo();
@@ -137,7 +137,7 @@ public class TipoProdutoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        TipoProdutoBeans novo = (TipoProdutoBeans) lstCargo.getSelectedValue();
+        TipoProdutoBean novo = (TipoProdutoBean) lstCargo.getSelectedValue();
         if(novo.getDescricao().equals("Pizza")){
             JOptionPane.showMessageDialog(null, "Campo não pode ser removido");
         }else{
@@ -149,7 +149,7 @@ public class TipoProdutoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void lstCargoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCargoMouseReleased
-        TipoProdutoBeans novo = (TipoProdutoBeans) lstCargo.getSelectedValue();
+        TipoProdutoBean novo = (TipoProdutoBean) lstCargo.getSelectedValue();
     }//GEN-LAST:event_lstCargoMouseReleased
 
 
@@ -164,7 +164,7 @@ public class TipoProdutoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 
-    final TipoProdutoBeans populaClienteBeans() {
+    final TipoProdutoBean populaClienteBeans() {
 
         System.out.println(tipoProdutoBeans);
         return tipoProdutoBeans;

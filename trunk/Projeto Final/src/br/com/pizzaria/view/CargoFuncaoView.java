@@ -1,20 +1,20 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CargoBeans;
+import br.com.pizzaria.beans.CargoBean;
 import br.com.pizzaria.controller.CargoController;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class CargoFuncaoView extends javax.swing.JInternalFrame {
 
-    CargoBeans cargoBeans;
+    CargoBean cargoBeans;
     CargoController cargoController;
     DefaultListModel modelo;
 
     public CargoFuncaoView() {
         initComponents();
 
-        cargoBeans = new CargoBeans();
+        cargoBeans = new CargoBean();
         cargoController = new CargoController();
         modelo = new DefaultListModel();
         carregaListaCargo();
@@ -137,7 +137,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        CargoBeans novo = (CargoBeans) lstCargo.getSelectedValue();
+        CargoBean novo = (CargoBean) lstCargo.getSelectedValue();
         if (novo.getDescricao().equals("Entregador")||novo.getDescricao().equals("Gerente")) {
             JOptionPane.showMessageDialog(null, "Campo não pode ser removido");
         } else {
@@ -150,7 +150,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void lstCargoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCargoMouseReleased
-        CargoBeans novo = (CargoBeans) lstCargo.getSelectedValue();
+        CargoBean novo = (CargoBean) lstCargo.getSelectedValue();
         //txtCargo.setText(novo.getDescricao());
     }//GEN-LAST:event_lstCargoMouseReleased
 
@@ -166,7 +166,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCargo;
     // End of variables declaration//GEN-END:variables
 
-    final CargoBeans populaClienteBeans() {
+    final CargoBean populaClienteBeans() {
         cargoBeans.setDescricao(txtCargo.getText());
 
         System.out.println(cargoBeans);

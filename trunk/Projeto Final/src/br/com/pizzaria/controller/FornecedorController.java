@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBeans;
+import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.model.ClienteModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -14,7 +14,7 @@ public class FornecedorController {
         clienteModel = new ClienteModel();
     }
 
-    public boolean verificarDados(ClienteBeans cliente) {
+    public boolean verificarDados(ClienteBean cliente) {
         if (cliente.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -53,11 +53,11 @@ public class FornecedorController {
         clienteModel.procuraCliente(pesquisa, modelo);
     }
     
-    public ClienteBeans controlePreenchimento(int codigo){
+    public ClienteBean controlePreenchimento(int codigo){
         return clienteModel.preencherCampos(codigo);
     }
     
-    public boolean verificarDadosParaEditar(ClienteBeans cliente) {
+    public boolean verificarDadosParaEditar(ClienteBean cliente) {
         if (cliente.getNome().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
