@@ -6,7 +6,7 @@ import java.util.List;
 public class PedidoBean {
     
     private int codigoPedido;
-    private int codigoCliente;
+    private Integer codigoCliente;
     private String loginUsuario;
     private int codigoEntregador;
     private String data;
@@ -18,6 +18,9 @@ public class PedidoBean {
     private String obs;
     private double valorDesc;
     private List<ItemPedidoBean> itensPedido;
+    private double valorRecebido;
+    private double valorTroco;
+    private String tipoPagamento;
 
     public PedidoBean() {
         codProduto = new ArrayList<>();
@@ -58,14 +61,14 @@ public class PedidoBean {
     /**
      * @return the codigoCliente
      */
-    public int getCodigoCliente() {
+    public Integer getCodigoCliente() {
         return codigoCliente;
     }
 
     /**
      * @param codigoCliente the codigoCliente to set
      */
-    public void setCodigoCliente(int codigoCliente) {
+    public void setCodigoCliente(Integer codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
 
@@ -198,6 +201,48 @@ public class PedidoBean {
      */
     public void setItensPedido(List<ItemPedidoBean> itensPedido) {
         this.itensPedido = itensPedido;
+    }
+
+    /**
+     * @return the valorRecebido
+     */
+    public double getValorRecebido() {
+        return valorRecebido;
+    }
+
+    /**
+     * @param valorRecebido the valorRecebido to set
+     */
+    public void setValorRecebido(double valorRecebido) {
+        this.valorRecebido = valorRecebido;
+    }
+
+    /**
+     * @return the valorTroco
+     */
+    public double getValorTroco() {
+        return valorTroco;
+    }
+
+    /**
+     * @param valorTroco the valorTroco to set
+     */
+    public void setValorTroco(double valorTroco) {
+        this.valorTroco = valorTroco;
+    }
+
+    /**
+     * @return the tipoPagamento
+     */
+    public String getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    /**
+     * @param tipoPagamento the tipoPagamento to set
+     */
+    public void setTipoPagamento(String tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
     
 }

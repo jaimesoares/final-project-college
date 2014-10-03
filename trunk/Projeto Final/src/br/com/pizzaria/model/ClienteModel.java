@@ -117,9 +117,9 @@ public class ClienteModel {
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
             ResultSet rs = pstm.executeQuery();
-            if (pesquisa.equals("")) {
-                rs.next();
-            }
+//            if (pesquisa.equals("")) {
+//                rs.next();
+//            }
             while (rs.next()) {
                 ClienteBean clienteBeans = new ClienteBean();
                 clienteBeans.setObservacao(rs.getString("cli_obs"));

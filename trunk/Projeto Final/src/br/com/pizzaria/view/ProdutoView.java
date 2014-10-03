@@ -386,7 +386,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                 txfPesquisar.setEnabled(false);
                 modeloTabela.setNumRows(0);
             } else {
-                if (produtoController.verificarDadosParaEditar(capturaBeans(), cbTipo.getSelectedIndex())) {
+                if (produtoController.verificarDadosParaEditar(produtoBeans, ((TipoProdutoBean)modeloTipoProd.getSelectedItem()).getCodigo(), txaDescricao.getText())) {
                     btnEditar.setText("Editar");
                     btnFechar.setText("Fechar");
                     btnNovo.setEnabled(true);
@@ -507,6 +507,24 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         }
         return produtoBeans;
     }
+    final ProdutoBean capturaBeanEditar() {
+
+        produtoBeans.setCodigo(Integer.parseInt(produtoController.controleDeCodigo()));
+        produtoBeans.setDescricao(txaDescricao.getText());
+        produtoBeans.setDataCad(txtData.getText());
+        produtoBeans.setEstocavel((cbEstocavel.getSelectedItem().toString().charAt(0)));
+        if (!txtQtdEstoque.getText().equals("")) {
+            produtoBeans.setQtdSaldoEstoque(Double.parseDouble(txtQtdEstoque.getText()));
+        }
+        produtoBeans.setAvisaEstoqueMinimo((cbAvisa.getSelectedItem().toString().charAt(0)));
+        if (!txtQtd.getText().equals("")) {
+            produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
+        }
+        if (cbTipo.getSelectedIndex() != 0) {
+            produtoBeans.setTipoProduto((TipoProdutoBean) cbTipo.getSelectedItem());
+        }
+        return produtoBeans;
+    }
 
     final void limpaTudo() {
         txaDescricao.setText("");
@@ -534,7 +552,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         listaTipoProd = new ArrayList<>();
         produtoController.controleListaProduto(listaTipoProd);
         for (TipoProdutoBean tipoProdutoBeans : listaTipoProd) {
-            cbTipo.addItem(tipoProdutoBeans);
+            cbTipo.addItem(tipoProdutoBeans);           
         }
     }
 

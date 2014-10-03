@@ -174,10 +174,10 @@ public class ProdutoModel {
             pstm.setString(7, String.valueOf(produtoBeans.getEstocavel()));
             pstm.setInt(8, produtoBeans.getCodigo());
 
-            pstm.execute();
+            pstm.executeUpdate();
             ConectaBanco.getConnection().commit();
 
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            JOptionPane.showMessageDialog(null, "Produto alterado com sucesso! ", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
             return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -186,7 +186,13 @@ public class ProdutoModel {
     }
 
     public void populaListaTipoProduto(List<TipoProdutoBean> lista) {
-        String SQLSelection = "select * from tipo_prod;";
+        String SQLSelection = "select \n"
+                + "  `tprd_id`,\n"
+                + "  `tprd_descr`,\n"
+                + "  `tprd_stt_pizza` \n"
+                + "from\n"
+                + "  `pizzaria`.`tipo_prod` ;";
+                
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
