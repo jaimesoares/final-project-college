@@ -17,7 +17,7 @@ public class ItemPedidoBean {
     private int quantidade;
     private double precoUnitario;
     private double precoTotal;
-    private char meiaPizza;
+    private String meiaPizza;
     private String descricao;
 
     /**
@@ -107,14 +107,14 @@ public class ItemPedidoBean {
     /**
      * @return the meiaPizza
      */
-    public char getMeiaPizza() {
+    public String getMeiaPizza() {
         return meiaPizza;
     }
 
     /**
      * @param meiaPizza the meiaPizza to set
      */
-    public void setMeiaPizza(char meiaPizza) {
+    public void setMeiaPizza(String meiaPizza) {
         this.meiaPizza = meiaPizza;
     }
     

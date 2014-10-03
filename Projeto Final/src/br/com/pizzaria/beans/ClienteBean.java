@@ -2,7 +2,7 @@ package br.com.pizzaria.beans;
 
 public class ClienteBean {
 
-    private int codigoCliente;
+    private Integer codigoCliente;
     private String nome;
     private String rua;
     private String bairro;
@@ -24,11 +24,11 @@ public class ClienteBean {
 
     }
 
-    public int getCodigoCliente() {
+    public Integer getCodigoCliente() {
         return codigoCliente;
     }
 
-    public void setCodigoCliente(int codigoCliente) {
+    public void setCodigoCliente(Integer codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
 

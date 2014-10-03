@@ -42,8 +42,8 @@ public class ProdutoController {
         return produtoModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(ProdutoBean cardapio, int tipo) {
-        if (cardapio.getDescricao().equals("")) {
+    public boolean verificarDadosParaEditar(ProdutoBean cardapio, int tipo, String descricao) {
+        if (descricao.equals("")) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -52,7 +52,9 @@ public class ProdutoController {
             JOptionPane.showMessageDialog(null, "Selecione um tipo de produto!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-
+        
+        cardapio.getTipoProduto().setCodigo(tipo);
+        cardapio.setDescricao(descricao);
         return produtoModel.editarProduto(cardapio);
 
     }

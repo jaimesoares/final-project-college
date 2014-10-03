@@ -3,6 +3,7 @@ package br.com.pizzaria.controller;
 import br.com.pizzaria.beans.ClienteBean;
 import br.com.pizzaria.beans.PedidoBean;
 import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.beans.TipoProdutoBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.EntregaPedidoModel;
 import java.util.List;
@@ -19,7 +20,7 @@ public class EntregaPedidoController {
         clienteModel = new ClienteModel();
     }
 
-    public void controleDeItens(String pesquisa, List<ProdutoBean> listaDeItens) {
+    public void controleDeItens(int pesquisa, List<ProdutoBean> listaDeItens) {
         entregaPedidoModel.pesquisaItens(pesquisa, listaDeItens);
     }
 
@@ -61,5 +62,17 @@ public class EntregaPedidoController {
 
     public void controlePesquisa(String pesquisa, String tipo, List<ClienteBean> lista) {
         clienteModel.procuraCliente(pesquisa, tipo, lista);
+    }
+    
+    public void controleListaTipoProduto(List<TipoProdutoBean> lista) {
+        entregaPedidoModel.populaListaTipoProduto(lista);
+    }
+    
+    public void controleListaPizza(List<ProdutoBean> listaDePizza) {
+        entregaPedidoModel.pesquisaPizza(listaDePizza);
+    }
+    
+    public int controleCodigoPedido(){
+        return entregaPedidoModel.codigoDoPedido();
     }
 }
