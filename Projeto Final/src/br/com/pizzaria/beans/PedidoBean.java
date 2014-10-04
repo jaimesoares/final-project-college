@@ -21,6 +21,7 @@ public class PedidoBean {
     private double valorRecebido;
     private double valorTroco;
     private String tipoPagamento;
+    private String tipoPedido;
 
     public PedidoBean() {
         codProduto = new ArrayList<>();
@@ -243,6 +244,20 @@ public class PedidoBean {
      */
     public void setTipoPagamento(String tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
+    }
+
+    /**
+     * @return the tipoPedido
+     */
+    public String getTipoPedido() {
+        return tipoPedido;
+    }
+
+    /**
+     * @param tipoPedido the tipoPedido to set
+     */
+    public void setTipoPedido(String tipoPedido) {
+        this.tipoPedido = tipoPedido;
     }
     
 }
