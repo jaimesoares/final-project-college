@@ -386,7 +386,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
                 txfPesquisar.setEnabled(false);
                 modeloTabela.setNumRows(0);
             } else {
-                if (produtoController.verificarDadosParaEditar(produtoBeans, ((TipoProdutoBean)modeloTipoProd.getSelectedItem()).getCodigo(), txaDescricao.getText())) {
+                if (produtoController.verificarDadosParaEditar(produtoBeans, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo(), txaDescricao.getText())) {
                     btnEditar.setText("Editar");
                     btnFechar.setText("Fechar");
                     btnNovo.setEnabled(true);
@@ -440,7 +440,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPrecoFocusLost
 
     private void txtPrecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyTyped
-       String caracteres = "0987654321,.";
+        String caracteres = "0987654321,.";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
 
@@ -505,8 +505,15 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         if (cbTipo.getSelectedIndex() != 0) {
             produtoBeans.setTipoProduto((TipoProdutoBean) cbTipo.getSelectedItem());
         }
+        if (!txtQtd.getText().equals("")) {
+            produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
+        }
+        if (!txtQtdEstoque.getText().equals("")) {
+            produtoBeans.setQtdSaldoEstoque(Double.parseDouble(txtQtdEstoque.getText()));
+        }
         return produtoBeans;
     }
+
     final ProdutoBean capturaBeanEditar() {
 
         produtoBeans.setCodigo(Integer.parseInt(produtoController.controleDeCodigo()));
@@ -552,7 +559,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         listaTipoProd = new ArrayList<>();
         produtoController.controleListaProduto(listaTipoProd);
         for (TipoProdutoBean tipoProdutoBeans : listaTipoProd) {
-            cbTipo.addItem(tipoProdutoBeans);           
+            cbTipo.addItem(tipoProdutoBeans);
         }
     }
 

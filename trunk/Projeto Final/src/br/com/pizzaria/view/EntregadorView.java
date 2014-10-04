@@ -27,8 +27,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnNovo = new javax.swing.JButton();
-        lbl_codigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         sep_codigo = new javax.swing.JSeparator();
@@ -63,15 +61,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
                 btnNovoActionPerformed(evt);
             }
         });
-
-        lbl_codigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_codigo.setText("Código");
-
-        txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtCodigo.setForeground(new java.awt.Color(255, 51, 51));
-        txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
@@ -152,8 +141,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(txtCodigo)
             .addComponent(sep_codigo)
             .addComponent(sep_formulario)
             .addComponent(sep_pesquisa)
@@ -191,10 +178,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lbl_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(57, 57, 57)
                 .addComponent(sep_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -214,7 +198,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(sep_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -234,7 +218,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         habilitarCampos(true);
         txtData.setText(VerificarData.retornoDeDataAtual());
         txtNome.requestFocus();
-        txtCodigo.setText(entregadorController.controleDeCodigo());
+        //txtCodigo.setText(entregadorController.controleDeCodigo());
         limpaNovo();
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -254,7 +238,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
 
     private void tblEntregadorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntregadorMousePressed
        entregadorBeans = entregadorController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblEntregador.getSelectedRow(), 0).toString()));
-        txtCodigo.setText(entregadorBeans.getCodigo() + "");
+        //txtCodigo.setText(entregadorBeans.getCodigo() + "");
         txtNome.setText(entregadorBeans.getNome());
         txtData.setText(entregadorBeans.getDataCad());
     }//GEN-LAST:event_tblEntregadorMousePressed
@@ -283,7 +267,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_codigo;
     private javax.swing.JLabel lbl_data;
     private javax.swing.JLabel lbl_data1;
     private javax.swing.JSeparator sep_codigo;
@@ -292,7 +275,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_tabela;
     private javax.swing.JTable tblEntregador;
     private javax.swing.JFormattedTextField txfPesquisar;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
@@ -308,7 +290,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
     }
 
     final EntregadorBean capturaBeans() {
-        entregadorBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
+//        entregadorBeans.setCodigo(Integer.parseInt(txtCodigo.getText()));
         entregadorBeans.setNome(txtNome.getText());
         entregadorBeans.setDataCad(txtData.getText());
 
@@ -317,7 +299,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
 
     final void limpaTudo() {
         txtNome.setText("");
-        txtCodigo.setText("");
+        //txtCodigo.setText("");
         txtData.setText("");
     }
 

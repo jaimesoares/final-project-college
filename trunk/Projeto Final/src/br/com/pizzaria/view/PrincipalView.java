@@ -35,6 +35,7 @@ public class PrincipalView extends javax.swing.JFrame {
     LoginView login;
     TipoProdutoView tipoProdutoV;
     PrecoProdutoView precoProdutoV;
+    CancelamentoPedidosView cancelamentoPedidoV;
 
     public PrincipalView() {
         initComponents();
@@ -74,6 +75,7 @@ public class PrincipalView extends javax.swing.JFrame {
         JM_Movimentacao = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
         mniCozinha = new javax.swing.JMenuItem();
+        mniCancelarPedido = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         mniRelatorioCliente = new javax.swing.JMenuItem();
         mnSobre = new javax.swing.JMenu();
@@ -195,6 +197,14 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         JM_Movimentacao.add(mniCozinha);
+
+        mniCancelarPedido.setText("Cancelar Pedido");
+        mniCancelarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCancelarPedidoActionPerformed(evt);
+            }
+        });
+        JM_Movimentacao.add(mniCancelarPedido);
 
         jMenuBar1.add(JM_Movimentacao);
 
@@ -384,6 +394,15 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mniPrecoProdutoActionPerformed
 
+    private void mniCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCancelarPedidoActionPerformed
+        if (cancelamentoPedidoV == null || !cancelamentoPedidoV.isShowing()) {
+            cancelamentoPedidoV = new CancelamentoPedidosView(this);
+            Desktop.add(cancelamentoPedidoV);
+            centralizaForm(cancelamentoPedidoV);
+            cancelamentoPedidoV.setVisible(true);
+        }
+    }//GEN-LAST:event_mniCancelarPedidoActionPerformed
+
     private void telaLogin() {
 
         login = new LoginView();
@@ -488,6 +507,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mnSobre;
+    private javax.swing.JMenuItem mniCancelarPedido;
     private javax.swing.JMenuItem mniCardapio;
     private javax.swing.JMenuItem mniCliente;
     private javax.swing.JMenuItem mniCozinha;

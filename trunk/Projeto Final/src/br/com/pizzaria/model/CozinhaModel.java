@@ -30,7 +30,7 @@ public class CozinhaModel {
             String SQLSelection = "SELECT p.ped_cod, c.prd_descr, i.`item_quantidade`, p.ped_hr, i.item_stt_meia_pizza \n" +
 "                    FROM pedido p JOIN item i ON i.item_ped_cod = p.`ped_cod` \n" +
 "                    JOIN produtos c ON c.`prd_prod` = i.`item_cod_prod` \n" +
-"                    WHERE p.`ped_stt_canc` = 'A' \n" +
+"                    WHERE p.`ped_stt_canc` = 'A' AND c.`prd_tipo_prod` = 1\n" +
 "                    ORDER BY p.`ped_cod` desc ;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();

@@ -17,6 +17,7 @@ import br.com.pizzaria.controller.EntregaPedidoController;
 import br.com.pizzaria.controller.PrecoProdutoController;
 import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.Global;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -123,7 +124,6 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         populaListaPizzaSabor2();
 
         txtCodigo.setText(String.valueOf(decimalFormatoCodigo.format(entregaPedidoController.controleCodigoPedido() + 1)));
-        
 
     }
 
@@ -1290,10 +1290,12 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         btnContinuarPedidoActionPerformed(null);
         txtCliente.setText("Venda Balcão");
         clienteBeans.setCodigoCliente(null);
+        pedidoBeans.setTipoPedido("B");
     }//GEN-LAST:event_btnBalcaoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         habilitarCamposCliente(true);
+        pedidoBeans.setTipoPedido("E");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -1607,6 +1609,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         cbInteira.setEnabled(true);
         txtQtdPizza.setEditable(true);
         txtQtdPizza.setText("");
+        Color cor = new Color(204, 255, 255);
+        txtQtdPizza.setBackground(cor);
     }//GEN-LAST:event_rbInteiraActionPerformed
 
     private void rbMeiaPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMeiaPizzaActionPerformed
@@ -1615,6 +1619,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         cbInteira.setEnabled(false);
         txtQtdPizza.setEditable(false);
         txtQtdPizza.setText("1");
+        Color cor = new Color(255, 255, 204);
+        txtQtdPizza.setBackground(cor);
     }//GEN-LAST:event_rbMeiaPizzaActionPerformed
 
     private void cbSabor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSabor2ActionPerformed
@@ -1702,12 +1708,11 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void cbFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormaPagamentoActionPerformed
-        if(cbFormaPagamento.getSelectedIndex()==0){
-            JOptionPane.showMessageDialog(null, "Selecione uma forma de Pagamento!");   
+        if (cbFormaPagamento.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione uma forma de Pagamento!");
             txtValorRecebido.setEditable(false);
             txtValorRecebido.setText("");
-        }
-        else{
+        } else {
             txtValorRecebido.setEditable(true);
             txtValorRecebido.setText("");
         }

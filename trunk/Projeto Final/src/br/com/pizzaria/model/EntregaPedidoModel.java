@@ -109,12 +109,16 @@ public class EntregaPedidoModel {
                     + "             `ped_cli_cod`,\n"
                     + "             `ped_id_usuario`,\n"
                     + "             `ped_stt_canc`,\n"
+                    + "             `ped_tipo`,\n"
+                    + "             `ped_pagamento`,\n"
                     + "             `ped_obs`)\n"
                     + "values (\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     // + "        'ped_vlr_desc',\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -125,7 +129,9 @@ public class EntregaPedidoModel {
             pstmt.setString(1, formatoData.format(data));
             pstmt.setString(2, formatoHora.format(data));
             pstmt.setDouble(3, pedidobeans.getValorTotalPedido());
-            pstmt.setString(7, pedidobeans.getObs());
+            pstmt.setString(7, pedidobeans.getTipoPedido());
+            pstmt.setString(8, pedidobeans.getTipoPagamento());
+            pstmt.setString(9, pedidobeans.getObs());
             pstmt.setString(6, pedidobeans.getStatus());
 
             pstmt.execute();
@@ -168,7 +174,7 @@ public class EntregaPedidoModel {
         DecimalFormat formatoDecimal = new DecimalFormat("0.00");
         List<String> cupom = new ArrayList<>();
         String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
-        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData())+"      "+pedidoBeans.getHora());
+        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
         cupom.add("---------------------------------------------------------");//60 espaços
         cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
         cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
@@ -214,7 +220,7 @@ public class EntregaPedidoModel {
         }
         cupom.add("------------------------------------------------------------");
         cupom.add("Total:                                    R$" + totalPedido);
-        cupom.add(pedidoBeans.getTipoPagamento()+":                                  R$" + pedidoBeans.getValorRecebido());
+        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
         cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
         JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
     }
@@ -242,7 +248,7 @@ public class EntregaPedidoModel {
         }
         return campo;
     }
-    
+
     public String campoNota2(String campo) {
         int espaco = 10 - campo.length();
 
@@ -259,7 +265,7 @@ public class EntregaPedidoModel {
                 + "  `tprd_stt_pizza` \n"
                 + "from\n"
                 + "  `pizzaria`.`tipo_prod` \n"
-                + "where `tprd_descr` <> 'Pizza' ;";
+                + "where `tprd_descr` <> 'Pizza' and `tprd_descr` <> 'Borda';";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
@@ -335,7 +341,6 @@ public class EntregaPedidoModel {
             pstmt.execute();
             cadastrarItensCupom(codigoDoCupom(), pedidobeans);
 
-            
             System.out.println("Cadastro cupom realizado!");
 
         } catch (SQLException ex) {
