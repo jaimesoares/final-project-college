@@ -24,7 +24,7 @@ public class PrincipalView extends javax.swing.JFrame {
     EntregaPedidoView pedidoV;
     SobreView sobreV;
     UsuarioView usuarioV;
-    CozinhaView cozinhaV;
+//    CozinhaView cozinhaV;
     TipoDePedidoView tipoPedidoV;
     BalcaoPedidoView balcaoV;
     DefinirModuloView moduloV;
@@ -36,6 +36,18 @@ public class PrincipalView extends javax.swing.JFrame {
     TipoProdutoView tipoProdutoV;
     PrecoProdutoView precoProdutoV;
     CancelamentoPedidosView cancelamentoPedidoV;
+
+    MenuProducao menuProducao;
+    MenuEstoque menuEstoque;
+    MenuAjuda menuAjuda;
+    MenuCompras menuCompras;
+    MenuContasPagar menuContasPagar;
+    MenuContasReceber menuContasReceber;
+    MenuManutencao menuManutencao;
+    MenuRelatorio menuRelatorio;
+    MenuVendas menuVendas;
+
+    JInternalFrame menu;
 
     public PrincipalView() {
         initComponents();
@@ -49,6 +61,8 @@ public class PrincipalView extends javax.swing.JFrame {
         tipoPedidoV = new TipoDePedidoView(Desktop);
         habiltaMenu(false);
 
+        menu = new JInternalFrame();
+
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
             public void eventDispatched(AWTEvent e) {
             }
@@ -60,26 +74,34 @@ public class PrincipalView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        JM_Manutencao = new javax.swing.JMenu();
-        mniCliente = new javax.swing.JMenuItem();
-        mniFuncionario = new javax.swing.JMenuItem();
-        mniEntregador = new javax.swing.JMenuItem();
+        mnProducao = new javax.swing.JMenu();
+        mniCozinha = new javax.swing.JMenuItem();
+        mnEstoque = new javax.swing.JMenu();
         mniCardapio = new javax.swing.JMenuItem();
-        mniUsuario = new javax.swing.JMenuItem();
-        mniModulo = new javax.swing.JMenuItem();
-        mniFornecedor = new javax.swing.JMenuItem();
-        mniFuncao = new javax.swing.JMenuItem();
         mniTipoProduto = new javax.swing.JMenuItem();
         mniPrecoProduto = new javax.swing.JMenuItem();
-        JM_Movimentacao = new javax.swing.JMenu();
+        mnCompras = new javax.swing.JMenu();
+        mniFornecedor = new javax.swing.JMenuItem();
+        mnContasPagar = new javax.swing.JMenu();
+        mnVenda = new javax.swing.JMenu();
         mniPedido = new javax.swing.JMenuItem();
-        mniCozinha = new javax.swing.JMenuItem();
         mniCancelarPedido = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        mniCliente = new javax.swing.JMenuItem();
+        mnContarReceber = new javax.swing.JMenu();
+        mnManutencao = new javax.swing.JMenu();
+        mniFuncionario = new javax.swing.JMenuItem();
+        mniEntregador = new javax.swing.JMenuItem();
+        mniUsuario = new javax.swing.JMenuItem();
+        mniModulo = new javax.swing.JMenuItem();
+        mniFuncao = new javax.swing.JMenuItem();
+        mnRelatorio = new javax.swing.JMenu();
         mniRelatorioCliente = new javax.swing.JMenuItem();
-        mnSobre = new javax.swing.JMenu();
+        mnAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PIZZARIA MAMA");
@@ -96,31 +118,30 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        JM_Manutencao.setText("Manutenção");
-
-        mniCliente.setText("Cliente");
-        mniCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniClienteActionPerformed(evt);
+        mnProducao.setText("Produção");
+        mnProducao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnProducaoMousePressed(evt);
             }
         });
-        JM_Manutencao.add(mniCliente);
 
-        mniFuncionario.setText("Funcionário");
-        mniFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        mniCozinha.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
+        mniCozinha.setText("Cozinha");
+        mniCozinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFuncionarioActionPerformed(evt);
+                mniCozinhaActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(mniFuncionario);
+        mnProducao.add(mniCozinha);
 
-        mniEntregador.setText("Entregador");
-        mniEntregador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniEntregadorActionPerformed(evt);
+        jMenuBar1.add(mnProducao);
+
+        mnEstoque.setText("Estoque");
+        mnEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnEstoqueMousePressed(evt);
             }
         });
-        JM_Manutencao.add(mniEntregador);
 
         mniCardapio.setText("Produto");
         mniCardapio.addActionListener(new java.awt.event.ActionListener() {
@@ -128,39 +149,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniCardapioActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(mniCardapio);
-
-        mniUsuario.setText("Usuário");
-        mniUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniUsuarioActionPerformed(evt);
-            }
-        });
-        JM_Manutencao.add(mniUsuario);
-
-        mniModulo.setText("Módulo");
-        mniModulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniModuloActionPerformed(evt);
-            }
-        });
-        JM_Manutencao.add(mniModulo);
-
-        mniFornecedor.setText("Fornecedor");
-        mniFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFornecedorActionPerformed(evt);
-            }
-        });
-        JM_Manutencao.add(mniFornecedor);
-
-        mniFuncao.setText("Função / Cargo");
-        mniFuncao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFuncaoActionPerformed(evt);
-            }
-        });
-        JM_Manutencao.add(mniFuncao);
+        mnEstoque.add(mniCardapio);
 
         mniTipoProduto.setText("Tipo de Produto");
         mniTipoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +157,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniTipoProdutoActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(mniTipoProduto);
+        mnEstoque.add(mniTipoProduto);
 
         mniPrecoProduto.setText("Preço Produto");
         mniPrecoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -176,11 +165,41 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniPrecoProdutoActionPerformed(evt);
             }
         });
-        JM_Manutencao.add(mniPrecoProduto);
+        mnEstoque.add(mniPrecoProduto);
 
-        jMenuBar1.add(JM_Manutencao);
+        jMenuBar1.add(mnEstoque);
 
-        JM_Movimentacao.setText("Movimentação");
+        mnCompras.setText("Compras");
+        mnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnComprasMousePressed(evt);
+            }
+        });
+
+        mniFornecedor.setText("Fornecedor");
+        mniFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFornecedorActionPerformed(evt);
+            }
+        });
+        mnCompras.add(mniFornecedor);
+
+        jMenuBar1.add(mnCompras);
+
+        mnContasPagar.setText("Contas a Pagar");
+        mnContasPagar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnContasPagarMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(mnContasPagar);
+
+        mnVenda.setText("Vendas");
+        mnVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnVendaMousePressed(evt);
+            }
+        });
 
         mniPedido.setText("Pedido");
         mniPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -188,15 +207,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniPedidoActionPerformed(evt);
             }
         });
-        JM_Movimentacao.add(mniPedido);
-
-        mniCozinha.setText("Cozinha");
-        mniCozinha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniCozinhaActionPerformed(evt);
-            }
-        });
-        JM_Movimentacao.add(mniCozinha);
+        mnVenda.add(mniPedido);
 
         mniCancelarPedido.setText("Cancelar Pedido");
         mniCancelarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -204,11 +215,81 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniCancelarPedidoActionPerformed(evt);
             }
         });
-        JM_Movimentacao.add(mniCancelarPedido);
+        mnVenda.add(mniCancelarPedido);
 
-        jMenuBar1.add(JM_Movimentacao);
+        mniCliente.setText("Cliente");
+        mniCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniClienteActionPerformed(evt);
+            }
+        });
+        mnVenda.add(mniCliente);
 
-        jMenu1.setText("Relatório");
+        jMenuBar1.add(mnVenda);
+
+        mnContarReceber.setText("Contas a Receber");
+        mnContarReceber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnContarReceberMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(mnContarReceber);
+
+        mnManutencao.setText("Manutenção");
+        mnManutencao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnManutencaoMousePressed(evt);
+            }
+        });
+
+        mniFuncionario.setText("Funcionário");
+        mniFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFuncionarioActionPerformed(evt);
+            }
+        });
+        mnManutencao.add(mniFuncionario);
+
+        mniEntregador.setText("Entregador");
+        mniEntregador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEntregadorActionPerformed(evt);
+            }
+        });
+        mnManutencao.add(mniEntregador);
+
+        mniUsuario.setText("Usuário");
+        mniUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniUsuarioActionPerformed(evt);
+            }
+        });
+        mnManutencao.add(mniUsuario);
+
+        mniModulo.setText("Módulo");
+        mniModulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniModuloActionPerformed(evt);
+            }
+        });
+        mnManutencao.add(mniModulo);
+
+        mniFuncao.setText("Função / Cargo");
+        mniFuncao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFuncaoActionPerformed(evt);
+            }
+        });
+        mnManutencao.add(mniFuncao);
+
+        jMenuBar1.add(mnManutencao);
+
+        mnRelatorio.setText("Relatório");
+        mnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnRelatorioMousePressed(evt);
+            }
+        });
 
         mniRelatorioCliente.setText("Relatório de Clientes");
         mniRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -216,11 +297,16 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniRelatorioClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(mniRelatorioCliente);
+        mnRelatorio.add(mniRelatorioCliente);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnRelatorio);
 
-        mnSobre.setText("Ajuda");
+        mnAjuda.setText("Ajuda");
+        mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnAjudaMousePressed(evt);
+            }
+        });
 
         mniSobre.setText("Sobre");
         mniSobre.addActionListener(new java.awt.event.ActionListener() {
@@ -233,9 +319,9 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniSobreKeyPressed(evt);
             }
         });
-        mnSobre.add(mniSobre);
+        mnAjuda.add(mniSobre);
 
-        jMenuBar1.add(mnSobre);
+        jMenuBar1.add(mnAjuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -299,11 +385,6 @@ public class PrincipalView extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_mniPedidoActionPerformed
 
-    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
-        sobreV = new SobreView();
-        sobreV.setVisible(true);
-    }//GEN-LAST:event_mniSobreActionPerformed
-
     private void mniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuarioActionPerformed
         if (usuarioV == null || !usuarioV.isShowing()) {
             usuarioV = new UsuarioView();
@@ -315,10 +396,10 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniUsuarioActionPerformed
 
     private void mniCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCozinhaActionPerformed
-        if (cozinhaV == null || !cozinhaV.isShowing()) {
-            cozinhaV = new CozinhaView();
-            cozinhaV.setVisible(true);
-        }
+//        if (cozinhaV == null || !cozinhaV.isShowing()) {
+//            cozinhaV = new CozinhaView();
+//            cozinhaV.setVisible(true);
+//        }
     }//GEN-LAST:event_mniCozinhaActionPerformed
 
     private void mniModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniModuloActionPerformed
@@ -363,10 +444,6 @@ public class PrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuBar1KeyPressed
 
-    private void mniSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mniSobreKeyPressed
-
-    }//GEN-LAST:event_mniSobreKeyPressed
-
     private void mniRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioClienteActionPerformed
         if (relatorioClienteV == null || !relatorioClienteV.isShowing()) {
             relatorioClienteV = new RelatorioClienteView(PrincipalView.this);
@@ -402,6 +479,141 @@ public class PrincipalView extends javax.swing.JFrame {
             cancelamentoPedidoV.setVisible(true);
         }
     }//GEN-LAST:event_mniCancelarPedidoActionPerformed
+
+    private void mniSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mniSobreKeyPressed
+
+    }//GEN-LAST:event_mniSobreKeyPressed
+
+    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
+        sobreV = new SobreView();
+        sobreV.setVisible(true);
+    }//GEN-LAST:event_mniSobreActionPerformed
+
+    private void mnProducaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnProducaoMousePressed
+        // TODO add your handling code here:
+        if (menu == menuProducao) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuProducao = new MenuProducao();
+            Desktop.add(menuProducao);
+            menuProducao.setVisible(true);
+            menu = menuProducao;
+        }
+
+    }//GEN-LAST:event_mnProducaoMousePressed
+
+    private void mnEstoqueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnEstoqueMousePressed
+        if (menu == menuEstoque) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuEstoque = new MenuEstoque();
+            Desktop.add(menuEstoque);
+            menuEstoque.setVisible(true);
+            menu = menuEstoque;
+        }
+    }//GEN-LAST:event_mnEstoqueMousePressed
+
+    private void mnComprasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnComprasMousePressed
+        // TODO add your handling code here:
+        if (menu == menuCompras) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuCompras = new MenuCompras();
+            Desktop.add(menuCompras);
+            menuCompras.setVisible(true);
+            menu = menuCompras;
+        }
+    }//GEN-LAST:event_mnComprasMousePressed
+
+    private void mnContasPagarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnContasPagarMousePressed
+        // TODO add your handling code here:
+        if (menu == menuContasPagar) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuContasPagar = new MenuContasPagar();
+            Desktop.add(menuContasPagar);
+            menuContasPagar.setVisible(true);
+            menu = menuContasPagar;
+        }
+    }//GEN-LAST:event_mnContasPagarMousePressed
+
+    private void mnVendaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnVendaMousePressed
+        // TODO add your handling code here:
+        if (menu == menuVendas) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuVendas = new MenuVendas();
+            Desktop.add(menuVendas);
+            menuVendas.setVisible(true);
+            menu = menuVendas;
+        }
+    }//GEN-LAST:event_mnVendaMousePressed
+
+    private void mnContarReceberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnContarReceberMousePressed
+        // TODO add your handling code here:
+        if (menu == menuContasReceber) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuContasReceber = new MenuContasReceber();
+            Desktop.add(menuContasReceber);
+            menuContasReceber.setVisible(true);
+            menu = menuContasReceber;
+        }
+    }//GEN-LAST:event_mnContarReceberMousePressed
+
+    private void mnManutencaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnManutencaoMousePressed
+        // TODO add your handling code here:
+        if (menu == menuManutencao) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuManutencao = new MenuManutencao();
+            Desktop.add(menuManutencao);
+            menuManutencao.setVisible(true);
+            menu = menuManutencao;
+        }
+    }//GEN-LAST:event_mnManutencaoMousePressed
+
+    private void mnRelatorioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnRelatorioMousePressed
+        // TODO add your handling code here:
+        if (menu == menuRelatorio) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuRelatorio = new MenuRelatorio();
+            Desktop.add(menuRelatorio);
+            menuRelatorio.setVisible(true);
+            menu = menuRelatorio;
+        }
+    }//GEN-LAST:event_mnRelatorioMousePressed
+
+    private void mnAjudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMousePressed
+        // TODO add your handling code here:
+        if (menu == menuAjuda) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuAjuda = new MenuAjuda();
+            Desktop.add(menuAjuda);
+            menuAjuda.setVisible(true);
+            menu = menuAjuda;
+        }
+    }//GEN-LAST:event_mnAjudaMousePressed
 
     private void telaLogin() {
 
@@ -441,7 +653,6 @@ public class PrincipalView extends javax.swing.JFrame {
         Global.principal = janela;
 
         janela.telaLogin();
-        
 
         EventQueue queue = new EventQueue() {
             protected void dispatchEvent(AWTEvent event) {
@@ -458,14 +669,14 @@ public class PrincipalView extends javax.swing.JFrame {
 
                         switch (Integer.parseInt(tecla[1])) {
                             case 112: //F1
-                                JOptionPane.showMessageDialog(null, "Pressionou F1!");
+                                //JOptionPane.showMessageDialog(null, "Pressionou F1!");
                                 break;
                             case 113: //F2
-                                try {
-                                    Runtime.getRuntime().exec("calc.exe");
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+//                                try {
+//                                    Runtime.getRuntime().exec("calc.exe");
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
                                 break;
                             case 114: //F3
 
@@ -473,7 +684,7 @@ public class PrincipalView extends javax.swing.JFrame {
                             case 115: //F4
                                 break;
                             case 116: //F5
-                                JOptionPane.showMessageDialog(null, "Pressionou F5!");
+                                //JOptionPane.showMessageDialog(null, "Pressionou F5!");
                                 break;
                             case 117: //F6
                                 break;
@@ -482,10 +693,10 @@ public class PrincipalView extends javax.swing.JFrame {
                             case 119: //F8
                                 break;
                             case 120: //F9
-                                JOptionPane.showMessageDialog(null, "Pressionou F9!");
+                                // JOptionPane.showMessageDialog(null, "Pressionou F9!");
                                 break;
                             case 121: //F10
-                                Global.principal.moduloView();
+                                //Global.principal.moduloView();
                                 break;
                             case 122: //F11
                                 break;
@@ -502,11 +713,17 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu JM_Manutencao;
-    private javax.swing.JMenu JM_Movimentacao;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu mnSobre;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu mnAjuda;
+    private javax.swing.JMenu mnCompras;
+    private javax.swing.JMenu mnContarReceber;
+    private javax.swing.JMenu mnContasPagar;
+    private javax.swing.JMenu mnEstoque;
+    private javax.swing.JMenu mnManutencao;
+    private javax.swing.JMenu mnProducao;
+    private javax.swing.JMenu mnRelatorio;
+    private javax.swing.JMenu mnVenda;
     private javax.swing.JMenuItem mniCancelarPedido;
     private javax.swing.JMenuItem mniCardapio;
     private javax.swing.JMenuItem mniCliente;
