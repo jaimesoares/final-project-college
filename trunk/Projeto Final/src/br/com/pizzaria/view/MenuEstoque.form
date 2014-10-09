@@ -25,9 +25,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnPrecoProduto" max="32767" attributes="0"/>
+                  <Component id="btnPrecoProduto" pref="272" max="32767" attributes="0"/>
                   <Component id="btnProduto" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnTipoProduto" pref="272" max="32767" attributes="0"/>
+                  <Component id="btnTipoProduto" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -56,7 +56,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt; Produto &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; &lt;br/&gt;Crtl-1 &lt;/font&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt; Produto &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-1 &lt;/font&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProdutoActionPerformed"/>
@@ -70,7 +70,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Tipo de Produto &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; &lt;br/&gt;Crtl-2 &lt;/font&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Tipo de Produto &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-2 &lt;/font&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTipoProdutoActionPerformed"/>
@@ -84,7 +84,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt; Pre&#xe7;o de&lt;br/&gt; Produto&lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; &lt;br/&gt;Crtl-3 &lt;/font&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt; Pre&#xe7;o de Produto&lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-3 &lt;/font&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrecoProdutoActionPerformed"/>
