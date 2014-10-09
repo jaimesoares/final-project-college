@@ -82,7 +82,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnProduto.setForeground(new java.awt.Color(0, 51, 255));
-        btnProduto.setText("<html> Produto <font size='2' style='color:black'> <br/>Crtl-1 </font>");
+        btnProduto.setText("<html> Produto <font size='2' style='color:black'> Crtl-1 </font>");
         btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProdutoActionPerformed(evt);
@@ -91,7 +91,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnTipoProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnTipoProduto.setForeground(new java.awt.Color(0, 51, 255));
-        btnTipoProduto.setText("<html>Tipo de Produto <font size='2' style='color:black'> <br/>Crtl-2 </font>");
+        btnTipoProduto.setText("<html>Tipo de Produto <font size='2' style='color:black'> Crtl-2 </font>");
         btnTipoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTipoProdutoActionPerformed(evt);
@@ -100,7 +100,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnPrecoProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPrecoProduto.setForeground(new java.awt.Color(0, 51, 255));
-        btnPrecoProduto.setText("<html> Preço de<br/> Produto<font size='2' style='color:black'> <br/>Crtl-3 </font>");
+        btnPrecoProduto.setText("<html> Preço de Produto<font size='2' style='color:black'> Crtl-3 </font>");
         btnPrecoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrecoProdutoActionPerformed(evt);
@@ -114,9 +114,9 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPrecoProduto)
+                    .addComponent(btnPrecoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(btnProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addComponent(btnTipoProduto))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

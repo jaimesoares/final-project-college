@@ -135,12 +135,12 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnContarReceberMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnManutencao">
+        <Menu class="javax.swing.JMenu" name="mnEmpresa">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Manuten&#xe7;&#xe3;o"/>
+            <Property name="text" type="java.lang.String" value="Empresa"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnManutencaoMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnEmpresaMousePressed"/>
           </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniFuncionario">

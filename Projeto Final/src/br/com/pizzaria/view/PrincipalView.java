@@ -90,7 +90,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mniCancelarPedido = new javax.swing.JMenuItem();
         mniCliente = new javax.swing.JMenuItem();
         mnContarReceber = new javax.swing.JMenu();
-        mnManutencao = new javax.swing.JMenu();
+        mnEmpresa = new javax.swing.JMenu();
         mniFuncionario = new javax.swing.JMenuItem();
         mniEntregador = new javax.swing.JMenuItem();
         mniUsuario = new javax.swing.JMenuItem();
@@ -235,10 +235,10 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnContarReceber);
 
-        mnManutencao.setText("Manutenção");
-        mnManutencao.addMouseListener(new java.awt.event.MouseAdapter() {
+        mnEmpresa.setText("Empresa");
+        mnEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                mnManutencaoMousePressed(evt);
+                mnEmpresaMousePressed(evt);
             }
         });
 
@@ -248,7 +248,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniFuncionarioActionPerformed(evt);
             }
         });
-        mnManutencao.add(mniFuncionario);
+        mnEmpresa.add(mniFuncionario);
 
         mniEntregador.setText("Entregador");
         mniEntregador.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +256,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniEntregadorActionPerformed(evt);
             }
         });
-        mnManutencao.add(mniEntregador);
+        mnEmpresa.add(mniEntregador);
 
         mniUsuario.setText("Usuário");
         mniUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -264,7 +264,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniUsuarioActionPerformed(evt);
             }
         });
-        mnManutencao.add(mniUsuario);
+        mnEmpresa.add(mniUsuario);
 
         mniModulo.setText("Módulo");
         mniModulo.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +272,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniModuloActionPerformed(evt);
             }
         });
-        mnManutencao.add(mniModulo);
+        mnEmpresa.add(mniModulo);
 
         mniFuncao.setText("Função / Cargo");
         mniFuncao.addActionListener(new java.awt.event.ActionListener() {
@@ -280,9 +280,9 @@ public class PrincipalView extends javax.swing.JFrame {
                 mniFuncaoActionPerformed(evt);
             }
         });
-        mnManutencao.add(mniFuncao);
+        mnEmpresa.add(mniFuncao);
 
-        jMenuBar1.add(mnManutencao);
+        jMenuBar1.add(mnEmpresa);
 
         mnRelatorio.setText("Relatório");
         mnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -573,7 +573,7 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnContarReceberMousePressed
 
-    private void mnManutencaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnManutencaoMousePressed
+    private void mnEmpresaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnEmpresaMousePressed
         // TODO add your handling code here:
         if (menu == menuManutencao) {
             menu.dispose();
@@ -585,7 +585,7 @@ public class PrincipalView extends javax.swing.JFrame {
             menuManutencao.setVisible(true);
             menu = menuManutencao;
         }
-    }//GEN-LAST:event_mnManutencaoMousePressed
+    }//GEN-LAST:event_mnEmpresaMousePressed
 
     private void mnRelatorioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnRelatorioMousePressed
         // TODO add your handling code here:
@@ -719,8 +719,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu mnCompras;
     private javax.swing.JMenu mnContarReceber;
     private javax.swing.JMenu mnContasPagar;
+    private javax.swing.JMenu mnEmpresa;
     private javax.swing.JMenu mnEstoque;
-    private javax.swing.JMenu mnManutencao;
     private javax.swing.JMenu mnProducao;
     private javax.swing.JMenu mnRelatorio;
     private javax.swing.JMenu mnVenda;
