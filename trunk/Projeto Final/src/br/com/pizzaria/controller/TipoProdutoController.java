@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.TipoProdutoBean;
+import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.model.TipoProdutoModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;

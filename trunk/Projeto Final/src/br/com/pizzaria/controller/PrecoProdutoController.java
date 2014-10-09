@@ -1,8 +1,8 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBean;
-import br.com.pizzaria.beans.ModuloBean;
-import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.bean.ClienteBean;
+import br.com.pizzaria.bean.ModuloBean;
+import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.model.PrecoProdutoModel;
 import java.util.List;
 import javax.swing.ImageIcon;

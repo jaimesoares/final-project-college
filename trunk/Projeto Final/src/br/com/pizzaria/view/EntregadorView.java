@@ -1,6 +1,6 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.EntregadorBean;
+import br.com.pizzaria.bean.EntregadorBean;
 import br.com.pizzaria.controller.EntregadorController;
 import br.com.pizzaria.util.VerificarData;
 import javax.swing.table.DefaultTableModel;

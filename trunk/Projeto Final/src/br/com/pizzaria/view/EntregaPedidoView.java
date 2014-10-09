@@ -5,13 +5,13 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CepBean;
-import br.com.pizzaria.beans.ClienteBean;
-import br.com.pizzaria.beans.ItemPedidoBean;
-import br.com.pizzaria.beans.PedidoBean;
-import br.com.pizzaria.beans.PrecoProdutoBean;
-import br.com.pizzaria.beans.ProdutoBean;
-import br.com.pizzaria.beans.TipoProdutoBean;
+import br.com.pizzaria.bean.CepBean;
+import br.com.pizzaria.bean.ClienteBean;
+import br.com.pizzaria.bean.ItemPedidoBean;
+import br.com.pizzaria.bean.PedidoBean;
+import br.com.pizzaria.bean.PrecoProdutoBean;
+import br.com.pizzaria.bean.ProdutoBean;
+import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.EntregaPedidoController;
 import br.com.pizzaria.controller.PrecoProdutoController;

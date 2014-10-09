@@ -1,8 +1,8 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.PedidoBean;
-import br.com.pizzaria.beans.ProdutoBean;
-import br.com.pizzaria.beans.TipoProdutoBean;
+import br.com.pizzaria.bean.PedidoBean;
+import br.com.pizzaria.bean.ProdutoBean;
+import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import br.com.pizzaria.util.GeneratorPDF;

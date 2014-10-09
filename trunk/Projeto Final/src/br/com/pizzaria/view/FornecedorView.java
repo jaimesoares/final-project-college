@@ -1,6 +1,6 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
 import java.text.SimpleDateFormat;
 import java.util.Date;

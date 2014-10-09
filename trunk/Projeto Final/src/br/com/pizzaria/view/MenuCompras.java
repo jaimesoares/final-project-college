@@ -9,6 +9,12 @@ import br.com.pizzaria.util.Global;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 /**
@@ -17,13 +23,26 @@ import javax.swing.Timer;
  */
 public class MenuCompras extends javax.swing.JInternalFrame {
 
+    FornecedorView fornecedorV;
+
     /**
      * Creates new form MenuProdução
      */
     public MenuCompras() {
         initComponents();
-        Timer time = new Timer(1000,ativar);
-        time.start(); 
+        Timer time = new Timer(1000, ativar);
+        time.start();
+
+        btnFornecedor.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnFornecedor.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnFornecedorActionPerformed(e);
+            }
+
+        });
+
     }
 
     /**
@@ -35,16 +54,22 @@ public class MenuCompras extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPedidoBalcao = new javax.swing.JButton();
+        btnFornecedor = new javax.swing.JButton();
 
         setTitle("Menu Compras");
+        setPreferredSize(new java.awt.Dimension(308, 263));
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
-        btnPedidoBalcao.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnPedidoBalcao.setForeground(new java.awt.Color(0, 51, 255));
-        btnPedidoBalcao.setText("Fornecedor");
-        btnPedidoBalcao.addActionListener(new java.awt.event.ActionListener() {
+        btnFornecedor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnFornecedor.setForeground(new java.awt.Color(0, 51, 255));
+        btnFornecedor.setText("<html>Fornecedor <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPedidoBalcaoActionPerformed(evt);
+                btnFornecedorActionPerformed(evt);
             }
         });
 
@@ -54,43 +79,53 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPedidoBalcao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPedidoBalcao, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPedidoBalcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoBalcaoActionPerformed
-        
-    }//GEN-LAST:event_btnPedidoBalcaoActionPerformed
+    private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
+        if (fornecedorV == null || !fornecedorV.isShowing()) {
+            fornecedorV = new FornecedorView();
+            Global.principal.Desktop.add(fornecedorV);
+            centralizaForm(fornecedorV);
+            fornecedorV.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFornecedorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPedidoBalcao;
+    private javax.swing.JButton btnFornecedor;
     // End of variables declaration//GEN-END:variables
-    ActionListener ativar = (  
-        new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                centralizarComponente();
-            }  
-          
-        }  
-    );
-    
-    public final void centralizarComponente() {  
-       int x = Global.principal.getLocation().x;
-       int y = Global.principal.getLocation().y;
-        
+    ActionListener ativar = (new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            centralizarComponente();
+        }
+
+    });
+
+    public final void centralizarComponente() {
+        int x = Global.principal.getLocation().x;
+        int y = Global.principal.getLocation().y;
+
         Dimension ds = Global.principal.getSize();
-        Dimension dw = getSize();  
-        setLocation((0), (0));  
+        Dimension dw = getSize();
+        setLocation((0), (0));
+    }
+
+    private void centralizaForm(JInternalFrame frame) {
+        Dimension desktopSize = Global.principal.Desktop.getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 }

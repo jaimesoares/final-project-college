@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ModuloBean;
-import br.com.pizzaria.beans.UsuarioBean;
+import br.com.pizzaria.bean.ModuloBean;
+import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.controller.DefinirModuloController;
 import java.util.ArrayList;
 import java.util.List;

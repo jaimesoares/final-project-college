@@ -1,7 +1,7 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.PedidoBean;
-import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.bean.PedidoBean;
+import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

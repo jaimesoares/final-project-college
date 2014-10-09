@@ -1,8 +1,8 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.CargoBean;
-import br.com.pizzaria.beans.CepBean;
-import br.com.pizzaria.beans.FuncionarioBean;
+import br.com.pizzaria.bean.CargoBean;
+import br.com.pizzaria.bean.CepBean;
+import br.com.pizzaria.bean.FuncionarioBean;
 import br.com.pizzaria.model.FuncionarioModel;
 import br.com.pizzaria.util.VerificarData;
 import java.util.List;

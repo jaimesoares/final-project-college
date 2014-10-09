@@ -9,6 +9,11 @@ import br.com.pizzaria.util.Global;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 /**
@@ -17,13 +22,26 @@ import javax.swing.Timer;
  */
 public class MenuAjuda extends javax.swing.JInternalFrame {
 
+    SobreView sobreV;
+
     /**
      * Creates new form MenuProdução
      */
     public MenuAjuda() {
         initComponents();
-        Timer time = new Timer(1000,ativar);
-        time.start(); 
+        Timer time = new Timer(1000, ativar);
+        time.start();
+
+        btnSobre.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnSobre.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnSobreActionPerformed(e);
+            }
+
+        });
+
     }
 
     /**
@@ -35,16 +53,17 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPedidoBalcao3 = new javax.swing.JButton();
+        btnSobre = new javax.swing.JButton();
 
         setTitle("Menu Ajuda");
+        setPreferredSize(new java.awt.Dimension(308, 263));
 
-        btnPedidoBalcao3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnPedidoBalcao3.setForeground(new java.awt.Color(0, 51, 255));
-        btnPedidoBalcao3.setText("Sobre");
-        btnPedidoBalcao3.addActionListener(new java.awt.event.ActionListener() {
+        btnSobre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnSobre.setForeground(new java.awt.Color(0, 51, 255));
+        btnSobre.setText("<html>Sobre <font size='2' style='color:black'> Crtl-1 </font>");
+        btnSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPedidoBalcao3ActionPerformed(evt);
+                btnSobreActionPerformed(evt);
             }
         });
 
@@ -53,44 +72,46 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPedidoBalcao3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(btnSobre, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPedidoBalcao3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPedidoBalcao3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoBalcao3ActionPerformed
+    private void btnSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPedidoBalcao3ActionPerformed
+        if (sobreV == null || !sobreV.isShowing()) {
+            sobreV = new SobreView();
+            sobreV.setVisible(true);
+        }
+    }//GEN-LAST:event_btnSobreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPedidoBalcao3;
+    private javax.swing.JButton btnSobre;
     // End of variables declaration//GEN-END:variables
-    ActionListener ativar = (  
-        new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                centralizarComponente();
-            }  
-          
-        }  
-    );
-    
-    public final void centralizarComponente() {  
-       int x = Global.principal.getLocation().x;
-       int y = Global.principal.getLocation().y;
-        
+    ActionListener ativar = (new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            centralizarComponente();
+        }
+
+    });
+
+    public final void centralizarComponente() {
+        int x = Global.principal.getLocation().x;
+        int y = Global.principal.getLocation().y;
+
         Dimension ds = Global.principal.getSize();
-        Dimension dw = getSize();  
-        setLocation((0), (0));  
+        Dimension dw = getSize();
+        setLocation((0), (0));
     }
 }

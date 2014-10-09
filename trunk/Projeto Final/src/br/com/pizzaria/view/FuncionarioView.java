@@ -1,8 +1,8 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CargoBean;
-import br.com.pizzaria.beans.CepBean;
-import br.com.pizzaria.beans.FuncionarioBean;
+import br.com.pizzaria.bean.CargoBean;
+import br.com.pizzaria.bean.CepBean;
+import br.com.pizzaria.bean.FuncionarioBean;
 import br.com.pizzaria.controller.FuncionarioController;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificarData;

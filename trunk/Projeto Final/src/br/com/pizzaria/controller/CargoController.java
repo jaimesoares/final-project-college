@@ -1,7 +1,7 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.CargoBean;
-import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.bean.CargoBean;
+import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.model.CargoModel;
 import br.com.pizzaria.model.ClienteModel;
 import javax.swing.DefaultListModel;

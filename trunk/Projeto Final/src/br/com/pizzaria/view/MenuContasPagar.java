@@ -9,6 +9,7 @@ import br.com.pizzaria.util.Global;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JInternalFrame;
 import javax.swing.Timer;
 
 /**
@@ -24,6 +25,34 @@ public class MenuContasPagar extends javax.swing.JInternalFrame {
         initComponents();
         Timer time = new Timer(1000,ativar);
         time.start(); 
+        
+//        btnProduto.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_DOWN_MASK), "evento");
+//        btnProduto.getActionMap().put("evento", new AbstractAction() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                btnProdutoActionPerformed(e);
+//            }
+//
+//        });
+//        btnTipoProduto.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
+//        btnTipoProduto.getActionMap().put("evento", new AbstractAction() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                btnTipoProdutoActionPerformed(e);
+//            }
+//
+//        });
+//        btnPrecoProduto.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK), "evento");
+//        btnPrecoProduto.getActionMap().put("evento", new AbstractAction() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                btnPrecoProdutoActionPerformed(e);
+//            }
+//
+//        });
     }
 
     /**
@@ -36,12 +65,14 @@ public class MenuContasPagar extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setTitle("Menu Contas Pagar");
+        setPreferredSize(new java.awt.Dimension(308, 263));
+        setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 169, Short.MAX_VALUE)
+            .addGap(0, 292, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,5 +101,12 @@ public class MenuContasPagar extends javax.swing.JInternalFrame {
         Dimension ds = Global.principal.getSize();
         Dimension dw = getSize();  
         setLocation((0), (0));  
+    }
+    
+    private void centralizaForm(JInternalFrame frame) {
+        Dimension desktopSize = Global.principal.Desktop.getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 }
