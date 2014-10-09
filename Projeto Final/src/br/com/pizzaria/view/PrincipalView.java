@@ -52,7 +52,7 @@ public class PrincipalView extends javax.swing.JFrame {
     public PrincipalView() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
+       // mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
 
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
@@ -78,29 +78,14 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnProducao = new javax.swing.JMenu();
-        mniCozinha = new javax.swing.JMenuItem();
         mnEstoque = new javax.swing.JMenu();
-        mniCardapio = new javax.swing.JMenuItem();
-        mniTipoProduto = new javax.swing.JMenuItem();
-        mniPrecoProduto = new javax.swing.JMenuItem();
         mnCompras = new javax.swing.JMenu();
-        mniFornecedor = new javax.swing.JMenuItem();
         mnContasPagar = new javax.swing.JMenu();
         mnVenda = new javax.swing.JMenu();
-        mniPedido = new javax.swing.JMenuItem();
-        mniCancelarPedido = new javax.swing.JMenuItem();
-        mniCliente = new javax.swing.JMenuItem();
         mnContarReceber = new javax.swing.JMenu();
         mnEmpresa = new javax.swing.JMenu();
-        mniFuncionario = new javax.swing.JMenuItem();
-        mniEntregador = new javax.swing.JMenuItem();
-        mniUsuario = new javax.swing.JMenuItem();
-        mniModulo = new javax.swing.JMenuItem();
-        mniFuncao = new javax.swing.JMenuItem();
         mnRelatorio = new javax.swing.JMenu();
-        mniRelatorioCliente = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        mniSobre = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -125,16 +110,6 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnProducaoMousePressed(evt);
             }
         });
-
-        mniCozinha.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
-        mniCozinha.setText("Cozinha");
-        mniCozinha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniCozinhaActionPerformed(evt);
-            }
-        });
-        mnProducao.add(mniCozinha);
-
         jMenuBar1.add(mnProducao);
 
         mnEstoque.setText("Estoque");
@@ -143,31 +118,6 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnEstoqueMousePressed(evt);
             }
         });
-
-        mniCardapio.setText("Produto");
-        mniCardapio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniCardapioActionPerformed(evt);
-            }
-        });
-        mnEstoque.add(mniCardapio);
-
-        mniTipoProduto.setText("Tipo de Produto");
-        mniTipoProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniTipoProdutoActionPerformed(evt);
-            }
-        });
-        mnEstoque.add(mniTipoProduto);
-
-        mniPrecoProduto.setText("Preço Produto");
-        mniPrecoProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniPrecoProdutoActionPerformed(evt);
-            }
-        });
-        mnEstoque.add(mniPrecoProduto);
-
         jMenuBar1.add(mnEstoque);
 
         mnCompras.setText("Compras");
@@ -176,15 +126,6 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnComprasMousePressed(evt);
             }
         });
-
-        mniFornecedor.setText("Fornecedor");
-        mniFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFornecedorActionPerformed(evt);
-            }
-        });
-        mnCompras.add(mniFornecedor);
-
         jMenuBar1.add(mnCompras);
 
         mnContasPagar.setText("Contas a Pagar");
@@ -201,31 +142,6 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnVendaMousePressed(evt);
             }
         });
-
-        mniPedido.setText("Pedido");
-        mniPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniPedidoActionPerformed(evt);
-            }
-        });
-        mnVenda.add(mniPedido);
-
-        mniCancelarPedido.setText("Cancelar Pedido");
-        mniCancelarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniCancelarPedidoActionPerformed(evt);
-            }
-        });
-        mnVenda.add(mniCancelarPedido);
-
-        mniCliente.setText("Cliente");
-        mniCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniClienteActionPerformed(evt);
-            }
-        });
-        mnVenda.add(mniCliente);
-
         jMenuBar1.add(mnVenda);
 
         mnContarReceber.setText("Contas a Receber");
@@ -242,47 +158,6 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnEmpresaMousePressed(evt);
             }
         });
-
-        mniFuncionario.setText("Funcionário");
-        mniFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFuncionarioActionPerformed(evt);
-            }
-        });
-        mnEmpresa.add(mniFuncionario);
-
-        mniEntregador.setText("Entregador");
-        mniEntregador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniEntregadorActionPerformed(evt);
-            }
-        });
-        mnEmpresa.add(mniEntregador);
-
-        mniUsuario.setText("Usuário");
-        mniUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniUsuarioActionPerformed(evt);
-            }
-        });
-        mnEmpresa.add(mniUsuario);
-
-        mniModulo.setText("Módulo");
-        mniModulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniModuloActionPerformed(evt);
-            }
-        });
-        mnEmpresa.add(mniModulo);
-
-        mniFuncao.setText("Função / Cargo");
-        mniFuncao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFuncaoActionPerformed(evt);
-            }
-        });
-        mnEmpresa.add(mniFuncao);
-
         jMenuBar1.add(mnEmpresa);
 
         mnRelatorio.setText("Relatório");
@@ -291,15 +166,6 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnRelatorioMousePressed(evt);
             }
         });
-
-        mniRelatorioCliente.setText("Relatório de Clientes");
-        mniRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniRelatorioClienteActionPerformed(evt);
-            }
-        });
-        mnRelatorio.add(mniRelatorioCliente);
-
         jMenuBar1.add(mnRelatorio);
 
         mnAjuda.setText("Ajuda");
@@ -308,135 +174,12 @@ public class PrincipalView extends javax.swing.JFrame {
                 mnAjudaMousePressed(evt);
             }
         });
-
-        mniSobre.setText("Sobre");
-        mniSobre.setEnabled(false);
-        mniSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSobreActionPerformed(evt);
-            }
-        });
-        mniSobre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                mniSobreKeyPressed(evt);
-            }
-        });
-        mnAjuda.add(mniSobre);
-
         jMenuBar1.add(mnAjuda);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void mniClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniClienteActionPerformed
-        if (clienteV == null || !clienteV.isShowing()) {
-            clienteV = new ClienteView(PrincipalView.this);
-            Desktop.add(clienteV);
-            centralizaForm(clienteV);
-            clienteV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniClienteActionPerformed
-
-    private void mniFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFuncionarioActionPerformed
-        if (funcionarioV == null || !funcionarioV.isShowing()) {
-            funcionarioV = new FuncionarioView();
-            Desktop.add(funcionarioV);
-            centralizaForm(funcionarioV);
-            funcionarioV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniFuncionarioActionPerformed
-
-    private void mniEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEntregadorActionPerformed
-        if (entregadorV == null || !entregadorV.isShowing()) {
-            entregadorV = new EntregadorView();
-            Desktop.add(entregadorV);
-            centralizaForm(entregadorV);
-            entregadorV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniEntregadorActionPerformed
-
-    private void mniCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCardapioActionPerformed
-        if (produtoV == null || !produtoV.isShowing()) {
-            produtoV = new ProdutoView();
-            Desktop.add(produtoV);
-            centralizaForm(produtoV);
-            produtoV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniCardapioActionPerformed
-
-    private void mniPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPedidoActionPerformed
-        if (pedidoV == null || !pedidoV.isShowing()) {
-            pedidoV = new EntregaPedidoView(1);
-            Desktop.add(pedidoV);
-            centralizaForm(pedidoV);
-            pedidoV.setVisible(true);
-        }
-
-//        if (tipoPedidoV == null || !tipoPedidoV.isShowing()) {
-//            Desktop.add(tipoPedidoV);
-//            centralizaForm(tipoPedidoV);
-//            tipoPedidoV.setVisible(true);
-//        }
-//        if (balcaoV == null || !balcaoV.isShowing()) {
-//            balcaoV = new BalcaoPedidoView(1);
-//            Desktop.add(balcaoV);
-//            centralizaForm(balcaoV);
-//            balcaoV.setVisible(true);
-//        }
-    }//GEN-LAST:event_mniPedidoActionPerformed
-
-    private void mniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuarioActionPerformed
-        if (usuarioV == null || !usuarioV.isShowing()) {
-            usuarioV = new UsuarioView();
-            Desktop.add(usuarioV);
-            centralizaForm(usuarioV);
-            usuarioV.setVisible(true);
-        }
-
-    }//GEN-LAST:event_mniUsuarioActionPerformed
-
-    private void mniCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCozinhaActionPerformed
-//        if (cozinhaV == null || !cozinhaV.isShowing()) {
-//            cozinhaV = new CozinhaView();
-//            cozinhaV.setVisible(true);
-//        }
-    }//GEN-LAST:event_mniCozinhaActionPerformed
-
-    private void mniModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniModuloActionPerformed
-        if (moduloV == null || !moduloV.isShowing()) {
-            moduloV = new DefinirModuloView();
-            Desktop.add(moduloV);
-            centralizaForm(moduloV);
-            moduloV.setVisible(true);
-        }
-
-//        if (moduloV2 == null || !moduloV2.isShowing()) {
-//            moduloV2 = new ModuloView();
-//            Desktop.add(moduloV2);
-//            centralizaForm(moduloV2);
-//            moduloV2.setVisible(true);
-//        }
-    }//GEN-LAST:event_mniModuloActionPerformed
-
-    private void mniFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFornecedorActionPerformed
-        if (fornecedorV == null || !fornecedorV.isShowing()) {
-            fornecedorV = new FornecedorView();
-            Desktop.add(fornecedorV);
-            centralizaForm(fornecedorV);
-            fornecedorV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniFornecedorActionPerformed
-
-    private void mniFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFuncaoActionPerformed
-        if (cargoV == null || !cargoV.isShowing()) {
-            cargoV = new CargoFuncaoView();
-            Desktop.add(cargoV);
-            centralizaForm(cargoV);
-            cargoV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniFuncaoActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
@@ -445,33 +188,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jMenuBar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuBar1KeyPressed
 
     }//GEN-LAST:event_jMenuBar1KeyPressed
-
-    private void mniTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTipoProdutoActionPerformed
-        if (tipoProdutoV == null || !tipoProdutoV.isShowing()) {
-            tipoProdutoV = new TipoProdutoView();
-            Desktop.add(tipoProdutoV);
-            centralizaForm(tipoProdutoV);
-            tipoProdutoV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniTipoProdutoActionPerformed
-
-    private void mniPrecoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPrecoProdutoActionPerformed
-        if (precoProdutoV == null || !precoProdutoV.isShowing()) {
-            precoProdutoV = new PrecoProdutoView();
-            Desktop.add(precoProdutoV);
-            centralizaForm(precoProdutoV);
-            precoProdutoV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniPrecoProdutoActionPerformed
-
-    private void mniCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCancelarPedidoActionPerformed
-        if (cancelamentoPedidoV == null || !cancelamentoPedidoV.isShowing()) {
-            cancelamentoPedidoV = new CancelamentoPedidosView(this);
-            Desktop.add(cancelamentoPedidoV);
-            centralizaForm(cancelamentoPedidoV);
-            cancelamentoPedidoV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniCancelarPedidoActionPerformed
 
     private void mnProducaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnProducaoMousePressed
         // TODO add your handling code here:
@@ -529,20 +245,6 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnContasPagarMousePressed
 
-    private void mnVendaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnVendaMousePressed
-        // TODO add your handling code here:
-        if (menu == menuVendas) {
-            menu.dispose();
-            menu = new JInternalFrame();
-        } else {
-            menu.dispose();
-            menuVendas = new MenuVendas();
-            Desktop.add(menuVendas);
-            menuVendas.setVisible(true);
-            menu = menuVendas;
-        }
-    }//GEN-LAST:event_mnVendaMousePressed
-
     private void mnContarReceberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnContarReceberMousePressed
         // TODO add your handling code here:
         if (menu == menuContasReceber) {
@@ -599,23 +301,19 @@ public class PrincipalView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnAjudaMousePressed
 
-    private void mniRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioClienteActionPerformed
-        if (relatorioClienteV == null || !relatorioClienteV.isShowing()) {
-            relatorioClienteV = new RelatorioClienteView(PrincipalView.this);
-            Desktop.add(relatorioClienteV);
-            centralizaForm(relatorioClienteV);
-            relatorioClienteV.setVisible(true);
+    private void mnVendaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnVendaMousePressed
+        // TODO add your handling code here:
+        if (menu == menuVendas) {
+            menu.dispose();
+            menu = new JInternalFrame();
+        } else {
+            menu.dispose();
+            menuVendas = new MenuVendas();
+            Desktop.add(menuVendas);
+            menuVendas.setVisible(true);
+            menu = menuVendas;
         }
-    }//GEN-LAST:event_mniRelatorioClienteActionPerformed
-
-    private void mniSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mniSobreKeyPressed
-
-    }//GEN-LAST:event_mniSobreKeyPressed
-
-    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
-        sobreV = new SobreView();
-        sobreV.setVisible(true);
-    }//GEN-LAST:event_mniSobreActionPerformed
+    }//GEN-LAST:event_mnVendaMousePressed
 
     private void telaLogin() {
 
@@ -726,21 +424,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu mnProducao;
     private javax.swing.JMenu mnRelatorio;
     private javax.swing.JMenu mnVenda;
-    private javax.swing.JMenuItem mniCancelarPedido;
-    private javax.swing.JMenuItem mniCardapio;
-    private javax.swing.JMenuItem mniCliente;
-    private javax.swing.JMenuItem mniCozinha;
-    private javax.swing.JMenuItem mniEntregador;
-    private javax.swing.JMenuItem mniFornecedor;
-    private javax.swing.JMenuItem mniFuncao;
-    private javax.swing.JMenuItem mniFuncionario;
-    private javax.swing.JMenuItem mniModulo;
-    private javax.swing.JMenuItem mniPedido;
-    private javax.swing.JMenuItem mniPrecoProduto;
-    private javax.swing.JMenuItem mniRelatorioCliente;
-    private javax.swing.JMenuItem mniSobre;
-    private javax.swing.JMenuItem mniTipoProduto;
-    private javax.swing.JMenuItem mniUsuario;
     // End of variables declaration//GEN-END:variables
 
     private void centralizaForm(JInternalFrame frame) {
@@ -758,17 +441,16 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     public void habiltaMenu(boolean valor) {
-        mniCardapio.setEnabled(valor);
-        mniCliente.setEnabled(valor);
-        mniCozinha.setEnabled(valor);
-        mniEntregador.setEnabled(valor);
-        mniFuncionario.setEnabled(valor);
-        mniModulo.setEnabled(valor);
-        mniPedido.setEnabled(valor);
-        mniRelatorioCliente.setEnabled(valor);
-        mniUsuario.setEnabled(valor);
-        mniFornecedor.setEnabled(valor);
-        mniFuncao.setEnabled(valor);
+        mnAjuda.setVisible(valor);
+        mnCompras.setVisible(valor);
+        mnContarReceber.setVisible(valor);
+        mnContasPagar.setVisible(valor);
+        mnEmpresa.setVisible(valor);
+        mnEstoque.setVisible(valor);
+        mnProducao.setVisible(valor);
+        mnRelatorio.setVisible(valor);
+        mnVenda.setVisible(valor);
+        
 
     }
 
