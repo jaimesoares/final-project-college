@@ -82,7 +82,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnProduto.setForeground(new java.awt.Color(0, 51, 255));
-        btnProduto.setText("1 Produto ");
+        btnProduto.setText("<html> Produto <font size='2' style='color:black'> <br/>Crtl-1 </font>");
         btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProdutoActionPerformed(evt);
@@ -91,7 +91,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnTipoProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnTipoProduto.setForeground(new java.awt.Color(0, 51, 255));
-        btnTipoProduto.setText("<html> 2 Tipo de<br/>  Produto");
+        btnTipoProduto.setText("<html>Tipo de Produto <font size='2' style='color:black'> <br/>Crtl-2 </font>");
         btnTipoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTipoProdutoActionPerformed(evt);
@@ -100,7 +100,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnPrecoProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPrecoProduto.setForeground(new java.awt.Color(0, 51, 255));
-        btnPrecoProduto.setText("<html> 3 Preço de<br/> Produto");
+        btnPrecoProduto.setText("<html> Preço de<br/> Produto<font size='2' style='color:black'> <br/>Crtl-3 </font>");
         btnPrecoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrecoProdutoActionPerformed(evt);
@@ -112,16 +112,11 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTipoProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrecoProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(btnPrecoProduto)
+                    .addComponent(btnProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
