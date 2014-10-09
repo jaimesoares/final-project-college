@@ -79,6 +79,11 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         btnPrecoProduto = new javax.swing.JButton();
 
         setTitle("Menu Estoque");
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         btnProduto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnProduto.setForeground(new java.awt.Color(0, 51, 255));

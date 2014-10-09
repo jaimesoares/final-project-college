@@ -5,7 +5,7 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.UsuarioBean;
+import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.Relogio;

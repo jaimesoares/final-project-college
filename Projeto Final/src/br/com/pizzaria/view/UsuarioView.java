@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.FuncionarioBean;
-import br.com.pizzaria.beans.UsuarioBean;
+import br.com.pizzaria.bean.FuncionarioBean;
+import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
 import java.util.Arrays;
 import javax.swing.JOptionPane;

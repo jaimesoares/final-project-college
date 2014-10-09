@@ -1,7 +1,7 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.CepBean;
-import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.bean.CepBean;
+import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.util.VerificarData;
 import javax.swing.ImageIcon;

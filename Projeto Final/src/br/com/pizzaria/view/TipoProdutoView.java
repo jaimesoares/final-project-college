@@ -1,6 +1,6 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.TipoProdutoBean;
+import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.controller.TipoProdutoController;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.UsuarioBean;
+import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.model.FuncionarioModel;
 import br.com.pizzaria.model.UsuarioModel;
 import br.com.pizzaria.util.Som;

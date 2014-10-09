@@ -1,6 +1,6 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.beans.PedidoBean;
+import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import java.sql.PreparedStatement;

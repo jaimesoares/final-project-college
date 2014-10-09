@@ -5,7 +5,7 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ModuloBean;
+import br.com.pizzaria.bean.ModuloBean;
 import br.com.pizzaria.controller.ModuloController;
 import javax.swing.DefaultListModel;
 

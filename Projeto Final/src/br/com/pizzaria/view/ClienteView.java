@@ -1,7 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CepBean;
-import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.bean.CepBean;
+import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificarData;
 import java.awt.event.KeyEvent;

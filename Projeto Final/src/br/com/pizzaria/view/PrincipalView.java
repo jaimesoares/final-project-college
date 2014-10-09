@@ -43,7 +43,7 @@ public class PrincipalView extends javax.swing.JFrame {
     MenuCompras menuCompras;
     MenuContasPagar menuContasPagar;
     MenuContasReceber menuContasReceber;
-    MenuManutencao menuManutencao;
+    MenuEmpresa menuManutencao;
     MenuRelatorio menuRelatorio;
     MenuVendas menuVendas;
 
@@ -62,6 +62,7 @@ public class PrincipalView extends javax.swing.JFrame {
         habiltaMenu(false);
 
         menu = new JInternalFrame();
+       // mnAjuda.setVisible(false);
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
             public void eventDispatched(AWTEvent e) {
@@ -309,6 +310,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
 
         mniSobre.setText("Sobre");
+        mniSobre.setEnabled(false);
         mniSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniSobreActionPerformed(evt);
@@ -444,15 +446,6 @@ public class PrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuBar1KeyPressed
 
-    private void mniRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioClienteActionPerformed
-        if (relatorioClienteV == null || !relatorioClienteV.isShowing()) {
-            relatorioClienteV = new RelatorioClienteView(PrincipalView.this);
-            Desktop.add(relatorioClienteV);
-            centralizaForm(relatorioClienteV);
-            relatorioClienteV.setVisible(true);
-        }
-    }//GEN-LAST:event_mniRelatorioClienteActionPerformed
-
     private void mniTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTipoProdutoActionPerformed
         if (tipoProdutoV == null || !tipoProdutoV.isShowing()) {
             tipoProdutoV = new TipoProdutoView();
@@ -479,15 +472,6 @@ public class PrincipalView extends javax.swing.JFrame {
             cancelamentoPedidoV.setVisible(true);
         }
     }//GEN-LAST:event_mniCancelarPedidoActionPerformed
-
-    private void mniSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mniSobreKeyPressed
-
-    }//GEN-LAST:event_mniSobreKeyPressed
-
-    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
-        sobreV = new SobreView();
-        sobreV.setVisible(true);
-    }//GEN-LAST:event_mniSobreActionPerformed
 
     private void mnProducaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnProducaoMousePressed
         // TODO add your handling code here:
@@ -580,7 +564,7 @@ public class PrincipalView extends javax.swing.JFrame {
             menu = new JInternalFrame();
         } else {
             menu.dispose();
-            menuManutencao = new MenuManutencao();
+            menuManutencao = new MenuEmpresa();
             Desktop.add(menuManutencao);
             menuManutencao.setVisible(true);
             menu = menuManutencao;
@@ -614,6 +598,24 @@ public class PrincipalView extends javax.swing.JFrame {
             menu = menuAjuda;
         }
     }//GEN-LAST:event_mnAjudaMousePressed
+
+    private void mniRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioClienteActionPerformed
+        if (relatorioClienteV == null || !relatorioClienteV.isShowing()) {
+            relatorioClienteV = new RelatorioClienteView(PrincipalView.this);
+            Desktop.add(relatorioClienteV);
+            centralizaForm(relatorioClienteV);
+            relatorioClienteV.setVisible(true);
+        }
+    }//GEN-LAST:event_mniRelatorioClienteActionPerformed
+
+    private void mniSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mniSobreKeyPressed
+
+    }//GEN-LAST:event_mniSobreKeyPressed
+
+    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
+        sobreV = new SobreView();
+        sobreV.setVisible(true);
+    }//GEN-LAST:event_mniSobreActionPerformed
 
     private void telaLogin() {
 

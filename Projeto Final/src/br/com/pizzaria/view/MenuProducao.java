@@ -9,6 +9,11 @@ import br.com.pizzaria.util.Global;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 /**
@@ -18,13 +23,25 @@ import javax.swing.Timer;
 public class MenuProducao extends javax.swing.JInternalFrame {
 
     CozinhaView cozinhaV;
+
     /**
      * Creates new form MenuProdução
      */
     public MenuProducao() {
         initComponents();
-        Timer time = new Timer(1000,ativar);
-        time.start(); 
+        Timer time = new Timer(1000, ativar);
+        time.start();
+
+        btnPedidoBalcao.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnPedidoBalcao.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPedidoBalcaoActionPerformed(e);
+            }
+
+        });
+
     }
 
     /**
@@ -39,10 +56,12 @@ public class MenuProducao extends javax.swing.JInternalFrame {
         btnPedidoBalcao = new javax.swing.JButton();
 
         setTitle("Menu Produção");
+        setPreferredSize(new java.awt.Dimension(308, 263));
+        setRequestFocusEnabled(false);
 
         btnPedidoBalcao.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPedidoBalcao.setForeground(new java.awt.Color(0, 51, 255));
-        btnPedidoBalcao.setText("Cozinha");
+        btnPedidoBalcao.setText("<html>Cozinha <font size='2' style='color:black'> Crtl-1 </font>");
         btnPedidoBalcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPedidoBalcaoActionPerformed(evt);
@@ -55,8 +74,8 @@ public class MenuProducao extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPedidoBalcao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnPedidoBalcao, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,31 +89,29 @@ public class MenuProducao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPedidoBalcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoBalcaoActionPerformed
-if (cozinhaV == null || !cozinhaV.isShowing()) {
+        if (cozinhaV == null || !cozinhaV.isShowing()) {
             cozinhaV = new CozinhaView();
             cozinhaV.setVisible(true);
-        }        
+        }
     }//GEN-LAST:event_btnPedidoBalcaoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPedidoBalcao;
     // End of variables declaration//GEN-END:variables
-    ActionListener ativar = (  
-        new ActionListener(){  
-            public void actionPerformed(ActionEvent e){  
-                centralizarComponente();
-            }  
-          
-        }  
-    );
-    
-    public final void centralizarComponente() {  
-       int x = Global.principal.getLocation().x;
-       int y = Global.principal.getLocation().y;
-        
+    ActionListener ativar = (new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            centralizarComponente();
+        }
+
+    });
+
+    public final void centralizarComponente() {
+        int x = Global.principal.getLocation().x;
+        int y = Global.principal.getLocation().y;
+
         Dimension ds = Global.principal.getSize();
-        Dimension dw = getSize();  
-        setLocation((0), (0));  
+        Dimension dw = getSize();
+        setLocation((0), (0));
     }
 }

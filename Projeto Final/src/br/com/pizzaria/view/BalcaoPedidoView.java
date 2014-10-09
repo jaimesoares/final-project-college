@@ -5,9 +5,9 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.ClienteBean;
-import br.com.pizzaria.beans.PedidoBean;
-import br.com.pizzaria.beans.ProdutoBean;
+import br.com.pizzaria.bean.ClienteBean;
+import br.com.pizzaria.bean.PedidoBean;
+import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.controller.BalcaoPedidoController;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.EntregaPedidoController;

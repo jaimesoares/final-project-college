@@ -1,8 +1,8 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.beans.CepBean;
-import br.com.pizzaria.beans.ClienteBean;
-import br.com.pizzaria.beans.PedidoBean;
+import br.com.pizzaria.bean.CepBean;
+import br.com.pizzaria.bean.ClienteBean;
+import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.controller.CancelamentoPedidoController;
 import br.com.pizzaria.controller.EntregaPedidoController;
 import br.com.pizzaria.controller.RelatorioClienteController;

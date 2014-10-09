@@ -1,6 +1,6 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.beans.ClienteBean;
+import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.model.ClienteModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
