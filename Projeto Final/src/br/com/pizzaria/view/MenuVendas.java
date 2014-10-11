@@ -80,11 +80,6 @@ public class MenuVendas extends javax.swing.JInternalFrame {
 
         setTitle("Menu Vendas");
         setPreferredSize(new java.awt.Dimension(308, 263));
-        try {
-            setSelected(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
 
         btnPedido.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPedido.setForeground(new java.awt.Color(0, 51, 255));

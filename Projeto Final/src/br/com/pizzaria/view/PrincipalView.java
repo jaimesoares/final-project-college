@@ -77,13 +77,13 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
+        mnEmpresa = new javax.swing.JMenu();
         mnProducao = new javax.swing.JMenu();
         mnEstoque = new javax.swing.JMenu();
         mnCompras = new javax.swing.JMenu();
         mnContasPagar = new javax.swing.JMenu();
         mnVenda = new javax.swing.JMenu();
         mnContarReceber = new javax.swing.JMenu();
-        mnEmpresa = new javax.swing.JMenu();
         mnRelatorio = new javax.swing.JMenu();
         mnAjuda = new javax.swing.JMenu();
 
@@ -103,6 +103,14 @@ public class PrincipalView extends javax.swing.JFrame {
                 jMenuBar1KeyPressed(evt);
             }
         });
+
+        mnEmpresa.setText("Empresa");
+        mnEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnEmpresaMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(mnEmpresa);
 
         mnProducao.setText("Produção");
         mnProducao.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,14 +159,6 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(mnContarReceber);
-
-        mnEmpresa.setText("Empresa");
-        mnEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mnEmpresaMousePressed(evt);
-            }
-        });
-        jMenuBar1.add(mnEmpresa);
 
         mnRelatorio.setText("Relatório");
         mnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -312,6 +312,7 @@ public class PrincipalView extends javax.swing.JFrame {
             Desktop.add(menuVendas);
             menuVendas.setVisible(true);
             menu = menuVendas;
+           
         }
     }//GEN-LAST:event_mnVendaMousePressed
 

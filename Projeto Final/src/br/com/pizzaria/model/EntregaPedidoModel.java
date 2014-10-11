@@ -187,9 +187,11 @@ public class EntregaPedidoModel {
                         + "             `item_quantidade`,\n"
                         + "             `item_preco_unit`,\n"
                         + "             `item_preco_tot`,\n"
-                        + "             `item_stt_meia_pizza`\n"
+                        + "             `item_stt_meia_pizza`,\n"
+                        + "             `item_cod_prod2`\n"
                         + "             )\n"
                         + "values (?,\n"
+                        + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
@@ -203,7 +205,14 @@ public class EntregaPedidoModel {
                 pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
                 pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());
                 pstmt.setDouble(5, pedidoBeans.getItensPedido().get(i).getPrecoTotal());
-                pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
+
+                if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
+                    pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
+                    pstmt.setInt(7, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());                    
+                }else{
+                    pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
+                    pstmt.setString(7, null);   
+                }
 
                 pstmt.execute();
 
@@ -213,6 +222,7 @@ public class EntregaPedidoModel {
                 try {
                     ConectaBanco.getConnection().rollback();
                     JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                    //Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex1) {
                     Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
                 }
@@ -314,6 +324,38 @@ public class EntregaPedidoModel {
         }
     }
 
+    public void pesquisaBorda(List<ProdutoBean> listaDePizza) {
+        try {
+            String SQLPesquisa = "SELECT \n"
+                    + "  t.`tprd_id`,\n"
+                    + "  t.`tprd_descr`,\n"
+                    + "  p.`prd_prod`,\n"
+                    + "  p.`prd_descr`\n"
+                    //+ "  c.`tprc_preco` \n"
+                    + "FROM\n"
+                    + "  `pizzaria`.`tipo_prod` t \n"
+                    + "  JOIN `pizzaria`.`produtos` p \n"
+                    + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
+                    // + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
+                    //+ "    ON c.tprc_cod_prod = p.prd_prod \n"
+                    + "WHERE t.`tprd_descr` = 'Borda';";
+
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ProdutoBean novo = new ProdutoBean();
+                novo.setCodigo(rs.getInt("prd_prod"));
+                novo.setDescricao(rs.getString("prd_descr"));
+                novo.getPrecoProduto().setPreco(valorDoItem(rs.getInt("prd_prod")));
+                novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
+                novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
+                listaDePizza.add(novo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void cadastrarCupom(PedidoBean pedidobeans, int codigoPedido) {
 
         try {
@@ -363,7 +405,8 @@ public class EntregaPedidoModel {
                         + "  `cupi_cod_prod`,\n"
                         + "  `cupi_qtd`,\n"
                         + "  `cupi_vlr_unit`,\n"
-                        + "  `cupi_vlr_tot`\n"
+                        + "  `cupi_vlr_tot`,\n"
+                        + "  `cupi_cod_prod2`\n"
                         //+ "  `cupi_vlr_desc`,\n"
                         // + "  `cupi_vlr_tributo`\n"
                         + ") \n"
@@ -373,6 +416,7 @@ public class EntregaPedidoModel {
                         + "    ?,\n"
                         + "    ?,\n"
                         + "    ?,\n"
+                         + "    ?,\n"
                         + "    ?\n"
                         //  + "    'cupi_vlr_desc',\n"
                         //  + "    'cupi_vlr_tributo'\n"
@@ -385,6 +429,14 @@ public class EntregaPedidoModel {
                 pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
                 pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());
                 pstmt.setDouble(5, pedidoBeans.getItensPedido().get(i).getPrecoTotal());
+                
+                if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
+                    
+                    pstmt.setInt(6, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());                    
+                }else{
+                    pstmt.setString(6, null);   
+                }
+
 
                 pstmt.execute();
 

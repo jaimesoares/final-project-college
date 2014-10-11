@@ -72,6 +72,10 @@ public class EntregaPedidoController {
         entregaPedidoModel.pesquisaPizza(listaDePizza);
     }
     
+     public void controleListaBorda(List<ProdutoBean> listaDePizza) {
+        entregaPedidoModel.pesquisaBorda(listaDePizza);
+    }
+    
     public int controleCodigoPedido(){
         return entregaPedidoModel.codigoDoPedido();
     }

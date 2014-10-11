@@ -63,14 +63,19 @@ public class LoginView extends javax.swing.JInternalFrame {
         lblSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSenha.setText("Senha");
 
-        txtUsuario.setText("jaime");
+        txtUsuario.setText("admin");
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyPressed(evt);
             }
         });
 
-        txtSenha.setText("123");
+        txtSenha.setText("admin");
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);
@@ -222,6 +227,10 @@ public class LoginView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
@@ -259,9 +268,9 @@ public class LoginView extends javax.swing.JInternalFrame {
                 Global.principal.habiltaMenu(true);
                 Global.usuario = usuarioBeans;
                 CozinhaView cozinhaV = new CozinhaView();
-                    cozinhaV.setVisible(true);
-                    Relogio relogio = new Relogio();
-                    relogio.setVisible(true);
+                cozinhaV.setVisible(true);
+                    //Relogio relogio = new Relogio();
+                //relogio.setVisible(true);
                 this.dispose();
             } else {
                 lblMensagem.setText("Mensagem: Senha incorreta!");
