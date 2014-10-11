@@ -19,6 +19,9 @@ public class ItemPedidoBean {
     private double precoTotal;
     private String meiaPizza;
     private String descricao;
+    private int codigoProduto2;
+    private int codigoProduto3;
+    private double valotDesconto;
 
     /**
      * @return the codigoPedido
@@ -135,5 +138,47 @@ public class ItemPedidoBean {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the codigoProduto2
+     */
+    public int getCodigoProduto2() {
+        return codigoProduto2;
+    }
+
+    /**
+     * @param codigoProduto2 the codigoProduto2 to set
+     */
+    public void setCodigoProduto2(int codigoProduto2) {
+        this.codigoProduto2 = codigoProduto2;
+    }
+
+    /**
+     * @return the codigoProduto3
+     */
+    public int getCodigoProduto3() {
+        return codigoProduto3;
+    }
+
+    /**
+     * @param codigoProduto3 the codigoProduto3 to set
+     */
+    public void setCodigoProduto3(int codigoProduto3) {
+        this.codigoProduto3 = codigoProduto3;
+    }
+
+    /**
+     * @return the valotDesconto
+     */
+    public double getValotDesconto() {
+        return valotDesconto;
+    }
+
+    /**
+     * @param valotDesconto the valotDesconto to set
+     */
+    public void setValotDesconto(double valotDesconto) {
+        this.valotDesconto = valotDesconto;
     }
 }
