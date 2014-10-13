@@ -22,6 +22,7 @@ public class PedidoBean {
     private double valorTroco;
     private String tipoPagamento;
     private String tipoPedido;
+    private int codigoBorda;
 
     public PedidoBean() {
         codProduto = new ArrayList<>();
@@ -258,6 +259,20 @@ public class PedidoBean {
      */
     public void setTipoPedido(String tipoPedido) {
         this.tipoPedido = tipoPedido;
+    }
+
+    /**
+     * @return the codigoBorda
+     */
+    public int getCodigoBorda() {
+        return codigoBorda;
+    }
+
+    /**
+     * @param codigoBorda the codigoBorda to set
+     */
+    public void setCodigoBorda(int codigoBorda) {
+        this.codigoBorda = codigoBorda;
     }
     
 }

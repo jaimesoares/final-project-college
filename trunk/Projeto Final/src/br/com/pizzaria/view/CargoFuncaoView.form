@@ -42,7 +42,7 @@
                       <Component id="btnAdicionar" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnRemover" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="487" max="32767" attributes="0"/>
+                      <EmptySpace pref="415" max="32767" attributes="0"/>
                       <Component id="btnFechar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -85,7 +85,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnAdicionar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="+"/>
+        <Property name="text" type="java.lang.String" value="Adicionar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarActionPerformed"/>
@@ -101,7 +101,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRemover">
       <Properties>
-        <Property name="text" type="java.lang.String" value="-"/>
+        <Property name="text" type="java.lang.String" value="Remover"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverActionPerformed"/>

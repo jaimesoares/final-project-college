@@ -4,8 +4,11 @@ import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.FuncionarioBean;
 import br.com.pizzaria.controller.FuncionarioController;
+import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificarData;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -21,6 +25,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTelefone;
     MaskFormatter formatoNascimento;
     MaskFormatter formatoCEP;
+    MaskFormatter formatoRG;
     FuncionarioBean funcionarioBeans;
     FuncionarioController funcionarioController;
     DefaultTableModel modelo;
@@ -94,7 +99,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtBairro = new javax.swing.JTextField();
         lbl_data3 = new javax.swing.JLabel();
         lbl_bairro4 = new javax.swing.JLabel();
-        txtRg = new javax.swing.JTextField();
         lbl_bairro5 = new javax.swing.JLabel();
         txtCpf = new javax.swing.JTextField();
         lbl_rua6 = new javax.swing.JLabel();
@@ -107,6 +111,10 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro9 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        try{        formatoRG = new MaskFormatter("##.###.###-#");    
+        }catch (Exception Erro){      
+            JOptionPane.showMessageDialog(null, "RG inválida", "ERRO DE FORMATAÇÃO", 0);  }
+        txtRg = new JFormattedTextField(formatoRG);
 
         setClosable(true);
         setIconifiable(true);
@@ -177,9 +185,17 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNumero.setBackground(new java.awt.Color(204, 255, 255));
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyTyped(evt);
+            }
+        });
+
         lbl_bairro3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro3.setText("CEP:");
 
+        txfTelefone.setBackground(new java.awt.Color(204, 255, 255));
         txfTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfTelefoneKeyTyped(evt);
@@ -201,6 +217,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_rua2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua2.setText("Estado:");
 
+        txfNascimento.setBackground(new java.awt.Color(204, 255, 255));
         txfNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfNascimentoKeyTyped(evt);
@@ -245,6 +262,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtCidade.setEditable(false);
         txtCidade.setBackground(new java.awt.Color(255, 255, 204));
 
+        txtNome.setBackground(new java.awt.Color(204, 255, 255));
+
         lbl_bairro2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro2.setText("Cidade:");
 
@@ -266,6 +285,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro5.setText("RG:");
 
+        txtCpf.setBackground(new java.awt.Color(204, 255, 255));
         txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCpfFocusLost(evt);
@@ -294,6 +314,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro7.setText("Placa Moto:");
 
         txtPlaca.setEditable(false);
+        txtPlaca.setBackground(new java.awt.Color(240, 240, 240));
         txtPlaca.setEnabled(false);
         txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,12 +323,19 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         });
 
         txtCnh.setEditable(false);
+        txtCnh.setBackground(new java.awt.Color(240, 240, 240));
         txtCnh.setEnabled(false);
+        txtCnh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCnhKeyTyped(evt);
+            }
+        });
 
         lbl_bairro8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro8.setText("CNH:");
 
         txtMoto.setEditable(false);
+        txtMoto.setBackground(new java.awt.Color(240, 240, 240));
         txtMoto.setEnabled(false);
 
         lbl_bairro9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -320,6 +348,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Manutenção de Funcionário");
+
+        txtRg.setBackground(new java.awt.Color(204, 255, 255));
+        txtRg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRgKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -387,8 +422,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_bairro5)
-                            .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(103, 103, 103)
+                            .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(107, 107, 107)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_rua6)
                             .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -479,13 +514,13 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_bairro4)
                             .addComponent(lbl_rua6)
                             .addComponent(lbl_bairro5))
-                        .addGap(26, 26, 26)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -551,6 +586,18 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 btnEditar.setEnabled(true);
                 tblFuncionario.setEnabled(true);
                 txfPesquisar.setEnabled(true);
+
+                switch (JOptionPane.showConfirmDialog(null, "Deseja cadastrar usuário de sistema para " + txtNome.getText(), "Cadastro de Usuários", JOptionPane.YES_NO_OPTION)) {
+                    case 0:
+                        UsuarioView usuarioV = new UsuarioView();
+                        Global.principal.Desktop.add(usuarioV);
+                        Dimension desktopSize = Global.principal.Desktop.getSize();
+                        Dimension jInternalFrameSize = usuarioV.getSize();
+                        usuarioV.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                                (desktopSize.height - jInternalFrameSize.height) / 2);
+                        usuarioV.setVisible(true);
+                        break;
+                }
                 limpaTudo();
                 habilitarCampos(false);
             }
@@ -715,6 +762,33 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCpfKeyPressed
 
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtRgKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRgKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRgKeyTyped
+
+    private void txtCnhKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCnhKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCnhKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
@@ -763,7 +837,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtPlaca;
-    private javax.swing.JTextField txtRg;
+    private javax.swing.JFormattedTextField txtRg;
     private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
 
@@ -883,6 +957,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             txtCnh.setEditable(true);
             txtMoto.setEditable(true);
             txtPlaca.setEditable(true);
+
         } else {
             txtCnh.setEnabled(false);
             txtMoto.setEnabled(false);

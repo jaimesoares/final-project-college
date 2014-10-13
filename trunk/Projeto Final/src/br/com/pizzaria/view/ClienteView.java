@@ -6,7 +6,7 @@ import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificarData;
 import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -19,16 +19,29 @@ public class ClienteView extends javax.swing.JInternalFrame {
     ClienteBean clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
-    JFrame frame;
+    EntregaPedidoView frame;
 
-    public ClienteView(JFrame frame) {
+    public ClienteView() {
         initComponents();
-        this.frame = frame;
+
         habilitarCampos(false);
 
         clienteBeans = new ClienteBean();
         clienteController = new ClienteController();
         modelo = (DefaultTableModel) tblCliente.getModel();
+
+    }
+
+    public ClienteView(EntregaPedidoView frame) {
+        this.frame = frame;
+        initComponents();
+
+        habilitarCampos(false);
+
+        clienteBeans = new ClienteBean();
+        clienteController = new ClienteController();
+        modelo = (DefaultTableModel) tblCliente.getModel();
+        btnNovoActionPerformed(null);
 
     }
 
@@ -117,6 +130,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
 
+        txtNome.setBackground(new java.awt.Color(204, 255, 255));
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
@@ -163,6 +177,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Pesquisar:");
 
+        txfTelefone.setBackground(new java.awt.Color(204, 255, 255));
         txfTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfTelefoneActionPerformed(evt);
@@ -263,12 +278,14 @@ public class ClienteView extends javax.swing.JInternalFrame {
         lbl_data3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data3.setText("Número:");
 
+        txtNumero.setBackground(new java.awt.Color(204, 255, 255));
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumeroKeyTyped(evt);
             }
         });
 
+        txfNascimento.setBackground(new java.awt.Color(204, 255, 255));
         txfNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfNascimentoKeyTyped(evt);
@@ -533,6 +550,13 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 btnEditar.setEnabled(true);
                 tblCliente.setEnabled(true);
                 txtPesquisar.setEnabled(true);
+
+                if (frame.getTitle().equalsIgnoreCase("PEDIDO")) {                    
+                    frame.pesquisaCliente(txtNome.getText());
+                    frame.setVisible(true);
+                    this.dispose();
+                }
+                
                 limpaTudo();
                 habilitarCampos(false);
             }

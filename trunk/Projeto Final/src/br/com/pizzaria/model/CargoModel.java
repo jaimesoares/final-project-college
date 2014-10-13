@@ -66,10 +66,10 @@ public class CargoModel {
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Atualização efetivada", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Editar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "\""+cargoBeans.getDescricao()+"\" não pode ser removido!", "Alteração", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 }

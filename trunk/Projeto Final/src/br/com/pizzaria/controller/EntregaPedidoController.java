@@ -6,6 +6,7 @@ import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.EntregaPedidoModel;
+import br.com.pizzaria.view.EntregaPedidoView;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -79,4 +80,10 @@ public class EntregaPedidoController {
     public int controleCodigoPedido(){
         return entregaPedidoModel.codigoDoPedido();
     }
+    
+    public void controleImpressaoCupom(PedidoBean pedidoBean){
+        entregaPedidoModel.imprimirCupom(pedidoBean);
+    }
+    
+    
 }

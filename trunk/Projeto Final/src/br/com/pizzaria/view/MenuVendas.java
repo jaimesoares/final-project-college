@@ -157,7 +157,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         // TODO add your handling code here:
         if (clienteV == null || !clienteV.isShowing()) {
-            clienteV = new ClienteView(Global.principal);
+            clienteV = new ClienteView();
             Global.principal.Desktop.add(clienteV);
             centralizaForm(clienteV);
             clienteV.setVisible(true);

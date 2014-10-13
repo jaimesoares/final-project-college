@@ -1,7 +1,12 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.bean.ClienteBean;
+import br.com.pizzaria.bean.FornecedorBean;
 import br.com.pizzaria.controller.ClienteController;
+import br.com.pizzaria.controller.FornecedorController;
+import br.com.pizzaria.util.Global;
+import br.com.pizzaria.util.VerificarData;
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
@@ -11,11 +16,12 @@ import javax.swing.text.MaskFormatter;
 
 public class FornecedorView extends javax.swing.JInternalFrame {
 
-    MaskFormatter FormatoTelefone;
+    MaskFormatter formatoTelefone;
+    MaskFormatter formatoCEP;
     SimpleDateFormat FormatoData;
-    Date DataAtual;
-    ClienteBean clienteBeans;
-    ClienteController clienteController;
+    Date dataAtual;
+    FornecedorBean fornecedorBeans;
+    FornecedorController fornecedorController;
     DefaultTableModel modelo;
 
     public FornecedorView() {
@@ -23,26 +29,23 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         habilitarCampos(false);
         FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
-        clienteBeans = new ClienteBean();
-        clienteController = new ClienteController();
-//        modelo = (DefaultTableModel) tblCliente.getModel();
+        fornecedorBeans = new FornecedorBean();
+        fornecedorController = new FornecedorController();
+        modelo = (DefaultTableModel) tblFornecedor.getModel();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnFechar = new javax.swing.JButton();
-        txtBairro6 = new javax.swing.JTextField();
         try{
 
-            FormatoTelefone = new MaskFormatter("(##)####-####");
+            formatoTelefone = new MaskFormatter("(##)####-####");
 
         }catch (Exception Erro){
             JOptionPane.showMessageDialog(null, "Telefone inválido", "ERRO DE FORMATAÇÃO", 0);
         }
-        txfTelefone = new JFormattedTextField(FormatoTelefone);
-        txtBairro3 = new javax.swing.JTextField();
+        txfTelefone = new JFormattedTextField(formatoTelefone);
         txtBairro5 = new javax.swing.JTextField();
         lbl_bairro3 = new javax.swing.JLabel();
         lbl_data = new javax.swing.JLabel();
@@ -51,12 +54,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         sep_formulario = new javax.swing.JSeparator();
         sep_pesquisa = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFucnionario = new javax.swing.JTable();
+        tblFornecedor = new javax.swing.JTable();
         sep_tabela = new javax.swing.JSeparator();
-        btnCadastrar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnLiberar = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
         txfPesquisar = new javax.swing.JFormattedTextField();
         sep_codigo = new javax.swing.JSeparator();
         lbl_data3 = new javax.swing.JLabel();
@@ -70,13 +69,13 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         lbl_telefone1 = new javax.swing.JLabel();
         lbl_bairro = new javax.swing.JLabel();
         try{
-
-            FormatoTelefone = new MaskFormatter("(##)####-####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Telefone inválido", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txfTelefone1 = new JFormattedTextField(FormatoTelefone);
+ 
+     formatoTelefone = new MaskFormatter("(##)#####-####");
+ 
+ }catch (Exception Erro){
+     JOptionPane.showMessageDialog(null, "Telefone inválido", "ERRO DE FORMATAÇÃO", 0);
+ }
+        txfTelefone1 = new JFormattedTextField(formatoTelefone);
         txtNome2 = new javax.swing.JTextField();
         lbl_rua3 = new javax.swing.JLabel();
         txtData = new javax.swing.JTextField();
@@ -85,6 +84,13 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtEstado = new javax.swing.JTextField();
         lbl_bairro1 = new javax.swing.JLabel();
         txtBairro1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        try{      formatoCEP = new MaskFormatter("#####-###");    }catch(Exception erro){      JOptionPane.showMessageDialog(null, "CEP inválido", "ERRO DE FORMATAÇÃO", 0);  }
+        jFormattedTextField1 = new JFormattedTextField(formatoCEP);  ;
+        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        btnNovo1 = new javax.swing.JButton();
+        btnEditar1 = new javax.swing.JButton();
+        btnFechar1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -96,16 +102,17 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             e1.printStackTrace();
         }
 
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
+        txfTelefone.setBackground(new java.awt.Color(204, 255, 255));
+        txfTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfTelefoneKeyTyped(evt);
             }
         });
 
-        txtBairro3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBairro3ActionPerformed(evt);
+        txtBairro5.setBackground(new java.awt.Color(204, 255, 255));
+        txtBairro5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBairro5KeyTyped(evt);
             }
         });
 
@@ -121,7 +128,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Pesquisar:");
 
-        tblFucnionario.setModel(new javax.swing.table.DefaultTableModel(
+        tblFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -137,45 +144,13 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblFucnionario.getTableHeader().setReorderingAllowed(false);
-        tblFucnionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblFornecedor.getTableHeader().setReorderingAllowed(false);
+        tblFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblFucnionarioMousePressed(evt);
+                tblFornecedorMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblFucnionario);
-
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.setToolTipText("Cadastro de um novo cliente");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setText("Editar");
-        btnEditar.setToolTipText("Para edita alguma informação de cliente");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnLiberar.setText("Liberar");
-        btnLiberar.setToolTipText("Libera os campos para edição");
-        btnLiberar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLiberarActionPerformed(evt);
-            }
-        });
-
-        btnNovo.setText("Novo");
-        btnNovo.setToolTipText("Habilita o formulário para receber novos dados");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tblFornecedor);
 
         txfPesquisar.setForeground(new java.awt.Color(0, 51, 255));
         txfPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -189,13 +164,20 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         lbl_data3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data3.setText("Número:");
 
+        txtBairro.setBackground(new java.awt.Color(255, 255, 204));
+
         lbl_bairro2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro2.setText("Cidade:");
 
+        txtRua.setBackground(new java.awt.Color(255, 255, 204));
         txtRua.setText(" ");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
+
+        txtNome.setBackground(new java.awt.Color(204, 255, 255));
+
+        txtBairro2.setBackground(new java.awt.Color(255, 255, 204));
 
         lbl_rua.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua.setText("Endereço:");
@@ -211,6 +193,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 txfTelefone1ActionPerformed(evt);
             }
         });
+        txfTelefone1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfTelefone1KeyTyped(evt);
+            }
+        });
 
         txtNome2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +209,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         lbl_rua3.setText("E-mail:");
 
         txtData.setEditable(false);
+        txtData.setBackground(new java.awt.Color(255, 255, 204));
         txtData.setForeground(new java.awt.Color(51, 102, 255));
 
         lbl_telefone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -229,8 +217,52 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CPF:", "CNPJ:" }));
 
+        txtEstado.setBackground(new java.awt.Color(255, 255, 204));
+
         lbl_bairro1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_bairro1.setText("Contato:");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Manutenção de Fornecedor");
+
+        jFormattedTextField1.setBackground(new java.awt.Color(204, 255, 255));
+        jFormattedTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jFormattedTextField1KeyTyped(evt);
+            }
+        });
+
+        jFormattedTextField2.setBackground(new java.awt.Color(204, 255, 255));
+        jFormattedTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jFormattedTextField2KeyTyped(evt);
+            }
+        });
+
+        btnNovo1.setText("Novo");
+        btnNovo1.setToolTipText("Habilita o formulário para receber novos dados");
+        btnNovo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovo1ActionPerformed(evt);
+            }
+        });
+
+        btnEditar1.setText("Editar");
+        btnEditar1.setToolTipText("Para edita alguma informação de cliente");
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
+
+        btnFechar1.setText("Fechar");
+        btnFechar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFechar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,8 +274,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBairro3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_bairro3))
+                            .addComponent(lbl_bairro3)
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_rua)
@@ -297,30 +329,29 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_rua3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastrar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLiberar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFechar))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBairro6, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(59, 59, 59)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_data)
                                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNovo1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFechar1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -339,13 +370,12 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(23, 23, 23)
-                                        .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lbl_bairro3)
-                                            .addComponent(lbl_rua))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtBairro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lbl_bairro3)
+                                        .addComponent(lbl_rua))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbl_data3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -368,8 +398,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBairro6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lbl_bairro1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -377,7 +406,9 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_data)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_rua3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -396,98 +427,23 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnLiberar)
-                    .addComponent(btnFechar))
+                    .addComponent(btnNovo1)
+                    .addComponent(btnEditar1)
+                    .addComponent(btnFechar1))
                 .addGap(99, 99, 99))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnFecharActionPerformed
-
-    private void tblFucnionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFucnionarioMousePressed
+    private void tblFornecedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMousePressed
 //        funcionarioBeans = funcionarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFucnionario.getSelectedRow(), 0).toString()));
 //        txtCodigo.setText(funcionarioBeans.getCodigo() + "");
 //        txtNome.setText(funcionarioBeans.getNome());
 //        cbCargo.setSelectedItem(funcionarioBeans.getCargo());
 //        cbPermissao.setSelectedItem(funcionarioBeans.getPermissao());
 //        txtData.setText(funcionarioBeans.getDataCad());
-    }//GEN-LAST:event_tblFucnionarioMousePressed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-//        if (funcionarioController.verificarDados(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
-//            limpaTudo();
-//            habilitarCampos(false);
-//        }
-
-    }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-//        if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), cbPermissao.getSelectedIndex())) {
-//            limpaTudo();
-//            habilitarCampos(false);
-//        }
-        
-        //        if (btnEditar.getText().equals("Editar")) {
-//            btnEditar.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnNovo.setEnabled(false);
-//            habilitarCampos(true);
-//        } else {
-//            if (clienteController.verificarDadosParaEditar(populaClienteBeans())) {
-//                btnEditar.setText("Editar");
-//                btnFechar.setText("Fechar");
-//                btnNovo.setEnabled(true);
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
-        
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiberarActionPerformed
-        habilitarCampos(true);
-    }//GEN-LAST:event_btnLiberarActionPerformed
-
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-//        txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
-//        habilitarCampos(true);
-//        txtNome.requestFocus();
-//        txtCodigo.setText(funcionarioController.controleDeCodigo());
-//        limpaNovo();
-        
-//        if (btnNovo.getText().equals("Novo")) {
-//            btnNovo.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnEditar.setEnabled(false);
-//            txtPesquisar.setEnabled(false);
-//            modelo.setNumRows(0);
-//            txtData.setText(VerificadoresECorretores.retornoDeDataAtual());
-//            habilitarCampos(true);
-//            txtNome.requestFocus();
-//            txtCodigo.setText(clienteController.controleDeCodigo());
-//            limpaNovo();
-//        } else {
-//
-//            populaClienteBeans();
-//            if (clienteController.verificarDados(clienteBeans)) {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//                tblFuncionario.setEnabled(true);
-//                txtPesquisar.setEnabled(true);
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
-        
-    }//GEN-LAST:event_btnNovoActionPerformed
+    }//GEN-LAST:event_tblFornecedorMousePressed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
 //        modelo.setNumRows(0);
@@ -498,23 +454,150 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txfTelefone1ActionPerformed
 
-    private void txtBairro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairro3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBairro3ActionPerformed
-
     private void txtNome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNome2ActionPerformed
 
+    private void txfTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfTelefoneKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfTelefoneKeyTyped
+
+    private void txfTelefone1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfTelefone1KeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfTelefone1KeyTyped
+
+    private void jFormattedTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField1KeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jFormattedTextField1KeyTyped
+
+    private void txtBairro5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairro5KeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBairro5KeyTyped
+
+    private void jFormattedTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField2KeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jFormattedTextField2KeyTyped
+
+    private void btnNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo1ActionPerformed
+        //
+//        if (btnNovo.getText().equals("Novo")) {
+//            btnNovo.setText("Salvar");
+//            btnFechar.setText("Cancelar");
+//            btnEditar.setEnabled(false);
+//            txfPesquisar.setEnabled(false);
+//            modelo.setNumRows(0);
+//            txtData.setText(VerificarData.retornoDeDataAtual());
+//            habilitarCampos(true);
+//            txtNome.requestFocus();
+//            limpaNovo();
+//        } else {
+//
+//            if (funcionarioController.verificarDados(capturaBeans(), cbCargo.getSelectedIndex(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
+//                btnNovo.setText("Novo");
+//                btnFechar.setText("Fechar");
+//                btnEditar.setEnabled(true);
+//                tblFuncionario.setEnabled(true);
+//                txfPesquisar.setEnabled(true);
+//
+//                switch (JOptionPane.showConfirmDialog(null, "Deseja cadastrar usuário de sistema para " + txtNome.getText(), "Cadastro de Usuários", JOptionPane.YES_NO_OPTION)) {
+//                    case 0:
+//                    UsuarioView usuarioV = new UsuarioView();
+//                    Global.principal.Desktop.add(usuarioV);
+//                    Dimension desktopSize = Global.principal.Desktop.getSize();
+//                    Dimension jInternalFrameSize = usuarioV.getSize();
+//                    usuarioV.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+//                        (desktopSize.height - jInternalFrameSize.height) / 2);
+//                    usuarioV.setVisible(true);
+//                    break;
+//                }
+//                limpaTudo();
+//                habilitarCampos(false);
+//            }
+//        }
+
+    }//GEN-LAST:event_btnNovo1ActionPerformed
+
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+//        if (txtNome.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
+//        } else {
+//            if (btnEditar.getText().equals("Editar")) {
+//                btnEditar.setText("Salvar");
+//                btnFechar.setText("Cancelar");
+//                btnNovo.setEnabled(false);
+//                habilitarCampos(true);
+//                verificaEntregador();
+//                txfPesquisar.setEnabled(false);
+//                modelo.setNumRows(0);
+//            } else {
+//                if (funcionarioController.verificarDadosParaEditar(capturaBeans(), cbCargo.getSelectedIndex(), txfCEP.getText(), txtNumero.getText(), txfNascimento.getText())) {
+//                    btnEditar.setText("Editar");
+//                    btnFechar.setText("Fechar");
+//                    btnNovo.setEnabled(true);
+//                    limpaTudo();
+//                    habilitarCampos(false);
+//                    txfPesquisar.setEnabled(true);
+//                }
+//            }
+//        }
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
+    private void btnFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar1ActionPerformed
+//        if (btnFechar.getText().equals("Cancelar")) {
+//            limpaTudo();
+//            if (btnEditar.getText().equals("Salvar")) {
+//                btnEditar.setText("Editar");
+//                btnNovo.setEnabled(true);
+//                habilitarCampos(false);
+//            } else {
+//                btnNovo.setText("Novo");
+//                btnFechar.setText("Fechar");
+//                btnEditar.setEnabled(true);
+//                tblFuncionario.setEnabled(true);
+//                txfPesquisar.setEnabled(true);
+//                habilitarCampos(false);
+//            }
+//            btnFechar.setText("Fechar");
+//        } else {
+//            this.dispose();
+//        }
+    }//GEN-LAST:event_btnFechar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLiberar;
-    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnEditar1;
+    private javax.swing.JButton btnFechar1;
+    private javax.swing.JButton btnNovo1;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_bairro;
     private javax.swing.JLabel lbl_bairro1;
@@ -532,16 +615,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_formulario;
     private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
-    private javax.swing.JTable tblFucnionario;
+    private javax.swing.JTable tblFornecedor;
     private javax.swing.JFormattedTextField txfPesquisar;
     private javax.swing.JFormattedTextField txfTelefone;
     private javax.swing.JFormattedTextField txfTelefone1;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtBairro1;
     private javax.swing.JTextField txtBairro2;
-    private javax.swing.JTextField txtBairro3;
     private javax.swing.JTextField txtBairro5;
-    private javax.swing.JTextField txtBairro6;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNome;
@@ -557,11 +638,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }
 
     final void populaClienteBeans() {
-        clienteBeans.setNome(txtNome.getText());
-        clienteBeans.setRua(txtRua.getText());
-        clienteBeans.setBairro(txtBairro.getText());
-        clienteBeans.setTelefone(txfTelefone.getText());
-        clienteBeans.setDataCadastro(txtData.getText());
+//        fornecedorBeans.setNome(txtNome.getText());
+//        fornecedorBeans.setRua(txtRua.getText());
+//        fornecedorBeans.setBairro(txtBairro.getText());
+//        fornecedorBeans.setTelefone(txfTelefone.getText());
+//        fornecedorBeans.setDataCadastro(txtData.getText());
 
     }
 

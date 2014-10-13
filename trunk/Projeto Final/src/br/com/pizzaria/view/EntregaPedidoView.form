@@ -123,6 +123,7 @@
             <Component class="javax.swing.JButton" name="btnNovoCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Novo Cliente"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoClienteActionPerformed"/>
@@ -951,6 +952,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtValorRecebidoActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorRecebidoKeyPressed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorRecebidoKeyReleased"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorRecebidoKeyTyped"/>
               </Events>
@@ -1151,7 +1153,9 @@
                 <Component class="javax.swing.JComboBox" name="cbInteira">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="Selecionar Pizza Inteira"/>
+                      </StringArray>
                     </Property>
                   </Properties>
                   <Events>
@@ -1161,7 +1165,9 @@
                 <Component class="javax.swing.JComboBox" name="cbSabor1">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="Selecionar Pizza Sabor 1"/>
+                      </StringArray>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -1172,7 +1178,9 @@
                 <Component class="javax.swing.JComboBox" name="cbSabor2">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="Selecionar Pizza Sabor 2"/>
+                      </StringArray>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -1201,6 +1209,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtValorDescPizza">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorDescPizzaKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
@@ -1226,6 +1237,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQtdPizzaActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQtdPizzaKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtValorSubPizza">
@@ -1350,7 +1362,9 @@
                 <Component class="javax.swing.JComboBox" name="cbTipo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="Selecionar Tipo Produto"/>
+                      </StringArray>
                     </Property>
                   </Properties>
                   <Events>
@@ -1370,6 +1384,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbProdutoActionPerformed"/>
@@ -1411,6 +1426,7 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuantidadeProdActionPerformed"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtQuantidadeProdFocusLost"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantidadeProdKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblValor3">
@@ -1422,6 +1438,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtValorDescProd">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorDescProdKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxGratis">
                   <Properties>
@@ -1460,6 +1479,7 @@
             <Component class="javax.swing.JButton" name="btnImprimirCupom">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Imprimir cupom"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImprimirCupomActionPerformed"/>

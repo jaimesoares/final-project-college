@@ -7,12 +7,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
-import java.io.IOException;
-import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 
 public class PrincipalView extends javax.swing.JFrame {
 
@@ -104,7 +101,7 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        mnEmpresa.setText("Empresa");
+        mnEmpresa.setText("Empresa F1");
         mnEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnEmpresaMousePressed(evt);
@@ -112,7 +109,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnEmpresa);
 
-        mnProducao.setText("Produção");
+        mnProducao.setText("Produção F2");
         mnProducao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnProducaoMousePressed(evt);
@@ -120,7 +117,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnProducao);
 
-        mnEstoque.setText("Estoque");
+        mnEstoque.setText("Estoque F3");
         mnEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnEstoqueMousePressed(evt);
@@ -128,7 +125,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnEstoque);
 
-        mnCompras.setText("Compras");
+        mnCompras.setText("Compras F4");
         mnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnComprasMousePressed(evt);
@@ -136,7 +133,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnCompras);
 
-        mnContasPagar.setText("Contas a Pagar");
+        mnContasPagar.setText("Contas a Pagar F5");
         mnContasPagar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnContasPagarMousePressed(evt);
@@ -144,7 +141,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnContasPagar);
 
-        mnVenda.setText("Vendas");
+        mnVenda.setText("Vendas F6");
         mnVenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnVendaMousePressed(evt);
@@ -152,7 +149,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnVenda);
 
-        mnContarReceber.setText("Contas a Receber");
+        mnContarReceber.setText("Contas a Receber F7");
         mnContarReceber.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnContarReceberMousePressed(evt);
@@ -160,7 +157,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnContarReceber);
 
-        mnRelatorio.setText("Relatório");
+        mnRelatorio.setText("Relatório F8");
         mnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnRelatorioMousePressed(evt);
@@ -168,7 +165,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnRelatorio);
 
-        mnAjuda.setText("Ajuda");
+        mnAjuda.setText("Ajuda F9");
         mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnAjudaMousePressed(evt);
@@ -370,9 +367,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
                         switch (Integer.parseInt(tecla[1])) {
                             case 112: //F1
-                                //JOptionPane.showMessageDialog(null, "Pressionou F1!");
+                                Global.principal.mnEmpresaMousePressed(null);
                                 break;
                             case 113: //F2
+                                Global.principal.mnProducaoMousePressed(null);
 //                                try {
 //                                    Runtime.getRuntime().exec("calc.exe");
 //                                } catch (IOException e) {
@@ -380,21 +378,25 @@ public class PrincipalView extends javax.swing.JFrame {
 //                                }
                                 break;
                             case 114: //F3
-
+                                Global.principal.mnEstoqueMousePressed(null);
                                 break;
                             case 115: //F4
+                                Global.principal.mnComprasMousePressed(null);
                                 break;
                             case 116: //F5
-                                //JOptionPane.showMessageDialog(null, "Pressionou F5!");
+                                Global.principal.mnContasPagarMousePressed(null);
                                 break;
                             case 117: //F6
+                                Global.principal.mnVendaMousePressed(null);
                                 break;
                             case 118: //F7
+                                Global.principal.mnContarReceberMousePressed(null);
                                 break;
                             case 119: //F8
+                                Global.principal.mnRelatorioMousePressed(null);
                                 break;
                             case 120: //F9
-                                // JOptionPane.showMessageDialog(null, "Pressionou F9!");
+                                Global.principal.mnAjudaMousePressed(null);
                                 break;
                             case 121: //F10
                                 //Global.principal.moduloView();
