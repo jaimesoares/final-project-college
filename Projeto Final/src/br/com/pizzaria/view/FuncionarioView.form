@@ -106,9 +106,9 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbl_bairro5" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRg" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="txtRg" min="-2" pref="171" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbl_rua6" min="-2" max="-2" attributes="0"/>
                           <Component id="cbCargo" min="-2" pref="172" max="-2" attributes="0"/>
@@ -227,14 +227,14 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="txtCpf" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="cbCargo" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRg" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lbl_bairro4" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_rua6" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_bairro5" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtRg" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -398,6 +398,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNumero">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_bairro3">
       <Properties>
@@ -408,6 +416,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txfTelefone">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfTelefoneKeyTyped"/>
       </Events>
@@ -440,6 +453,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txfNascimento">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNascimentoKeyTyped"/>
       </Events>
@@ -533,6 +551,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNome">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_bairro2">
       <Properties>
@@ -582,8 +605,6 @@
         <Property name="text" type="java.lang.String" value="CPF:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtRg">
-    </Component>
     <Component class="javax.swing.JLabel" name="lbl_bairro5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -593,6 +614,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCpf">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCpfFocusLost"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCpfKeyPressed"/>
@@ -630,6 +656,9 @@
     <Component class="javax.swing.JTextField" name="txtPlaca">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f0" green="f0" red="f0" type="rgb"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -639,8 +668,14 @@
     <Component class="javax.swing.JTextField" name="txtCnh">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f0" green="f0" red="f0" type="rgb"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCnhKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_bairro8">
       <Properties>
@@ -653,6 +688,9 @@
     <Component class="javax.swing.JTextField" name="txtMoto">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f0" green="f0" red="f0" type="rgb"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -683,6 +721,20 @@
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Manuten&#xe7;&#xe3;o de Funcion&#xe1;rio"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtRg">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRgKeyTyped"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(formatoRG);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{        formatoRG = new MaskFormatter(&quot;##.###.###-#&quot;);    &#xd;&#xa;}catch (Exception Erro){      &#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;RG inv&#xe1;lida&quot;, &quot;ERRO DE FORMATA&#xc7;&#xc3;O&quot;, 0);  }&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

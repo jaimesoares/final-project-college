@@ -47,7 +47,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Função/Cargo");
 
-        btnAdicionar.setText("+");
+        btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
@@ -61,7 +61,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnRemover.setText("-");
+        btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
@@ -92,7 +92,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 487, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                         .addComponent(btnFechar)))
                 .addContainerGap())
         );
@@ -128,7 +128,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (cargoController.verificarDados(txtCargo.getText())) {
+        if (cargoController.verificarDados(txtCargo.getText(), modelo)) {
             modelo.removeAllElements();
             carregaListaCargo();
             txtCargo.setText("");
@@ -137,21 +137,32 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        CargoBean novo = (CargoBean) lstCargo.getSelectedValue();
-        if (novo.getDescricao().equals("Entregador")||novo.getDescricao().equals("Gerente")) {
-            JOptionPane.showMessageDialog(null, "Campo não pode ser removido");
+
+        if (lstCargo.getSelectedValue() != null) {
+            CargoBean novo = (CargoBean) lstCargo.getSelectedValue();
+
+            switch (JOptionPane.showConfirmDialog(null, "Deseja remover " + novo.getDescricao() + "?", "Alterção", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    if (novo.getDescricao().equals("Entregador") || novo.getDescricao().equals("Gerente")) {
+                        JOptionPane.showMessageDialog(null, "Campo não pode ser removido");
+                    } else {
+                        cargoController.verificarDadosParaEditar(novo);
+                        modelo.removeAllElements();
+                        carregaListaCargo();
+                        txtCargo.setText("");
+                    }
+                    break;
+            }
+
         } else {
-            cargoController.verificarDadosParaEditar(novo);
-            modelo.removeAllElements();
-            carregaListaCargo();
-            txtCargo.setText("");
+            JOptionPane.showMessageDialog(null, "Selecione uma Função/Cago!");
         }
+
 
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void lstCargoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCargoMouseReleased
-        CargoBean novo = (CargoBean) lstCargo.getSelectedValue();
-        //txtCargo.setText(novo.getDescricao());
+        
     }//GEN-LAST:event_lstCargoMouseReleased
 
 
@@ -165,15 +176,7 @@ public class CargoFuncaoView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_codigo1;
     private javax.swing.JTextField txtCargo;
     // End of variables declaration//GEN-END:variables
-
-    final CargoBean populaClienteBeans() {
-        cargoBeans.setDescricao(txtCargo.getText());
-
-        System.out.println(cargoBeans);
-        return cargoBeans;
-
-    }
-
+    
     public void carregaListaCargo() {
         cargoController.controleListaCargo(modelo);
         lstCargo.setModel(modelo);

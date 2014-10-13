@@ -33,7 +33,7 @@ public class FuncionarioController {
             JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-        
+
         if (!VerificarData.verificaData(nascimento)) {
             JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -51,6 +51,31 @@ public class FuncionarioController {
 
         if (numero.equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'NÚMERO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (funcionario.getCpf().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'CPF' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (funcionario.getRg().equals("  .   .   - ")) {
+            JOptionPane.showMessageDialog(null, "Campo 'RG' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if ((funcionario.getEmail().equals(""))) {
+        } else if ((funcionario.getEmail().contains("@")) && (funcionario.getEmail().contains(".")) && (!funcionario.getEmail().contains(" "))) {
+            String usuario = new String(funcionario.getEmail().substring(0, funcionario.getEmail().lastIndexOf('@')));
+            String dominio = new String(funcionario.getEmail().substring(funcionario.getEmail().lastIndexOf('@') + 1, funcionario.getEmail().length()));
+            if ((usuario.length() >= 1) && (!usuario.contains("@")) && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".") >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo 'E-MAIL' inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+                return false;
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo 'E-MAIL' inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
@@ -87,14 +112,14 @@ public class FuncionarioController {
             JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-        
+
         if (!VerificarData.verificaData(nascimento)) {
             JOptionPane.showMessageDialog(null, "Campo \"NASCIMENTO\" inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
         if (funcionario.getTelefone().equals("(  )    -    ")) {
-            JOptionPane.showMessageDialog(null, "Campo \"TELEFONE\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Campo 'TELEFONE' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
@@ -105,6 +130,31 @@ public class FuncionarioController {
 
         if (numero.equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'NÚMERO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (funcionario.getCpf().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'CPF' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if (funcionario.getRg().equals("  .   .   - ")) {
+            JOptionPane.showMessageDialog(null, "Campo 'RG' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+
+        if ((funcionario.getEmail().equals(""))) {
+        } else if ((funcionario.getEmail().contains("@")) && (funcionario.getEmail().contains(".")) && (!funcionario.getEmail().contains(" "))) {
+            String usuario = new String(funcionario.getEmail().substring(0, funcionario.getEmail().lastIndexOf('@')));
+            String dominio = new String(funcionario.getEmail().substring(funcionario.getEmail().lastIndexOf('@') + 1, funcionario.getEmail().length()));
+            if ((usuario.length() >= 1) && (!usuario.contains("@")) && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".") >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo 'E-MAIL' inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+                return false;
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo 'E-MAIL' inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 

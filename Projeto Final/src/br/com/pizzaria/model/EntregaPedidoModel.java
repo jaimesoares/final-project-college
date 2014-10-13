@@ -1,10 +1,10 @@
 package br.com.pizzaria.model;
 
+import br.com.pizzaria.bean.CupomBean;
 import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import br.com.pizzaria.util.GeneratorPDF;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
@@ -105,18 +105,18 @@ public class EntregaPedidoModel {
                     + "             `ped_data`,\n"
                     + "             `ped_hr`,\n"
                     + "             `ped_vlr_tot`,\n"
-                    // + "             `ped_vlr_desc`,\n"
                     + "             `ped_cli_cod`,\n"
                     + "             `ped_id_usuario`,\n"
                     + "             `ped_stt_canc`,\n"
                     + "             `ped_tipo`,\n"
                     + "             `ped_pagamento`,\n"
+                    + "             `ped_vlr_desc`,\n"
                     + "             `ped_obs`)\n"
                     + "values (\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                    // + "        'ped_vlr_desc',\n"
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -131,15 +131,17 @@ public class EntregaPedidoModel {
             pstmt.setDouble(3, pedidobeans.getValorTotalPedido());
             pstmt.setString(7, pedidobeans.getTipoPedido());
             pstmt.setString(8, pedidobeans.getTipoPagamento());
-            pstmt.setString(9, pedidobeans.getObs());
+            pstmt.setString(10, pedidobeans.getObs());
             pstmt.setString(6, pedidobeans.getStatus());
+            pstmt.setDouble(9, pedidobeans.getValorDesc());
 
             pstmt.execute();
-            cadastrarItens(codigoDoPedido(), pedidobeans);
-            cadastrarCupom(pedidobeans, codigoDoPedido());
+            pedidobeans.setCodigoPedido(codigoDoPedido());
 
-            ConectaBanco.getConnection().commit();
-            JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            if (cadastrarItens(codigoDoPedido(), pedidobeans) || cadastrarCupom(pedidobeans)) {
+                ConectaBanco.getConnection().commit();
+                JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            }
 
         } catch (SQLException ex) {
             try {
@@ -170,14 +172,14 @@ public class EntregaPedidoModel {
         return codigo;
     }
 
-    public void cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*//*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBean pedidoBeans) {
+    public boolean cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*//*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBean pedidoBeans) {
         DecimalFormat formatoDecimal = new DecimalFormat("0.00");
-        List<String> cupom = new ArrayList<>();
+//        List<String> cupom = new ArrayList<>();
         String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
-        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
-        cupom.add("---------------------------------------------------------");//60 espaços
-        cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
-        cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
+//        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
+//        cupom.add("---------------------------------------------------------");//60 espaços
+//        cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
+//        cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
             try {
 
@@ -208,31 +210,33 @@ public class EntregaPedidoModel {
 
                 if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
                     pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
-                    pstmt.setInt(7, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());                    
-                }else{
+                    pstmt.setInt(7, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
+                } else {
                     pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
-                    pstmt.setString(7, null);   
+                    pstmt.setString(7, null);
                 }
 
                 pstmt.execute();
 
-                cupom.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao()) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
-
+//                cupom.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao()) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
             } catch (SQLException ex) {
+                Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
                 try {
                     ConectaBanco.getConnection().rollback();
-                    JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
-                    //Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                    //JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
                 } catch (SQLException ex1) {
                     Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
                 }
+                return false;
             }
         }
-        cupom.add("------------------------------------------------------------");
-        cupom.add("Total:                                    R$" + totalPedido);
-        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
-        cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
-        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
+//        cupom.add("------------------------------------------------------------");
+//        cupom.add("Total:                                    R$" + totalPedido);
+//        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
+//        cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
+//        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
+        return true;
     }
 
     public String pesquisaProduto(int codigo) {
@@ -356,10 +360,10 @@ public class EntregaPedidoModel {
         }
     }
 
-    public void cadastrarCupom(PedidoBean pedidobeans, int codigoPedido) {
+    public boolean cadastrarCupom(PedidoBean pedidobeans) {
 
         try {
-            String SQLInserePedido = "insert into `pizzaria`.`cupom` (\n"
+            String SQLInsereCupom = "insert into `pizzaria`.`cupom` (\n"
                     + "  `cup_vlr`,\n"
                     //+ "  `cup_tributos`,\n"
                     + "  `cup_dt_emissao`,\n"
@@ -374,13 +378,14 @@ public class EntregaPedidoModel {
                     + "    ?,\n"
                     + "    ?\n"
                     + "  ) ;";
-            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsereCupom);
             pstmt.setString(2, pedidobeans.getData());
             pstmt.setString(3, pedidobeans.getHora());
             pstmt.setDouble(1, pedidobeans.getValorTotalPedido());
-            pstmt.setInt(4, codigoPedido);
+            pstmt.setInt(4, pedidobeans.getCodigoPedido());
 
             pstmt.execute();
+
             cadastrarItensCupom(codigoDoCupom(), pedidobeans);
 
             System.out.println("Cadastro cupom realizado!");
@@ -389,13 +394,16 @@ public class EntregaPedidoModel {
             try {
                 ConectaBanco.getConnection().rollback();
                 JOptionPane.showMessageDialog(null, "Impossível Cadastrar Cupom" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
             } catch (SQLException ex1) {
                 Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
             }
+            return false;
         }
+        return true;
     }
 
-    public void cadastrarItensCupom(int codigoCupom, PedidoBean pedidoBeans) {
+    public boolean cadastrarItensCupom(int codigoCupom, PedidoBean pedidoBeans) {
 
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
             try {
@@ -406,8 +414,8 @@ public class EntregaPedidoModel {
                         + "  `cupi_qtd`,\n"
                         + "  `cupi_vlr_unit`,\n"
                         + "  `cupi_vlr_tot`,\n"
-                        + "  `cupi_cod_prod2`\n"
-                        //+ "  `cupi_vlr_desc`,\n"
+                        + "  `cupi_cod_prod2`,\n"
+                        + "  `cupi_vlr_desc`\n"
                         // + "  `cupi_vlr_tributo`\n"
                         + ") \n"
                         + "values\n"
@@ -416,10 +424,9 @@ public class EntregaPedidoModel {
                         + "    ?,\n"
                         + "    ?,\n"
                         + "    ?,\n"
-                         + "    ?,\n"
+                        + "    ?,\n"
+                        + "    ?,\n"
                         + "    ?\n"
-                        //  + "    'cupi_vlr_desc',\n"
-                        //  + "    'cupi_vlr_tributo'\n"
                         + "  ) ;\n"
                         + "";
 
@@ -429,14 +436,14 @@ public class EntregaPedidoModel {
                 pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
                 pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());
                 pstmt.setDouble(5, pedidoBeans.getItensPedido().get(i).getPrecoTotal());
-                
-                if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
-                    
-                    pstmt.setInt(6, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());                    
-                }else{
-                    pstmt.setString(6, null);   
-                }
+                pstmt.setDouble(7, pedidoBeans.getItensPedido().get(i).getValotDesconto());
 
+                if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
+
+                    pstmt.setInt(6, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
+                } else {
+                    pstmt.setString(6, null);
+                }
 
                 pstmt.execute();
 
@@ -444,12 +451,14 @@ public class EntregaPedidoModel {
                 try {
                     ConectaBanco.getConnection().rollback();
                     JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item de Cupom" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
                 } catch (SQLException ex1) {
                     Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
                 }
+                return false;
             }
         }
-
+        return true;
     }
 
     public int codigoDoCupom() {
@@ -469,6 +478,39 @@ public class EntregaPedidoModel {
         }
         //JOptionPane.showMessageDialog(null, codigo);
         return codigo;
+    }
+
+    public void imprimirCupom(PedidoBean pedidoBeans) {
+        Date data = new Date();
+        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        pedidoBeans.setData(formatoData.format(data));
+        pedidoBeans.setHora(formatoHora.format(data));
+
+        String descricao = "";
+        DecimalFormat formatoDecimal = new DecimalFormat("0.00");
+        List<String> cupom = new ArrayList<>();
+        String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
+        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
+        cupom.add("---------------------------------------------------------");//60 espaços
+        cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
+        cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
+        for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
+
+            if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
+                descricao = pedidoBeans.getItensPedido().get(i).getDescricao() + "/" + pesquisaProduto(pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
+            } else {
+                descricao = pedidoBeans.getItensPedido().get(i).getDescricao();
+            }
+
+            cupom.add(campoNota(descricao) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
+
+        }
+        cupom.add("------------------------------------------------------------");
+        cupom.add("Total:                                    R$" + totalPedido);
+        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
+        cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
+        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
     }
 
 }

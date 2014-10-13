@@ -18,6 +18,7 @@ import br.com.pizzaria.controller.PrecoProdutoController;
 import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.Global;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,7 @@ import javax.swing.text.MaskFormatter;
  * @author katia
  */
 public class EntregaPedidoView extends javax.swing.JInternalFrame {
-    
+
     MaskFormatter FormatoTelefone;
     ClienteBean clienteBeans;
     ClienteController clienteController;
@@ -64,7 +65,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     List<TipoProdutoBean> listaTipoProd;
     ProdutoController produtoController;
     List<ProdutoBean> listaProduto;
-    
+
     ComboBoxModel<ProdutoBean> modeloPizzaInteira;
     List<ProdutoBean> listaPizzaInteira;
     ComboBoxModel<ProdutoBean> modeloPizzaSabor1;
@@ -83,7 +84,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         initComponents();
         this.codigoFuncionario = codigoFuncionario;
         habilitarCampos(false);
-        
+
         btnFinalizar.setEnabled(false);
         clienteController = new ClienteController();
         clienteBeans = new ClienteBean();
@@ -100,34 +101,34 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtTotal.setEditable(false);
         formatoData = new SimpleDateFormat("yyyy-MM-dd");
         formatoHora = new SimpleDateFormat("HH-mm-ss");
-        
+
         precoProdutoController = new PrecoProdutoController();
         modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
         produtoController = new ProdutoController();
-        
+
         populaTipoProduto();
-        
+
         grupoPesquisa = new ButtonGroup();
         grupoPesquisa.add(rbNome);
         grupoPesquisa.add(rbTelefone);
         grupoPesquisa.add(rbEndereco);
-        
+
         grupoPizza = new ButtonGroup();
         grupoPizza.add(rbInteira);
         grupoPizza.add(rbMeiaPizza);
-        
+
         modeloPizzaInteira = (ComboBoxModel) cbInteira.getModel();
         modeloPizzaSabor1 = (ComboBoxModel) cbSabor1.getModel();
         modeloPizzaSabor2 = (ComboBoxModel) cbSabor2.getModel();
         modeloBorda = (ComboBoxModel) cbBorda.getModel();
-        
+
         populaListaPizzaInteira();
         populaListaPizzaSabor1();
         populaListaPizzaSabor2();
         populaListaBorda();
-        
+
         txtCodigo.setText(String.valueOf(decimalFormatoCodigo.format(entregaPedidoController.controleCodigoPedido() + 1)));
-        
+
     }
 
     /**
@@ -284,6 +285,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         });
 
         btnNovoCliente.setText("Novo Cliente");
+        btnNovoCliente.setEnabled(false);
         btnNovoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoClienteActionPerformed(evt);
@@ -751,6 +753,9 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             }
         });
         txtValorRecebido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtValorRecebidoKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtValorRecebidoKeyReleased(evt);
             }
@@ -805,12 +810,14 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("Vlr. Desc:");
 
+        cbInteira.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Pizza Inteira" }));
         cbInteira.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbInteiraActionPerformed(evt);
             }
         });
 
+        cbSabor1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Pizza Sabor 1" }));
         cbSabor1.setEnabled(false);
         cbSabor1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -818,6 +825,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             }
         });
 
+        cbSabor2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Pizza Sabor 2" }));
         cbSabor2.setEnabled(false);
         cbSabor2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -835,6 +843,12 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtValorPizza.setEditable(false);
         txtValorPizza.setBackground(new java.awt.Color(255, 255, 204));
 
+        txtValorDescPizza.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorDescPizzaKeyTyped(evt);
+            }
+        });
+
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setText("Qtde:");
 
@@ -845,6 +859,11 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtQtdPizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQtdPizzaActionPerformed(evt);
+            }
+        });
+        txtQtdPizza.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQtdPizzaKeyTyped(evt);
             }
         });
 
@@ -950,6 +969,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         lblUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario1.setText("Tipo:");
 
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Tipo Produto" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoActionPerformed(evt);
@@ -959,6 +979,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         lblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario.setText("Produto:");
 
+        cbProduto.setEnabled(false);
         cbProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbProdutoActionPerformed(evt);
@@ -990,9 +1011,20 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 txtQuantidadeProdFocusLost(evt);
             }
         });
+        txtQuantidadeProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeProdKeyTyped(evt);
+            }
+        });
 
         lblValor3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor3.setText("Vlr. Desc:");
+
+        txtValorDescProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorDescProdKeyTyped(evt);
+            }
+        });
 
         cbxGratis.setText("Grátis");
         cbxGratis.setEnabled(false);
@@ -1083,6 +1115,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         });
 
         btnImprimirCupom.setText("Imprimir cupom");
+        btnImprimirCupom.setEnabled(false);
         btnImprimirCupom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirCupomActionPerformed(evt);
@@ -1209,34 +1242,19 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         pnlPai.setEnabledAt(1, true);
         pnlPai.setEnabledAt(0, false);
         pnlPai.setSelectedIndex(1);
-        
+
 
     }//GEN-LAST:event_btnContinuarPedidoActionPerformed
 
     private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
-//        if (btnNovoCliente.getText().equals("Novo Cliente")) {
-//            btnNovoCliente.setText("Salvar");
-//            btnFechar.setText("Cancelar");
-//            btnContinuarPedido.setEnabled(false);
-//            btnPesquisar.setEnabled(false);
-//            cbProdutos.removeAllItems();
-//            txtData.setText(VerificarData.retornoDeDataAtual());
-//            habilitarCampos(true);
-//            txtNome.requestFocus();
-//            txtCodigoCliente.setText(clienteController.controleDeCodigo());
-//            limpaNovo();
-//        } else {
-//
-//            populaClienteBeans();
-//            if (clienteController.verificarDados(clienteBeans)) {
-//                btnNovoCliente.setText("Novo Cliente");
-//                btnFechar.setText("Fechar");
-//                btnContinuarPedido.setEnabled(true);
-//                btnPesquisar.setEnabled(true);
-//                limpaTudo();
-//                habilitarCampos(false);
-//            }
-//        }
+        ClienteView clienteV = new ClienteView(this);
+        Global.principal.Desktop.add(clienteV);
+        Dimension desktopSize = Global.principal.Desktop.getSize();
+        Dimension jInternalFrameSize = clienteV.getSize();
+        clienteV.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        clienteV.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_btnNovoClienteActionPerformed
 
     private void btnBalcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalcaoActionPerformed
@@ -1252,25 +1270,27 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        String tipoPesquisa;
-        if (rbNome.isSelected()) {
-            tipoPesquisa = "nome";
-        } else if (rbTelefone.isSelected()) {
-            tipoPesquisa = "telefone";
-        } else {
-            tipoPesquisa = "rua";
-        }
-        
-        cbPesquisa.removeAllItems();
-        listaDeClientes.clear();
-        String pesquisa = JOptionPane.showInputDialog(null, "Entre com " + tipoPesquisa + " do cliente:", "PESQUISA DE CLIENTE", 3);
-        System.out.println(pesquisa);
-        if (!(pesquisa == null)) {
-            entregaPedidoController.controlePesquisa(pesquisa, tipoPesquisa, listaDeClientes);
-            for (ClienteBean clienteB : listaDeClientes) {
-                cbPesquisa.addItem(clienteB);
-            }
-        }
+        pesquisaCliente();
+
+//        String tipoPesquisa;
+//        if (rbNome.isSelected()) {
+//            tipoPesquisa = "nome";
+//        } else if (rbTelefone.isSelected()) {
+//            tipoPesquisa = "telefone";
+//        } else {
+//            tipoPesquisa = "rua";
+//        }
+//
+//        cbPesquisa.removeAllItems();
+//        listaDeClientes.clear();
+//        String pesquisa = JOptionPane.showInputDialog(null, "Entre com " + tipoPesquisa + " do cliente:", "PESQUISA DE CLIENTE", 3);
+//
+//        if (pesquisa != null) {
+//            entregaPedidoController.controlePesquisa(pesquisa, tipoPesquisa, listaDeClientes);
+//            for (ClienteBean clienteB : listaDeClientes) {
+//                cbPesquisa.addItem(clienteB);
+//            }
+//        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txfCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCEPKeyPressed
@@ -1290,10 +1310,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     private void cbPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPesquisaActionPerformed
         System.out.println(cbPesquisa.getSelectedItem());
         if (!(cbPesquisa.getSelectedItem() == null)) {
-            //String codigo = cbPesquisa.getSelectedItem().toString();
-            //codigo = codigo.substring(0, codigo.indexOf(" "));
+
             clienteBeans = clienteController.controlePreenchimento(((ClienteBean) cbPesquisa.getSelectedItem()).getCodigoCliente());
-            //txtCodigoCliente.setText(clienteBeans.getCodigoCliente() + "");
             txtNome.setText(clienteBeans.getNome());
             txtCliente.setText(clienteBeans.getNome());
             txtRua.setText(clienteBeans.getRua());
@@ -1314,21 +1332,21 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
         String caracteres = "0987654321";
-        
+
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-            
+
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtNumeroKeyTyped
 
     private void txfTelCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfTelCelularKeyTyped
         String caracteres = "0987654321";
-        
+
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-            
+
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txfTelCelularKeyTyped
 
@@ -1338,11 +1356,11 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void txfNascimentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNascimentoKeyTyped
         String caracteres = "0987654321";
-        
+
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-            
+
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txfNascimentoKeyTyped
 
@@ -1356,11 +1374,11 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void txfTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfTelefoneKeyTyped
         String caracteres = "0987654321";
-        
+
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-            
+
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txfTelefoneKeyTyped
 
@@ -1381,53 +1399,62 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtQuantidadeProdFocusLost
 
     private void cbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdutoActionPerformed
-        if (cbProduto.getSelectedItem() != null) {
-                //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
-                txtValorProd.setText(decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
-            }
+        if (cbProduto.getSelectedIndex() >= 0) {
+            //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
+
+            txtValorDescProd.setText("");
+            txtValorProd.setText("");
+            txtQuantidadeProd.setText("");
+            cbxGratis.setSelected(false);
+            txtValorProd.setText(decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
+        } else {
+            txtValorProd.setText("");
+        }
     }//GEN-LAST:event_cbProdutoActionPerformed
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        
-        cbProduto.removeAllItems();
-        
-        populaListaProduto();
+        if (cbTipo.getSelectedIndex() > 0) {
+            cbProduto.removeAllItems();
+            populaListaProduto();
+        } else {
+            cbProduto.setEnabled(false);
+            cbProduto.setSelectedIndex(-1);
+        }
     }//GEN-LAST:event_cbTipoActionPerformed
 
     private void txtValorRecebidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyReleased
-        String caracteres = "0987654321,.";
-        
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            
-            evt.consume();
-            
-        } else {
-            
+
+        if (!txtValorRecebido.getText().equals("")) {
             try {
                 double verifica = Double.parseDouble(txtValorRecebido.getText().replace(",", "."));
                 double troco = verifica - Double.parseDouble(txtTotal.getText().replace(",", "."));
                 txtTroco.setText(decimalFormato.format(troco).replace(",", "."));
                 if (Double.parseDouble(txtTroco.getText()) >= 0) {
                     btnFinalizar.setEnabled(true);
+                    btnImprimirCupom.setEnabled(true);
                 } else {
                     btnFinalizar.setEnabled(false);
+                    btnImprimirCupom.setEnabled(false);
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Campo valor deve conter apenas número!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
                 txtValorRecebido.setText("");
                 txtValorRecebido.requestFocus();
                 txtTroco.setText("");
+
             }
+        } else {
+            txtTroco.setText("");
         }
     }//GEN-LAST:event_txtValorRecebidoKeyReleased
 
     private void txtValorRecebidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyTyped
         String caracteres = "0987654321,.";
-        
+
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-            
+
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtValorRecebidoKeyTyped
 
@@ -1440,10 +1467,16 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             case 0:
                 populaPedidoBeans();
                 entregaPedidoController.conttroleDePedido(/*String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), */pedidoBeans);
-                limpaFinaliza();
-                limpaTudo();
+//                limpaFinaliza();
+//                limpaTudo();
                 CozinhaView.populaTabela();
-                this.dispose();
+//                this.dispose();
+                btnAdicionaPizza.setEnabled(false);
+                btnAdicionaProduto.setEnabled(false);
+                btnRemove.setEnabled(false);
+                btnFinalizar.setEnabled(false);
+                cbFormaPagamento.setEnabled(false);
+                txtValorRecebido.setEnabled(false);
                 break;
         }
 
@@ -1478,7 +1511,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                     }
                     break;
             }
-            
+
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -1488,14 +1521,14 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void btnAdicionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaProdutoActionPerformed
         double subTotal = 0.0;
-        
+
         double valorDesconto = 0.0;
         double valorTotal = 0.0;
-        
+
         if (cbProduto.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Campo 'Produto' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
         } else if (entregaPedidoController.verificaItens(txtQuantidadeProd.getText())) {
-            
+
             subTotal = Double.parseDouble(txtValorProd.getText()) * Integer.parseInt(txtQuantidadeProd.getText());
 
 //            if (cbxGratis.isSelected()) {
@@ -1511,7 +1544,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
             // double subTotal = Double.parseDouble(txtValorProd.getText()) * Integer.parseInt(txtQuantidadeProd.getText());
             modeloDeTabela.addRow(new Object[]{cbProduto.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), "", txtQuantidadeProd.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
-            
+
             cbFormaPagamento.setEnabled(true);
             txtTroco.setText("");
             btnFinalizar.setEnabled(false);
@@ -1520,7 +1553,8 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             calculaTotal();
             txtValorDescProd.setText("");
             cbxGratis.setSelected(false);
-            
+            cbTipo.setSelectedIndex(0);
+
         }
     }//GEN-LAST:event_btnAdicionaProdutoActionPerformed
 
@@ -1529,7 +1563,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             txtValorPizza.setText("");
             //00:09 OK
             txtQtdPizza.setText("");
-            if (cbInteira.getSelectedItem() != null) {
+            if (cbInteira.getSelectedIndex() > 0) {
                 //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
                 txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
             }
@@ -1543,36 +1577,32 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         cbInteira.setEnabled(true);
         txtQtdPizza.setEditable(true);
         txtQtdPizza.setText("");
-        Color cor = new Color(204, 255, 255);
-        txtQtdPizza.setBackground(cor);
+//        Color cor = new Color(204, 255, 255);
+//        txtQtdPizza.setBackground(cor);
         cbBorda.setSelectedIndex(0);
+        cbSabor1.setSelectedIndex(0);
+        cbSabor2.setSelectedIndex(0);
+        txtValorPizza.setText("");
     }//GEN-LAST:event_rbInteiraActionPerformed
 
     private void rbMeiaPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMeiaPizzaActionPerformed
         cbSabor1.setEnabled(true);
         cbSabor2.setEnabled(true);
         cbInteira.setEnabled(false);
-        txtQtdPizza.setEditable(false);
-        txtQtdPizza.setText("1");
-        Color cor = new Color(255, 255, 204);
-        txtQtdPizza.setBackground(cor);
+        txtQtdPizza.setEditable(true);
+        txtQtdPizza.setText("");
+//        txtQtdPizza.setEditable(false);
+//        txtQtdPizza.setText("1");
+//        Color cor = new Color(255, 255, 204);
+//        txtQtdPizza.setBackground(cor);
         cbBorda.setSelectedIndex(0);
+        cbInteira.setSelectedIndex(0);
+        txtValorPizza.setText("");
     }//GEN-LAST:event_rbMeiaPizzaActionPerformed
 
     private void cbSabor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSabor2ActionPerformed
         if (rbMeiaPizza.isSelected()) {
-            txtValorPizza.setText("");
-            //00:09 OK
-            //txtQtdPizza.setText("");
-            if (cbSabor2.getSelectedItem() != null) {
-                double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
-                double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
-                if (sabor1 >= sabor2) {
-                    txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
-                } else {
-                    txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
-                }
-            }
+            controleValorSabores();
         }
         cbBorda.setSelectedIndex(0);
     }//GEN-LAST:event_cbSabor2ActionPerformed
@@ -1583,18 +1613,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void cbSabor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSabor1ActionPerformed
         if (rbMeiaPizza.isSelected()) {
-            txtValorPizza.setText("");
-            //00:09 OK
-            // txtQtdPizza.setText("");
-            if (cbSabor2.getSelectedItem() != null) {
-                double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
-                double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
-                if (sabor1 >= sabor2) {
-                    txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
-                } else {
-                    txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
-                }
-            }
+            controleValorSabores();
         }
         cbBorda.setSelectedIndex(0);
     }//GEN-LAST:event_cbSabor1ActionPerformed
@@ -1604,71 +1623,12 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtQuantidadeProdActionPerformed
 
     private void btnAdicionaPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaPizzaActionPerformed
-        double subTotal;
-        double valorBorda = 0;
-        double valorDesconto = 0;
-        double valorTotal;
+
         if (rbMeiaPizza.isSelected()) {
-            if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
-                
-                if (!(txtValorSubPizza.getText().equals(""))) {
-                    valorBorda = Double.parseDouble(txtValorSubPizza.getText());
-                    subTotal = Double.parseDouble(txtValorPizza.getText()) + valorBorda * Integer.parseInt(txtQtdPizza.getText());
-                } else {
-                    subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
-                }
-                
-                if (!(txtValorDescPizza.getText().equals(""))) {
-                    valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText());
-                    valorDesconto = Double.parseDouble(txtValorDescPizza.getText());
-                } else {
-                    valorTotal = subTotal;
-                }
-                
-                if (cbSabor2.getSelectedItem() != null) {
-                    double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
-                    double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
-                    if (sabor1 >= sabor2) {
-                        modeloDeTabela.addRow(new Object[]{cbSabor1.getSelectedItem() + " / " + cbSabor2.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
-                        // modeloDeTabela.addRow(new Object[]{cbSabor2.getSelectedItem() + " meia", 0.00, 0, 0.00});
-                        adicionaPizzaSabores("sabor1", valorTotal);
-                    } else {
-                        // modeloDeTabela.addRow(new Object[]{cbSabor1.getSelectedItem() + " meia", 0.00, 0, 0.00});
-                        modeloDeTabela.addRow(new Object[]{cbSabor2.getSelectedItem() + " / " + cbSabor1.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
-                        adicionaPizzaSabores("sabor2", valorTotal);
-                    }
-                }
-            }
-        } else if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
-            
-            if (!(txtValorSubPizza.getText().equals(""))) {
-                valorBorda = Double.parseDouble(txtValorSubPizza.getText());
-                subTotal = Double.parseDouble(txtValorPizza.getText()) + valorBorda * Integer.parseInt(txtQtdPizza.getText());
-            } else {
-                subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
-            }
-            
-            if (!(txtValorDescPizza.getText().equals(""))) {
-                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText());
-                valorDesconto = Double.parseDouble(txtValorDescPizza.getText());
-            } else {
-                valorTotal = subTotal;
-            }
-            
-            if (cbInteira.getSelectedItem() != null) {
-                modeloDeTabela.addRow(new Object[]{cbInteira.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
-                adicionaPizzaInteira(valorTotal);
-            }
+            controleMeiaPizza();
+        } else {
+            controlePizzaInteira();
         }
-        
-        cbBorda.setSelectedIndex(0);
-        cbFormaPagamento.setEnabled(true);
-        txtTroco.setText("");
-        btnFinalizar.setEnabled(false);
-        txtValorDescPizza.setText("");
-        
-        limpaPizza();
-        calculaTotal();
 
     }//GEN-LAST:event_btnAdicionaPizzaActionPerformed
 
@@ -1692,7 +1652,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         if (txtValorPizza.getText().equals("")) {
 
             //00:09 OK
-        } else if (cbBorda.getSelectedIndex() != 0) {
+        } else if (cbBorda.getSelectedIndex() > 0) {
             //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
             //txtValorSubPizza.setText(decimalFormato.format((((ProdutoBean) cbBorda.getSelectedItem()).getPrecoProduto().getPreco()) + (Double.parseDouble(txtValorPizza.getText()))).replace(",", "."));
             txtValorSubPizza.setText(decimalFormato.format((((ProdutoBean) cbBorda.getSelectedItem()).getPrecoProduto().getPreco())).replace(",", "."));
@@ -1729,17 +1689,59 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
     private void btnImprimirCupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCupomActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Cansei de trabalhar por hoje, \n"
-                + "-Popular combo com as bordas das pizzas OK\n"
-                + "-Definir nome meia-meia na mesma linha OK\n"
-                + "-Definir primeiro item dos combo com \"Selecione um item\"\n"
-                + "-Botão imprimir\n"
-                + "-Acresecentar segundo sabor OK\n"
-                + "-Validar desconto OK\n"
-                + "\n"
-                + "ERRO\n"
-                + "Menu não perde o foco, precisando assim pressionar duas vezes no botão para abrir a janela.");
+        populaPedidoBeans();
+        entregaPedidoController.controleImpressaoCupom(pedidoBeans);
+        btnAdicionaPizza.setEnabled(false);
+        btnAdicionaProduto.setEnabled(false);
+        btnRemove.setEnabled(false);
+        btnImprimirCupom.setEnabled(false);
+        cbFormaPagamento.setEnabled(false);
+        txtValorRecebido.setEnabled(false);
+
     }//GEN-LAST:event_btnImprimirCupomActionPerformed
+
+    private void txtQuantidadeProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeProdKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuantidadeProdKeyTyped
+
+    private void txtQtdPizzaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdPizzaKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQtdPizzaKeyTyped
+
+    private void txtValorDescPizzaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorDescPizzaKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorDescPizzaKeyTyped
+
+    private void txtValorDescProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorDescProdKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorDescProdKeyTyped
+
+    private void txtValorRecebidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            txtValorRecebidoKeyReleased(null);
+        }
+    }//GEN-LAST:event_txtValorRecebidoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1850,9 +1852,9 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtValorRecebido.setEditable(valor);
         txtTroco.setEditable(valor);
     }
-    
+
     final void habilitarCamposCliente(boolean valor) {
-        
+
         cbPesquisa.setEnabled(valor);
         btnPesquisar.setEnabled(valor);
         txtEstado.setEnabled(true);
@@ -1871,7 +1873,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         rbNome.setEnabled(valor);
         rbTelefone.setEnabled(valor);
         txtData.setEnabled(valor);
-        
+
         lblCelular.setEnabled(valor);
         lblCep.setEnabled(valor);
         lblCidade.setEnabled(valor);
@@ -1886,9 +1888,10 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         lbl_data.setEnabled(valor);
         lblNumero.setEnabled(valor);
         btnBalcao.setEnabled(false);
-        
+        btnNovoCliente.setEnabled(valor);
+
     }
-    
+
     public void habilitaCamposEditar(boolean valor) {
         txtEstado.setEditable(false);
         txtObservacao.setEditable(valor);
@@ -1903,17 +1906,17 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtNumero.setEditable(valor);
         txtRua.setEditable(false);
     }
-    
+
     final void limpaProduto() {
         // txtItem.setText("");
         txtQuantidadeProd.setText("");
         txtValorProd.setText("");
-        
+
         cbProduto.removeAllItems();
     }
-    
+
     final void populaPedidoBeans() {
-        
+
         pedidoBeans.setCodigoCliente(clienteBeans.getCodigoCliente());
         pedidoBeans.setLoginUsuario(Global.usuario.getLogin());
         pedidoBeans.setCodigoEntregador(0);
@@ -1924,9 +1927,9 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         pedidoBeans.setValorRecebido(Double.parseDouble(txtValorRecebido.getText()));
         pedidoBeans.setValorTroco(Double.parseDouble(txtTroco.getText()));
         pedidoBeans.setTipoPagamento(cbFormaPagamento.getSelectedItem().toString());
-        
+
     }
-    
+
     final void limpaFinaliza() {
         txtTotal.setText("");
         btnFinalizar.setEnabled(false);
@@ -1936,27 +1939,27 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         pnlPai.setEnabledAt(0, true);
         pnlPai.setEnabledAt(1, false);
         pnlPai.setSelectedIndex(0);
-        
+
     }
-    
+
     final void limpaNovo() {
         txtNome.setText("");
         txtRua.setText("");
         txtBairro.setText("");
         txfTelefone.setText("");
     }
-    
+
     final ClienteBean populaClienteBeans() {
         clienteBeans.setNome(txtNome.getText());
         clienteBeans.setRua(txtRua.getText());
         clienteBeans.setBairro(txtBairro.getText());
         clienteBeans.setTelefone(txfTelefone.getText());
         clienteBeans.setDataCadastro(txtData.getText());
-        
+
         return clienteBeans;
-        
+
     }
-    
+
     final void limpaTudo() {
         txtNome.setText("");
         txtRua.setText("");
@@ -1966,7 +1969,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         txtData.setText("");
         cbPesquisa.removeAllItems();
     }
-    
+
     public void adicionaProduto(double total) {
         double subTotal = Double.parseDouble(txtValorProd.getText()) * Integer.parseInt(txtQuantidadeProd.getText());
         ItemPedidoBean itemPedido = new ItemPedidoBean();
@@ -1976,22 +1979,22 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         itemPedido.setPrecoTotal(total);
         itemPedido.setMeiaPizza("N");
         itemPedido.setDescricao(((ProdutoBean) cbProduto.getSelectedItem()).getDescricao());
-        
+
         listaDeItens.add(itemPedido);
     }
-    
+
     public void calculaTotal() {
         double totalDoPedido = 0;
         for (ItemPedidoBean listaDeIten : listaDeItens) {
             totalDoPedido += listaDeIten.getPrecoTotal();
         }
-        
+
         txtTotal.setText(decimalFormato.format(totalDoPedido).replace(",", "."));
     }
-    
+
     public void populaCamposCep() {
         CepBean cepBeans;
-        
+
         if (clienteController.controleCepValido(cepBeans = clienteController.controleCep(txfCEP.getText().replace("-", "")))) {
             txtBairro.setText(cepBeans.getBairro());
             txtCidade.setText(cepBeans.getCidade());
@@ -1999,7 +2002,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             txtEstado.setText(cepBeans.getEstado());
         }
     }
-    
+
     public void populaTipoProduto() {
         listaTipoProd = new ArrayList<>();
         entregaPedidoController.controleListaTipoProduto(listaTipoProd);
@@ -2007,16 +2010,22 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             cbTipo.addItem(tipoProdutoBeans);
         }
     }
-    
+
     public void populaListaProduto() {
-        listaProduto = new ArrayList<>();
-        // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
-        entregaPedidoController.controleDeItens(((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo(), listaProduto);
-        for (ProdutoBean prdutoBeans : listaProduto) {
-            cbProduto.addItem(prdutoBeans);
+        if (cbTipo.getSelectedIndex() > 0) {
+            listaProduto = new ArrayList<>();
+            // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
+            entregaPedidoController.controleDeItens(((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo(), listaProduto);
+            for (ProdutoBean prdutoBeans : listaProduto) {
+                cbProduto.addItem(prdutoBeans);
+            }
+            cbProduto.setEnabled(true);
+        } else {
+            cbProduto.setEnabled(false);
+            cbProduto.setSelectedIndex(0);
         }
     }
-    
+
     public void populaListaPizzaInteira() {
         listaPizzaInteira = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
@@ -2025,7 +2034,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             cbInteira.addItem(prdutoBeans);
         }
     }
-    
+
     public void populaListaPizzaSabor1() {
         listaPizzaSabor1 = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
@@ -2034,7 +2043,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             cbSabor1.addItem(prdutoBeans);
         }
     }
-    
+
     public void populaListaPizzaSabor2() {
         listaPizzaSabor2 = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
@@ -2043,7 +2052,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             cbSabor2.addItem(prdutoBeans);
         }
     }
-    
+
     public void populaListaBorda() {
         listaBorda = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
@@ -2052,13 +2061,13 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             cbBorda.addItem(prdutoBeans);
         }
     }
-    
+
     public void habilitaPizza(boolean valor) {
         cbInteira.setEnabled(valor);
         cbSabor1.setEnabled(valor);
         cbSabor2.setEnabled(valor);
     }
-    
+
     public void adicionaPizzaInteira(double total) {
         double subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
         ItemPedidoBean itemPedido = new ItemPedidoBean();
@@ -2068,13 +2077,13 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         itemPedido.setPrecoTotal(total);
         itemPedido.setMeiaPizza("N");
         itemPedido.setDescricao(((ProdutoBean) cbInteira.getSelectedItem()).getDescricao());
-        
+
         listaDeItens.add(itemPedido);
     }
-    
+
     public void adicionaPizzaSabores(String valorMaior, double total) {
         double subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
-        
+
         if (valorMaior.equals("sabor1")) {
             ItemPedidoBean itemPedido = new ItemPedidoBean();
             itemPedido.setCodigoProduto(((ProdutoBean) cbSabor1.getSelectedItem()).getCodigo());
@@ -2112,14 +2121,156 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 //            itemPedido2.setMeiaPizza("S");
 //            listaDeItens.add(itemPedido2);
         }
-        
+
     }
-    
+
     final void limpaPizza() {
-        
+
         txtQtdPizza.setText("");
         txtValorPizza.setText("");
-        
+
     }
-    
+
+    public void pesquisaCliente() {
+        String tipoPesquisa;
+        if (rbNome.isSelected()) {
+            tipoPesquisa = "nome";
+        } else if (rbTelefone.isSelected()) {
+            tipoPesquisa = "telefone";
+        } else {
+            tipoPesquisa = "rua";
+        }
+
+        cbPesquisa.removeAllItems();
+        listaDeClientes.clear();
+        String pesquisa = JOptionPane.showInputDialog(null, "Entre com " + tipoPesquisa + " do cliente:", "PESQUISA DE CLIENTE", 3);
+
+        if (pesquisa != null) {
+            entregaPedidoController.controlePesquisa(pesquisa, tipoPesquisa, listaDeClientes);
+            for (ClienteBean clienteB : listaDeClientes) {
+                cbPesquisa.addItem(clienteB);
+            }
+        }
+    }
+
+    public void pesquisaCliente(String pesquisa) {
+
+        cbPesquisa.removeAllItems();
+        listaDeClientes.clear();
+
+        if (pesquisa != null) {
+            entregaPedidoController.controlePesquisa(pesquisa, "nome", listaDeClientes);
+            for (ClienteBean clienteB : listaDeClientes) {
+                cbPesquisa.addItem(clienteB);
+            }
+        }
+    }
+
+    public void controleMeiaPizza() {
+        double subTotal;
+        double valorBorda = 0;
+        double valorDesconto = 0;
+        double valorTotal;
+        System.out.println(cbSabor2.getSelectedIndex() + "2");
+        System.out.println(cbSabor1.getSelectedIndex() + "1");
+        if (cbSabor1.getSelectedIndex() <= 0 || cbSabor2.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null, "Selecione dois sabores!");
+        } else if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
+
+            if (!(txtValorSubPizza.getText().equals(""))) {
+                valorBorda = Double.parseDouble(txtValorSubPizza.getText());
+                subTotal = Double.parseDouble(txtValorPizza.getText()) + valorBorda * Integer.parseInt(txtQtdPizza.getText());
+            } else {
+                subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
+            }
+
+            if (!(txtValorDescPizza.getText().equals(""))) {
+                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText());
+                valorDesconto = Double.parseDouble(txtValorDescPizza.getText());
+            } else {
+                valorTotal = subTotal;
+            }
+
+            if (cbSabor2.getSelectedItem() != null) {
+                double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
+                double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
+                if (sabor1 >= sabor2) {
+                    modeloDeTabela.addRow(new Object[]{cbSabor1.getSelectedItem() + " / " + cbSabor2.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+                    // modeloDeTabela.addRow(new Object[]{cbSabor2.getSelectedItem() + " meia", 0.00, 0, 0.00});
+                    adicionaPizzaSabores("sabor1", valorTotal);
+                } else {
+                    // modeloDeTabela.addRow(new Object[]{cbSabor1.getSelectedItem() + " meia", 0.00, 0, 0.00});
+                    modeloDeTabela.addRow(new Object[]{cbSabor2.getSelectedItem() + " / " + cbSabor1.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+                    adicionaPizzaSabores("sabor2", valorTotal);
+                }
+            }
+
+            cbSabor1.setSelectedIndex(0);
+            cbSabor2.setSelectedIndex(0);
+            cbBorda.setSelectedIndex(0);
+            cbFormaPagamento.setEnabled(true);
+            txtTroco.setText("");
+            btnFinalizar.setEnabled(false);
+            txtValorDescPizza.setText("");
+            txtValorSubPizza.setText("");
+
+            limpaPizza();
+            calculaTotal();
+        }
+    }
+
+    public void controlePizzaInteira() {
+        double subTotal;
+        double valorBorda = 0;
+        double valorDesconto = 0;
+        double valorTotal;
+        if (cbInteira.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null, "Selecione uma Pizza!");
+        } else if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
+
+            if (!(txtValorSubPizza.getText().equals(""))) {
+                valorBorda = Double.parseDouble(txtValorSubPizza.getText());
+                subTotal = Double.parseDouble(txtValorPizza.getText()) + valorBorda * Integer.parseInt(txtQtdPizza.getText());
+            } else {
+                subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
+            }
+
+            if (!(txtValorDescPizza.getText().equals(""))) {
+                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText());
+                valorDesconto = Double.parseDouble(txtValorDescPizza.getText());
+            } else {
+                valorTotal = subTotal;
+            }
+
+            if (cbInteira.getSelectedItem() != null) {
+                modeloDeTabela.addRow(new Object[]{cbInteira.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+                adicionaPizzaInteira(valorTotal);
+            }
+            cbInteira.setSelectedIndex(0);
+            cbBorda.setSelectedIndex(0);
+            cbFormaPagamento.setEnabled(true);
+            txtTroco.setText("");
+            btnFinalizar.setEnabled(false);
+            txtValorDescPizza.setText("");
+            txtValorSubPizza.setText("");
+
+            limpaPizza();
+            calculaTotal();
+        }
+    }
+
+    public void controleValorSabores() {
+        txtValorPizza.setText("");
+
+        if (cbSabor2.getSelectedIndex() > 0 && cbSabor1.getSelectedIndex() > 0) {
+            double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
+            double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
+            if (sabor1 >= sabor2) {
+                txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
+            } else {
+                txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
+            }
+        }
+    }
+
 }
