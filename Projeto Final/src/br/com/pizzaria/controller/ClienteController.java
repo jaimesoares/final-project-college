@@ -4,12 +4,11 @@ import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.util.VerificarData;
-import br.com.pizzaria.view.ClienteView;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ClienteController extends ClienteView{
+public class ClienteController {
 
     ClienteModel clienteModel;
 

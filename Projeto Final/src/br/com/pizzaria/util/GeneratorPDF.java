@@ -26,7 +26,7 @@ public class GeneratorPDF {
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH-mm-ss");
         SimpleDateFormat formatoData = new SimpleDateFormat("dd-MM-yyyy");
        // String path = "C:\\Users\\Jaime\\Desktop";
-        String path = "cupom";
+        String path = System.getProperty("user.dir")+"\\Cupom";
         Font fontNormal = FontFactory.getFont(FontFactory.COURIER, 10,Font.NORMAL, BaseColor.BLACK);
 // criação do documento
         Document document = new Document();
@@ -44,7 +44,7 @@ public class GeneratorPDF {
             return "Erro ao gerar cupom";
         }
         document.close();
-        return "Cupom gerado com sucesso em \\NetBeansProjects\\trunk\\Projeto Final\\Cupom";
+        return "Cupom gerado com sucesso em "+path;
     }
 
     public static void main(String[] args) {
