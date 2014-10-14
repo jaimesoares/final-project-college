@@ -65,6 +65,8 @@ public class PrincipalView extends javax.swing.JFrame {
             public void eventDispatched(AWTEvent e) {
             }
         }, AWTEvent.KEY_EVENT_MASK);
+        
+        
 
     }
 
