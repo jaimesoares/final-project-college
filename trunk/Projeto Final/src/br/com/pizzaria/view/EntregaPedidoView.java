@@ -1979,6 +1979,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         itemPedido.setPrecoTotal(total);
         itemPedido.setMeiaPizza("N");
         itemPedido.setDescricao(((ProdutoBean) cbProduto.getSelectedItem()).getDescricao());
+        itemPedido.setItemProdutoBean((ProdutoBean)cbProduto.getSelectedItem());
 
         listaDeItens.add(itemPedido);
     }

@@ -22,6 +22,7 @@ public class ItemPedidoBean {
     private int codigoProduto2;
     private int codigoProduto3;
     private double valotDesconto;
+    private ProdutoBean itemProdutoBean;
 
     /**
      * @return the codigoPedido
@@ -180,5 +181,19 @@ public class ItemPedidoBean {
      */
     public void setValotDesconto(double valotDesconto) {
         this.valotDesconto = valotDesconto;
+    }
+
+    /**
+     * @return the itemProdutoBean
+     */
+    public ProdutoBean getItemProdutoBean() {
+        return itemProdutoBean;
+    }
+
+    /**
+     * @param itemProdutoBean the itemProdutoBean to set
+     */
+    public void setItemProdutoBean(ProdutoBean itemProdutoBean) {
+        this.itemProdutoBean = itemProdutoBean;
     }
 }
