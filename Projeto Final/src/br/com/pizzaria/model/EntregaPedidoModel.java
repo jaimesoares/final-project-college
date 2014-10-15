@@ -31,7 +31,9 @@ public class EntregaPedidoModel {
                     + "  t.`tprd_id`,\n"
                     + "  t.`tprd_descr`,\n"
                     + "  p.`prd_prod`,\n"
-                    + "  p.`prd_descr`\n"
+                    + "  p.`prd_prod_venda`,\n"
+                    + "  p.`prd_descr`,\n"
+                    + "  p.`prod_estocavel`\n "
                     //+ "  c.`tprc_preco` \n"
                     + "FROM\n"
                     + "  `pizzaria`.`tipo_prod` t \n"
@@ -39,7 +41,7 @@ public class EntregaPedidoModel {
                     + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
                     // + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
                     //+ "    ON c.tprc_cod_prod = p.prd_prod \n"
-                    + "WHERE t.`tprd_id` = '" + pesquisa + "';";
+                    + "WHERE t.`tprd_id` = '" + pesquisa + "' and p.`prd_prod_venda` ='S';";
 
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
@@ -50,6 +52,7 @@ public class EntregaPedidoModel {
                 novo.getPrecoProduto().setPreco(valorDoItem(rs.getInt("prd_prod")));
                 novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
                 novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
+                novo.setEstocavel(rs.getString("prod_estocavel").charAt(0));
                 listaDeItens.add(novo);
             }
         } catch (SQLException ex) {
@@ -138,7 +141,7 @@ public class EntregaPedidoModel {
             pstmt.execute();
             pedidobeans.setCodigoPedido(codigoDoPedido());
 
-            if (cadastrarItens(codigoDoPedido(), pedidobeans) || cadastrarCupom(pedidobeans)) {
+            if (cadastrarItens(codigoDoPedido(), pedidobeans) && cadastrarCupom(pedidobeans) && atualizaMovimentoEstoque(pedidobeans)) {
                 ConectaBanco.getConnection().commit();
                 JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
             }
@@ -511,6 +514,212 @@ public class EntregaPedidoModel {
         cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
         cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
         JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
+    }
+
+    public boolean atualizaMovimentoEstoque(PedidoBean pedidoBeans) {
+
+        for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
+            try {
+
+                String SQLInsertItens = "insert into `pizzaria`.`movto_estoq`\n"
+                        + "            (\n"
+                        + "             `estq_dt_movto`,\n"
+                        + "             `estq_cod_prod`,\n"
+                        + "             `estq_tipo`,\n"
+                        + "             `estq_qtd`)\n"
+                        + "values (\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?);";
+
+                PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
+                pstmt.setString(1, pedidoBeans.getData());
+                pstmt.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
+                pstmt.setInt(3, 1);
+                pstmt.setInt(4, pedidoBeans.getItensPedido().get(i).getQuantidade());
+
+                pstmt.execute();
+
+                if (!atualizaSaldoEstoque(pedidoBeans)) {
+                    return false;
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    ConectaBanco.getConnection().rollback();
+                    JOptionPane.showMessageDialog(null, "Impossível Atualizar Movimento Estoque " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                } catch (SQLException ex1) {
+                    Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean atualizaSaldoEstoque(PedidoBean pedidoBeans) {
+
+        boolean insert = true;
+
+        for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
+
+            if (pedidoBeans.getItensPedido().get(i).getItemProdutoBean().getEstocavel() == 'S') {
+                long quantidadeEntrada = 0;
+                long quantidadeSaida = 0;
+                long saldoAtual = 0;
+                long saldoAnterior = 0;
+                String dataSaldoEstoque = pedidoBeans.getData();
+
+                /*Pesquisa para verificar todas as ocorrências de um produto de entrada e saída na data atual*/
+                try {
+                    String SQLPesquisa = "select\n"
+                            + "  `estq_id`,\n"
+                            + "  `estq_dt_movto`,\n"
+                            + "  `estq_cod_prod`,\n"
+                            + "  `estq_tipo`,\n"
+                            + "  `estq_qtd`\n"
+                            + "from `pizzaria`.`movto_estoq`"
+                            + "WHERE `estq_cod_prod` = '" + pedidoBeans.getItensPedido().get(i).getCodigoProduto() + "'"
+                            + " and `estq_dt_movto` = '" + pedidoBeans.getData() + "';";
+
+                    PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
+                    ResultSet rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        int tipoMovimentacaoEstoque = rs.getInt("estq_tipo");
+
+                        if (tipoMovimentacaoEstoque == 1 || tipoMovimentacaoEstoque == 4 || tipoMovimentacaoEstoque == 6 || tipoMovimentacaoEstoque == 8) {
+                            quantidadeSaida += rs.getLong("estq_qtd");
+                        }
+                        if (tipoMovimentacaoEstoque == 2 || tipoMovimentacaoEstoque == 3 || tipoMovimentacaoEstoque == 5 || tipoMovimentacaoEstoque == 7) {
+                            quantidadeEntrada += rs.getLong("estq_qtd");
+                        }
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Pesquisa para verificar todas as ocorrências de um produto de entrada e saída na data atual " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                }
+
+                /*Pesquisa para saber o saldo anterior do produto acima*/
+                try {
+                    String SQLPesquisa = "select \n"
+                            + "  `sdoe_dt_movto`,\n"
+                            + "  `sdoe_cod_prod`,\n"
+                            + "  `sdoe_qtd_sdo_ant`,\n"
+                            + "  `sdoe_qtd_ent`,\n"
+                            + "  `sdoe_qtd_sai`,\n"
+                            + "  `sdoe_qtd_sdo_atu` \n"
+                            + "from\n"
+                            + "  `pizzaria`.`saldo_estoque` \n"
+                            + "where `sdoe_cod_prod` = " + pedidoBeans.getItensPedido().get(i).getCodigoProduto() + "\n "/*+ " AND `sdoe_dt_movto` < '" + pedidoBeans.getData() + "'\n "*/
+                            + "ORDER BY `sdoe_dt_movto` desc \n"
+                            + "limit 2 ;";
+
+                    PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
+                    ResultSet rs = pstmt.executeQuery();
+                    if (rs.next()) { //verifico se tem algum registro do produto
+
+                        dataSaldoEstoque = rs.getString("sdoe_dt_movto");
+                        if (dataSaldoEstoque.equals(pedidoBeans.getData())) {//se o resultado do rs for a data atual, então contém registo deste produto de hoje
+                            if (rs.next()) {//verifico a data anterior da última atualização do registro desse produto
+                                dataSaldoEstoque = rs.getString("sdoe_dt_movto");
+                                saldoAnterior = rs.getLong("sdoe_qtd_sdo_atu");
+                                insert = false;
+                            }
+                            insert =false;
+                        } else {
+                            saldoAnterior = rs.getLong("sdoe_qtd_sdo_atu");
+                            insert = true;
+                        }
+
+                    } else {
+                        insert = true;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Pesquisa para saber o saldo anterior do produto " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                }
+
+                if (!insert) {
+                    //fazer update
+                    try {
+                        String SQLUpdate = "update `pizzaria`.`saldo_estoque`\n"
+                                + "set \n"
+                                + "  `sdoe_qtd_sdo_ant` = ?,\n"
+                                + "  `sdoe_qtd_ent` = ?,\n"
+                                + "  `sdoe_qtd_sai` = ?,\n"
+                                + "  `sdoe_qtd_sdo_atu` = ?\n"
+                                + "where `sdoe_dt_movto` = ?\n"
+                                + "    and `sdoe_cod_prod` = ?;";
+                        PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
+                        pstm.setLong(1, saldoAnterior);
+                        pstm.setLong(2, quantidadeEntrada);
+                        pstm.setLong(3, quantidadeSaida);
+
+                        saldoAtual = saldoAnterior + quantidadeEntrada - quantidadeSaida;
+                        pstm.setLong(4, saldoAtual); //saldo que deverá ser atualizado
+
+                        pstm.setString(5, pedidoBeans.getData());
+                        pstm.setInt(6, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
+
+                        pstm.executeUpdate();
+
+                        //JOptionPane.showMessageDialog(null, "Produto alterado com sucesso! ", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                        try {
+                            ConectaBanco.getConnection().rollback();
+                            JOptionPane.showMessageDialog(null, "Update tabela saldo estoque" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                        } catch (SQLException ex1) {
+                            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                        return false;
+                    }
+                } else {
+                    //fazer insert
+                    try {
+                        String SQLInsert = "insert into `pizzaria`.`saldo_estoque`\n"
+                                + "            (`sdoe_dt_movto`,\n"
+                                + "             `sdoe_cod_prod`,\n"
+                                + "             `sdoe_qtd_sdo_ant`,\n"
+                                + "             `sdoe_qtd_ent`,\n"
+                                + "             `sdoe_qtd_sai`,\n"
+                                + "             `sdoe_qtd_sdo_atu`)\n"
+                                + "values (?,\n"
+                                + "       ?,\n"
+                                + "        ?,\n"
+                                + "        ?,\n"
+                                + "       ?,\n"
+                                + "        ?);";
+                        PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsert);
+                        pstm.setString(1, pedidoBeans.getData());
+                        pstm.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
+                        pstm.setLong(3, saldoAnterior);
+                        pstm.setLong(4, quantidadeEntrada);
+                        pstm.setLong(5, quantidadeSaida);
+
+                        saldoAtual = saldoAnterior + quantidadeEntrada - quantidadeSaida;
+                        pstm.setLong(6, saldoAtual); //saldo que deverá ser atualizado
+
+                        pstm.execute();
+
+                        //JOptionPane.showMessageDialog(null, "Produto alterado com sucesso! ", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                        try {
+                            ConectaBanco.getConnection().rollback();
+                            JOptionPane.showMessageDialog(null, "Insert tabela saldo estoque" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                        } catch (SQLException ex1) {
+                            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                        return false;
+                    }
+                }
+            }
+
+        }
+        return true;
     }
 
 }

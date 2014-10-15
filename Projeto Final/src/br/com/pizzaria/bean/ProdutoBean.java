@@ -10,7 +10,10 @@ public class ProdutoBean {
     private double qtdSaldoEstoque;
     private char estocavel;
     private String dataCad;
-    private PrecoProdutoBean precoProduto;
+    private PrecoProdutoBean precoProduto;//preço de venda
+    private String unidadeMedida ;
+    private char prodAcabadoPrima;
+    private char venda;
 
     public ProdutoBean() {
         tipoProduto = new TipoProdutoBean();
@@ -146,6 +149,48 @@ public class ProdutoBean {
      */
     public void setPrecoProduto(PrecoProdutoBean precoProduto) {
         this.precoProduto = precoProduto;
+    }
+
+    /**
+     * @return the unidadeMedida
+     */
+    public String getUnidadeMedida() {
+        return unidadeMedida;
+    }
+
+    /**
+     * @param unidadeMedida the unidadeMedida to set
+     */
+    public void setUnidadeMedida(String unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
+    }
+
+    /**
+     * @return the prodAcabadoPrima
+     */
+    public char getProdAcabadoPrima() {
+        return prodAcabadoPrima;
+    }
+
+    /**
+     * @param prodAcabadoPrima the prodAcabadoPrima to set
+     */
+    public void setProdAcabadoPrima(char prodAcabadoPrima) {
+        this.prodAcabadoPrima = prodAcabadoPrima;
+    }
+
+    /**
+     * @return the venda
+     */
+    public char getVenda() {
+        return venda;
+    }
+
+    /**
+     * @param venda the venda to set
+     */
+    public void setVenda(char venda) {
+        this.venda = venda;
     }
 
 }
