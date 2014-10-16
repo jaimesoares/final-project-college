@@ -1979,7 +1979,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         itemPedido.setPrecoTotal(total);
         itemPedido.setMeiaPizza("N");
         itemPedido.setDescricao(((ProdutoBean) cbProduto.getSelectedItem()).getDescricao());
-        itemPedido.setItemProdutoBean((ProdutoBean)cbProduto.getSelectedItem());
+        itemPedido.setItemProdutoBean((ProdutoBean) cbProduto.getSelectedItem());
 
         listaDeItens.add(itemPedido);
     }
@@ -2078,7 +2078,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         itemPedido.setPrecoTotal(total);
         itemPedido.setMeiaPizza("N");
         itemPedido.setDescricao(((ProdutoBean) cbInteira.getSelectedItem()).getDescricao());
-
+        itemPedido.setItemProdutoBean((ProdutoBean) cbInteira.getSelectedItem());
         listaDeItens.add(itemPedido);
     }
 
@@ -2094,6 +2094,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             itemPedido.setDescricao(((ProdutoBean) cbSabor1.getSelectedItem()).getDescricao());
             itemPedido.setCodigoProduto2(((ProdutoBean) cbSabor2.getSelectedItem()).getCodigo());
             itemPedido.setMeiaPizza("S");
+            itemPedido.setItemProdutoBean((ProdutoBean) cbSabor1.getSelectedItem());
             listaDeItens.add(itemPedido);
 //            ItemPedidoBean itemPedido2 = new ItemPedidoBean();
 //            itemPedido2.setCodigoProduto(((ProdutoBean) cbSabor2.getSelectedItem()).getCodigo());
@@ -2112,6 +2113,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             itemPedido.setDescricao(((ProdutoBean) cbSabor2.getSelectedItem()).getDescricao());
             itemPedido.setCodigoProduto2(((ProdutoBean) cbSabor1.getSelectedItem()).getCodigo());
             itemPedido.setMeiaPizza("S");
+            itemPedido.setItemProdutoBean((ProdutoBean)cbSabor2.getSelectedItem());
             listaDeItens.add(itemPedido);
 //            ItemPedidoBean itemPedido2 = new ItemPedidoBean();
 //            itemPedido2.setCodigoProduto(((ProdutoBean) cbSabor1.getSelectedItem()).getCodigo());
