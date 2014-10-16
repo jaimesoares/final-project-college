@@ -572,7 +572,7 @@ public class EntregaPedidoModel {
                 long saldoAnterior = 0;
                 String dataSaldoEstoque = pedidoBeans.getData();
 
-                /*Pesquisa para verificar todas as ocorrências de um produto de entrada e saída na data atual*/
+                /*Pesquisa para verificar todas as ocorrências de um produto de entrada e saída na data atual da tabela movto_estoq*/
                 try {
                     String SQLPesquisa = "select\n"
                             + "  `estq_id`,\n"
@@ -621,14 +621,15 @@ public class EntregaPedidoModel {
                     if (rs.next()) { //verifico se tem algum registro do produto
 
                         dataSaldoEstoque = rs.getString("sdoe_dt_movto");
+                        
                         if (dataSaldoEstoque.equals(pedidoBeans.getData())) {//se o resultado do rs for a data atual, então contém registo deste produto de hoje
                             if (rs.next()) {//verifico a data anterior da última atualização do registro desse produto
                                 dataSaldoEstoque = rs.getString("sdoe_dt_movto");
                                 saldoAnterior = rs.getLong("sdoe_qtd_sdo_atu");
                                 insert = false;
                             }
-                            insert =false;
-                        } else {
+                            insert = false;
+                        } else { //caso possua apenas o registro de hoje
                             saldoAnterior = rs.getLong("sdoe_qtd_sdo_atu");
                             insert = true;
                         }
