@@ -190,6 +190,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), null));
 
+        rbProdAcabado.setSelected(true);
         rbProdAcabado.setText("Prod. Acabado");
 
         rbMateriaPrima.setText("Matéria-prima");

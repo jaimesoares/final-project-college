@@ -57,8 +57,8 @@ public class EntregaPedidoController {
         return true;
     }
 
-    public void conttroleDePedido(/*String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, */PedidoBean pedidobeans) {
-        entregaPedidoModel.cadastrarPedido(/*codigoCliente, codigoFuncioario, total, tamanhoTabela, */pedidobeans);
+    public boolean conttroleDePedido(/*String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, */PedidoBean pedidobeans) {
+        return entregaPedidoModel.cadastrarPedido(/*codigoCliente, codigoFuncioario, total, tamanhoTabela, */pedidobeans);
     }
 
     public void controlePesquisa(String pesquisa, String tipo, List<ClienteBean> lista) {
