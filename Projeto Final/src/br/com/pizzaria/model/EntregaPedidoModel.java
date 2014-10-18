@@ -94,7 +94,7 @@ public class EntregaPedidoModel {
         return 0;
     }
 
-    public void cadastrarPedido(/*int codigoCliente, String codigoFuncioario, String total, int tamanhoTabela,*/PedidoBean pedidobeans) {
+    public boolean cadastrarPedido(/*int codigoCliente, String codigoFuncioario, String total, int tamanhoTabela,*/PedidoBean pedidobeans) {
 
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
@@ -144,6 +144,9 @@ public class EntregaPedidoModel {
             if (cadastrarItens(codigoDoPedido(), pedidobeans) && cadastrarCupom(pedidobeans) && atualizaMovimentoEstoque(pedidobeans)) {
                 ConectaBanco.getConnection().commit();
                 JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                return true;
+            } else {
+                return false;
             }
 
         } catch (SQLException ex) {
@@ -153,6 +156,7 @@ public class EntregaPedidoModel {
             } catch (SQLException ex1) {
                 Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
             }
+            return false;
         }
     }
 
@@ -621,7 +625,7 @@ public class EntregaPedidoModel {
                     if (rs.next()) { //verifico se tem algum registro do produto
 
                         dataSaldoEstoque = rs.getString("sdoe_dt_movto");
-                        
+
                         if (dataSaldoEstoque.equals(pedidoBeans.getData())) {//se o resultado do rs for a data atual, então contém registo deste produto de hoje
                             if (rs.next()) {//verifico a data anterior da última atualização do registro desse produto
                                 dataSaldoEstoque = rs.getString("sdoe_dt_movto");

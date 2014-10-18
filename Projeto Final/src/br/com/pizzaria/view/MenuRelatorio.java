@@ -23,6 +23,7 @@ import javax.swing.Timer;
  */
 public class MenuRelatorio extends javax.swing.JInternalFrame {
 RelatorioClienteView relatorioClienteV;
+ConsultaMovimentacaoEstoqueView movimentoEstoque;
     /**
      * Creates new form MenuProdução
      */
@@ -53,6 +54,7 @@ RelatorioClienteView relatorioClienteV;
     private void initComponents() {
 
         btnRelatorioCliente = new javax.swing.JButton();
+        btnRelatorioCliente1 = new javax.swing.JButton();
 
         setTitle("Menu Relatório");
         setPreferredSize(new java.awt.Dimension(308, 263));
@@ -66,13 +68,24 @@ RelatorioClienteView relatorioClienteV;
             }
         });
 
+        btnRelatorioCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnRelatorioCliente1.setForeground(new java.awt.Color(0, 51, 255));
+        btnRelatorioCliente1.setText("<html> Movimento Estoque <font size='2' style='color:black'> Crtl-1 </font>");
+        btnRelatorioCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioCliente1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRelatorioCliente)
+                    .addComponent(btnRelatorioCliente1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -80,7 +93,9 @@ RelatorioClienteView relatorioClienteV;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRelatorioCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,9 +111,20 @@ RelatorioClienteView relatorioClienteV;
         }
     }//GEN-LAST:event_btnRelatorioClienteActionPerformed
 
+    private void btnRelatorioCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioCliente1ActionPerformed
+        // TODO add your handling code here:
+        if (movimentoEstoque == null || !movimentoEstoque.isShowing()) {
+            movimentoEstoque = new ConsultaMovimentacaoEstoqueView();
+            Global.principal.Desktop.add(movimentoEstoque);
+            centralizaForm(movimentoEstoque);
+            movimentoEstoque.setVisible(true);
+        }
+    }//GEN-LAST:event_btnRelatorioCliente1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRelatorioCliente;
+    private javax.swing.JButton btnRelatorioCliente1;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (  
         new ActionListener(){  

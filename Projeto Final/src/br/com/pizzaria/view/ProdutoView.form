@@ -394,6 +394,7 @@
       <SubComponents>
         <Component class="javax.swing.JRadioButton" name="rbProdAcabado">
           <Properties>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Prod. Acabado"/>
           </Properties>
         </Component>

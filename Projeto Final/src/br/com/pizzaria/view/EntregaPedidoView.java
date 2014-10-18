@@ -1431,10 +1431,10 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 txtTroco.setText(decimalFormato.format(troco).replace(",", "."));
                 if (Double.parseDouble(txtTroco.getText()) >= 0) {
                     btnFinalizar.setEnabled(true);
-                    btnImprimirCupom.setEnabled(true);
+                    //btnImprimirCupom.setEnabled(true);
                 } else {
                     btnFinalizar.setEnabled(false);
-                    btnImprimirCupom.setEnabled(false);
+                    //btnImprimirCupom.setEnabled(false);
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Campo valor deve conter apenas número!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
@@ -1466,20 +1466,21 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         switch (JOptionPane.showConfirmDialog(null, "Finalizar Pedido!", "Finalizar Pedido", JOptionPane.YES_NO_OPTION)) {
             case 0:
                 populaPedidoBeans();
-                entregaPedidoController.conttroleDePedido(/*String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), */pedidoBeans);
+                if (entregaPedidoController.conttroleDePedido(/*String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), */pedidoBeans)) {
 //                limpaFinaliza();
 //                limpaTudo();
-                CozinhaView.populaTabela();
+                    CozinhaView.populaTabela();
 //                this.dispose();
-                btnAdicionaPizza.setEnabled(false);
-                btnAdicionaProduto.setEnabled(false);
-                btnRemove.setEnabled(false);
-                btnFinalizar.setEnabled(false);
-                cbFormaPagamento.setEnabled(false);
-                txtValorRecebido.setEnabled(false);
-                break;
+                    btnAdicionaPizza.setEnabled(false);
+                    btnAdicionaProduto.setEnabled(false);
+                    btnRemove.setEnabled(false);
+                    btnFinalizar.setEnabled(false);
+                    cbFormaPagamento.setEnabled(false);
+                    txtValorRecebido.setEnabled(false);
+                    btnImprimirCupom.setEnabled(true);
+                    break;
+                }
         }
-
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
@@ -1697,6 +1698,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         btnImprimirCupom.setEnabled(false);
         cbFormaPagamento.setEnabled(false);
         txtValorRecebido.setEnabled(false);
+        this.dispose();
 
     }//GEN-LAST:event_btnImprimirCupomActionPerformed
 
@@ -2113,7 +2115,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
             itemPedido.setDescricao(((ProdutoBean) cbSabor2.getSelectedItem()).getDescricao());
             itemPedido.setCodigoProduto2(((ProdutoBean) cbSabor1.getSelectedItem()).getCodigo());
             itemPedido.setMeiaPizza("S");
-            itemPedido.setItemProdutoBean((ProdutoBean)cbSabor2.getSelectedItem());
+            itemPedido.setItemProdutoBean((ProdutoBean) cbSabor2.getSelectedItem());
             listaDeItens.add(itemPedido);
 //            ItemPedidoBean itemPedido2 = new ItemPedidoBean();
 //            itemPedido2.setCodigoProduto(((ProdutoBean) cbSabor1.getSelectedItem()).getCodigo());
