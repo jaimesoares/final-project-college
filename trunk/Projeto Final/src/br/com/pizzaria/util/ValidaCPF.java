@@ -21,7 +21,7 @@ public class ValidaCPF {
             sm = 0;
             peso = 10;
             for (i = 0; i < 9; i++) {
-                num = (int) (CPF.charAt(i) - 48);
+                num = (CPF.charAt(i) - 48);
                 sm = sm + (num * peso);
                 peso = peso - 1;
             }
@@ -35,7 +35,7 @@ public class ValidaCPF {
             sm = 0;
             peso = 11;
             for (i = 0; i < 10; i++) {
-                num = (int) (CPF.charAt(i) - 48);
+                num = (CPF.charAt(i) - 48);
                 sm = sm + (num * peso);
                 peso = peso - 1;
             }

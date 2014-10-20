@@ -39,7 +39,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEntregador = new javax.swing.JTable();
         sep_tabela = new javax.swing.JSeparator();
-        btnCadastrar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnLiberar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
@@ -106,14 +105,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblEntregador);
 
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.setToolTipText("Cadastro de um novo cliente");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
         btnEditar.setText("Editar");
         btnEditar.setToolTipText("Para edita alguma informação de cliente");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +113,7 @@ public class EntregadorView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLiberar.setText("Liberar");
+        btnLiberar.setText("Remover");
         btnLiberar.setToolTipText("Libera os campos para edição");
         btnLiberar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,15 +145,12 @@ public class EntregadorView extends javax.swing.JInternalFrame {
                         .addComponent(txtNome))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLiberar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFechar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLiberar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFechar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_data1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,7 +192,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
-                    .addComponent(btnCadastrar)
                     .addComponent(btnEditar)
                     .addComponent(btnLiberar)
                     .addComponent(btnFechar))
@@ -221,15 +208,6 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         //txtCodigo.setText(entregadorController.controleDeCodigo());
         limpaNovo();
     }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if (entregadorController.verificarDados(capturaBeans())) {
-            limpaTudo();
-            habilitarCampos(false);
-        }
-
-
-    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
         modelo.setNumRows(0);
@@ -250,17 +228,16 @@ public class EntregadorView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiberarActionPerformed
-        habilitarCampos(true);
-    }//GEN-LAST:event_btnLiberarActionPerformed
-
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
 
+    private void btnLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiberarActionPerformed
+        habilitarCampos(true);
+    }//GEN-LAST:event_btnLiberarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnLiberar;

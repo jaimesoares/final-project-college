@@ -28,10 +28,10 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
         initComponents();
         precoProdutoController = new PrecoProdutoController();
         modeloListaProd = new DefaultListModel();
-        modeloComboProd = (ComboBoxModel) cbProduto.getModel();
+        modeloComboProd = cbProduto.getModel();
         modeloTabelaPrecoProd = (DefaultTableModel) tblPrecoProduto.getModel();
         decimalFormato = new DecimalFormat("0.00");
-        modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
+        modeloTipoProd = cbTipo.getModel();
         produtoController = new ProdutoController();
 
         populaTipoProduto();
@@ -71,7 +71,7 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnAdicionar.setText("+");
+        btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);

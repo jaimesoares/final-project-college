@@ -39,9 +39,9 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
         modelo = (DefaultTableModel) tblMovimentacaoEstoque.getModel();
         produtoController = new ProdutoController();
 
-        modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
-        modeloProdData = (ComboBoxModel) cbData.getModel();
-        modeloProduto = (ComboBoxModel) cbProduto.getModel();
+        modeloTipoProd = cbTipo.getModel();
+        modeloProdData = cbData.getModel();
+        modeloProduto = cbProduto.getModel();
         produtoController = new ProdutoController();
 
         consultaEstoqueController = new ConsultaMovimentacaoEstoqueController();

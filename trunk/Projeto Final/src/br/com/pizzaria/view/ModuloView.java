@@ -59,7 +59,7 @@ public class ModuloView extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(lstModulo);
 
-        btnRemover.setText("-");
+        btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
@@ -73,7 +73,7 @@ public class ModuloView extends javax.swing.JFrame {
             }
         });
 
-        btnAdicionar.setText("+");
+        btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);

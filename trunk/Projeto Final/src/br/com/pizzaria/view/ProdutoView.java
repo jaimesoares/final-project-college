@@ -33,7 +33,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         produtoBeans = new ProdutoBean();
         produtoController = new ProdutoController();
         formatoDecimal = new DecimalFormat("0.00");
-        modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
+        modeloTipoProd = cbTipo.getModel();
         precoProdutoController = new PrecoProdutoController();
         populaTipoProduto();
 
@@ -41,7 +41,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         grupoProdAcabPrima.add(rbMateriaPrima);
         grupoProdAcabPrima.add(rbProdAcabado);
 
-        modeloUnidade = (ComboBoxModel) cbUnidadeMedida.getModel();
+        modeloUnidade = cbUnidadeMedida.getModel();
     }
 
     @SuppressWarnings("unchecked")
