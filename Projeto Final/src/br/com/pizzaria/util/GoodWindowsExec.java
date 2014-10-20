@@ -47,7 +47,13 @@ public class GoodWindowsExec
                 String mysql ="mysqldump";
                 cmd[0] = "cmd.exe" ;
                 cmd[1] = "/C" ;
-                cmd[2] = mysql+" -u root -p root test -r C:\\Users\\Jaime\\Desktop\\testbackup.sql";
+                cmd[2] = mysql+" -u root -proot test -r \"C:\\Users\\Jaime\\Desktop\\Nova pasta\\testbackup.sql\"";
+            
+//            String mysql ="mysql";
+//                cmd[0] = "cmd.exe" ;
+//                cmd[1] = "/C" ;
+//                cmd[2] = mysql+" -u root -proot test < \"C:\\Users\\Jaime\\Desktop\\Nova pasta\\testbackup.sql\"";
+                
             
             
             Runtime rt = Runtime.getRuntime();
