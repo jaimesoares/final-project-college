@@ -39,7 +39,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         funcionarioBeans = new FuncionarioBean();
         funcionarioController = new FuncionarioController();
         modelo = (DefaultTableModel) tblFuncionario.getModel();
-        modeloCargos = (ComboBoxModel) cbCargo.getModel();
+        modeloCargos = cbCargo.getModel();
         populaCargo();
 
     }

@@ -26,7 +26,7 @@ public class ValidaCNPJ {
             sm = 0;
             peso = 2;
             for (i = 11; i >= 0; i--) {
-                num = (int) (CNPJ.charAt(i) - 48);
+                num = (CNPJ.charAt(i) - 48);
                 sm = sm + (num * peso);
                 peso = peso + 1;
                 if (peso == 10) {
@@ -44,7 +44,7 @@ public class ValidaCNPJ {
             sm = 0;
             peso = 2;
             for (i = 12; i >= 0; i--) {
-                num = (int) (CNPJ.charAt(i) - 48);
+                num = (CNPJ.charAt(i) - 48);
                 sm = sm + (num * peso);
                 peso = peso + 1;
                 if (peso == 10) {

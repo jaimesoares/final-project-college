@@ -103,7 +103,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         formatoHora = new SimpleDateFormat("HH-mm-ss");
 
         precoProdutoController = new PrecoProdutoController();
-        modeloTipoProd = (ComboBoxModel) cbTipo.getModel();
+        modeloTipoProd = cbTipo.getModel();
         produtoController = new ProdutoController();
 
         populaTipoProduto();
@@ -117,10 +117,10 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
         grupoPizza.add(rbInteira);
         grupoPizza.add(rbMeiaPizza);
 
-        modeloPizzaInteira = (ComboBoxModel) cbInteira.getModel();
-        modeloPizzaSabor1 = (ComboBoxModel) cbSabor1.getModel();
-        modeloPizzaSabor2 = (ComboBoxModel) cbSabor2.getModel();
-        modeloBorda = (ComboBoxModel) cbBorda.getModel();
+        modeloPizzaInteira = cbInteira.getModel();
+        modeloPizzaSabor1 = cbSabor1.getModel();
+        modeloPizzaSabor2 = cbSabor2.getModel();
+        modeloBorda = cbBorda.getModel();
 
         populaListaPizzaInteira();
         populaListaPizzaSabor1();
