@@ -1,48 +1,40 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.bean.CepBean;
-import br.com.pizzaria.bean.ClienteBean;
+import br.com.pizzaria.bean.AjusteEstoqueBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.controller.AjusteEstoqueController;
-import br.com.pizzaria.controller.ConsultaMovEstoqueController;
-import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.VerificarData;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 
 public class AjusteEstoqueView extends javax.swing.JInternalFrame {
 
-    MaskFormatter formatoData;
     AjusteEstoqueController ajusteEstoqueController;
-    DefaultTableModel modelo;
-    ProdutoController produtoController;
     List<ProdutoBean> listaProduto;
     ComboBoxModel<TipoProdutoBean> modeloTipoProd;
     List<TipoProdutoBean> listaTipoProd;
     ComboBoxModel<ProdutoBean> modeloProduto;
-
-    ComboBoxModel<String> modeloProdData;
-    List<String> listaProdData;
+    ButtonGroup grupoAjuste;
+    AjusteEstoqueBean ajusteEstoqueBean;
 
     public AjusteEstoqueView() {
 
         initComponents();
-        
+
+        grupoAjuste = new ButtonGroup();
+        grupoAjuste.add(rbEntrada);
+        grupoAjuste.add(rbSaida);
+
         txtData.setText(VerificarData.retornoDeDataAtual());
-        
-        
-        
-        
         habilitarCampos(false);
-//
         modeloTipoProd = cbTipo.getModel();
         modeloProduto = cbProduto.getModel();
 
         ajusteEstoqueController = new AjusteEstoqueController();
+        ajusteEstoqueBean = new AjusteEstoqueBean();
 
         populaTipoProduto();
     }
@@ -291,22 +283,19 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
 
     private void cbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdutoActionPerformed
         if (cbProduto.getSelectedIndex() > 0) {
-            //txtValor.setText(ajusteEstoqueController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
             limpaCampos();
-            
             populaQuantidadeAtual();
-            
-
-            //txtValorProd.setText(decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
+            txtMedida.setText(((ProdutoBean) modeloProduto.getSelectedItem()).getUnidadeMedida());
+            txtQtdAjuste.setEditable(true);
         } else {
-           
-            
+            txtQtdAjuste.setEditable(false);
             limpaCampos();
         }
     }//GEN-LAST:event_cbProdutoActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
@@ -341,65 +330,9 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     final void habilitarCampos(boolean valor) {
-        txtMedida.setEnabled(valor);
-        txtQtdAjuste.setEnabled(valor);
-        txtQtdAtual.setEnabled(valor);
-    }
-
-    final ClienteBean populaClienteBeans() {
-
-        return null;
-
-    }
-
-    final void limpaTudo() {
-//        txtEstado.setText("");
-//        txaObs.setText("");
-//        txfCEP.setText("");
-//        txfNascimento.setText("");
-//        txfTelCelular.setText("");
-//        txfTelefone.setText("");
-//        txtBairro.setText("");
-//        txtCidade.setText("");
-//        txtCodigo.setText("");
-//        txtData.setText("");
-//        txtEmail.setText("");
-//        txtNome.setText("");
-//        txtNumero.setText("");
-//        txtPesquisar.setText("");
-//        txtRua.setText("");
-    }
-
-    final void limpaNovo() {
-//       txtEstado.setText("");
-//        txaObs.setText("");
-//        txfCEP.setText("");
-//        txfNascimento.setText("");
-//        txfTelCelular.setText("");
-//        txfTelefone.setText("");
-//        txtBairro.setText("");
-//        txtCidade.setText("");
-//        txtEmail.setText("");
-//        txtNome.setText("");
-//        txtNumero.setText("");
-//        txtPesquisar.setText("");
-//        txtRua.setText("");
-    }
-
-    public void populaCamposCep() {
-        CepBean cepBeans;
-
-//        if (ajusteEstoqueController.controleCepValido(cepBeans = ajusteEstoqueController.controleCep(txfCEP.getText().replace("-", "")))) {
-//            txtBairro.setText(cepBeans.getBairro());
-//            txtCidade.setText(cepBeans.getCidade());
-//            txtRua.setText(cepBeans.getEndereco());
-//            txtEstado.setText(cepBeans.getEstado());
-//        }
-    }
-
-    public static void main(String args[]) {
-//        ClienteView cliente = new ClienteView();
-//        cliente.setVisible(true);
+        txtMedida.setEditable(valor);
+        txtQtdAjuste.setEditable(valor);
+        txtQtdAtual.setEditable(valor);
     }
 
     public void populaTipoProduto() {
@@ -413,7 +346,6 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
     public void populaListaProduto() {
         if (cbTipo.getSelectedIndex() > 0) {
             listaProduto = new ArrayList<>();
-            // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
             ajusteEstoqueController.controleDeItens(((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo(), listaProduto);
             cbProduto.addItem("Selecionar Produto");
 
@@ -429,27 +361,21 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
 
     public void populaQuantidadeAtual() {
         if (cbProduto.getSelectedIndex() > 0) {
-            
-            // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
+
             long controleQuantidadeAtual = ajusteEstoqueController.controleQuantidadeAtual(((ProdutoBean) modeloProduto.getSelectedItem()).getCodigo());
             txtQtdAtual.setText(String.valueOf(controleQuantidadeAtual));
 
-
-        } else {
-
-//            cbData.setSelectedIndex(0);
         }
     }
-//
-//    public void populaTabela() {
-//        if (cbData.getSelectedIndex() > 0) {
-//            ajusteEstoqueController.controleTabelaMovimentoEstoque(cbData.getSelectedItem().toString(), ((ProdutoBean) modeloProduto.getSelectedItem()).getCodigo(), modelo, txtSaldoAnterior, txtSaldoAtual);
-//        }
-//    }
-//    
-    public void limpaCampos(){
+
+    public void limpaCampos() {
         txtMedida.setText("");
         txtQtdAjuste.setText("");
         txtQtdAtual.setText("");
+    }
+    
+    public AjusteEstoqueBean populaAjuste(){
+        
+        return null;
     }
 }
