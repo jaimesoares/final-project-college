@@ -10,6 +10,7 @@ import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.Som;
 import br.com.pizzaria.util.ThreadTempo;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -53,6 +54,9 @@ public class LoginView extends javax.swing.JInternalFrame {
         lblMensagem = new javax.swing.JLabel();
         separador = new javax.swing.JSeparator();
         lblH2O = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnAjuda = new javax.swing.JMenu();
+        mniSuporte = new javax.swing.JMenuItem();
 
         painelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acesso ao sistema", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri Light", 1, 12))); // NOI18N
 
@@ -156,6 +160,20 @@ public class LoginView extends javax.swing.JInternalFrame {
         lblH2O.setForeground(new java.awt.Color(0, 204, 51));
         lblH2O.setText("(Beba H2O)");
 
+        mnAjuda.setText("Ajuda");
+
+        mniSuporte.setText("Suporte");
+        mniSuporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSuporteActionPerformed(evt);
+            }
+        });
+        mnAjuda.add(mniSuporte);
+
+        jMenuBar1.add(mnAjuda);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,15 +248,29 @@ public class LoginView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
+    private void mniSuporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSuporteActionPerformed
+        // TODO add your handling code here:
+        SuporteView suporte = new SuporteView(Global.principal, closable);
+        
+        Dimension desktopSize = Global.principal.Desktop.getSize();
+        Dimension jInternalFrameSize = suporte.getSize();
+        suporte.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        suporte.setVisible(true);
+    }//GEN-LAST:event_mniSuporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLogin1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblH2O;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JMenu mnAjuda;
+    private javax.swing.JMenuItem mniSuporte;
     private javax.swing.JPanel painelLogin;
     private javax.swing.JSeparator separador;
     private javax.swing.JPasswordField txtSenha;
