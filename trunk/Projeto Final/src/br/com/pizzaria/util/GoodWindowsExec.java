@@ -5,7 +5,10 @@
  */
 package br.com.pizzaria.util;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 class StreamGobbler extends Thread
 {
     InputStream is;
@@ -17,6 +20,7 @@ class StreamGobbler extends Thread
         this.type = type;
     }
     
+    @Override
     public void run()
     {
         try

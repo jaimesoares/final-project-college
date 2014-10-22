@@ -3,17 +3,17 @@ package br.com.pizzaria.controller;
 
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
-import br.com.pizzaria.model.ConsultaMovimmentoEstoqueModel;
+import br.com.pizzaria.model.ConsultaMovEstoqueModel;
 import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultaMovimentacaoEstoqueController {
+public class ConsultaMovEstoqueController {
 
-    ConsultaMovimmentoEstoqueModel movimentoEstoqueModel;
+    ConsultaMovEstoqueModel movimentoEstoqueModel;
     
-    public ConsultaMovimentacaoEstoqueController() {
-        movimentoEstoqueModel = new ConsultaMovimmentoEstoqueModel();
+    public ConsultaMovEstoqueController() {
+        movimentoEstoqueModel = new ConsultaMovEstoqueModel();
     }
     
     public void controlePeriodoCliente(String dataInicial, String dataFinal, DefaultTableModel tabela){

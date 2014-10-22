@@ -7,7 +7,6 @@ import br.com.pizzaria.controller.FuncionarioController;
 import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificarData;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -640,7 +638,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblFuncionarioMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (txtNome.getText().equals("")) {
+        if (txtNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
         } else {
             if (btnEditar.getText().equals("Editar")) {

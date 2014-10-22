@@ -8,7 +8,6 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Global;
-import br.com.pizzaria.util.Relogio;
 import br.com.pizzaria.util.Som;
 import br.com.pizzaria.util.ThreadTempo;
 import java.awt.event.KeyEvent;
@@ -205,7 +204,7 @@ public class LoginView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSenhaKeyPressed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        if (txtUsuario.getText().equals("") && String.valueOf(txtSenha.getPassword()).equals("")) {
+        if (txtUsuario.getText().isEmpty() && String.valueOf(txtSenha.getPassword()).isEmpty()) {
             play.som();
         } else {
             txtUsuario.setText("");

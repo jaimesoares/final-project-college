@@ -4,24 +4,18 @@ import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
-import br.com.pizzaria.controller.ConsultaMovimentacaoEstoqueController;
-import br.com.pizzaria.controller.EntregaPedidoController;
-import br.com.pizzaria.controller.PrecoProdutoController;
+import br.com.pizzaria.controller.ConsultaMovEstoqueController;
 import br.com.pizzaria.controller.ProdutoController;
-import br.com.pizzaria.util.VerificarData;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
-import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame {
+public class ConsultaMovEstoqueView extends javax.swing.JInternalFrame {
 
     MaskFormatter formatoData;
-    ConsultaMovimentacaoEstoqueController consultaEstoqueController;
+    ConsultaMovEstoqueController consultaEstoqueController;
     DefaultTableModel modelo;
     ProdutoController produtoController;
     List<ProdutoBean> listaProduto;
@@ -32,7 +26,7 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
     ComboBoxModel<String> modeloProdData;
     List<String> listaProdData;
 
-    public ConsultaMovimentacaoEstoqueView() {
+    public ConsultaMovEstoqueView() {
 
         initComponents();
         habilitarCampos(false);
@@ -44,7 +38,7 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
         modeloProduto = cbProduto.getModel();
         produtoController = new ProdutoController();
 
-        consultaEstoqueController = new ConsultaMovimentacaoEstoqueController();
+        consultaEstoqueController = new ConsultaMovEstoqueController();
 
         populaTipoProduto();
     }
@@ -68,6 +62,8 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
         cbTipo = new javax.swing.JComboBox();
         cbProduto = new javax.swing.JComboBox();
         cbData = new javax.swing.JComboBox();
+        lbl_data3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -119,8 +115,10 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade Movimento Dia"));
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Saldo Anterior");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Saldo Atual");
 
         txtSaldoAnterior.setEditable(false);
@@ -156,6 +154,7 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Data:");
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Tipo Produto" }));
@@ -181,6 +180,9 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
             }
         });
 
+        lbl_data3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbl_data3.setText("Unid. Med.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,11 +199,15 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl_data3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(cbData, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                        .addGap(53, 53, 53)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -222,7 +228,11 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cbData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lbl_data3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(sep_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +242,7 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
                 .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -306,6 +316,8 @@ public class ConsultaMovimentacaoEstoqueView extends javax.swing.JInternalFrame 
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_data3;
     private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
     private javax.swing.JTable tblMovimentacaoEstoque;

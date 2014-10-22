@@ -217,7 +217,6 @@ public class ModuloView extends javax.swing.JFrame {
         moduloBeans.setNome(txtNome.getText());
         moduloBeans.setTitulo(txtTitulo.getText());
 
-        System.out.println(moduloBeans);
         return moduloBeans;
 
     }

@@ -2,15 +2,12 @@ package br.com.pizzaria.model;
 
 import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.CepBean;
-import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.bean.FuncionarioBean;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -140,7 +137,6 @@ public class FornecedorModel {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                System.out.println(rs.getInt("fun_cargo"));
                 funcionarioBeans.setCodigo(rs.getInt("fun_codigo"));
                 funcionarioBeans.setNome(rs.getString("fun_nome"));
                 funcionarioBeans.setTelefone(rs.getString("fun_tel"));

@@ -7,7 +7,7 @@ public class ProdutoBean {
     private TipoProdutoBean tipoProduto;
     private double qtdMinima;
     private char avisaEstoqueMinimo;
-    private double qtdSaldoEstoque;
+    private long qtdSaldoEstoque;
     private char estocavel;
     private String dataCad;
     private PrecoProdutoBean precoProduto;//preço de venda
@@ -98,14 +98,14 @@ public class ProdutoBean {
     /**
      * @return the qtdSaldoEstoque
      */
-    public double getQtdSaldoEstoque() {
+    public long getQtdSaldoEstoque() {
         return qtdSaldoEstoque;
     }
 
     /**
      * @param qtdSaldoEstoque the qtdSaldoEstoque to set
      */
-    public void setQtdSaldoEstoque(double qtdSaldoEstoque) {
+    public void setQtdSaldoEstoque(long qtdSaldoEstoque) {
         this.qtdSaldoEstoque = qtdSaldoEstoque;
     }
 

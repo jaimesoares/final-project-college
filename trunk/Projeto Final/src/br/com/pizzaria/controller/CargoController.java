@@ -15,7 +15,7 @@ public class CargoController {
     }
 
     public boolean verificarDados(String descricao, DefaultListModel lista) {
-        if (descricao.equals("")) {
+        if (descricao.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Descrição' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -37,7 +37,7 @@ public class CargoController {
     }
 
     public boolean verificarDadosParaEditar(CargoBean cargo) {
-        if (cargo.getDescricao().equals("")) {
+        if (cargo.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"Descrição\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

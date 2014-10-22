@@ -17,7 +17,7 @@ public class ClienteController {
     }
 
     public boolean verificarDados(ClienteBean cliente, String cep, String numero, String nascimento) {
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'NOME' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
             
@@ -52,12 +52,12 @@ public class ClienteController {
             return false;
         }
 
-        if (numero.equals("")) {
+        if (numero.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'NÚMERO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if ((cliente.getEmail().equals(""))) {
+        if ((cliente.getEmail().isEmpty())) {
         } else if ((cliente.getEmail().contains("@")) && (cliente.getEmail().contains(".")) && (!cliente.getEmail().contains(" "))) {
             String usuario = new String(cliente.getEmail().substring(0, cliente.getEmail().lastIndexOf('@')));
             String dominio = new String(cliente.getEmail().substring(cliente.getEmail().lastIndexOf('@') + 1, cliente.getEmail().length()));
@@ -91,7 +91,7 @@ public class ClienteController {
     }
 
     public boolean verificarDadosParaEditar(ClienteBean cliente, String cep, String numero, String nascimento) {
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"NOME\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -125,12 +125,12 @@ public class ClienteController {
             return false;
         }
 
-        if (numero.equals("")) {
+        if (numero.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'NÚMERO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if ((cliente.getEmail().equals(""))) {
+        if ((cliente.getEmail().isEmpty())) {
         } else if ((cliente.getEmail().contains("@")) && (cliente.getEmail().contains(".")) && (!cliente.getEmail().contains(" "))) {
             String usuario = new String(cliente.getEmail().substring(0, cliente.getEmail().lastIndexOf('@')));
             String dominio = new String(cliente.getEmail().substring(cliente.getEmail().lastIndexOf('@') + 1, cliente.getEmail().length()));

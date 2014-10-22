@@ -17,18 +17,18 @@ public class DefinirModuloController {
     }
 
     public boolean verificarDados(ClienteBean cliente) {
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'NOME' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
+        if (cliente.getRua().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'RUA' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
 
             return false;
         }
 
-        if (cliente.getBairro().equals("")) {
+        if (cliente.getBairro().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'BAIRRO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -58,18 +58,18 @@ public class DefinirModuloController {
     }
     
     public boolean verificarDadosParaEditar(ClienteBean cliente) {
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"NOME\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
+        if (cliente.getRua().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"RUA\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
 
             return false;
         }
 
-        if (cliente.getBairro().equals("")) {
+        if (cliente.getBairro().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"BAIRRO\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

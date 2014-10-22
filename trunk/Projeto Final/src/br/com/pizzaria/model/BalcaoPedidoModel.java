@@ -45,7 +45,7 @@ public class BalcaoPedidoModel {
                 listaDeItens.add(novo);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -62,7 +62,7 @@ public class BalcaoPedidoModel {
                 return rs.getDouble("tprc_preco");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
@@ -78,7 +78,7 @@ public class BalcaoPedidoModel {
                 return rs.getInt("car_cod");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
@@ -124,7 +124,7 @@ public class BalcaoPedidoModel {
                 ConectaBanco.getConnection().rollback();
                 JOptionPane.showMessageDialog(null, "Impossível Cadastrar Pedido" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
             } catch (SQLException ex1) {
-                Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
     }
@@ -142,7 +142,7 @@ public class BalcaoPedidoModel {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         //JOptionPane.showMessageDialog(null, codigo);
         return codigo;
@@ -177,7 +177,7 @@ public class BalcaoPedidoModel {
                     ConectaBanco.getConnection().rollback();
                     JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
                 } catch (SQLException ex1) {
-                    Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                    Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
                 }
             }
         }

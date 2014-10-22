@@ -6,7 +6,6 @@ import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.util.VerificarData;
 import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -19,7 +18,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     ClienteBean clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
-    EntregaPedidoView frame;
+    PedidoView frame;
 
     public ClienteView() {
         initComponents();
@@ -32,7 +31,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     }
 
-    public ClienteView(EntregaPedidoView frame) {
+    public ClienteView(PedidoView frame) {
         this.frame = frame;
         initComponents();
 
@@ -565,7 +564,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (txtNome.getText().equals("")) {
+        if (txtNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
         } else {
             if (btnEditar.getText().equals("Editar")) {

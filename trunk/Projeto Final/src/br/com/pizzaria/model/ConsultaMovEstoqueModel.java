@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultaMovimmentoEstoqueModel {
+public class ConsultaMovEstoqueModel {
 
-    public ConsultaMovimmentoEstoqueModel() {
+    public ConsultaMovEstoqueModel() {
     }
 
     /**
@@ -52,7 +52,7 @@ public class ConsultaMovimmentoEstoqueModel {
                 tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovimmentoEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -70,7 +70,7 @@ public class ConsultaMovimmentoEstoqueModel {
                 tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovimmentoEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -107,7 +107,7 @@ public class ConsultaMovimmentoEstoqueModel {
                 tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovimmentoEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -141,7 +141,7 @@ public class ConsultaMovimmentoEstoqueModel {
                 listaDeItens.add(novo);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EntregaPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -236,7 +236,7 @@ public class ConsultaMovimmentoEstoqueModel {
             tabela.addRow(new Object[]{"", "", ""});
             tabela.addRow(new Object[]{"Total:", "", total});
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovimmentoEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -6,8 +6,6 @@
 package br.com.pizzaria.util;
 
 import com.itextpdf.text.BaseColor;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -15,13 +13,14 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 
 public class GeneratorPDF {
 

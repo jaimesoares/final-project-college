@@ -1,12 +1,7 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.bean.FornecedorBean;
-import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.FornecedorController;
-import br.com.pizzaria.util.Global;
-import br.com.pizzaria.util.VerificarData;
-import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;

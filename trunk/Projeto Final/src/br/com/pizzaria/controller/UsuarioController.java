@@ -4,7 +4,6 @@ import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.model.FuncionarioModel;
 import br.com.pizzaria.model.UsuarioModel;
 import br.com.pizzaria.util.Som;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,12 +22,12 @@ public class UsuarioController {
 
     public boolean verificaDados(UsuarioBean usuarioBeans) {
 
-        if (usuarioBeans.getLogin().equals("")) {
+        if (usuarioBeans.getLogin().isEmpty()) {
             play.som();
             JOptionPane.showMessageDialog(null, "Campo 'USUÁRIO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-        if (usuarioBeans.getSenha().equals("")) {
+        if (usuarioBeans.getSenha().isEmpty()) {
             play.som();
             JOptionPane.showMessageDialog(null, "Campo 'SENHA' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -55,7 +54,7 @@ public class UsuarioController {
             return false;
         }
         
-        if (!login.equals("")) {
+        if (!login.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Usuário já cadastrado", "OPÇÃO INVÁLIDA", 1 );
             return false;
         }
@@ -69,7 +68,7 @@ public class UsuarioController {
             return false;
         }
         
-        if (login.equals("")) {
+        if (login.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Usuário não cadastrado", "OPÇÃO INVÁLIDA", 1 );
             return false;
         }
@@ -88,11 +87,11 @@ public class UsuarioController {
     
     public boolean controleDadosNovo(UsuarioBean usuarioBeans) {
 
-        if (usuarioBeans.getLogin().equals("")) {
+        if (usuarioBeans.getLogin().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Login' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-        if (usuarioBeans.getSenha().equals("")) {
+        if (usuarioBeans.getSenha().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Senha' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -103,11 +102,11 @@ public class UsuarioController {
     
     public boolean controleDadosEditar(UsuarioBean usuarioBeans) {
 
-        if (usuarioBeans.getLogin().equals("")) {
+        if (usuarioBeans.getLogin().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Login' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-        if (usuarioBeans.getSenha().equals("")) {
+        if (usuarioBeans.getSenha().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Senha' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

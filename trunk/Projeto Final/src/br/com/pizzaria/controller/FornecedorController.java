@@ -15,18 +15,18 @@ public class FornecedorController {
     }
 
     public boolean verificarDados(ClienteBean cliente) {
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
+        if (cliente.getRua().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo rua não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
 
             return false;
         }
 
-        if (cliente.getBairro().equals("")) {
+        if (cliente.getBairro().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo bairro não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -36,7 +36,7 @@ public class FornecedorController {
             return false;
         }
 
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -58,18 +58,18 @@ public class FornecedorController {
     }
     
     public boolean verificarDadosParaEditar(ClienteBean cliente) {
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (cliente.getRua().equals("")) {
+        if (cliente.getRua().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo rua não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
 
             return false;
         }
 
-        if (cliente.getBairro().equals("")) {
+        if (cliente.getBairro().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo bairro não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -79,7 +79,7 @@ public class FornecedorController {
             return false;
         }
 
-        if (cliente.getNome().equals("")) {
+        if (cliente.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
