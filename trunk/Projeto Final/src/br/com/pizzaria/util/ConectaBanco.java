@@ -3,6 +3,7 @@ package br.com.pizzaria.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class ConectaBanco implements AutoCloseable {
 
@@ -21,9 +22,11 @@ public class ConectaBanco implements AutoCloseable {
             System.out.println("Conectou");
             status="Conectou";
         } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Driver não encontrado \n Contatar o suporte");
             System.out.println("Driver não encontrado");
             status="Driver não encontrado";
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar no banco \n Contatar o suporte ");
             System.out.println("Erro ao conectar ao banco");
             status="Erro ao conectar ao banco";
         }
