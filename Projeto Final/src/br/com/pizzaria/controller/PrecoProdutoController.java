@@ -1,7 +1,5 @@
 package br.com.pizzaria.controller;
 
-import br.com.pizzaria.bean.ClienteBean;
-import br.com.pizzaria.bean.ModuloBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.model.PrecoProdutoModel;
 import java.util.List;
@@ -18,7 +16,7 @@ public class PrecoProdutoController {
     }
     
     public boolean verificarDados(int codigo, String precoC) {
-        if (precoC.equals("")) {
+        if (precoC.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Preço' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

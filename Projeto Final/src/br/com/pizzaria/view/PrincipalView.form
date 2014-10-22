@@ -14,7 +14,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mnEmpresa">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Empresa F1"/>
+            <Property name="text" type="java.lang.String" value="Empresa F1 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnEmpresaMousePressed"/>
@@ -22,7 +22,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnProducao">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Produ&#xe7;&#xe3;o F2"/>
+            <Property name="text" type="java.lang.String" value="Produ&#xe7;&#xe3;o F2 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnProducaoMousePressed"/>
@@ -30,7 +30,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnEstoque">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Estoque F3"/>
+            <Property name="text" type="java.lang.String" value="Estoque F3 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnEstoqueMousePressed"/>
@@ -38,7 +38,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnCompras">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Compras F4"/>
+            <Property name="text" type="java.lang.String" value="Compras F4 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnComprasMousePressed"/>
@@ -46,7 +46,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnContasPagar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contas a Pagar F5"/>
+            <Property name="text" type="java.lang.String" value="Contas a Pagar F5 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnContasPagarMousePressed"/>
@@ -54,7 +54,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnVenda">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Vendas F6"/>
+            <Property name="text" type="java.lang.String" value="Vendas F6 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnVendaMousePressed"/>
@@ -62,7 +62,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnContarReceber">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contas a Receber F7"/>
+            <Property name="text" type="java.lang.String" value="Contas a Receber F7 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnContarReceberMousePressed"/>
@@ -70,7 +70,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnRelatorio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Relat&#xf3;rio F8"/>
+            <Property name="text" type="java.lang.String" value="Relat&#xf3;rio F8 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnRelatorioMousePressed"/>

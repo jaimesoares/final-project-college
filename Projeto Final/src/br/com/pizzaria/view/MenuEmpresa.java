@@ -24,7 +24,7 @@ import javax.swing.Timer;
 public class MenuEmpresa extends javax.swing.JInternalFrame {
 
     FuncionarioView funcionarioV;
-    EntregadorView entregadorV;
+    
     UsuarioView usuarioV;
     DefinirModuloView moduloV;
     ModuloView moduloV2;
@@ -47,15 +47,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             }
 
         });
-        btnEntregador.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
-        btnEntregador.getActionMap().put("evento", new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnEntregadorActionPerformed(e);
-            }
-
-        });
+        
         btnUsuario.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK), "evento");
         btnUsuario.getActionMap().put("evento", new AbstractAction() {
 
@@ -96,7 +88,6 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnFuncionario = new javax.swing.JButton();
-        btnEntregador = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
         btnFuncao = new javax.swing.JButton();
         btnModulo = new javax.swing.JButton();
@@ -110,15 +101,6 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
         btnFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFuncionarioActionPerformed(evt);
-            }
-        });
-
-        btnEntregador.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnEntregador.setForeground(new java.awt.Color(0, 51, 255));
-        btnEntregador.setText("<html>Entregador <font size='2' style='color:black'> Crtl-2 </font>");
-        btnEntregador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntregadorActionPerformed(evt);
             }
         });
 
@@ -157,7 +139,6 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFuncionario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEntregador)
                     .addComponent(btnUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnModulo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnFuncao, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
@@ -168,9 +149,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEntregador, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(77, 77, 77)
                 .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,16 +169,6 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             funcionarioV.setVisible(true);
         }
     }//GEN-LAST:event_btnFuncionarioActionPerformed
-
-    private void btnEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregadorActionPerformed
-        // TODO add your handling code here:
-        if (entregadorV == null || !entregadorV.isShowing()) {
-            entregadorV = new EntregadorView();
-            Global.principal.Desktop.add(entregadorV);
-            centralizaForm(entregadorV);
-            entregadorV.setVisible(true);
-        }
-    }//GEN-LAST:event_btnEntregadorActionPerformed
 
     private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
         // TODO add your handling code here:
@@ -233,7 +202,6 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEntregador;
     private javax.swing.JButton btnFuncao;
     private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnModulo;

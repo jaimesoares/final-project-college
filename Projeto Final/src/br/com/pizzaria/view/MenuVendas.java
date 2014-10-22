@@ -6,7 +6,6 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.util.Global;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +24,7 @@ import javax.swing.Timer;
 public class MenuVendas extends javax.swing.JInternalFrame {
 
     ClienteView clienteV;
-    EntregaPedidoView pedidoV;
+    PedidoView pedidoV;
     CancelamentoPedidosView cancelamentoPedidoV;
 
     /**
@@ -137,7 +136,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
 
     private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
         if (pedidoV == null || !pedidoV.isShowing()) {
-            pedidoV = new EntregaPedidoView(1);
+            pedidoV = new PedidoView(1);
             Global.principal.Desktop.add(pedidoV);
             centralizaForm(pedidoV);
             pedidoV.setVisible(true);

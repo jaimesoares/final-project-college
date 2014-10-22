@@ -15,11 +15,11 @@ public class ModuloController {
     }
 
     public boolean verificarDados(ModuloBean moduloBeans) {
-        if (moduloBeans.getNome().equals("")) {
+        if (moduloBeans.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Nome' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-        if (moduloBeans.getTitulo().equals("")) {
+        if (moduloBeans.getTitulo().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Titulo' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -33,12 +33,12 @@ public class ModuloController {
     }
 
     public boolean verificarDadosParaEditar(ModuloBean modulo) {
-        if (modulo.getNome().equals("")) {
+        if (modulo.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"Nome\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
         
-        if (modulo.getTitulo().equals("")) {
+        if (modulo.getTitulo().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"Título\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

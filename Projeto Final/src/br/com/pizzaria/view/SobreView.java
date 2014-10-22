@@ -37,7 +37,7 @@ public class SobreView extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("Edson de Moraes:\nRGM: 135623-2  \nemail: edmoralles@hotmail.com\n\nAntonio Firmino:\nRGM 80432-1 \nEmail: firmino.santos@panco.com.br\n\nJaime Cangussu:\nRGM 90096-6  \nEmail: jaime.sistema@gmail.com\n\nGuilherme:\nRGM 135922-3\nEmail:financeiro@contmarvel.com.br \n\nLucas Correia:\nRGM: 132820-4\nemail: lcsilva10@gmail.com");
+        jTextArea1.setText("Edson de Moraes:\nRGM: 135623-2  \nemail: edmoralles@hotmail.com\n\nAntonio Firmino:\nRGM 80432-1 \nEmail: firmino.santos@panco.com.br\n\nJaime Cangussu:\nRGM 90096-6  \nEmail: jaime.sistema@gmail.com\n\nGuilherme:\nRGM 135922-3\nEmail:financeiro@contmarvel.com.br \n\n");
         jTextArea1.setAutoscrolls(false);
         jScrollPane1.setViewportView(jTextArea1);
 

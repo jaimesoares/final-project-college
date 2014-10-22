@@ -138,7 +138,6 @@ public class FuncionarioModel {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                System.out.println(rs.getInt("fun_cargo"));
                 funcionarioBeans.setCodigo(rs.getInt("fun_codigo"));
                 funcionarioBeans.setNome(rs.getString("fun_nome"));
                 funcionarioBeans.setTelefone(rs.getString("fun_tel"));

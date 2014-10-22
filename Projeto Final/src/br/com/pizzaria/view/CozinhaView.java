@@ -7,7 +7,6 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.controller.CozinhaController;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class CozinhaView extends javax.swing.JFrame {

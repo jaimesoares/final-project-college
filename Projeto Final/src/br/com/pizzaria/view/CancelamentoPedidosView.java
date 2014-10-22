@@ -1,11 +1,9 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.bean.CepBean;
-import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.controller.CancelamentoPedidoController;
-import br.com.pizzaria.controller.EntregaPedidoController;
-import br.com.pizzaria.controller.RelatorioClienteController;
+import br.com.pizzaria.controller.PedidoController;
 import br.com.pizzaria.util.VerificarData;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +15,7 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
     MaskFormatter formatoData;
     MaskFormatter formatoCEP;
     PedidoBean pedidoBean;
-    EntregaPedidoController pedidoController;
+    PedidoController pedidoController;
     DefaultTableModel modeloTabelaPedido;
     DefaultTableModel modeloTabelaItemPedido;
     JFrame frame;

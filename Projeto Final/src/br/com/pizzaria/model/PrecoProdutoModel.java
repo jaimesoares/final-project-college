@@ -57,7 +57,7 @@ public class PrecoProdutoModel {
                 produtoBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("prod_data_cadastro")));
                 produtoBeans.setDescricao(rs.getString("prd_descr"));
                 produtoBeans.setEstocavel(rs.getString("prod_estocavel").charAt(0));
-                produtoBeans.setQtdSaldoEstoque(rs.getDouble("prd_qtd_saldo_estoq"));
+                produtoBeans.setQtdSaldoEstoque(rs.getLong("prd_qtd_saldo_estoq"));
                 produtoBeans.setAvisaEstoqueMinimo(rs.getString("prd_stt_avisa_estoq_min").charAt(0));
                 produtoBeans.setQtdMinima(rs.getDouble("prd_qtd_min_estoq"));
                 produtoBeans.setCodigo(rs.getInt("prd_prod"));

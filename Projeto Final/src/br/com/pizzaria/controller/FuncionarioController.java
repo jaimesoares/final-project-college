@@ -19,7 +19,7 @@ public class FuncionarioController {
     }
 
     public boolean verificarDados(FuncionarioBean funcionario, int cargo, String cep, String numero, String nascimento) {
-        if (funcionario.getNome().equals("")) {
+        if (funcionario.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -49,12 +49,12 @@ public class FuncionarioController {
             return false;
         }
 
-        if (numero.equals("")) {
+        if (numero.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'NÚMERO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (funcionario.getCpf().equals("")) {
+        if (funcionario.getCpf().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'CPF' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -64,7 +64,7 @@ public class FuncionarioController {
             return false;
         }
 
-        if ((funcionario.getEmail().equals(""))) {
+        if ((funcionario.getEmail().isEmpty())) {
         } else if ((funcionario.getEmail().contains("@")) && (funcionario.getEmail().contains(".")) && (!funcionario.getEmail().contains(" "))) {
             String usuario = new String(funcionario.getEmail().substring(0, funcionario.getEmail().lastIndexOf('@')));
             String dominio = new String(funcionario.getEmail().substring(funcionario.getEmail().lastIndexOf('@') + 1, funcionario.getEmail().length()));
@@ -98,7 +98,7 @@ public class FuncionarioController {
     }
 
     public boolean verificarDadosParaEditar(FuncionarioBean funcionario, int cargo, String cep, String numero, String nascimento) {
-        if (funcionario.getNome().equals("")) {
+        if (funcionario.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -128,12 +128,12 @@ public class FuncionarioController {
             return false;
         }
 
-        if (numero.equals("")) {
+        if (numero.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'NÚMERO' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (funcionario.getCpf().equals("")) {
+        if (funcionario.getCpf().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'CPF' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -143,7 +143,7 @@ public class FuncionarioController {
             return false;
         }
 
-        if ((funcionario.getEmail().equals(""))) {
+        if ((funcionario.getEmail().isEmpty())) {
         } else if ((funcionario.getEmail().contains("@")) && (funcionario.getEmail().contains(".")) && (!funcionario.getEmail().contains(" "))) {
             String usuario = new String(funcionario.getEmail().substring(0, funcionario.getEmail().lastIndexOf('@')));
             String dominio = new String(funcionario.getEmail().substring(funcionario.getEmail().lastIndexOf('@') + 1, funcionario.getEmail().length()));

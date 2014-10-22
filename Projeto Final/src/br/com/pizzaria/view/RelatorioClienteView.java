@@ -5,7 +5,6 @@ import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.RelatorioClienteController;
 import br.com.pizzaria.util.VerificarData;
-import java.util.Date;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

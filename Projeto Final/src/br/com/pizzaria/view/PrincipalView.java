@@ -16,14 +16,12 @@ public class PrincipalView extends javax.swing.JFrame {
     FundoDeTela Desktop;
     ClienteView clienteV;
     FuncionarioView funcionarioV;
-    EntregadorView entregadorV;
+
     ProdutoView produtoV;
-    EntregaPedidoView pedidoV;
+    PedidoView pedidoV;
     SobreView sobreV;
     UsuarioView usuarioV;
 //    CozinhaView cozinhaV;
-    TipoDePedidoView tipoPedidoV;
-    BalcaoPedidoView balcaoV;
     DefinirModuloView moduloV;
     ModuloView moduloV2;
     FornecedorView fornecedorV;
@@ -49,24 +47,21 @@ public class PrincipalView extends javax.swing.JFrame {
     public PrincipalView() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-       // mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
+        // mniCliente.setIcon(new ImageIcon("imagens/mais.png"));
 
         Desktop = new FundoDeTela("imagens/pizza_fundo.jpg");
         getContentPane().add(Desktop);
         Desktop.setVisible(true);
 
-        tipoPedidoV = new TipoDePedidoView(Desktop);
         habiltaMenu(false);
 
         menu = new JInternalFrame();
-       // mnAjuda.setVisible(false);
+        // mnAjuda.setVisible(false);
 
         Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
             public void eventDispatched(AWTEvent e) {
             }
         }, AWTEvent.KEY_EVENT_MASK);
-        
-        
 
     }
 
@@ -103,7 +98,7 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        mnEmpresa.setText("Empresa F1");
+        mnEmpresa.setText("Empresa F1 |");
         mnEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnEmpresaMousePressed(evt);
@@ -111,7 +106,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnEmpresa);
 
-        mnProducao.setText("Produção F2");
+        mnProducao.setText("Produção F2 |");
         mnProducao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnProducaoMousePressed(evt);
@@ -119,7 +114,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnProducao);
 
-        mnEstoque.setText("Estoque F3");
+        mnEstoque.setText("Estoque F3 |");
         mnEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnEstoqueMousePressed(evt);
@@ -127,7 +122,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnEstoque);
 
-        mnCompras.setText("Compras F4");
+        mnCompras.setText("Compras F4 |");
         mnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnComprasMousePressed(evt);
@@ -135,7 +130,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnCompras);
 
-        mnContasPagar.setText("Contas a Pagar F5");
+        mnContasPagar.setText("Contas a Pagar F5 |");
         mnContasPagar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnContasPagarMousePressed(evt);
@@ -143,7 +138,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnContasPagar);
 
-        mnVenda.setText("Vendas F6");
+        mnVenda.setText("Vendas F6 |");
         mnVenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnVendaMousePressed(evt);
@@ -151,7 +146,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnVenda);
 
-        mnContarReceber.setText("Contas a Receber F7");
+        mnContarReceber.setText("Contas a Receber F7 |");
         mnContarReceber.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnContarReceberMousePressed(evt);
@@ -159,7 +154,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnContarReceber);
 
-        mnRelatorio.setText("Relatório F8");
+        mnRelatorio.setText("Relatório F8 |");
         mnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mnRelatorioMousePressed(evt);
@@ -311,7 +306,7 @@ public class PrincipalView extends javax.swing.JFrame {
             Desktop.add(menuVendas);
             menuVendas.setVisible(true);
             menu = menuVendas;
-           
+
         }
     }//GEN-LAST:event_mnVendaMousePressed
 
@@ -361,7 +356,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 String a[];
                 String tecla[];
 
-                if (!event.paramString().equals("")) {
+                if (!event.paramString().isEmpty()) {
                     if (event.paramString().substring(0, 5).equals("KEY_P")) {
                         a = event.paramString().split(",");
                         tecla = a[1].split("=");
@@ -401,9 +396,22 @@ public class PrincipalView extends javax.swing.JFrame {
                                 Global.principal.mnAjudaMousePressed(null);
                                 break;
                             case 121: //F10
-                                //Global.principal.moduloView();
+                                
+                                //teste
+                                AjusteEstoqueView novo = new AjusteEstoqueView();
+                                Global.principal.Desktop.add(novo);                                
+                                novo.setVisible(true);
+                                //fim teste
+                                
                                 break;
                             case 122: //F11
+                                
+                                //teste
+                                RequisicaoMercadoria novo2 = new RequisicaoMercadoria();
+                                Global.principal.Desktop.add(novo2);                                
+                                novo2.setVisible(true);
+                                //fim teste
+                                
                                 break;
                             case 123: //F12
                                 break;
@@ -455,7 +463,6 @@ public class PrincipalView extends javax.swing.JFrame {
         mnProducao.setVisible(valor);
         mnRelatorio.setVisible(valor);
         mnVenda.setVisible(valor);
-        
 
     }
 

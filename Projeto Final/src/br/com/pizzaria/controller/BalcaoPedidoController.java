@@ -33,12 +33,12 @@ public class BalcaoPedidoController {
 
     public boolean verificaItens(String valor, String quantidade, String codigo, String item) {
 
-        if (item.equals("")) {
+        if (item.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'item' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (valor.equals("")) {
+        if (valor.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'valor' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -54,7 +54,7 @@ public class BalcaoPedidoController {
             return false;
         }
 
-        if (quantidade.equals("")) {
+        if (quantidade.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'quantidade' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

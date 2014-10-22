@@ -426,7 +426,6 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         produtoBeans = produtoController.controlePreenchimento(((ProdutoBean) modeloTabela.getValueAt(tblProduto.getSelectedRow(), 0)).getCodigo());
 
         System.out.println(produtoBeans.getTipoProduto().getDescricao());
-        System.out.println(((ProdutoBean) modeloTabela.getValueAt(tblProduto.getSelectedRow(), 0)).getCodigo());
         txaDescricao.setText(produtoBeans.getDescricao());
         modeloTipoProd.setSelectedItem(produtoBeans.getTipoProduto());
         txtPreco.setText(String.valueOf(formatoDecimal.format(produtoBeans.getPrecoProduto().getPreco())));
@@ -463,7 +462,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        if (txaDescricao.getText().equals("")) {
+        if (txaDescricao.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
         } else {
             if (btnEditar.getText().equals("Editar")) {
@@ -589,7 +588,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         produtoBeans.setUnidadeMedida((cbUnidadeMedida.getSelectedItem().toString()));
         produtoBeans.setEstocavel((cbEstocavel.getSelectedItem().toString().charAt(0)));
         produtoBeans.setAvisaEstoqueMinimo((cbAvisa.getSelectedItem().toString().charAt(0)));
-        if (!txtQtd.getText().equals("")) {
+        if (!txtQtd.getText().isEmpty()) {
             produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
         }
 
@@ -617,7 +616,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 //            produtoBeans.setQtdSaldoEstoque(Double.parseDouble(txtQtdEstoque.getText()));
 //        }
         produtoBeans.setAvisaEstoqueMinimo((cbAvisa.getSelectedItem().toString().charAt(0)));
-        if (!txtQtd.getText().equals("")) {
+        if (!txtQtd.getText().isEmpty()) {
             produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
         }
         if (cbTipo.getSelectedIndex() != 0) {

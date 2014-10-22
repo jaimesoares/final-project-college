@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
@@ -27,6 +26,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
     ProdutoView produtoV;
     PrecoProdutoView precoProdutoV;
     TipoProdutoView tipoProdutoV;
+    AjusteEstoqueView ajusteEstoqueV;
 
     /**
      * Creates new form MenuProdução
@@ -77,6 +77,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         btnProduto = new javax.swing.JButton();
         btnTipoProduto = new javax.swing.JButton();
         btnPrecoProduto = new javax.swing.JButton();
+        btnPrecoProduto1 = new javax.swing.JButton();
 
         setTitle("Menu Estoque");
         try {
@@ -112,16 +113,30 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPrecoProduto1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnPrecoProduto1.setForeground(new java.awt.Color(0, 51, 255));
+        btnPrecoProduto1.setText("<html> Ajustes de Estoque<font size='2' style='color:black'> Crtl-3 </font>");
+        btnPrecoProduto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrecoProduto1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPrecoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnTipoProduto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPrecoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                            .addComponent(btnProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnTipoProduto)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnPrecoProduto1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,6 +148,8 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                 .addComponent(btnTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrecoProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -169,9 +186,20 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnPrecoProdutoActionPerformed
 
+    private void btnPrecoProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoProduto1ActionPerformed
+        // TODO add your handling code here:
+        if (ajusteEstoqueV == null || !ajusteEstoqueV.isShowing()) {
+            ajusteEstoqueV = new AjusteEstoqueView();
+            Global.principal.Desktop.add(ajusteEstoqueV);
+            centralizaForm(ajusteEstoqueV);
+            ajusteEstoqueV.setVisible(true);
+        }
+    }//GEN-LAST:event_btnPrecoProduto1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrecoProduto;
+    private javax.swing.JButton btnPrecoProduto1;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnTipoProduto;
     // End of variables declaration//GEN-END:variables

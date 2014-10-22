@@ -2,49 +2,38 @@ package br.com.pizzaria.controller;
 
 import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.bean.PedidoBean;
+import br.com.pizzaria.bean.ProdutoBean;
+import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.model.ClienteModel;
 import br.com.pizzaria.model.PedidoModel;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author katia e Jaime
- */
 public class PedidoController {
 
-    PedidoModel pedidoModel;
+    PedidoModel entregaPedidoModel;
     ClienteModel clienteModel;
 
     public PedidoController() {
-        pedidoModel = new PedidoModel();
+        entregaPedidoModel = new PedidoModel();
         clienteModel = new ClienteModel();
     }
 
-    public void controleDeItens(String pesquisa, List<String> listaDeItens) {
-        pedidoModel.pesquisaItens(pesquisa, listaDeItens);
+    public void controleDeItens(int pesquisa, List<ProdutoBean> listaDeItens) {
+        entregaPedidoModel.pesquisaItens(pesquisa, listaDeItens);
     }
 
-    public double controleDeValor(String valor) {
-        return pedidoModel.valorDoItem(valor);
+    public double controleDeValor(int codigoProduto) {
+        return entregaPedidoModel.valorDoItem(codigoProduto);
     }
 
     public int controleDeCodigo(String codigo) {
-        return pedidoModel.codigoDoItem(codigo);
+        return entregaPedidoModel.codigoDoItem(codigo);
     }
 
-    public boolean verificaItens(String valor, String quantidade, String codigo, String item) {
+    public boolean verificaItens(String quantidade) {
 
-        if (item.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'item' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
-
-        if (valor.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'valor' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
 
         try {
             int x = Integer.parseInt(quantidade);
@@ -57,24 +46,43 @@ public class PedidoController {
             return false;
         }
 
-        if (quantidade.equals("")) {
+        if (quantidade.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'quantidade' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        if (codigo.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo 'código' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+        
 
         return true;
     }
 
-    public void conttroleDePedido(String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, PedidoBean pedidobeans) {
-        pedidoModel.cadastrarPedido(codigoCliente, codigoFuncioario, total, tamanhoTabela, pedidobeans);
+    public boolean conttroleDePedido(/*String codigoCliente, String codigoFuncioario, String total, int tamanhoTabela, */PedidoBean pedidobeans) {
+        return entregaPedidoModel.cadastrarPedido(/*codigoCliente, codigoFuncioario, total, tamanhoTabela, */pedidobeans);
     }
 
     public void controlePesquisa(String pesquisa, String tipo, List<ClienteBean> lista) {
         clienteModel.procuraCliente(pesquisa, tipo, lista);
     }
+    
+    public void controleListaTipoProduto(List<TipoProdutoBean> lista) {
+        entregaPedidoModel.populaListaTipoProduto(lista);
+    }
+    
+    public void controleListaPizza(List<ProdutoBean> listaDePizza) {
+        entregaPedidoModel.pesquisaPizza(listaDePizza);
+    }
+    
+     public void controleListaBorda(List<ProdutoBean> listaDePizza) {
+        entregaPedidoModel.pesquisaBorda(listaDePizza);
+    }
+    
+    public int controleCodigoPedido(){
+        return entregaPedidoModel.codigoDoPedido();
+    }
+    
+    public void controleImpressaoCupom(PedidoBean pedidoBean){
+        entregaPedidoModel.imprimirCupom(pedidoBean);
+    }
+    
+    
 }

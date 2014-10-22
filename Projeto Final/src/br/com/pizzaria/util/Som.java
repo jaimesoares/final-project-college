@@ -13,7 +13,7 @@ public class Som {
 
     public void som() {
         try {
-            clip = Applet.newAudioClip(new File("sons/error.wav").toURL());
+            clip = Applet.newAudioClip(new File("sons/error.wav").toURI().toURL());
             clip.play();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Som.class.getName()).log(Level.SEVERE, null, ex);

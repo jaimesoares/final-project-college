@@ -7,7 +7,6 @@
 package br.com.pizzaria.model;
 
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.ConectaBancoPizzariMama;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -15,7 +15,7 @@ public class TipoProdutoController {
     }
 
     public boolean verificarDados(String descricao) {
-        if (descricao.equals("")) {
+        if (descricao.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Descrição' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
@@ -29,7 +29,7 @@ public class TipoProdutoController {
     }
 
     public boolean verificarDadosParaEditar(TipoProdutoBean tipoProduto) {
-        if (tipoProduto.getDescricao().equals("")) {
+        if (tipoProduto.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo \"Descrição\" não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }

@@ -23,7 +23,7 @@ import javax.swing.Timer;
  */
 public class MenuRelatorio extends javax.swing.JInternalFrame {
 RelatorioClienteView relatorioClienteV;
-ConsultaMovimentacaoEstoqueView movimentoEstoque;
+ConsultaMovEstoqueView movimentoEstoque;
     /**
      * Creates new form MenuProdução
      */
@@ -114,7 +114,7 @@ ConsultaMovimentacaoEstoqueView movimentoEstoque;
     private void btnRelatorioCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioCliente1ActionPerformed
         // TODO add your handling code here:
         if (movimentoEstoque == null || !movimentoEstoque.isShowing()) {
-            movimentoEstoque = new ConsultaMovimentacaoEstoqueView();
+            movimentoEstoque = new ConsultaMovEstoqueView();
             Global.principal.Desktop.add(movimentoEstoque);
             centralizaForm(movimentoEstoque);
             movimentoEstoque.setVisible(true);
