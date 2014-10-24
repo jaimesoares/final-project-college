@@ -27,6 +27,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
     PrecoProdutoView precoProdutoV;
     TipoProdutoView tipoProdutoV;
     AjusteEstoqueView ajusteEstoqueV;
+    NotaFiscalEntradaView notaFiscalEntradaV;
 
     /**
      * Creates new form MenuProdução
@@ -228,6 +229,12 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
     private void btnPrecoProduto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoProduto2ActionPerformed
         // TODO add your handling code here:
+        if (notaFiscalEntradaV == null || !notaFiscalEntradaV.isShowing()) {
+            notaFiscalEntradaV = new NotaFiscalEntradaView();
+            Global.principal.Desktop.add(notaFiscalEntradaV);
+            centralizaForm(notaFiscalEntradaV);
+            notaFiscalEntradaV.setVisible(true);
+        }
     }//GEN-LAST:event_btnPrecoProduto2ActionPerformed
 
     private void btnPrecoProduto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoProduto3ActionPerformed
