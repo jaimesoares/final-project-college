@@ -24,7 +24,7 @@ import javax.swing.Timer;
 public class MenuEmpresa extends javax.swing.JInternalFrame {
 
     FuncionarioView funcionarioV;
-    
+
     UsuarioView usuarioV;
     DefinirModuloView moduloV;
     ModuloView moduloV2;
@@ -47,7 +47,17 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             }
 
         });
-        
+
+        btnEmpresa.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnEmpresa.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnEmpresaActionPerformed(e);
+            }
+
+        });
+
         btnUsuario.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK), "evento");
         btnUsuario.getActionMap().put("evento", new AbstractAction() {
 
@@ -91,6 +101,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
         btnUsuario = new javax.swing.JButton();
         btnFuncao = new javax.swing.JButton();
         btnModulo = new javax.swing.JButton();
+        btnEmpresa = new javax.swing.JButton();
 
         setTitle("Menu Empresa");
         setPreferredSize(new java.awt.Dimension(308, 417));
@@ -131,6 +142,15 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEmpresa.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnEmpresa.setForeground(new java.awt.Color(0, 51, 255));
+        btnEmpresa.setText("<html>Empresa <font size='2' style='color:black'> Crtl-2 </font>");
+        btnEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpresaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +161,8 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
                     .addComponent(btnFuncionario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnModulo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnFuncao, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addComponent(btnFuncao, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnEmpresa, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,7 +170,9 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,8 +223,13 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnModuloActionPerformed
 
+    private void btnEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEmpresaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEmpresa;
     private javax.swing.JButton btnFuncao;
     private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnModulo;
@@ -222,7 +250,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
         Dimension dw = getSize();
         setLocation((0), (0));
     }
-    
+
     private void centralizaForm(JInternalFrame frame) {
         Dimension desktopSize = Global.principal.Desktop.getSize();
         Dimension jInternalFrameSize = frame.getSize();

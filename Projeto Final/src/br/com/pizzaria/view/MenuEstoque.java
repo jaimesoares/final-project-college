@@ -78,6 +78,8 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         btnTipoProduto = new javax.swing.JButton();
         btnPrecoProduto = new javax.swing.JButton();
         btnPrecoProduto1 = new javax.swing.JButton();
+        btnPrecoProduto2 = new javax.swing.JButton();
+        btnPrecoProduto3 = new javax.swing.JButton();
 
         setTitle("Menu Estoque");
         try {
@@ -122,6 +124,24 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPrecoProduto2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnPrecoProduto2.setForeground(new java.awt.Color(0, 51, 255));
+        btnPrecoProduto2.setText("<html>Incluir NF Entrada<font size='2' style='color:black'> Crtl-3 </font>");
+        btnPrecoProduto2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrecoProduto2ActionPerformed(evt);
+            }
+        });
+
+        btnPrecoProduto3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnPrecoProduto3.setForeground(new java.awt.Color(0, 51, 255));
+        btnPrecoProduto3.setText("<html> Excluir NF Entrada<font size='2' style='color:black'> Crtl-3 </font>");
+        btnPrecoProduto3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrecoProduto3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,7 +156,13 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                             .addComponent(btnTipoProduto)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnPrecoProduto1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
+                        .addComponent(btnPrecoProduto1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnPrecoProduto2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,7 +176,11 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                 .addComponent(btnPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrecoProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrecoProduto2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,10 +226,20 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnPrecoProduto1ActionPerformed
 
+    private void btnPrecoProduto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoProduto2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrecoProduto2ActionPerformed
+
+    private void btnPrecoProduto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoProduto3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrecoProduto3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrecoProduto;
     private javax.swing.JButton btnPrecoProduto1;
+    private javax.swing.JButton btnPrecoProduto2;
+    private javax.swing.JButton btnPrecoProduto3;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnTipoProduto;
     // End of variables declaration//GEN-END:variables

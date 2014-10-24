@@ -398,18 +398,18 @@ public class PrincipalView extends javax.swing.JFrame {
                             case 121: //F10
                                 
                                 //teste
-                                AjusteEstoqueView novo = new AjusteEstoqueView();
-                                Global.principal.Desktop.add(novo);                                
-                                novo.setVisible(true);
+//                                AjusteEstoqueView novo = new AjusteEstoqueView();
+//                                Global.principal.Desktop.add(novo);                                
+//                                novo.setVisible(true);
                                 //fim teste
                                 
                                 break;
                             case 122: //F11
                                 
                                 //teste
-                                RequisicaoMercadoria novo2 = new RequisicaoMercadoria();
-                                Global.principal.Desktop.add(novo2);                                
-                                novo2.setVisible(true);
+//                                RequisicaoMercadoria novo2 = new RequisicaoMercadoria();
+//                                Global.principal.Desktop.add(novo2);                                
+//                                novo2.setVisible(true);
                                 //fim teste
                                 
                                 break;

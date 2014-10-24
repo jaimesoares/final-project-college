@@ -55,6 +55,8 @@ public class MenuCompras extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnFornecedor = new javax.swing.JButton();
+        btnFornecedor1 = new javax.swing.JButton();
+        btnFornecedor2 = new javax.swing.JButton();
 
         setTitle("Menu Compras");
         setPreferredSize(new java.awt.Dimension(308, 263));
@@ -73,13 +75,34 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             }
         });
 
+        btnFornecedor1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnFornecedor1.setForeground(new java.awt.Color(0, 51, 255));
+        btnFornecedor1.setText("<html>Cotação <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedor1ActionPerformed(evt);
+            }
+        });
+
+        btnFornecedor2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnFornecedor2.setForeground(new java.awt.Color(0, 51, 255));
+        btnFornecedor2.setText("<html>Pedido de Compra <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedor2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnFornecedor1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnFornecedor2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -87,7 +110,11 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFornecedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFornecedor2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,9 +129,19 @@ public class MenuCompras extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
+    private void btnFornecedor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFornecedor1ActionPerformed
+
+    private void btnFornecedor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedor2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFornecedor2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFornecedor;
+    private javax.swing.JButton btnFornecedor1;
+    private javax.swing.JButton btnFornecedor2;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {
         public void actionPerformed(ActionEvent e) {

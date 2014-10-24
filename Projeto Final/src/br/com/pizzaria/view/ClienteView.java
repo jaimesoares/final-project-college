@@ -28,6 +28,8 @@ public class ClienteView extends javax.swing.JInternalFrame {
         clienteBeans = new ClienteBean();
         clienteController = new ClienteController();
         modelo = (DefaultTableModel) tblCliente.getModel();
+        frame = new PedidoView(1);
+        frame.setTitle("");
 
     }
 
