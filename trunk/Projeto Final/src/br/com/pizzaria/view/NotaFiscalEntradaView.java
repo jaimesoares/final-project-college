@@ -84,6 +84,8 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
         setTitle("NOTA FISCAL DE ENTRADA");
         setPreferredSize(new java.awt.Dimension(680, 680));
 
