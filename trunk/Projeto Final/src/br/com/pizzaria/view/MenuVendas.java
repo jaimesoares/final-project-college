@@ -76,6 +76,8 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         btnPedido = new javax.swing.JButton();
         btnCancelarPedido = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
+        btnCliente1 = new javax.swing.JButton();
+        btnCliente2 = new javax.swing.JButton();
 
         setTitle("Menu Vendas");
         setPreferredSize(new java.awt.Dimension(308, 263));
@@ -107,16 +109,36 @@ public class MenuVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnCliente1.setForeground(new java.awt.Color(0, 51, 255));
+        btnCliente1.setText("<html>Entrega de Pedidos <font size='2' style='color:black'> Crtl-3 </font>");
+        btnCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliente1ActionPerformed(evt);
+            }
+        });
+
+        btnCliente2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnCliente2.setForeground(new java.awt.Color(0, 51, 255));
+        btnCliente2.setText("<html>Fechamento do Dia <font size='2' style='color:black'> Crtl-3 </font>");
+        btnCliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliente2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPedido)
-                    .addComponent(btnCancelarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnCliente))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPedido, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelarPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCliente1)
+                    .addComponent(btnCliente2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -128,7 +150,11 @@ public class MenuVendas extends javax.swing.JInternalFrame {
                 .addComponent(btnCancelarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,10 +189,20 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    private void btnCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCliente1ActionPerformed
+
+    private void btnCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliente2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCliente2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarPedido;
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnCliente1;
+    private javax.swing.JButton btnCliente2;
     private javax.swing.JButton btnPedido;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {
