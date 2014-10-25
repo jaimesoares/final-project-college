@@ -80,7 +80,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         btnCliente2 = new javax.swing.JButton();
 
         setTitle("Menu Vendas");
-        setPreferredSize(new java.awt.Dimension(308, 263));
+        setPreferredSize(new java.awt.Dimension(308, 411));
 
         btnPedido.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPedido.setForeground(new java.awt.Color(0, 51, 255));
@@ -154,7 +154,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
                 .addComponent(btnCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
