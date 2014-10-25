@@ -35,7 +35,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbl_bairro3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField1" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="txtCep" min="-2" pref="105" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -44,14 +44,14 @@
                       </Group>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtBairro5" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="txtNumero" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
                           <Component id="lbl_data3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbl_bairro2" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtBairro2" min="-2" pref="265" max="-2" attributes="0"/>
+                          <Component id="txtCidade" min="-2" pref="265" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -59,7 +59,7 @@
                               <Component id="lbl_bairro1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtBairro1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtContato" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbl_bairro" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
                                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txtRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -172,7 +172,7 @@
                           <Group type="102" attributes="0">
                               <Component id="lbl_data3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtBairro5" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNumero" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -185,7 +185,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtBairro" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtBairro2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCidade" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -203,7 +203,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="lbl_bairro1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtBairro1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtContato" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -259,14 +259,14 @@
         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;&#xd;&#xa;    formatoTelefone = new MaskFormatter(&quot;(##)####-####&quot;);&#xd;&#xa;&#xd;&#xa;}catch (Exception Erro){&#xd;&#xa;    JOptionPane.showMessageDialog(null, &quot;Telefone inv&#xe1;lido&quot;, &quot;ERRO DE FORMATA&#xc7;&#xc3;O&quot;, 0);&#xd;&#xa;}"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBairro5">
+    <Component class="javax.swing.JTextField" name="txtNumero">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="cc" type="rgb"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBairro5KeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_bairro3">
@@ -395,8 +395,11 @@
           <Color blue="ff" green="ff" red="cc" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBairro2">
+    <Component class="javax.swing.JTextField" name="txtCidade">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="ff" red="ff" type="rgb"/>
@@ -494,7 +497,7 @@
         <Property name="text" type="java.lang.String" value="Contato:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBairro1">
+    <Component class="javax.swing.JTextField" name="txtContato">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -508,14 +511,16 @@
         <Property name="text" type="java.lang.String" value="Manuten&#xe7;&#xe3;o de Fornecedor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+    <Component class="javax.swing.JFormattedTextField" name="txtCep">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="cc" type="rgb"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jFormattedTextField1KeyTyped"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCepFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCepActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCepKeyTyped"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(formatoCEP);  "/>
@@ -529,6 +534,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextField2ActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jFormattedTextField2KeyTyped"/>
       </Events>
     </Component>
