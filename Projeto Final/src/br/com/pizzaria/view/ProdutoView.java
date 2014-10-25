@@ -267,7 +267,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         lblDescricao4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblDescricao4.setText("Unid. Medida:");
 
-        cbUnidadeMedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "KG", "UN" }));
+        cbUnidadeMedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UN", "KG", "CX", "DZ", "GR", "LT" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

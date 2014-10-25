@@ -122,7 +122,7 @@
                   <Font name="Arial" size="14" style="1"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Edson de Moraes:&#xa;RGM: 135623-2  &#xa;email: edmoralles@hotmail.com&#xa;&#xa;Antonio Firmino:&#xa;RGM 80432-1 &#xa;Email: firmino.santos@panco.com.br&#xa;&#xa;Jaime Cangussu:&#xa;RGM 90096-6  &#xa;Email: jaime.sistema@gmail.com&#xa;&#xa;Guilherme:&#xa;RGM 135922-3&#xa;Email:financeiro@contmarvel.com.br &#xa;&#xa;"/>
+                <Property name="text" type="java.lang.String" value="Edson de Moraes:&#xa;RGM: 135623-2  &#xa;E-mail: edmoralles@hotmail.com&#xa;&#xa;Antonio Firmino:&#xa;RGM 80432-1 &#xa;E-mail: firmino.santos@panco.com.br&#xa;&#xa;Jaime Cangussu:&#xa;RGM 90096-6  &#xa;E-mail: jaime.sistema@gmail.com&#xa;&#xa;Guilherme Justimiano:&#xa;RGM 135922-3&#xa;E-mail: financeiro@contmarvel.com.br &#xa;&#xa;Josu&#xe9; Salvino &#xa;RGM: 130588-3&#xa;E-mail: josue.salvino@hotmail.com&#xa;&#xa;Wilkor Ribeiro &#xa;Rgm: 131031-3&#x9;&#xa;E-mail: wilkorguitarrista@gmail.com "/>
                 <Property name="autoscrolls" type="boolean" value="false"/>
               </Properties>
             </Component>

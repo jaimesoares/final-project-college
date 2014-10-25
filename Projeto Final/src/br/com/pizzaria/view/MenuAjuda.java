@@ -5,6 +5,7 @@
  */
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.util.Backup;
 import br.com.pizzaria.util.Global;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
@@ -54,6 +56,7 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnSobre = new javax.swing.JButton();
+        btnSobre1 = new javax.swing.JButton();
 
         setTitle("Menu Ajuda");
         setPreferredSize(new java.awt.Dimension(308, 263));
@@ -67,13 +70,24 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSobre1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnSobre1.setForeground(new java.awt.Color(0, 51, 255));
+        btnSobre1.setText("<html>Gerar Backup <font size='2' style='color:black'> Crtl-1 </font>");
+        btnSobre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSobre1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSobre, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSobre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnSobre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -81,7 +95,9 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSobre1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,9 +111,17 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSobreActionPerformed
 
+    private void btnSobre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobre1ActionPerformed
+        // TODO add your handling code here:
+
+        JOptionPane.showMessageDialog(null, Backup.gerarBackup());
+
+    }//GEN-LAST:event_btnSobre1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSobre;
+    private javax.swing.JButton btnSobre1;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {
         public void actionPerformed(ActionEvent e) {
