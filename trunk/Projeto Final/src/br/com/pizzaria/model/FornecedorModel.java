@@ -2,16 +2,14 @@ package br.com.pizzaria.model;
 
 import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.CepBean;
-import br.com.pizzaria.bean.FornecedorBean;
-import br.com.pizzaria.controller.FornecedorController;
 import br.com.pizzaria.util.ConectaBanco;
-import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import br.com.pizzaria.bean.FornecedorBean;
 
 public class FornecedorModel {
 
@@ -20,8 +18,8 @@ public class FornecedorModel {
     }
 
     public boolean cadastrarFornecedor(FornecedorBean fornecedorBeans) {
-        
- return false;
+
+        return false;
     }
 
     public String proximoFornecedor() {
@@ -60,28 +58,27 @@ public class FornecedorModel {
 
     public void listaFornecedor(DefaultTableModel modelo) {
         try {
-            String SQLSelection = "SELECT \n"
-                    + "  f.`fun_codigo`,\n"
-                    + "  f.`fun_nome`,\n"
-                    + "  c.`crg_descr` \n"
-                    + "FROM\n"
-                    + "  `fornecedor` f \n"
-                    + "  JOIN `cargo` c \n"
-                    + "    ON c.`crg_id_cargo` = f.`fun_cargo` ;";
+            String SQLSelection = "SELECT\n"
+                    + "  `for_id_fornec`,\n"
+                    + "  `for_nome`,\n"
+                    + "  `for_cod_pfj`,\n"
+                    + "  `for_contato`,\n"
+                    
+                    + "FROM `pizzaria`.`fornecedor`\n";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                
-             //   FornecedorBens novo = new fornecedorBeans();
-                        
-        //        novo.setCodigo(rs.getInt("fun_codigo"));
 
-          //      novo.setNome(rs.getString("fun_nome"));
-            //    novo.getCargo().setDescricao(rs.getString("crg_descr"));
-              //  modelo.addRow(new Object[]{novo, rs.getString("crg_descr")});
+                FornecedorBean novo = new FornecedorBean();
+
+                novo.setCodigo(rs.getInt("fun_codigo"));
+
+                novo.setNome(rs.getString("for_nome"));
+                novo.setEndereco(rs.getString("for_cod_pfj"));
+                modelo.addRow(new Object[]{novo, rs.getString("for_contato")});
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível listar funcionário " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Impossível listar o fornecedor " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 
@@ -89,7 +86,6 @@ public class FornecedorModel {
 
         FornecedorBean fornecedorBeans = new FornecedorBean();
 
-        
         try {
             String SQLSelection = "select * from fornecedor where fun_codigo = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
@@ -102,15 +98,15 @@ public class FornecedorModel {
                 fornecedorBeans.setTelCelular(rs.getString("tel_cel"));
 
                 fornecedorBeans.setEndereco(rs.getString("fun_rua"));
-          //      fornecedorBeans.setNumero(rs.getInt("fun_nro_ender"));
-            //    fornecedorBeans.setCep(rs.getString("fun_cep"));
+                //      fornecedorBeans.setNumero(rs.getInt("fun_nro_ender"));
+                //    fornecedorBeans.setCep(rs.getString("fun_cep"));
                 fornecedorBeans.setBairro(rs.getString("fun_bairro"));
                 fornecedorBeans.setCidade(rs.getString("fun_cidade"));
-              //  fornecedorBeans.setCpf(rs.getString("fun_cpf"));
+                //  fornecedorBeans.setCpf(rs.getString("fun_cpf"));
                 //fornecedorBeans.setRg(rs.getString("fun_rg"));
-               // fornecedorBeans.setMoto(rs.getString("fun_moto"));
-               // fornecedorBeans.setPlacaMoto(rs.getString("fun_placa_moto"));
-               // fornecedorBeans.setCnh(rs.getString("fun_cnh"));
+                // fornecedorBeans.setMoto(rs.getString("fun_moto"));
+                // fornecedorBeans.setPlacaMoto(rs.getString("fun_placa_moto"));
+                // fornecedorBeans.setCnh(rs.getString("fun_cnh"));
 
                 String SQLSelect = "select * from cargo where crg_id_cargo = '" + rs.getInt("fun_cargo") + "';";
 
@@ -122,7 +118,7 @@ public class FornecedorModel {
                         CargoBean novo = new CargoBean();
                         novo.setCodigo(rsCargo.getInt("crg_id_cargo"));
                         novo.setDescricao(rsCargo.getString("crg_descr"));
-                     
+
                     }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -219,10 +215,3 @@ public class FornecedorModel {
         return cepBeans;
     }
 }
-
-
-
-
-
-
-

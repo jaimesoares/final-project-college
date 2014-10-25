@@ -1,5 +1,6 @@
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.FornecedorBean;
 import br.com.pizzaria.controller.FornecedorController;
 import br.com.pizzaria.util.ConectaBanco;
@@ -14,6 +15,10 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import br.com.pizzaria.util.ValidaCPF;
+import br.com.pizzaria.util.ValidaCNPJ;
+import java.util.List;
+import javax.swing.ComboBoxModel;
 
 public class FornecedorView extends javax.swing.JInternalFrame {
 
@@ -24,12 +29,15 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     FornecedorBean fornecedorBeans;
     FornecedorController fornecedorController;
     DefaultTableModel modelo;
-
+    List<CargoBean> listaCargo;
+    ComboBoxModel<CargoBean> modeloCargos;
+    
+    
     public FornecedorView() {
         initComponents();
-        habilitarCampos(true);
+        habilitarCampos(false);
         txtData.setText(VerificarData.retornoDeDataAtual());
-        btnNovo1.setText("Salvar");
+        btnNovo1.setText("Novo");
         FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
         fornecedorBeans = new FornecedorBean();
@@ -208,6 +216,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNome2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNome2FocusLost(evt);
+            }
+        });
         txtNome2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNome2ActionPerformed(evt);
@@ -225,6 +238,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         lbl_telefone.setText("Tel. Fixo:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CPF:", "CNPJ:" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         txtEstado.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -254,12 +272,20 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         });
 
         jFormattedTextField2.setBackground(new java.awt.Color(204, 255, 255));
+        jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFormattedTextField2FocusLost(evt);
+            }
+        });
         jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField2ActionPerformed(evt);
             }
         });
         jFormattedTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedTextField2KeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jFormattedTextField2KeyTyped(evt);
             }
@@ -530,11 +556,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void btnNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo1ActionPerformed
 
-        if (btnNovo1.getText().equals("Salvar")) {
-
-            cadastraFornecedor();
+        if (btnNovo1.getText().equals("Novo")) {
+            btnNovo1.setText("Salvar");
+            habilitarCampos(true);
             limpaNovo();
         } else {
+               
+             
+            cadastraFornecedor();
             limpaTudo();
             habilitarCampos(false);
 
@@ -639,6 +668,51 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField2ActionPerformed
 
+    private void jFormattedTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField2KeyPressed
+
+          
+   
+          
+          
+    }//GEN-LAST:event_jFormattedTextField2KeyPressed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusLost
+               if(jComboBox1.getSelectedIndex()== 0){
+                 
+            if (ValidaCPF.isCPF(jFormattedTextField2.getText())) {
+                jFormattedTextField2.setText(ValidaCPF.imprimeCPF(jFormattedTextField2.getText()));
+            } else {
+                jFormattedTextField2.setText("");
+                JOptionPane.showMessageDialog(null, "CPF inválido", "Erro de Preenchimento", 0, new ImageIcon("imagens/cancelar.png"));
+            }
+        }else{
+         
+          if (ValidaCNPJ.isCNPJ(jFormattedTextField2.getText())) {
+                jFormattedTextField2.setText(ValidaCNPJ.imprimeCNPJ(jFormattedTextField2.getText()));
+            } else {
+                jFormattedTextField2.setText("");
+                JOptionPane.showMessageDialog(null, "CNPJ inválido", "Erro de Preenchimento", 0, new ImageIcon("imagens/cancelar.png"));
+          
+          
+      
+      
+      
+          }
+          }// TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField2FocusLost
+
+    private void txtNome2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNome2FocusLost
+  
+      
+        
+  
+        
+    }//GEN-LAST:event_txtNome2FocusLost
+
     public void cadastraFornecedor() {
 
         try {
@@ -661,7 +735,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                     + "        ?,\n"
                     + "        ?,\n"
                     + "       ?,\n"
-                   //fez alguma alteração na tela de pedido? que eu lembre não mano fiquei focado nessa mesmo ...ok quando fizer o comit 
+                   //faz um pedido completo pela aplicação só pra ver se funciona!
                     + "        ?);";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
             pstm.setString(1, txtNome.getText());
@@ -684,7 +758,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
 
         }
-//roda ai
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -748,12 +822,22 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }
 
     final void limpaTudo() {
+        
         txtNome.setText("");
         txtRua.setText("");
         txtBairro.setText("");
         txfTelefone.setText("");
-        //txtCodigo.setText("");
         txtData.setText("");
+        txfTelefone1.setText("");
+        txtCep.setText("");
+        txtCidade.setText("");
+        txtContato.setText("");
+        txtNome2.setText("");
+        txtEstado.setText("");
+        txtBairro.setText("");
+        
+        
+                
     }
 
     final void limpaNovo() {
@@ -762,5 +846,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtBairro.setText("");
         txfTelefone.setText("");
     }
+    
+    
 
 }
