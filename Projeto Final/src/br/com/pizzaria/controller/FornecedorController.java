@@ -12,7 +12,7 @@ public class FornecedorController {
     ClienteModel clienteModel;
  
     public FornecedorController() {
-        clienteModel = new ClienteModel();
+       // clienteModel = new ClienteModel();
        
     }
 

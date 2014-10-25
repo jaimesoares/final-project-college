@@ -62,20 +62,24 @@ public class FornecedorModel {
                     + "  `for_id_fornec`,\n"
                     + "  `for_nome`,\n"
                     + "  `for_cod_pfj`,\n"
-                    + "  `for_contato`,\n"
-                    
-                    + "FROM `pizzaria`.`fornecedor`\n";
+                    + "  `for_cep`,\n"
+                    + "  `for_nro_ender`,\n"
+                    + "  `for_email`,\n"
+                    + "  `for_tel`,\n"
+                    + "  `for_tel_cel`,\n"
+                    + "  `for_dt_cad`,\n"
+                    + "  `for_contato`\n"
+                    + "FROM `pizzaria`.`fornecedor`\n"
+                    + "LIMIT 0, 1000;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
 
                 FornecedorBean novo = new FornecedorBean();
+                // novo.setCodigo(rs.getInt("for_id_fornec"));
 
-                novo.setCodigo(rs.getInt("fun_codigo"));
-
-                novo.setNome(rs.getString("for_nome"));
-                novo.setEndereco(rs.getString("for_cod_pfj"));
-                modelo.addRow(new Object[]{novo, rs.getString("for_contato")});
+                modelo.addRow(new Object[]{rs.getInt("for_id_fornec"),
+                    rs.getString("for_nome"), rs.getString("for_cod_pfj"), rs.getString("for_contato")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível listar o fornecedor " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -85,47 +89,34 @@ public class FornecedorModel {
     public FornecedorBean preencherCampos(int codigo) {
 
         FornecedorBean fornecedorBeans = new FornecedorBean();
-
+           
         try {
-            String SQLSelection = "select * from fornecedor where fun_codigo = ?;";
+            JOptionPane.showMessageDialog(null, codigo);
+            String SQLSelection = "select * from fornecedor where for_id_fornec = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                fornecedorBeans.setCodigo(rs.getInt("fun_codigo"));
-                fornecedorBeans.setNome(rs.getString("fun_nome"));
-                fornecedorBeans.setTelefone(rs.getString("fun_tel"));
-                fornecedorBeans.setTelCelular(rs.getString("tel_cel"));
+                
+                fornecedorBeans.setNome(rs.getString("for_nome"));
+                fornecedorBeans.setTelefone(rs.getString("for_tel"));
+                fornecedorBeans.setTelCelular(rs.getString("for_tel_cel"));
 
-                fornecedorBeans.setEndereco(rs.getString("fun_rua"));
-                //      fornecedorBeans.setNumero(rs.getInt("fun_nro_ender"));
-                //    fornecedorBeans.setCep(rs.getString("fun_cep"));
-                fornecedorBeans.setBairro(rs.getString("fun_bairro"));
-                fornecedorBeans.setCidade(rs.getString("fun_cidade"));
-                //  fornecedorBeans.setCpf(rs.getString("fun_cpf"));
-                //fornecedorBeans.setRg(rs.getString("fun_rg"));
-                // fornecedorBeans.setMoto(rs.getString("fun_moto"));
-                // fornecedorBeans.setPlacaMoto(rs.getString("fun_placa_moto"));
-                // fornecedorBeans.setCnh(rs.getString("fun_cnh"));
-
-                String SQLSelect = "select * from cargo where crg_id_cargo = '" + rs.getInt("fun_cargo") + "';";
-
-                try (PreparedStatement pstmCargo = ConectaBanco.getConnection().prepareStatement(SQLSelect)) {
-
-                    ResultSet rsCargo = pstmCargo.executeQuery();
-
-                    if (rsCargo.next()) {
-                        CargoBean novo = new CargoBean();
-                        novo.setCodigo(rsCargo.getInt("crg_id_cargo"));
-                        novo.setDescricao(rsCargo.getString("crg_descr"));
-
-                    }
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
-                }
-
-                fornecedorBeans.setEmail(rs.getString("fun_email"));
-
+                 fornecedorBeans.setCep(rs.getInt("for_cep"));
+                //  fornecedorBeans.setEndereco(rs.getString("for_rua"));
+                //fornecedorBeans.setCep(rs.getInt("for_numero"));
+                fornecedorBeans.setNumero(rs.getInt("for_nro_ender"));
+                //fornecedorBeans.setCidade(rs.getString("for_cidade"));
+                // fornecedorBeans.setBairro(rs.getString("for_bairro"));
+                // fornecedorBeans.setEstado(rs.getString("for_estado"));
+                // fornecedorBeans.setBairro(rs.getString("for_bairro"));
+                fornecedorBeans.setPfj(rs.getString("for_cod_pfj"));
+                fornecedorBeans.setDataCad(rs.getString("for_dt_cad"));
+                fornecedorBeans.setContato(rs.getString("for_contato"));
+                fornecedorBeans.setEmail(rs.getString("for_email"));
+                fornecedorBeans.Imprimir();
+                
+               
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
