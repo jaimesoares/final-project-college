@@ -1,6 +1,5 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.FornecedorBean;
 import br.com.pizzaria.controller.FornecedorController;
 import br.com.pizzaria.util.ConectaBanco;
@@ -18,7 +17,7 @@ import javax.swing.text.MaskFormatter;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.ValidaCNPJ;
 import java.util.List;
-import javax.swing.ComboBoxModel;
+import br.com.pizzaria.model.FornecedorModel;
 
 public class FornecedorView extends javax.swing.JInternalFrame {
 
@@ -29,10 +28,10 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     FornecedorBean fornecedorBeans;
     FornecedorController fornecedorController;
     DefaultTableModel modelo;
-    List<CargoBean> listaCargo;
-    ComboBoxModel<CargoBean> modeloCargos;
-    
-    
+    List<FornecedorBean> listaFornecedor;
+
+    FornecedorModel list = new FornecedorModel();
+
     public FornecedorView() {
         initComponents();
         habilitarCampos(false);
@@ -43,7 +42,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         fornecedorBeans = new FornecedorBean();
         fornecedorController = new FornecedorController();
         modelo = (DefaultTableModel) tblFornecedor.getModel();
-
+        list.listaFornecedor(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -145,11 +144,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Cargo", "Permissão"
+                "Código", "Nome", "CPF/CNPJ", "Contato"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -487,11 +486,12 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblFornecedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMousePressed
-     //  fornecedorBeans = fornecedorController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString()));
-        // txtCodigo.setText(fornecedorBeans.getCodigo() + "");
-        txtNome.setText(fornecedorBeans.getNome());
-        txtData.setText(fornecedorBeans.getDataCad());
+        int codigo = 0;
+        codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
 
+        // list.preencherCampos(Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString()));
+        habilitarCampos(true);
+        preencherCampos(codigo);
 
     }//GEN-LAST:event_tblFornecedorMousePressed
 
@@ -561,10 +561,10 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             habilitarCampos(true);
             limpaNovo();
         } else {
-               
-             
+
             cadastraFornecedor();
             limpaTudo();
+            list.listaFornecedor(modelo);
             habilitarCampos(false);
 
         }
@@ -574,7 +574,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
         if (txtNome.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Selecione um clinete para editar!");
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para editar!");
+
         } else {
             if (btnEditar1.getText().equals("Editar")) {
                 btnEditar1.setText("Salvar");
@@ -632,7 +633,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
 
-         //JOptionPane.showMessageDialog(null,txtCep.getText().substring(0,5) + txtCep.getText().substring(6,9));
+        //JOptionPane.showMessageDialog(null,txtCep.getText().substring(0,5) + txtCep.getText().substring(6,9));
         String SQLSelection = "select "
                 + "c.`cep_cod`,"
                 + "c.`cep_ender`,"
@@ -670,54 +671,43 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void jFormattedTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField2KeyPressed
 
-          
-   
-          
-          
+
     }//GEN-LAST:event_jFormattedTextField2KeyPressed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusLost
-               if(jComboBox1.getSelectedIndex()== 0){
-                 
+        if (jComboBox1.getSelectedIndex() == 0) {
+
             if (ValidaCPF.isCPF(jFormattedTextField2.getText())) {
                 jFormattedTextField2.setText(ValidaCPF.imprimeCPF(jFormattedTextField2.getText()));
             } else {
                 jFormattedTextField2.setText("");
                 JOptionPane.showMessageDialog(null, "CPF inválido", "Erro de Preenchimento", 0, new ImageIcon("imagens/cancelar.png"));
             }
-        }else{
-         
-          if (ValidaCNPJ.isCNPJ(jFormattedTextField2.getText())) {
+        } else {
+
+            if (ValidaCNPJ.isCNPJ(jFormattedTextField2.getText())) {
                 jFormattedTextField2.setText(ValidaCNPJ.imprimeCNPJ(jFormattedTextField2.getText()));
             } else {
                 jFormattedTextField2.setText("");
                 JOptionPane.showMessageDialog(null, "CNPJ inválido", "Erro de Preenchimento", 0, new ImageIcon("imagens/cancelar.png"));
-          
-          
-      
-      
-      
-          }
-          }// TODO add your handling code here:
+
+            }
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField2FocusLost
 
     private void txtNome2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNome2FocusLost
-  
-      
-        
-  
-        
+
+
     }//GEN-LAST:event_txtNome2FocusLost
 
     public void cadastraFornecedor() {
 
         try {
-            String SQLInsertion = "insert into `pizzaria`.`fornecedor`\n"
-                    + "            (\n"
+            String SQLInsertion = "INSERT INTO `pizzaria`.`fornecedor`\n"
                     + "             `for_nome`,\n"
                     + "             `for_cod_pfj`,\n"
                     + "             `for_cep`,\n"
@@ -726,20 +716,30 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                     + "             `for_tel`,\n"
                     + "             `for_tel_cel`,\n"
                     + "             `for_dt_cad`,\n"
-                    + "             `for_contato`)\n"
-                    + "values (?,\n"
+                    + "             `for_contato`,\n"
+                   // + "             `for_ender`,\n"
+                   // + "             `for_bairro`,\n"
+                   // + "             `for_cidade`,\n"
+                   // + "             `for_estado`,\n"
+                  //  + "             `for_status`)\n"
+                    + "VALUES (?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                    + "       ?,\n"
-                   //faz um pedido completo pela aplicação só pra ver se funciona!
+                    + "        ?,\n"
+                   // + "        ?,\n"
+                   // + "        ?,\n"
+                   // + "        ?,\n"
+                  //  + "        ?,\n"
+                  //  + "        ?,\n"
                     + "        ?);";
+
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
             pstm.setString(1, txtNome.getText());
-            pstm.setDouble(2, Double.parseDouble(jFormattedTextField2.getText()));
+            pstm.setString(2, jFormattedTextField2.getText().replace(".", "").replace("-", ""));
             pstm.setString(3, txtCep.getText().replace("-", ""));
             pstm.setInt(4, Integer.parseInt(txtNumero.getText()));
             pstm.setString(5, txtNome2.getText());
@@ -747,6 +747,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             pstm.setString(7, txfTelefone1.getText());
             pstm.setString(8, VerificarData.converteParaSql(txtData.getText()));
             pstm.setString(9, txtContato.getText());
+           // pstm.setString(10, txtRua.getText());
+           // pstm.setString(11, txtBairro.getText());
+          //  pstm.setString(12, txtCidade.getText());
+          //  pstm.setString(13, txtEstado.getText());
+          //  pstm.setString(14, "Ativo");
 
             JOptionPane.showMessageDialog(null, "terminei a instrução");
             pstm.execute();
@@ -822,7 +827,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }
 
     final void limpaTudo() {
-        
+
         txtNome.setText("");
         txtRua.setText("");
         txtBairro.setText("");
@@ -835,9 +840,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtNome2.setText("");
         txtEstado.setText("");
         txtBairro.setText("");
-        
-        
-                
+
     }
 
     final void limpaNovo() {
@@ -846,7 +849,41 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtBairro.setText("");
         txfTelefone.setText("");
     }
-    
-    
+
+    public void preencherCampos(int codigo) {
+
+        try {
+            JOptionPane.showMessageDialog(null, codigo);
+            String SQLSelection = "select * from fornecedor where for_id_fornec = ?;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            pstm.setInt(1, codigo);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+
+                txtNome.setText(rs.getString("for_nome"));
+
+                txfTelefone.setText(rs.getString("for_tel"));
+
+                txfTelefone1.setText(rs.getString("for_tel_cel"));
+
+                txtCep.setText(rs.getString("for_cep"));
+                txtRua.setText(rs.getString("for_ender"));
+
+                txtNumero.setText(rs.getString("for_nro_ender"));
+                txtCidade.setText(rs.getString("for_cidade"));
+                txtBairro.setText(rs.getString("for_bairro"));
+                txtEstado.setText(rs.getString("for_estado"));
+
+                jFormattedTextField2.setText(rs.getString("for_cod_pfj"));
+                txtData.setText(rs.getString("for_dt_cad"));
+                txtContato.setText(rs.getString("for_contato"));
+                txtNome2.setText(rs.getString("for_email"));
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+
+    }
 
 }

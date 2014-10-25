@@ -1,5 +1,8 @@
 package br.com.pizzaria.bean;
 
+import javax.swing.JOptionPane;
+import br.com.pizzaria.view.FornecedorView;
+
 public class FornecedorBean {
     
     private int codigo;
@@ -18,8 +21,8 @@ public class FornecedorBean {
     private String Estado;
     
 
-    public FornecedorBean() {        
-        
+    public FornecedorBean() {
+       
     }
 
     /**
@@ -217,6 +220,17 @@ public class FornecedorBean {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
-
     
+    
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+
+    public void Imprimir(){
+        
+        
+      
+        
+    }
 }
