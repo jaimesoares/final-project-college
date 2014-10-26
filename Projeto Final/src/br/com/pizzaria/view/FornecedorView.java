@@ -102,6 +102,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         btnNovo1 = new javax.swing.JButton();
         btnEditar1 = new javax.swing.JButton();
         btnFechar1 = new javax.swing.JButton();
+        btnRemov = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -166,6 +167,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txfPesquisar.setForeground(new java.awt.Color(0, 51, 255));
         txfPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txfPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfPesquisarActionPerformed(evt);
+            }
+        });
         txfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfPesquisarKeyReleased(evt);
@@ -313,6 +319,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnRemov.setText("Remover");
+        btnRemov.setToolTipText("Para edita alguma informação de cliente");
+        btnRemov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemovActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -327,9 +341,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                             .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_rua)
-                            .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_rua)
+                                .addGap(0, 362, Short.MAX_VALUE))
+                            .addComponent(txtRua))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_data3)))
@@ -345,9 +361,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                             .addComponent(txtContato)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_bairro)
-                                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_bairro)
+                                        .addGap(0, 194, Short.MAX_VALUE))
+                                    .addComponent(txtBairro))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lbl_rua2)
                                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -387,10 +405,12 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemov)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFechar1)))
                 .addContainerGap())
@@ -462,7 +482,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 .addComponent(lbl_rua3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(sep_formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -478,7 +498,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo1)
                     .addComponent(btnEditar1)
-                    .addComponent(btnFechar1))
+                    .addComponent(btnFechar1)
+                    .addComponent(btnRemov))
                 .addGap(99, 99, 99))
         );
 
@@ -496,8 +517,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblFornecedorMousePressed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
-//        modelo.setNumRows(0);
-//        funcionarioController.controlePesquisa(txfPesquisar.getText(), modelo);
+        modelo.setNumRows(0);
+        fornecedorController.controlePesquisa(txfPesquisar.getText(), modelo);
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void txfTelefone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTelefone1ActionPerformed
@@ -573,28 +594,40 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovo1ActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+
+        FornecedorBean fornecedorBeans = new FornecedorBean();
+
+        int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+
         if (txtNome.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Selecione um cliente para editar!");
 
         } else {
+
             if (btnEditar1.getText().equals("Editar")) {
-                btnEditar1.setText("Salvar");
-                btnFechar1.setText("Cancelar");
+
+                editarFornecedor(codigo);
+               // btnEditar1.setText("Salvar");
+                //JOptionPane.showMessageDialog(null, codigo1);
+                // btnFechar1.setText("Cancelar");
                 btnNovo1.setEnabled(false);
                 habilitarCampos(true);
 
                 txfPesquisar.setEnabled(false);
                 modelo.setNumRows(0);
             } else {
-
+                JOptionPane.showMessageDialog(null, codigo);
+                editarFornecedor(codigo);
                 btnEditar1.setText("Editar");
                 btnFechar1.setText("Fechar");
                 btnNovo1.setEnabled(true);
+
                 limpaTudo();
                 habilitarCampos(false);
                 txfPesquisar.setEnabled(true);
 
             }
+
         }
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
@@ -609,6 +642,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             btnNovo1.setEnabled(true);
             habilitarCampos(false);
         } else {
+
             btnNovo1.setText("Novo");
             btnFechar1.setText("Fechar");
             btnEditar1.setEnabled(true);
@@ -633,7 +667,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
 
-        //JOptionPane.showMessageDialog(null,txtCep.getText().substring(0,5) + txtCep.getText().substring(6,9));
         String SQLSelection = "select "
                 + "c.`cep_cod`,"
                 + "c.`cep_ender`,"
@@ -700,15 +733,57 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jFormattedTextField2FocusLost
 
     private void txtNome2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNome2FocusLost
-
+       
+        FornecedorBean e =new FornecedorBean();
+       
+        String email = txtNome2.getText();
+        
+        
+        e.setEmail(email);
+        
+       
+        //fornecedorController.verificarDadosParaEditar(email);
 
     }//GEN-LAST:event_txtNome2FocusLost
+
+    private void btnRemovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovActionPerformed
+
+        int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+        String in = "Inativo";
+
+        try {
+
+            String SQLUpdate = "UPDATE `pizzaria`.`fornecedor`\n"
+                    + "SET `for_status` = 'Inativo'\n"
+                    + "WHERE `for_id_fornec` = "+codigo+";";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
+
+         //pstm.setString(1, in);
+            pstm.execute();
+            ConectaBanco.getConnection().commit();
+
+            
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            modelo.setNumRows(0);
+            list.listaFornecedor(modelo);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
+        }
+        
+    }//GEN-LAST:event_btnRemovActionPerformed
+
+    private void txfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfPesquisarActionPerformed
 
     public void cadastraFornecedor() {
 
         try {
+            modelo.setNumRows(0);
+            
             String SQLInsertion = "INSERT INTO `pizzaria`.`fornecedor`\n"
-                    + "             `for_nome`,\n"
+                    + "            (`for_nome`,\n"
                     + "             `for_cod_pfj`,\n"
                     + "             `for_cep`,\n"
                     + "             `for_nro_ender`,\n"
@@ -717,11 +792,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                     + "             `for_tel_cel`,\n"
                     + "             `for_dt_cad`,\n"
                     + "             `for_contato`,\n"
-                   // + "             `for_ender`,\n"
-                   // + "             `for_bairro`,\n"
-                   // + "             `for_cidade`,\n"
-                   // + "             `for_estado`,\n"
-                  //  + "             `for_status`)\n"
+                    + "             `for_ender`,\n"
+                    + "             `for_bairro`,\n"
+                    + "             `for_cidade`,\n"
+                    + "             `for_estado`,\n"
+                    + "             `for_status`)\n"
                     + "VALUES (?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -730,11 +805,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                   // + "        ?,\n"
-                   // + "        ?,\n"
-                   // + "        ?,\n"
-                  //  + "        ?,\n"
-                  //  + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
                     + "        ?);";
 
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
@@ -747,11 +822,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             pstm.setString(7, txfTelefone1.getText());
             pstm.setString(8, VerificarData.converteParaSql(txtData.getText()));
             pstm.setString(9, txtContato.getText());
-           // pstm.setString(10, txtRua.getText());
-           // pstm.setString(11, txtBairro.getText());
-          //  pstm.setString(12, txtCidade.getText());
-          //  pstm.setString(13, txtEstado.getText());
-          //  pstm.setString(14, "Ativo");
+            pstm.setString(10, txtRua.getText());
+            pstm.setString(11, txtBairro.getText());
+            pstm.setString(12, txtCidade.getText());
+            pstm.setString(13, txtEstado.getText());
+            pstm.setString(14, "Ativo");
 
             JOptionPane.showMessageDialog(null, "terminei a instrução");
             pstm.execute();
@@ -770,6 +845,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnFechar1;
     private javax.swing.JButton btnNovo1;
+    private javax.swing.JButton btnRemov;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
@@ -840,6 +916,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtNome2.setText("");
         txtEstado.setText("");
         txtBairro.setText("");
+        jFormattedTextField2.setText("");
 
     }
 
@@ -852,8 +929,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     public void preencherCampos(int codigo) {
 
+        int codigo2 = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+        fornecedorBeans.setCodigo(codigo2);
+
         try {
-            JOptionPane.showMessageDialog(null, codigo);
+
             String SQLSelection = "select * from fornecedor where for_id_fornec = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             pstm.setInt(1, codigo);
@@ -875,7 +955,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 txtEstado.setText(rs.getString("for_estado"));
 
                 jFormattedTextField2.setText(rs.getString("for_cod_pfj"));
-                txtData.setText(rs.getString("for_dt_cad"));
+                txtData.setText(VerificarData.converteParaJAVA(rs.getString("for_dt_cad")));
                 txtContato.setText(rs.getString("for_contato"));
                 txtNome2.setText(rs.getString("for_email"));
 
@@ -886,4 +966,51 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     }
 
+    public void editarFornecedor(int codigo) {
+
+        try {
+            String SQLUpdate = "UPDATE `pizzaria`.`fornecedor`\n"
+                    + "SET `for_nome` = ?,\n"
+                    + "  `for_cod_pfj` = ?,\n"
+                    + "  `for_cep` = ?,\n"
+                    + "  `for_nro_ender` = ?,\n"
+                    + "  `for_email` = ?,\n"
+                    + "  `for_tel` = ?,\n"
+                    + "  `for_tel_cel` = ?,\n"
+                    + "  `for_dt_cad` = ?,\n"
+                    + "  `for_contato` = ?,\n"
+                    + "  `for_ender` = ?,\n"
+                    + "  `for_bairro` = ?,\n"
+                    + "  `for_cidade` = ?,\n"
+                    + "  `for_estado` = ?,\n"
+                    + "  `for_status` = ?\n"
+                    + "WHERE `for_id_fornec` = " + codigo + ";";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
+
+            pstm.setString(1, txtNome.getText());
+            pstm.setString(2, jFormattedTextField2.getText().replace(".", "").replace("-", ""));
+            pstm.setString(3, txtCep.getText().replace("-", ""));
+            pstm.setInt(4, Integer.parseInt(txtNumero.getText()));
+            pstm.setString(5, txtNome2.getText());
+            pstm.setString(6, txfTelefone.getText());
+            pstm.setString(7, txfTelefone1.getText());
+            pstm.setString(8, VerificarData.converteParaSql(txtData.getText()));
+            pstm.setString(9, txtContato.getText());
+            pstm.setString(10, txtRua.getText());
+            pstm.setString(11, txtBairro.getText());
+            pstm.setString(12, txtCidade.getText());
+            pstm.setString(13, txtEstado.getText());
+            pstm.setString(14, "Ativo");
+
+            pstm.execute();
+            ConectaBanco.getConnection().commit();
+
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
+        }
+
+    }
 }

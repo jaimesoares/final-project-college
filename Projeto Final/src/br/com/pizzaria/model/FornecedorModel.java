@@ -1,6 +1,5 @@
 package br.com.pizzaria.model;
 
-import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.util.ConectaBanco;
 import java.sql.PreparedStatement;
@@ -35,6 +34,8 @@ public class FornecedorModel {
                 PreparedStatement pstmIncrement = ConectaBanco.getConnection().prepareStatement(SQLResetIncrement);
                 pstmIncrement.execute();
                 ConectaBanco.getConnection().commit();
+                
+                
                 return "1";
             }
         } catch (SQLException ex) {
@@ -45,11 +46,12 @@ public class FornecedorModel {
 
     public void procuraFornecedor(String pesquisa, DefaultTableModel modelo) {
         try {
-            String SQLSelection = "select * from fornecedor where fun_nome like '%" + pesquisa + "%';";
+            String SQLSelection = "select * from fornecedor where for_nome like '%" + pesquisa + "%';";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("fun_codigo"), rs.getString("fun_nome"), rs.getString("fun_cargo"), rs.getString("fun_permissao")});
+               modelo.addRow(new Object[]{rs.getInt("for_id_fornec"),
+                    rs.getString("for_nome"), rs.getString("for_cod_pfj"), rs.getString("for_contato")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -57,6 +59,7 @@ public class FornecedorModel {
     }
 
     public void listaFornecedor(DefaultTableModel modelo) {
+       
         try {
             String SQLSelection = "SELECT\n"
                     + "  `for_id_fornec`,\n"
@@ -70,7 +73,8 @@ public class FornecedorModel {
                     + "  `for_dt_cad`,\n"
                     + "  `for_contato`\n"
                     + "FROM `pizzaria`.`fornecedor`\n"
-                    + "LIMIT 0, 1000;";
+                    + "WHERE `for_status` ='Ativo' ;";
+                 
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
