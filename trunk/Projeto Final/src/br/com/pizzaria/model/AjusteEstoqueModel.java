@@ -20,7 +20,7 @@ public class AjusteEstoqueModel {
     public AjusteEstoqueModel() {
     }
 
-    public void pesquisaItens(int codigo, List<ProdutoBean> listaDeItens) {
+    public void pesquisaProdutos(int codigo, List<ProdutoBean> listaDeItens) {
         try {
             String SQLPesquisa = "SELECT \n"
                     + "  t.`tprd_id`,\n"
@@ -34,7 +34,7 @@ public class AjusteEstoqueModel {
                     + "FROM\n"
                     + "  `pizzaria`.`tipo_prod` t \n"
                     + "  JOIN `pizzaria`.`produtos` p \n"
-                    + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
+                    + "    ON p.`prd_tipo_prod`=t.tprd_id \n"
                     //                     + "  JOIN `pizzaria`.`saldo_estoque` c \n"
                     //                    + "    ON c.sdoe_cod_prod = p.prd_prod \n"
                     + "WHERE t.`tprd_id` = '" + codigo + "' and p.`prod_estocavel` ='S';";
@@ -64,7 +64,7 @@ public class AjusteEstoqueModel {
                 + "  `tprd_stt_pizza` \n"
                 + "from\n"
                 + "  `pizzaria`.`tipo_prod` \n"
-                + "where `tprd_descr` <> 'Pizza' and `tprd_descr` <> 'Borda';";
+                + "where tprd_stt_pizza='N';";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 

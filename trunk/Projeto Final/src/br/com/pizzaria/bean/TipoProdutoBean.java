@@ -9,6 +9,7 @@ package br.com.pizzaria.bean;
 public class TipoProdutoBean {
     private int codigo;
     private String descricao;
+    private String pizza;
 
     /**
      * @return the codigo
@@ -41,6 +42,20 @@ public class TipoProdutoBean {
     @Override
     public String toString(){
         return this.descricao;
+    }
+
+    /**
+     * @return the pizza
+     */
+    public String getPizza() {
+        return pizza;
+    }
+
+    /**
+     * @param pizza the pizza to set
+     */
+    public void setPizza(String pizza) {
+        this.pizza = pizza;
     }
     
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 
 public class AjusteEstoqueView extends javax.swing.JInternalFrame {
 
@@ -146,6 +147,16 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
         lbl_data5.setText("Qtde Ajuste:");
 
         txtQtdAjuste.setEditable(false);
+        txtQtdAjuste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQtdAjusteActionPerformed(evt);
+            }
+        });
+        txtQtdAjuste.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQtdAjusteKeyTyped(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Ajuste:"));
 
@@ -295,7 +306,21 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
-        
+        String tipoMovimento;
+        if (txtQtdAjuste.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Entre com a quantidade!");
+            txtQtdAjuste.requestFocus();
+        }else{
+            if(rbEntrada.isSelected()){
+                tipoMovimento = "entrada";
+            }else{
+                tipoMovimento = "saida";
+            }
+            
+            
+            
+        }
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
@@ -305,6 +330,22 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
     private void txtMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMedidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMedidaActionPerformed
+
+    private void txtQtdAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdAjusteActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtQtdAjusteActionPerformed
+
+    private void txtQtdAjusteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdAjusteKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321,.";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtQtdAjusteKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,9 +414,9 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
         txtQtdAjuste.setText("");
         txtQtdAtual.setText("");
     }
-    
-    public AjusteEstoqueBean populaAjuste(){
-        
+
+    public AjusteEstoqueBean populaAjuste() {
+
         return null;
     }
 }
