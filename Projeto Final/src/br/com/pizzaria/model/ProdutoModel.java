@@ -89,14 +89,26 @@ public class ProdutoModel {
 
     public void procuraProduto(String pesquisa, DefaultTableModel modelo) {
         try {
-            String SQLSelection = "select * from produtos where prd_descr like '%" + pesquisa + "%';";
+
+            String SQLSelection = "select \n"
+                    + "  `prd_prod`,\n"
+                    + "  `prd_descr`,\n"
+                    + "  `tprd_descr` \n"
+                    + "from\n"
+                    + "  `pizzaria`.`produtos` \n"
+                    + "  join `tipo_prod` \n"
+                    + "    on `tprd_id` = prd_tipo_prod \n"
+                    + "where prd_descr like '%"+pesquisa+"%' \n"
+                    + "limit 0, 1000 ;\n"
+                    + "";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 ProdutoBean novo = new ProdutoBean();
                 novo.setDescricao(rs.getString("prd_descr"));
                 novo.setCodigo(rs.getInt("prd_prod"));
-                modelo.addRow(new Object[]{novo});
+                novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
+                modelo.addRow(new Object[]{rs.getString("tprd_descr"), novo});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

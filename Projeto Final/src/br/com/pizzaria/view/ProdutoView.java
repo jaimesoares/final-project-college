@@ -118,11 +118,11 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Descrição"
+                "Tipo", "Descrição"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

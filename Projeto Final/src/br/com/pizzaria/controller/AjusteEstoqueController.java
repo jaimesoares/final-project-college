@@ -20,7 +20,7 @@ public class AjusteEstoqueController {
     
     
     public void controleDeItens(int pesquisa, List<ProdutoBean> listaDeItens) {
-        ajusteEstoqueModel.pesquisaItens(pesquisa, listaDeItens);
+        ajusteEstoqueModel.pesquisaProdutos(pesquisa, listaDeItens);
     }
     
      public void controleListaTipoProduto(List<TipoProdutoBean> lista) {

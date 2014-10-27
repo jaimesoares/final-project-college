@@ -14,13 +14,13 @@ public class TipoProdutoController {
         tipoProdutoModel = new TipoProdutoModel();
     }
 
-    public boolean verificarDados(String descricao) {
+    public boolean verificarDados(String descricao, String pizza) {
         if (descricao.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo 'Descrição' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
 
-        tipoProdutoModel.cadastrarTipoProduto(descricao);
+        tipoProdutoModel.cadastrarTipoProduto(descricao, pizza);
         return true;
     }
 

@@ -15,15 +15,16 @@ public class TipoProdutoModel {
 
     }
 
-    public void cadastrarTipoProduto(String descricao) {
+    public void cadastrarTipoProduto(String descricao, String producao) {
 
         String SQLInsertion = "insert into `pizzaria`.`tipo_prod`"
-                + "(`tprd_descr`)"
-                + "values (?);";
+                + "(`tprd_descr`, tprd_stt_pizza)"
+                + "values (?,?);";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion)) {
 
             pstm.setString(1, descricao);
+            pstm.setString(2, producao);
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
@@ -48,6 +49,7 @@ public class TipoProdutoModel {
                 TipoProdutoBean novo = new TipoProdutoBean();
                 novo.setCodigo(rs.getInt("tprd_id"));
                 novo.setDescricao(rs.getString("tprd_descr"));
+                novo.setPizza(rs.getString("tprd_stt_pizza"));
                 modelo.addElement(novo);
             }
         } catch (SQLException ex) {
