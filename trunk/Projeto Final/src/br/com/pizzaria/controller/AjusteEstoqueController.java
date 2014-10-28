@@ -1,9 +1,11 @@
 
 package br.com.pizzaria.controller;
 
+import br.com.pizzaria.bean.AjusteEstoqueBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.model.AjusteEstoqueModel;
+import br.com.pizzaria.model.AtualizaMovimentoEstoqueModel;
 import br.com.pizzaria.model.ConsultaMovEstoqueModel;
 import java.util.List;
 import javax.swing.JTextField;
@@ -37,5 +39,9 @@ public class AjusteEstoqueController {
      
      public long controleQuantidadeAtual(int codigoProduto) {
         return ajusteEstoqueModel.pesquisaQuantidadeAtual(codigoProduto);
+     }
+     
+     public boolean controleMovimentoEstoque(AjusteEstoqueBean ajusteEstoque) {
+         return ajusteEstoqueModel.atualizaMovimentoEstoque(ajusteEstoque);
      }
 }

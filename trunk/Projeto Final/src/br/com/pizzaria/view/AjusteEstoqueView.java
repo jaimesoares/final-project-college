@@ -4,6 +4,7 @@ import br.com.pizzaria.bean.AjusteEstoqueBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.controller.AjusteEstoqueController;
+import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.VerificarData;
 import java.util.ArrayList;
 import java.util.List;
@@ -310,17 +311,11 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
         if (txtQtdAjuste.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Entre com a quantidade!");
             txtQtdAjuste.requestFocus();
-        }else{
-            if(rbEntrada.isSelected()){
-                tipoMovimento = "entrada";
-            }else{
-                tipoMovimento = "saida";
+        } else {
+            if(ajusteEstoqueController.controleMovimentoEstoque(populaAjuste())){
+                cbTipo.setSelectedIndex(0);
             }
-            
-            
-            
         }
-
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
@@ -416,7 +411,11 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
     }
 
     public AjusteEstoqueBean populaAjuste() {
-
-        return null;
+        ajusteEstoqueBean.setTipoMovimento(rbEntrada.isSelected() ? 7 : 8);
+        ajusteEstoqueBean.setAjusteMovimento(Long.parseLong(txtQtdAjuste.getText()));
+        ajusteEstoqueBean.setCodigoFunc(Global.usuario.getCodigoFuncionario());
+        ajusteEstoqueBean.setDataMovimento(txtData.getText());
+        ajusteEstoqueBean.setProdutoBean((ProdutoBean) modeloProduto.getSelectedItem());
+        return ajusteEstoqueBean;
     }
 }
