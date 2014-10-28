@@ -26,6 +26,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
     FuncionarioView funcionarioV;
 
     UsuarioView usuarioV;
+    EmpresaView empresaV;
     DefinirModuloView moduloV;
     ModuloView moduloV2;
     CargoFuncaoView cargoV;
@@ -224,7 +225,13 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModuloActionPerformed
 
     private void btnEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaActionPerformed
-        // TODO add your handling code here:
+  if (empresaV == null || !empresaV.isShowing()) {
+            empresaV = new EmpresaView();
+            Global.principal.Desktop.add(empresaV);
+            centralizaForm(empresaV);
+            empresaV.setVisible(true);
+        }        
+// TODO add your handling code here:
     }//GEN-LAST:event_btnEmpresaActionPerformed
 
 
