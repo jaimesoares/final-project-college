@@ -39,10 +39,10 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         btnNovo1.setText("Salvar");
        // FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
-       // fornecedorBeans = new FornecedorBean();
+        // fornecedorBeans = new FornecedorBean();
         //fornecedorController = new FornecedorController();
-       // modelo = (DefaultTableModel) tblFornecedor.getModel();
-       // list.listaFornecedor(modelo);
+        // modelo = (DefaultTableModel) tblFornecedor.getModel();
+        // list.listaFornecedor(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -223,7 +223,7 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         txtEstado.setBackground(new java.awt.Color(255, 255, 204));
 
         lbl_bairro1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_bairro1.setText("Contato:");
+        lbl_bairro1.setText("Site:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
@@ -393,8 +393,8 @@ public class EmpresaView extends javax.swing.JInternalFrame {
                                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                 .addComponent(lbl_rua2)
                                                                 .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                        .addComponent(lbl_bairro1)
-                                                        .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lbl_bairro1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addComponent(lbl_rua)
                                                 .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -533,7 +533,6 @@ public class EmpresaView extends javax.swing.JInternalFrame {
     private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
         // TODO add your handling code here:
         String caracteres = "0987654321";
-        
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -552,11 +551,13 @@ public class EmpresaView extends javax.swing.JInternalFrame {
     private void btnNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo1ActionPerformed
 
         if (btnNovo1.getText().equals("Salvar")) {
+
+            validaCampos();
             cadastraEmpresa();
             limpaTudo();
             //list.listaFornecedor(modelo);
             habilitarCampos(false);
-        } 
+        }
 
 
     }//GEN-LAST:event_btnNovo1ActionPerformed
@@ -565,8 +566,7 @@ public class EmpresaView extends javax.swing.JInternalFrame {
 
         FornecedorBean fornecedorBeans = new FornecedorBean();
 
-     //   int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
-
+        //   int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
         if (txtNome.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Selecione um cliente para editar!");
 
@@ -574,25 +574,25 @@ public class EmpresaView extends javax.swing.JInternalFrame {
 
             if (btnEditar1.getText().equals("Editar")) {
 
-           //     editarFornecedor(codigo);
+                //     editarFornecedor(codigo);
                 // btnEditar1.setText("Salvar");
                 //JOptionPane.showMessageDialog(null, codigo1);
-                 btnFechar1.setText("Cancelar");
+                btnFechar1.setText("Cancelar");
                 btnNovo1.setEnabled(false);
                 habilitarCampos(false);
 
-        //        txfPesquisar.setEnabled(false);
+                //        txfPesquisar.setEnabled(false);
                 modelo.setNumRows(0);
             } else {
                 // JOptionPane.showMessageDialog(null, codigo);
-             //   editarFornecedor(codigo);
+                //   editarFornecedor(codigo);
                 btnEditar1.setText("Editar");
                 btnFechar1.setText("Fechar");
                 btnNovo1.setEnabled(true);
 
                 limpaTudo();
                 habilitarCampos(false);
-          //      txfPesquisar.setEnabled(true);
+                //      txfPesquisar.setEnabled(true);
 
             }
 
@@ -606,9 +606,9 @@ public class EmpresaView extends javax.swing.JInternalFrame {
             table(true);
             modelo.setNumRows(0);
             list.listaFornecedor(modelo);
-             btnFechar1.setText("Fechar");
-             btnNovo1.setText("Novo");
-             
+            btnFechar1.setText("Fechar");
+            btnNovo1.setText("Novo");
+
             limpaTudo();
             if (btnEditar1.getText().equals("Salvar")) {
 
@@ -616,13 +616,13 @@ public class EmpresaView extends javax.swing.JInternalFrame {
             }
             btnNovo1.setEnabled(true);
             habilitarCampos(false);
-            
+
         } else {
-     JOptionPane.showMessageDialog(null, "Else");
+            JOptionPane.showMessageDialog(null, "Else");
             btnNovo1.setText("Novo");
             btnFechar1.setText("Fechar");
             btnEditar1.setEnabled(true);
-           // tblFornecedor.setEnabled(true);
+            // tblFornecedor.setEnabled(true);
             //txfPesquisar.setEnabled(true);
             habilitarCampos(false);
 
@@ -740,25 +740,39 @@ public class EmpresaView extends javax.swing.JInternalFrame {
 
     public void cadastraEmpresa() {
 
-        try {
-            modelo.setNumRows(0);
+    
 
-            String SQLInsertion = "INSERT INTO `pizzaria`.`fornecedor`\n"
-                    + "            (`for_nome`,\n"
-                    + "             `for_cod_pfj`,\n"
-                    + "             `for_cep`,\n"
-                    + "             `for_nro_ender`,\n"
-                    + "             `for_email`,\n"
-                    + "             `for_tel`,\n"
-                    + "             `for_tel_cel`,\n"
-                    + "             `for_dt_cad`,\n"
-                    + "             `for_contato`,\n"
-                    + "             `for_ender`,\n"
-                    + "             `for_bairro`,\n"
-                    + "             `for_cidade`,\n"
-                    + "             `for_estado`,\n"
-                    + "             `for_status`)\n"
-                    + "VALUES (?,\n"
+        try {
+
+                String pjf = "";
+
+        if (jComboBox1.getSelectedIndex() == 0) {
+
+            pjf = "Pessoa Física";
+
+        } else {
+
+            pjf = "Pessoa Jurídica";
+
+        }
+        
+            String SQLInsertion = "INSERT INTO `pizzaria`.`empresa`\n"
+                    
+                    + "            (`emp_cod_pfj`,\n"
+                    + "             `emp_fis_jur_emp`,\n"
+                    + "             `emp_cep`,\n"
+                    + "             `emp_raz_emp`,\n"
+                    + "             `emp_fantasia_emp`,\n"
+                    + "             `emp_nro_ender`,\n"
+                    + "             `emp_inscr_est`,\n"
+                    + "             `emp_tel1`,\n"
+                    + "             `emp_tel2`,\n"
+                    + "             `emp_tel_cel`,\n"
+                    + "             `emp_tel_cel2`,\n"
+                    + "             `emp_email`,\n"
+                    + "             `emp_site`,\n"
+                    + "             `emp_dt_movto`)\n"
+                    + "VALUES (?,\n"   
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -774,26 +788,28 @@ public class EmpresaView extends javax.swing.JInternalFrame {
                     + "        ?);";
 
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
-            pstm.setString(1, txtNome.getText());
-            pstm.setString(2, jFormattedTextField2.getText().replace(".", "").replace("-", ""));
-            pstm.setString(3, txtCep.getText().replace("-", ""));
-            pstm.setInt(4, Integer.parseInt(txtNumero.getText()));
-            pstm.setString(5, txtNome2.getText());
-            pstm.setString(6, txfTelefone.getText());
-            pstm.setString(7, txfTelefone1.getText());
-            pstm.setString(8, VerificarData.converteParaSql(txtData.getText()));
-            pstm.setString(9, txtContato.getText());
-            pstm.setString(10, txtRua.getText());
-            pstm.setString(11, txtBairro.getText());
-            pstm.setString(12, txtCidade.getText());
-            pstm.setString(13, txtEstado.getText());
-            pstm.setString(14, "Ativo");
+
+            pstm.setDouble(1, Double.parseDouble(jFormattedTextField2.getText().replace(".", "").replace("-", "")));
+            pstm.setString(2,pjf);
+            pstm.setDouble(3, Double.parseDouble(txtCep.getText().replace("-", "")));
+            pstm.setString(4, txtNome.getText());
+            pstm.setString(5,"Juliette");
+            
+            pstm.setInt(6, Integer.parseInt(txtNumero.getText()));
+            pstm.setString(7, txtEstado.getText());
+            pstm.setString(8, txfTelefone.getText());
+            pstm.setString(9, txfTelefone1.getText());
+            pstm.setString(10, txfTelefone2.getText());
+            pstm.setString(11, txfTelefone3.getText());
+            pstm.setString(12, txtNome2.getText());
+            pstm.setString(13, txtContato.getText());
+            pstm.setString(14, VerificarData.converteParaSql(txtData.getText()));
 
             JOptionPane.showMessageDialog(null, "terminei a instrução");
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            JOptionPane.showMessageDialog(null, "Empresa Cadastra com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -889,14 +905,13 @@ public class EmpresaView extends javax.swing.JInternalFrame {
 
     public void table(boolean valor) {
 
-      //  tblFornecedor.setVisible(valor);
+        //  tblFornecedor.setVisible(valor);
     }
 
     public void preencherCampos(int codigo) {
 
         //int codigo2 = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
-       // fornecedorBeans.setCodigo(codigo2);
-
+        // fornecedorBeans.setCodigo(codigo2);
         try {
 
             String SQLSelection = "select * from fornecedor where for_id_fornec = ?;";
@@ -978,4 +993,15 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         }
 
     }
+
+    public void validaCampos() {
+
+        if (txtNome.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Digite o nome da Empresa");
+
+        }
+
+    }
+
 }
