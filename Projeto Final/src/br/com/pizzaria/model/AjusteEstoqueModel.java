@@ -202,15 +202,13 @@ public class AjusteEstoqueModel {
                     + "       ?,\n"
                     + "       ?);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
-            
-
-            pstmt.execute();
             pstmt.setString(1, VerificarData.converteParaSql(ajusteEstoque.getDataMovimento()));
             pstmt.setInt(2, ajusteEstoque.getProdutoBean().getCodigo());
             pstmt.setInt(3, ajusteEstoque.getTipoMovimento());
             pstmt.setLong(4, ajusteEstoque.getAjusteMovimento());
             pstmt.setInt(5, ajusteEstoque.getCodigoFunc());
-
+            pstmt.execute();
+            
             if (atualizaMovimentoEstoque(ajusteEstoque)) {
                 ConectaBanco.getConnection().commit();
                 JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
