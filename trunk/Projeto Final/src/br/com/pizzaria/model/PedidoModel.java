@@ -539,7 +539,7 @@ public class PedidoModel {
                 pstmt.setString(1, pedidoBeans.getData());
                 pstmt.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
                 pstmt.setInt(3, 1);
-                pstmt.setInt(4, pedidoBeans.getItensPedido().get(i).getQuantidade());
+                pstmt.setLong(4, pedidoBeans.getItensPedido().get(i).getQuantidade());
 
                 pstmt.execute();
 
