@@ -1,7 +1,6 @@
 package br.com.pizzaria.model;
 
 import br.com.pizzaria.bean.AjusteEstoqueBean;
-import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.util.ConectaBanco;
@@ -9,8 +8,6 @@ import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
