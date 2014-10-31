@@ -36,9 +36,18 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         initComponents();
         habilitarCampos(true);
         txtData.setText(VerificarData.retornoDeDataAtual());
-        btnNovo1.setText("Salvar");
-       // FormatoData = new SimpleDateFormat("dd/MM/yyyy");
+        selectEmpresa();
+        if (txtNome.getText().isEmpty()) {
 
+            
+btnNovo1.setText("Salvar");
+        }else{
+        btnNovo1.setText("Editar");
+            
+        }
+       
+
+       // FormatoData = new SimpleDateFormat("dd/MM/yyyy");
         // fornecedorBeans = new FornecedorBean();
         //fornecedorController = new FornecedorController();
         // modelo = (DefaultTableModel) tblFornecedor.getModel();
@@ -92,7 +101,6 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         txtCep = new JFormattedTextField(formatoCEP);  ;
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         btnNovo1 = new javax.swing.JButton();
-        btnEditar1 = new javax.swing.JButton();
         btnFechar1 = new javax.swing.JButton();
         lbl_telefone2 = new javax.swing.JLabel();
         try{
@@ -275,14 +283,6 @@ public class EmpresaView extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEditar1.setText("Editar");
-        btnEditar1.setToolTipText("Para edita alguma informação de cliente");
-        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditar1ActionPerformed(evt);
-            }
-        });
-
         btnFechar1.setText("Fechar");
         btnFechar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,13 +329,11 @@ public class EmpresaView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(58, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnNovo1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEditar1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnFechar1))
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -486,9 +484,8 @@ public class EmpresaView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar1)
-                    .addComponent(btnNovo1)
-                    .addComponent(btnEditar1))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(btnNovo1))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         pack();
@@ -557,47 +554,14 @@ public class EmpresaView extends javax.swing.JInternalFrame {
             limpaTudo();
             //list.listaFornecedor(modelo);
             habilitarCampos(false);
+        } else {
+            
+            editarEmpresa();
+
         }
 
 
     }//GEN-LAST:event_btnNovo1ActionPerformed
-
-    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-
-        FornecedorBean fornecedorBeans = new FornecedorBean();
-
-        //   int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
-        if (txtNome.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Selecione um cliente para editar!");
-
-        } else {
-
-            if (btnEditar1.getText().equals("Editar")) {
-
-                //     editarFornecedor(codigo);
-                // btnEditar1.setText("Salvar");
-                //JOptionPane.showMessageDialog(null, codigo1);
-                btnFechar1.setText("Cancelar");
-                btnNovo1.setEnabled(false);
-                habilitarCampos(false);
-
-                //        txfPesquisar.setEnabled(false);
-                modelo.setNumRows(0);
-            } else {
-                // JOptionPane.showMessageDialog(null, codigo);
-                //   editarFornecedor(codigo);
-                btnEditar1.setText("Editar");
-                btnFechar1.setText("Fechar");
-                btnNovo1.setEnabled(true);
-
-                limpaTudo();
-                habilitarCampos(false);
-                //      txfPesquisar.setEnabled(true);
-
-            }
-
-        }
-    }//GEN-LAST:event_btnEditar1ActionPerformed
 
     private void btnFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar1ActionPerformed
 
@@ -610,18 +574,13 @@ public class EmpresaView extends javax.swing.JInternalFrame {
             btnNovo1.setText("Novo");
 
             limpaTudo();
-            if (btnEditar1.getText().equals("Salvar")) {
-
-                btnEditar1.setText("Editar");
-            }
-            btnNovo1.setEnabled(true);
-            habilitarCampos(false);
+          
 
         } else {
             JOptionPane.showMessageDialog(null, "Else");
             btnNovo1.setText("Novo");
             btnFechar1.setText("Fechar");
-            btnEditar1.setEnabled(true);
+           
             // tblFornecedor.setEnabled(true);
             //txfPesquisar.setEnabled(true);
             habilitarCampos(false);
@@ -740,39 +699,42 @@ public class EmpresaView extends javax.swing.JInternalFrame {
 
     public void cadastraEmpresa() {
 
-    
-
         try {
 
-                String pjf = "";
+            String pjf = "";
 
-        if (jComboBox1.getSelectedIndex() == 0) {
+            if (jComboBox1.getSelectedIndex() == 0) {
 
-            pjf = "Pessoa Física";
+                pjf = "Pessoa Física";
 
-        } else {
+            } else {
 
-            pjf = "Pessoa Jurídica";
+                pjf = "Pessoa Jurídica";
 
-        }
-        
+            }
+
             String SQLInsertion = "INSERT INTO `pizzaria`.`empresa`\n"
-                    
                     + "            (`emp_cod_pfj`,\n"
                     + "             `emp_fis_jur_emp`,\n"
                     + "             `emp_cep`,\n"
                     + "             `emp_raz_emp`,\n"
                     + "             `emp_fantasia_emp`,\n"
                     + "             `emp_nro_ender`,\n"
-                    + "             `emp_inscr_est`,\n"
                     + "             `emp_tel1`,\n"
                     + "             `emp_tel2`,\n"
                     + "             `emp_tel_cel`,\n"
                     + "             `emp_tel_cel2`,\n"
                     + "             `emp_email`,\n"
                     + "             `emp_site`,\n"
-                    + "             `emp_dt_movto`)\n"
-                    + "VALUES (?,\n"   
+                    + "             `emp_dt_movto`,\n"
+                    + "             `emp_bairro`,\n"
+                    + "             `emp_estado`,\n"
+                    + "             `emp_cidade`,\n"
+                    + "             `emp_rua`)\n"
+                    + "VALUES (?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -790,22 +752,26 @@ public class EmpresaView extends javax.swing.JInternalFrame {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
 
             pstm.setDouble(1, Double.parseDouble(jFormattedTextField2.getText().replace(".", "").replace("-", "")));
-            pstm.setString(2,pjf);
+            pstm.setString(2, pjf);
             pstm.setDouble(3, Double.parseDouble(txtCep.getText().replace("-", "")));
             pstm.setString(4, txtNome.getText());
-            pstm.setString(5,"Juliette");
-            
-            pstm.setInt(6, Integer.parseInt(txtNumero.getText()));
-            pstm.setString(7, txtEstado.getText());
-            pstm.setString(8, txfTelefone.getText());
-            pstm.setString(9, txfTelefone1.getText());
-            pstm.setString(10, txfTelefone2.getText());
-            pstm.setString(11, txfTelefone3.getText());
-            pstm.setString(12, txtNome2.getText());
-            pstm.setString(13, txtContato.getText());
-            pstm.setString(14, VerificarData.converteParaSql(txtData.getText()));
+            pstm.setString(5, "PizzariaMama");
 
-            JOptionPane.showMessageDialog(null, "terminei a instrução");
+            pstm.setInt(6, Integer.parseInt(txtNumero.getText()));
+
+            pstm.setString(7, txfTelefone.getText());
+            pstm.setString(8, txfTelefone1.getText());
+            pstm.setString(9, txfTelefone2.getText());
+            pstm.setString(10, txfTelefone3.getText());
+            pstm.setString(11, txtNome2.getText());
+            pstm.setString(12, txtContato.getText());
+            pstm.setString(13, VerificarData.converteParaSql(txtData.getText()));
+            pstm.setString(14, txtBairro.getText());
+            pstm.setString(15, txtEstado.getText());
+            pstm.setString(16, txtCidade.getText());
+            pstm.setString(17, txtRua.getText());
+
+            // JOptionPane.showMessageDialog(null, "terminei a instrução");
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
@@ -819,7 +785,6 @@ public class EmpresaView extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnFechar1;
     private javax.swing.JButton btnNovo1;
     private javax.swing.JComboBox jComboBox1;
@@ -908,36 +873,34 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         //  tblFornecedor.setVisible(valor);
     }
 
-    public void preencherCampos(int codigo) {
+    public void selectEmpresa() {
 
         //int codigo2 = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
         // fornecedorBeans.setCodigo(codigo2);
         try {
 
-            String SQLSelection = "select * from fornecedor where for_id_fornec = ?;";
+            String SQLSelection = "select * from empresa where emp_id_empresa = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
-            pstm.setInt(1, codigo);
+            pstm.setInt(1, 1);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
 
-                txtNome.setText(rs.getString("for_nome"));
+                jFormattedTextField2.setText(rs.getString("emp_cod_pfj"));
 
-                txfTelefone.setText(rs.getString("for_tel"));
+                txtCep.setText("0"+rs.getString("emp_cep"));
+                txtNome.setText(rs.getString("emp_raz_emp"));
 
-                txfTelefone1.setText(rs.getString("for_tel_cel"));
-
-                txtCep.setText(rs.getString("for_cep"));
-                txtRua.setText(rs.getString("for_ender"));
-
-                txtNumero.setText(rs.getString("for_nro_ender"));
-                txtCidade.setText(rs.getString("for_cidade"));
-                txtBairro.setText(rs.getString("for_bairro"));
-                txtEstado.setText(rs.getString("for_estado"));
-
-                jFormattedTextField2.setText(rs.getString("for_cod_pfj"));
-                txtData.setText(VerificarData.converteParaJAVA(rs.getString("for_dt_cad")));
-                txtContato.setText(rs.getString("for_contato"));
-                txtNome2.setText(rs.getString("for_email"));
+                txtNumero.setText(rs.getString("emp_nro_ender"));
+                txfTelefone.setText(rs.getString("emp_tel1"));
+                txfTelefone1.setText(rs.getString("emp_tel2"));
+                txfTelefone2.setText(rs.getString("emp_tel_cel"));
+                txfTelefone3.setText(rs.getString("emp_tel_cel2"));
+                txtNome2.setText(rs.getString("emp_email"));
+                txtContato.setText(rs.getString("emp_site"));
+                txtBairro.setText(rs.getString("emp_bairro"));
+                txtEstado.setText(rs.getString("emp_estado"));
+                txtCidade.setText(rs.getString("emp_cidade"));
+                txtRua.setText(rs.getString("emp_rua"));
 
             }
         } catch (SQLException ex) {
@@ -946,41 +909,66 @@ public class EmpresaView extends javax.swing.JInternalFrame {
 
     }
 
-    public void editarFornecedor(int codigo) {
+    public void editarEmpresa() {
 
+               String pjf = "";
+
+            if (jComboBox1.getSelectedIndex() == 0) {
+
+                pjf = "Pessoa Física";
+
+            } else {
+
+                pjf = "Pessoa Jurídica";
+
+            }
+            
         try {
-            String SQLUpdate = "UPDATE `pizzaria`.`fornecedor`\n"
-                    + "SET `for_nome` = ?,\n"
-                    + "  `for_cod_pfj` = ?,\n"
-                    + "  `for_cep` = ?,\n"
-                    + "  `for_nro_ender` = ?,\n"
-                    + "  `for_email` = ?,\n"
-                    + "  `for_tel` = ?,\n"
-                    + "  `for_tel_cel` = ?,\n"
-                    + "  `for_dt_cad` = ?,\n"
-                    + "  `for_contato` = ?,\n"
-                    + "  `for_ender` = ?,\n"
-                    + "  `for_bairro` = ?,\n"
-                    + "  `for_cidade` = ?,\n"
-                    + "  `for_estado` = ?,\n"
-                    + "  `for_status` = ?\n"
-                    + "WHERE `for_id_fornec` = " + codigo + ";";
-            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
+            int cod = 1;
+            
+            String SQLUpdate = "UPDATE `pizzaria`.`empresa`\n"
+                    + "SET `emp_cod_pfj` = ?,\n"
+                    + "  `emp_fis_jur_emp` = ?,\n"
+                    + "  `emp_cep` = ?,\n"
+                    + "  `emp_raz_emp` = ?,\n"
+                    + "  `emp_fantasia_emp` = ?,\n"
+                    + "  `emp_nro_ender` = ?,\n"
+                   
+                    + "  `emp_tel1` = ?,\n"
+                    + "  `emp_tel2` = ?,\n"
+                    + "  `emp_tel_cel` = ?,\n"
+                    + "  `emp_tel_cel2` = ?,\n"
+                    + "  `emp_email` = ?,\n"
+                    + "  `emp_site` = ?,\n"
+                    + "  `emp_dt_movto` = ?,\n"
+                    + "  `emp_bairro` = ?,\n"
+                    + "  `emp_estado` = ?,\n"
+                    + "  `emp_cidade` = ?,\n"
+                    + "  `emp_rua` = ?\n"
+                    + "WHERE `emp_id_empresa` ="+cod+"";
 
-            pstm.setString(1, txtNome.getText());
-            pstm.setString(2, jFormattedTextField2.getText().replace(".", "").replace("-", ""));
-            pstm.setString(3, txtCep.getText().replace("-", ""));
-            pstm.setInt(4, Integer.parseInt(txtNumero.getText()));
-            pstm.setString(5, txtNome2.getText());
-            pstm.setString(6, txfTelefone.getText());
-            pstm.setString(7, txfTelefone1.getText());
-            pstm.setString(8, VerificarData.converteParaSql(txtData.getText()));
-            pstm.setString(9, txtContato.getText());
-            pstm.setString(10, txtRua.getText());
-            pstm.setString(11, txtBairro.getText());
-            pstm.setString(12, txtCidade.getText());
-            pstm.setString(13, txtEstado.getText());
-            pstm.setString(14, "Ativo");
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
+           
+            
+              pstm.setDouble(1, Double.parseDouble(jFormattedTextField2.getText().replace(".", "").replace("-", "")));
+            pstm.setString(2, pjf);
+            pstm.setDouble(3, Double.parseDouble(txtCep.getText().replace("-", "")));
+            pstm.setString(4, txtNome.getText());
+            pstm.setString(5, "PizzariaMama");
+
+            pstm.setInt(6, Integer.parseInt(txtNumero.getText()));
+
+            pstm.setString(7, txfTelefone.getText());
+            pstm.setString(8, txfTelefone1.getText());
+            pstm.setString(9, txfTelefone2.getText());
+            pstm.setString(10, txfTelefone3.getText());
+            pstm.setString(11, txtNome2.getText());
+            pstm.setString(12, txtContato.getText());
+            pstm.setString(13, VerificarData.converteParaSql(txtData.getText()));
+            pstm.setString(14, txtBairro.getText());
+            pstm.setString(15, txtEstado.getText());
+            pstm.setString(16, txtCidade.getText());
+            pstm.setString(17, txtRua.getText());
 
             pstm.execute();
             ConectaBanco.getConnection().commit();
