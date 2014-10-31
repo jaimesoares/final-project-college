@@ -39,10 +39,13 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_rua" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRua" min="-2" pref="422" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lbl_rua" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="362" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="txtRua" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtNumero" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
                           <Component id="lbl_data3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -62,10 +65,13 @@
                           <Component id="txtContato" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_bairro" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtBairro" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lbl_bairro" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="194" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtBairro" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lbl_rua2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtEstado" min="-2" pref="74" max="-2" attributes="0"/>
@@ -120,10 +126,12 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="btnNovo1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnEditar1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnRemov" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnFechar1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -220,7 +228,7 @@
               <Component id="lbl_rua3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtNome2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
               <Component id="sep_formulario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -238,6 +246,7 @@
                   <Component id="btnNovo1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditar1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnFechar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRemov" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
@@ -369,6 +378,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfPesquisarActionPerformed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfPesquisarKeyReleased"/>
       </Events>
     </Component>
@@ -592,6 +602,15 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFechar1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRemov">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Remover"/>
+        <Property name="toolTipText" type="java.lang.String" value="Para edita alguma informa&#xe7;&#xe3;o de cliente"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemovActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
