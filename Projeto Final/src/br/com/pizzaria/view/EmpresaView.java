@@ -37,6 +37,7 @@ public class EmpresaView extends javax.swing.JInternalFrame {
         habilitarCampos(true);
         txtData.setText(VerificarData.retornoDeDataAtual());
         selectEmpresa();
+       
         if (txtNome.getText().isEmpty()) {
 
             
@@ -625,6 +626,9 @@ btnNovo1.setText("Salvar");
                 txtCidade.setText(rs.getString("cep_cid"));
                 txtRua.setText(rs.getString("cep_ender"));
                 txtEstado.setText(rs.getString("mun_uf"));
+            }else{
+                JOptionPane.showMessageDialog(null, "CEP não encontrado!");
+                txtCep.setFocusable(true);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -676,7 +680,7 @@ btnNovo1.setText("Salvar");
         e.setEmail(email);
 
         if (fornecedorController.verificaEmail(e)) {
-            System.out.println("salvar");
+            //System.out.println("salvar");
         }
 
     }//GEN-LAST:event_txtNome2FocusLost
@@ -847,6 +851,7 @@ btnNovo1.setText("Salvar");
 
         txtNome.setText("");
         txtRua.setText("");
+        txtNumero.setText("");
         txtBairro.setText("");
         txfTelefone.setText("");
         txtData.setText("");
@@ -858,7 +863,9 @@ btnNovo1.setText("Salvar");
         txtEstado.setText("");
         txtBairro.setText("");
         jFormattedTextField2.setText("");
-
+        txfTelefone2.setText("");
+        txfTelefone3.setText("");
+        
     }
 
     final void limpaNovo() {
