@@ -28,6 +28,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
     TipoProdutoView tipoProdutoV;
     AjusteEstoqueView ajusteEstoqueV;
     NotaFiscalEntradaView notaFiscalEntradaV;
+    ConsultaMovEstoqueView movimentoEstoque;
 
     /**
      * Creates new form MenuProdução
@@ -81,6 +82,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         btnPrecoProduto1 = new javax.swing.JButton();
         btnPrecoProduto2 = new javax.swing.JButton();
         btnPrecoProduto3 = new javax.swing.JButton();
+        btnRelatorioCliente1 = new javax.swing.JButton();
 
         setTitle("Menu Estoque");
         try {
@@ -143,6 +145,15 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             }
         });
 
+        btnRelatorioCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnRelatorioCliente1.setForeground(new java.awt.Color(0, 51, 255));
+        btnRelatorioCliente1.setText("<html> Movimento Estoque <font size='2' style='color:black'> Crtl-1 </font>");
+        btnRelatorioCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioCliente1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,7 +174,10 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                         .addComponent(btnPrecoProduto2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
+                        .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRelatorioCliente1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -181,7 +195,9 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                 .addComponent(btnPrecoProduto2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRelatorioCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -241,6 +257,16 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPrecoProduto3ActionPerformed
 
+    private void btnRelatorioCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioCliente1ActionPerformed
+        // TODO add your handling code here:
+        if (movimentoEstoque == null || !movimentoEstoque.isShowing()) {
+            movimentoEstoque = new ConsultaMovEstoqueView();
+            Global.principal.Desktop.add(movimentoEstoque);
+            centralizaForm(movimentoEstoque);
+            movimentoEstoque.setVisible(true);
+        }
+    }//GEN-LAST:event_btnRelatorioCliente1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrecoProduto;
@@ -248,6 +274,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrecoProduto2;
     private javax.swing.JButton btnPrecoProduto3;
     private javax.swing.JButton btnProduto;
+    private javax.swing.JButton btnRelatorioCliente1;
     private javax.swing.JButton btnTipoProduto;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {

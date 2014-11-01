@@ -54,7 +54,6 @@ ConsultaMovEstoqueView movimentoEstoque;
     private void initComponents() {
 
         btnRelatorioCliente = new javax.swing.JButton();
-        btnRelatorioCliente1 = new javax.swing.JButton();
 
         setTitle("Menu Relatório");
         setPreferredSize(new java.awt.Dimension(308, 263));
@@ -68,24 +67,13 @@ ConsultaMovEstoqueView movimentoEstoque;
             }
         });
 
-        btnRelatorioCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnRelatorioCliente1.setForeground(new java.awt.Color(0, 51, 255));
-        btnRelatorioCliente1.setText("<html> Movimento Estoque <font size='2' style='color:black'> Crtl-1 </font>");
-        btnRelatorioCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelatorioCliente1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRelatorioCliente)
-                    .addComponent(btnRelatorioCliente1))
+                .addComponent(btnRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -93,9 +81,7 @@ ConsultaMovEstoqueView movimentoEstoque;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRelatorioCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,20 +97,9 @@ ConsultaMovEstoqueView movimentoEstoque;
         }
     }//GEN-LAST:event_btnRelatorioClienteActionPerformed
 
-    private void btnRelatorioCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioCliente1ActionPerformed
-        // TODO add your handling code here:
-        if (movimentoEstoque == null || !movimentoEstoque.isShowing()) {
-            movimentoEstoque = new ConsultaMovEstoqueView();
-            Global.principal.Desktop.add(movimentoEstoque);
-            centralizaForm(movimentoEstoque);
-            movimentoEstoque.setVisible(true);
-        }
-    }//GEN-LAST:event_btnRelatorioCliente1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRelatorioCliente;
-    private javax.swing.JButton btnRelatorioCliente1;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (  
         new ActionListener(){  

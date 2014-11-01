@@ -118,7 +118,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
 
         btnUsuario.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnUsuario.setForeground(new java.awt.Color(0, 51, 255));
-        btnUsuario.setText("<html>Usuário <font size='2' style='color:black'> Crtl-3 </font>");
+        btnUsuario.setText("<html>Usuário/Módulo <font size='2' style='color:black'> Crtl-3 </font>");
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuarioActionPerformed(evt);

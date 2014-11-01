@@ -20,7 +20,7 @@ public class ProdutoController {
         return produtoModel.proximoProduto();
     }
 
-    public boolean verificarDados(ProdutoBean produto, int tipo) {
+    public boolean verificarDados(ProdutoBean produto, int tipo, String preco) {
         if (produto.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
@@ -31,7 +31,7 @@ public class ProdutoController {
             return false;
         }
 
-        return produtoModel.cadastrarProduto(produto);
+        return produtoModel.cadastrarProduto(produto, preco);
     }
 
     public void controlePesquisa(String pesquisa, DefaultTableModel modelo) {
@@ -42,19 +42,12 @@ public class ProdutoController {
         return produtoModel.preencherCampos(codigo);
     }
 
-    public boolean verificarDadosParaEditar(ProdutoBean cardapio, int tipo, String descricao) {
-        if (descricao.isEmpty()) {
+    public boolean verificarDadosParaEditar(ProdutoBean cardapio) {
+        if (cardapio.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo descrição não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
-        }
-
-        if (tipo == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione um tipo de produto!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
-            return false;
-        }
+        }        
         
-        cardapio.getTipoProduto().setCodigo(tipo);
-        cardapio.setDescricao(descricao);
         return produtoModel.editarProduto(cardapio);
 
     }

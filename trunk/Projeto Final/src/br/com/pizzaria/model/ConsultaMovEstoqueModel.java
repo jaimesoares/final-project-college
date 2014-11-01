@@ -20,96 +20,7 @@ public class ConsultaMovEstoqueModel {
     public ConsultaMovEstoqueModel() {
     }
 
-    /**
-     *
-     * @param data
-     * @param tabela
-     */
-    public void listarClienteDia(String data, DefaultTableModel tabela) {
-        String SqlSelection = "select\n"
-                + "  `cli_cod`,\n"
-                + "  `cli_nome`,\n"
-                + "  `cli_cep`,\n"
-                + "  `cli_nro_ender`,\n"
-                + "  `cli_email`,\n"
-                + "  `cli_telefone`,\n"
-                + "  `cli_tel_cel`,\n"
-                + "  `cli_aniversario`,\n"
-                + "  `cli_datacad`,\n"
-                + "  `cli_dt_ult_compra`,\n"
-                + "  `cli_stt_inadimp`,\n"
-                + "  `cli_rua`,\n"
-                + "  `cli_bairro`,\n"
-                + "  `cli_obs`,\n"
-                + "  `cli_cidade`\n"
-                + "from `pizzaria`.`cliente`\n"
-                + "where `cli_datacad`='" + VerificarData.converteParaSql(data) + "';";
-
-        try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
-
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     *
-     * @param tabela
-     */
-    public void listarTodosClientes(DefaultTableModel tabela) {
-        String SqlSelection = "select *  from `pizzaria`.`cliente`";
-
-        try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
-
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     *
-     * @param dataInicial
-     * @param dataFinal
-     * @param tabela
-     */
-    public void listarCLientePeriodo(String dataInicial, String dataFinal, DefaultTableModel tabela) {
-        String SqlSelection = "select\n"
-                + "  `cli_cod`,\n"
-                + "  `cli_nome`,\n"
-                + "  `cli_cep`,\n"
-                + "  `cli_nro_ender`,\n"
-                + "  `cli_email`,\n"
-                + "  `cli_telefone`,\n"
-                + "  `cli_tel_cel`,\n"
-                + "  `cli_aniversario`,\n"
-                + "  `cli_datacad`,\n"
-                + "  `cli_dt_ult_compra`,\n"
-                + "  `cli_stt_inadimp`,\n"
-                + "  `cli_rua`,\n"
-                + "  `cli_bairro`,\n"
-                + "  `cli_obs`,\n"
-                + "  `cli_cidade`\n"
-                + "from `pizzaria`.`cliente`\n"
-                + "WHERE  `cli_datacad`  BETWEEN '" + VerificarData.converteParaSql(dataInicial) + "' AND '" + VerificarData.converteParaSql(dataFinal) + "';";
-
-        try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
-
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_cidade"), rs.getString("cli_telefone"), rs.getString("cli_tel_cel"), VerificarData.converteParaJAVA(rs.getString("cli_datacad"))});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     public void pesquisaItens(int codigo, List<ProdutoBean> listaDeItens) {
         try {
@@ -119,6 +30,7 @@ public class ConsultaMovEstoqueModel {
                     + "  p.`prd_prod`,\n"
                     + "  p.`prd_prod_venda`,\n"
                     + "  p.`prd_descr`,\n"
+                    + "  p.`prd_unid_med`,\n"
                     + "  p.`prod_estocavel`\n "
                     //+ "  c.`tprc_preco` \n"
                     + "FROM\n"
@@ -127,7 +39,7 @@ public class ConsultaMovEstoqueModel {
                     + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
                     // + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
                     //+ "    ON c.tprc_cod_prod = p.prd_prod \n"
-                    + "WHERE t.`tprd_id` = '" + codigo + "' and p.`prd_prod_venda` ='S';";
+                    + "WHERE t.`tprd_id` = '" + codigo + "' and p.`prod_estocavel` ='S';";
 
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
@@ -138,6 +50,7 @@ public class ConsultaMovEstoqueModel {
                 novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
                 novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
                 novo.setEstocavel(rs.getString("prod_estocavel").charAt(0));
+                novo.setUnidadeMedida(rs.getString("prd_unid_med"));
                 listaDeItens.add(novo);
             }
         } catch (SQLException ex) {

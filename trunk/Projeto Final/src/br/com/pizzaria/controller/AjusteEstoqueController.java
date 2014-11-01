@@ -39,7 +39,7 @@ public class AjusteEstoqueController {
         return ajusteEstoqueModel.pesquisaQuantidadeAtual(codigoProduto);
      }
      
-     public boolean controleMovimentoEstoque(AjusteEstoqueBean ajusteEstoque) {
-         return ajusteEstoqueModel.atualizaMovimentoEstoque(ajusteEstoque);
+     public boolean controleAjusteEstoque(AjusteEstoqueBean ajusteEstoque) {
+         return ajusteEstoqueModel.ajusteEstoque(ajusteEstoque);
      }
 }
