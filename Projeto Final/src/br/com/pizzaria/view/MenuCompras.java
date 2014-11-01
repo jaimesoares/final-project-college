@@ -24,6 +24,8 @@ import javax.swing.Timer;
 public class MenuCompras extends javax.swing.JInternalFrame {
 
     FornecedorView fornecedorV;
+    PedidoCompraView pedidoV;
+    CancelaPedidoCompraView cancelaV;
 
     /**
      * Creates new form MenuProdução
@@ -57,9 +59,10 @@ public class MenuCompras extends javax.swing.JInternalFrame {
         btnFornecedor = new javax.swing.JButton();
         btnFornecedor1 = new javax.swing.JButton();
         btnFornecedor2 = new javax.swing.JButton();
+        btnFornecedor3 = new javax.swing.JButton();
 
         setTitle("Menu Compras");
-        setPreferredSize(new java.awt.Dimension(308, 263));
+        setPreferredSize(new java.awt.Dimension(308, 352));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -93,6 +96,15 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             }
         });
 
+        btnFornecedor3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnFornecedor3.setForeground(new java.awt.Color(0, 51, 255));
+        btnFornecedor3.setText("<html>Cancela Pedido de Compra <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedor3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +114,8 @@ public class MenuCompras extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(btnFornecedor1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnFornecedor2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addComponent(btnFornecedor2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnFornecedor3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,7 +127,9 @@ public class MenuCompras extends javax.swing.JInternalFrame {
                 .addComponent(btnFornecedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFornecedor2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,13 +150,30 @@ public class MenuCompras extends javax.swing.JInternalFrame {
 
     private void btnFornecedor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedor2ActionPerformed
         // TODO add your handling code here:
+        if (pedidoV == null || !pedidoV.isShowing()) {
+            pedidoV = new PedidoCompraView();
+            Global.principal.Desktop.add(pedidoV);
+            centralizaForm(pedidoV);
+            pedidoV.setVisible(true);
+        }
     }//GEN-LAST:event_btnFornecedor2ActionPerformed
+
+    private void btnFornecedor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedor3ActionPerformed
+        // TODO add your handling code here:
+        if (cancelaV == null || !cancelaV.isShowing()) {
+            cancelaV = new CancelaPedidoCompraView();
+            Global.principal.Desktop.add(cancelaV);
+            centralizaForm(cancelaV);
+            cancelaV.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFornecedor3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFornecedor;
     private javax.swing.JButton btnFornecedor1;
     private javax.swing.JButton btnFornecedor2;
+    private javax.swing.JButton btnFornecedor3;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {
         public void actionPerformed(ActionEvent e) {
