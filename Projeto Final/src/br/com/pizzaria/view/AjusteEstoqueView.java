@@ -312,7 +312,7 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Entre com a quantidade!");
             txtQtdAjuste.requestFocus();
         } else {
-            if(ajusteEstoqueController.controleMovimentoEstoque(populaAjuste())){
+            if(ajusteEstoqueController.controleAjusteEstoque(populaAjuste())){
                 cbTipo.setSelectedIndex(0);
             }
         }

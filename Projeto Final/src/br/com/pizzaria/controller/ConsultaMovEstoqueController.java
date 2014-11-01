@@ -16,18 +16,6 @@ public class ConsultaMovEstoqueController {
         movimentoEstoqueModel = new ConsultaMovEstoqueModel();
     }
     
-    public void controlePeriodoCliente(String dataInicial, String dataFinal, DefaultTableModel tabela){
-        movimentoEstoqueModel.listarCLientePeriodo(dataInicial, dataFinal, tabela);
-    }
-    
-    public void controleClienteDia(String data, DefaultTableModel tabela){
-        movimentoEstoqueModel.listarClienteDia(data, tabela);
-    }
-    
-    public void controleTodosClientes(DefaultTableModel tabela){
-        movimentoEstoqueModel.listarTodosClientes(tabela);
-    }
-    
     public void controleDeItens(int pesquisa, List<ProdutoBean> listaDeItens) {
         movimentoEstoqueModel.pesquisaItens(pesquisa, listaDeItens);
     }

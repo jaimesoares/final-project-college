@@ -218,7 +218,7 @@ public class RequisicaoMercadoriaModel {
             
             if (Estoque.atualizaMovimentoEstoque(novo)) {
                 ConectaBanco.getConnection().commit();
-                JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                JOptionPane.showMessageDialog(null, "Requisição realizada com sucesso", "Requisição efetivada", 1, new ImageIcon("imagens/ticado.png"));
                 return true;
             } else {
                 return false;

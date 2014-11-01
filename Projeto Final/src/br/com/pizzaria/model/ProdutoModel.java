@@ -38,7 +38,7 @@ public class ProdutoModel {
         }
     }
 
-    public boolean cadastrarProduto(ProdutoBean produtoBeans) {
+    public boolean cadastrarProduto(ProdutoBean produtoBeans, String preco) {
         try {
             String SQLInsertion = "insert into `pizzaria`.`produtos`\n"
                     + "             (`prd_descr`,\n"
@@ -76,6 +76,11 @@ public class ProdutoModel {
             pstm.setString(10, String.valueOf(produtoBeans.getVenda()));
 
             pstm.execute();
+            
+            if(!preco.isEmpty()){
+                cadastrarPrecoProduto(produtoBeans.getCodigo(),Double.parseDouble(preco));
+            }
+            
             ConectaBanco.getConnection().commit();
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
@@ -134,16 +139,13 @@ public class ProdutoModel {
                     + "  p.`prod_estocavel`,"
                     + "  p.`prd_unid_med`,"
                     + "  p.`prd_acab_prima`,"
-                    + "  p.`prd_prod_venda`,"
-                    + "  v.`tprc_preco` \n"
+                    + "  p.`prd_prod_venda`"
+                   
                     + "from\n"
-                    + "  `pizzaria`.`tab_precos_venda` v \n"
-                    + "  join `produtos` p \n"
-                    + "    on v.`tprc_cod_prod` = p.`prd_prod` \n"
-                    + "where p.`prd_prod` = ? \n"
-                    + "order by v.`tprc_vigencia` desc \n"
-                    + "limit 1 ;\n"
-                    + "";
+                    + "  `pizzaria`.`produtos` p \n"
+                   
+                    + "where p.`prd_prod` = ? ;\n";
+                    
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
@@ -164,7 +166,23 @@ public class ProdutoModel {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
                 }
+                
+                
+                String SQLSelectPreco = "select * from tab_precos_venda where tprc_cod_prod = '" + codigo + "' order by `tprc_vigencia` desc limit 1 ;";
+                try (PreparedStatement pstmPreco = ConectaBanco.getConnection().prepareStatement(SQLSelectPreco)) {
 
+                    ResultSet rsPreco = pstmPreco.executeQuery();
+
+                    if (rsPreco.next()) {
+                        produtoBeans.getPrecoProduto().setPreco(rsPreco.getDouble("tprc_preco"));
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                }
+
+                
+                
+                
                 produtoBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("prod_data_cadastro")));
                 produtoBeans.setDescricao(rs.getString("prd_descr"));
                 produtoBeans.setEstocavel(rs.getString("prod_estocavel").charAt(0));
@@ -172,7 +190,7 @@ public class ProdutoModel {
                 produtoBeans.setAvisaEstoqueMinimo(rs.getString("prd_stt_avisa_estoq_min").charAt(0));
                 produtoBeans.setQtdMinima(rs.getDouble("prd_qtd_min_estoq"));
                 produtoBeans.setCodigo(rs.getInt("prd_prod"));
-                produtoBeans.getPrecoProduto().setPreco(rs.getDouble("tprc_preco"));
+                
                 produtoBeans.setUnidadeMedida(rs.getString("prd_unid_med"));
                 produtoBeans.setProdAcabadoPrima(rs.getString("prd_acab_prima").charAt(0));
                 produtoBeans.setVenda(rs.getString("prd_prod_venda").charAt(0));
@@ -190,27 +208,15 @@ public class ProdutoModel {
             String SQLUpdate = "update `pizzaria`.`produtos` set\n"
                     + "  `prd_descr` = ?,\n"
                     + "  `prd_qtd_min_estoq` = ?,\n"
-                    + "  `prd_stt_avisa_estoq_min` = ?,\n"
-                    + "  `prd_tipo_prod` = ?,\n"
-                    + "  `prd_qtd_saldo_estoq` = ?,\n"
-                    + "  `prod_data_cadastro` = ?,\n"
-                    + "  `prod_estocavel` = ?,\n"
-                    + "  `prd_unid_med`= ?,"
-                    + "  `prd_acab_prima`= ?,"
+                    + "  `prd_stt_avisa_estoq_min` = ?,\n"                    
                     + "  `prd_prod_venda`= ?"
                     + "where `prd_prod` = ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
             pstm.setString(1, produtoBeans.getDescricao());
             pstm.setDouble(2, produtoBeans.getQtdMinima());
-            pstm.setString(3, String.valueOf(produtoBeans.getAvisaEstoqueMinimo()));
-            pstm.setInt(4, produtoBeans.getTipoProduto().getCodigo());
-            pstm.setDouble(5, produtoBeans.getQtdSaldoEstoque());
-            pstm.setString(6, VerificarData.converteParaSql(produtoBeans.getDataCad()));
-            pstm.setString(7, String.valueOf(produtoBeans.getEstocavel()));
-            pstm.setString(8, String.valueOf(produtoBeans.getUnidadeMedida()));
-            pstm.setString(9, String.valueOf(produtoBeans.getProdAcabadoPrima()));
-            pstm.setString(10, String.valueOf(produtoBeans.getVenda()));
-            pstm.setInt(11, produtoBeans.getCodigo());
+            pstm.setString(3, String.valueOf(produtoBeans.getAvisaEstoqueMinimo()));          
+            pstm.setString(4, String.valueOf(produtoBeans.getVenda()));
+            pstm.setInt(5, produtoBeans.getCodigo());
 
             pstm.executeUpdate();
             ConectaBanco.getConnection().commit();
@@ -244,5 +250,32 @@ public class ProdutoModel {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL ", 0, new ImageIcon("imagens/cancelar.png"));
         }
+    }
+    
+    public void cadastrarPrecoProduto(int codigo, double preco) {
+
+        String SQLInsertion = "insert into `pizzaria`.`tab_precos_venda`\n"
+                + "            (`tprc_cod_prod`,\n"
+                + "             `tprc_vigencia`,\n"
+                + "             `tprc_preco`)\n"
+                + "values (?,\n"
+                + "        ?,\n"
+                + "        ?);";
+
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion)) {
+
+            pstm.setInt(1, codigo);
+            pstm.setDouble(3, preco);
+            pstm.setString(2, VerificarData.converteParaSql(VerificarData.retornoDeDataAtual()));
+
+            pstm.execute();
+            
+
+            //JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Cadastrar" + ex.getMessage(), "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+
     }
 }

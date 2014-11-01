@@ -1,6 +1,5 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.bean.AjusteEstoqueBean;
 import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.bean.ProdutoBean;
@@ -91,7 +90,7 @@ public class RequisicaoMercadoria extends javax.swing.JInternalFrame {
         jLabel1.setText("Requisição de Mercadoria");
         jLabel1.setOpaque(true);
 
-        btnFechar1.setText("Adicionar");
+        btnFechar1.setText("Requisitar");
         btnFechar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFechar1ActionPerformed(evt);
@@ -194,7 +193,7 @@ public class RequisicaoMercadoria extends javax.swing.JInternalFrame {
         lbl_data4.setText("Qtde Atual:");
 
         lbl_data5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_data5.setText("Qtde Ajuste:");
+        lbl_data5.setText("Qtde Requis:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
