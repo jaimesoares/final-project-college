@@ -87,7 +87,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
         setTitle("PEDIDO DE COMPRA");
         setPreferredSize(new java.awt.Dimension(680, 680));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cabeçalho Nota Fiscal"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Observação:");
@@ -264,7 +264,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                     .addComponent(txtPreco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Itens Nota Fiscal"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Itens"));
 
         lbl_data1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data1.setText("Tipo Produto:");
@@ -416,9 +416,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lbl_data8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_data8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)

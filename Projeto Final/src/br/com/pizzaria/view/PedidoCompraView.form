@@ -68,7 +68,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Cabe&#xe7;alho Nota Fiscal"/>
+            <TitledBorder title="Pedido"/>
           </Border>
         </Property>
       </Properties>
@@ -331,7 +331,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Itens Nota Fiscal"/>
+            <TitledBorder title="Itens"/>
           </Border>
         </Property>
       </Properties>
@@ -350,10 +350,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbProduto" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lbl_data8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="198" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lbl_data8" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">

@@ -1,5 +1,6 @@
 package br.com.pizzaria.model;
 
+import br.com.pizzaria.bean.FornecedorBean;
 import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
@@ -261,7 +262,7 @@ public class PedidoModel {
     }
 
     public String campoNota(String campo) {
-        int espaco = 20 - campo.length();
+        int espaco = 25 - campo.length();
 
         for (int j = 0; j < espaco; j++) {
             campo = campo.concat(" ");
@@ -271,6 +272,15 @@ public class PedidoModel {
 
     public String campoNota2(String campo) {
         int espaco = 10 - campo.length();
+
+        for (int j = 0; j < espaco; j++) {
+            campo = campo.concat(" ");
+        }
+        return campo;
+    }
+    
+    public String campoFormaPagamento(String campo) {
+        int espaco = 42 - campo.length();
 
         for (int j = 0; j < espaco; j++) {
             campo = campo.concat(" ");
@@ -308,8 +318,8 @@ public class PedidoModel {
                     + "  t.`tprd_id`,\n"
                     + "  t.`tprd_descr`,\n"
                     + "  p.`prd_prod`,\n"
-                    + "  p.`prd_descr`\n"
-                    //+ "  c.`tprc_preco` \n"
+                    + "  p.`prd_descr`,\n"
+                    + "  p.`prd_ingrediente` \n"
                     + "FROM\n"
                     + "  `pizzaria`.`tipo_prod` t \n"
                     + "  JOIN `pizzaria`.`produtos` p \n"
@@ -327,6 +337,7 @@ public class PedidoModel {
                 novo.getPrecoProduto().setPreco(valorDoItem(rs.getInt("prd_prod")));
                 novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
                 novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
+                novo.setIngredientes(rs.getString("prd_ingrediente"));
                 listaDePizza.add(novo);
             }
         } catch (SQLException ex) {
@@ -393,7 +404,6 @@ public class PedidoModel {
             pstmt.execute();
 
             cadastrarItensCupom(codigoDoCupom(), pedidobeans);
-
 
         } catch (SQLException ex) {
             try {
@@ -496,10 +506,13 @@ public class PedidoModel {
         DecimalFormat formatoDecimal = new DecimalFormat("0.00");
         List<String> cupom = new ArrayList<>();
         String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
+        cupom.add(selectEmpresa().getNome());
+        cupom.add(selectEmpresa().getEndereco()+", "+selectEmpresa().getNumero()+" - "+selectEmpresa().getBairro()+" SP");
+        cupom.add("CNPJ: "+selectEmpresa().getPfj()+" INSCR. EST.: 116.854.228.110");
         cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
         cupom.add("---------------------------------------------------------");//60 espaços
         cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
-        cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
+        cupom.add("PRODUTO                  QTD       VL UNIT.  VL TOTAL  ");
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
 
             if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
@@ -512,8 +525,8 @@ public class PedidoModel {
 
         }
         cupom.add("------------------------------------------------------------");
-        cupom.add("Total:                                    R$" + totalPedido);
-        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
+        cupom.add("Total:                                    R$" + totalPedido);//42 ESPAÇOS
+        cupom.add(campoFormaPagamento(pedidoBeans.getTipoPagamento()+":") +"R$" + pedidoBeans.getValorRecebido());
         cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
         JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
     }
@@ -723,6 +736,34 @@ public class PedidoModel {
 
         }
         return true;
+    }
+
+    public FornecedorBean selectEmpresa() {
+        FornecedorBean empresa = new FornecedorBean();
+        //int codigo2 = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+        // fornecedorBeans.setCodigo(codigo2);
+        try {
+            
+            String SQLSelection = "select * from empresa where emp_id_empresa = ?;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            pstm.setInt(1, 1);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                
+                empresa.setPfj(rs.getString("emp_cod_pfj"));
+                empresa.setNome(rs.getString("emp_raz_emp"));
+                empresa.setNumero(rs.getInt("emp_nro_ender"));
+                empresa.setBairro(rs.getString("emp_bairro"));
+                empresa.setEstado(rs.getString("emp_estado"));
+                empresa.setCidade(rs.getString("emp_cidade"));
+                empresa.setEndereco(rs.getString("emp_rua"));
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+        return empresa;
+
     }
 
 }

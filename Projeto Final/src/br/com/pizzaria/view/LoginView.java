@@ -290,25 +290,27 @@ public class LoginView extends javax.swing.JInternalFrame {
             UsuarioBean usuarioBeans = usuarioController.controlePesquisaLogin(momentUser);
 
             if (usuarioBeans.getCodigoFuncionario() == 0) {
-                lblMensagem.setText("Mensagem: Usuário não cadastrado!");
-                lblMensagem.setVisible(true);
-                thread = new ThreadTempo(lblMensagem);
-                thread.start();
-                play.som();
+                JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+//                lblMensagem.setText("Mensagem: Usuário não cadastrado!");
+//                lblMensagem.setVisible(true);
+//                thread = new ThreadTempo(lblMensagem);
+//                thread.start();
+//                play.som();
             } else if (usuarioBeans.getSenha().equals(momentUser.getSenha())) {
                 Global.principal.habiltaMenu(true);
                 Global.usuario = usuarioBeans;
-                CozinhaView cozinhaV = new CozinhaView();
-                cozinhaV.setVisible(true);
+//                CozinhaView cozinhaV = new CozinhaView();
+//                cozinhaV.setVisible(true);
                     //Relogio relogio = new Relogio();
                 //relogio.setVisible(true);
                 this.dispose();
             } else {
-                lblMensagem.setText("Mensagem: Senha incorreta!");
-                lblMensagem.setVisible(true);
-                thread = new ThreadTempo(lblMensagem);
-                thread.start();
-                play.som();
+                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+//                lblMensagem.setText("Mensagem: Senha incorreta!");
+//                lblMensagem.setVisible(true);
+//                thread = new ThreadTempo(lblMensagem);
+//                thread.start();
+//                play.som();
             }
         }
 

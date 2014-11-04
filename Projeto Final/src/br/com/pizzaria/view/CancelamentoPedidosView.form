@@ -225,6 +225,7 @@
         <Component class="javax.swing.JButton" name="btnBalcao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Balc&#xe3;o"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pedidos realizados no balc&#xe3;o"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBalcaoActionPerformed"/>

@@ -146,8 +146,8 @@ public class ConsultaMovEstoqueModel {
                 total = entrada - saida;
                 tabela.addRow(new Object[]{rs.getString("tme_descr"), rs.getString("tme_stt_ent_sai"), rs.getLong("estq_qtd")});
             }
-            tabela.addRow(new Object[]{"", "", ""});
-            tabela.addRow(new Object[]{"Total:", "", total});
+         //   tabela.addRow(new Object[]{"", "", ""});
+           // tabela.addRow(new Object[]{"Total:", "", total});
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaMovEstoqueModel.class.getName()).log(Level.SEVERE, null, ex);
         }
