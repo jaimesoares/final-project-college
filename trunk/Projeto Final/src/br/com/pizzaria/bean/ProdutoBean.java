@@ -14,6 +14,7 @@ public class ProdutoBean {
     private String unidadeMedida ;
     private char prodAcabadoPrima;
     private char venda;
+    private String ingredientes;
 
     public ProdutoBean() {
         tipoProduto = new TipoProdutoBean();
@@ -191,6 +192,20 @@ public class ProdutoBean {
      */
     public void setVenda(char venda) {
         this.venda = venda;
+    }
+
+    /**
+     * @return the ingredientes
+     */
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    /**
+     * @param ingredientes the ingredientes to set
+     */
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
 }

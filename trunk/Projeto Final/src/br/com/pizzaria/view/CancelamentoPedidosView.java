@@ -113,6 +113,7 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
         });
 
         btnBalcao.setText("Balcão");
+        btnBalcao.setToolTipText("Pedidos realizados no balcão");
         btnBalcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBalcaoActionPerformed(evt);
