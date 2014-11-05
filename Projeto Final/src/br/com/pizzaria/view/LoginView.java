@@ -8,6 +8,7 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
 import br.com.pizzaria.util.Global;
+import br.com.pizzaria.util.LimiteDigitos;
 import br.com.pizzaria.util.Som;
 import br.com.pizzaria.util.ThreadTempo;
 import java.awt.Dimension;
@@ -32,6 +33,8 @@ public class LoginView extends javax.swing.JInternalFrame {
         usuarioController = new UsuarioController();
         play = new Som();
         //this.login();
+        txtUsuario.setDocument(new LimiteDigitos(23));
+        
     }
 
     /**
@@ -73,8 +76,14 @@ public class LoginView extends javax.swing.JInternalFrame {
             }
         });
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyReleased(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
             }
         });
 
@@ -213,6 +222,8 @@ public class LoginView extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             login();
         }
+        
+       
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
@@ -259,6 +270,16 @@ public class LoginView extends javax.swing.JInternalFrame {
         suporte.setVisible(true);
     }//GEN-LAST:event_mniSuporteActionPerformed
 
+    private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_txtUsuarioKeyReleased
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
@@ -290,12 +311,13 @@ public class LoginView extends javax.swing.JInternalFrame {
             UsuarioBean usuarioBeans = usuarioController.controlePesquisaLogin(momentUser);
 
             if (usuarioBeans.getCodigoFuncionario() == 0) {
-                JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+                play.som();
+                JOptionPane.showMessageDialog(null, "Usuário não cadastrado!", "Aviso", JOptionPane.ERROR_MESSAGE);
 //                lblMensagem.setText("Mensagem: Usuário não cadastrado!");
 //                lblMensagem.setVisible(true);
 //                thread = new ThreadTempo(lblMensagem);
 //                thread.start();
-//                play.som();
+                
             } else if (usuarioBeans.getSenha().equals(momentUser.getSenha())) {
                 Global.principal.habiltaMenu(true);
                 Global.usuario = usuarioBeans;
@@ -305,12 +327,13 @@ public class LoginView extends javax.swing.JInternalFrame {
                 //relogio.setVisible(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+                play.som();
+                JOptionPane.showMessageDialog(null, "Senha incorreta!", "Aviso", JOptionPane.ERROR_MESSAGE);
 //                lblMensagem.setText("Mensagem: Senha incorreta!");
 //                lblMensagem.setVisible(true);
 //                thread = new ThreadTempo(lblMensagem);
 //                thread.start();
-//                play.som();
+                
             }
         }
 

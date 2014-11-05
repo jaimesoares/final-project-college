@@ -68,8 +68,12 @@ public class PedidoController {
         entregaPedidoModel.populaListaTipoProduto(lista);
     }
     
-    public void controleListaPizza(List<ProdutoBean> listaDePizza) {
-        entregaPedidoModel.pesquisaPizza(listaDePizza);
+    public void controleListaTipoPizza(List<TipoProdutoBean> lista) {
+        entregaPedidoModel.populaListaTipoPizza(lista);
+    }
+    
+    public void controleListaPizza(List<ProdutoBean> listaDePizza, int codigo) {
+        entregaPedidoModel.pesquisaPizza(listaDePizza, codigo);
     }
     
      public void controleListaBorda(List<ProdutoBean> listaDePizza) {
