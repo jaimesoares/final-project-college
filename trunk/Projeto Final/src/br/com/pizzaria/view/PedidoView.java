@@ -19,6 +19,7 @@ import br.com.pizzaria.controller.ProdutoController;
 import br.com.pizzaria.util.Global;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -62,7 +63,9 @@ public class PedidoView extends javax.swing.JInternalFrame {
     DefaultListModel modeloListaProd;
     ComboBoxModel<PrecoProdutoBean> modeloComboProd;
     ComboBoxModel<TipoProdutoBean> modeloTipoProd;
+    ComboBoxModel<TipoProdutoBean> modeloTipoPizza;
     List<TipoProdutoBean> listaTipoProd;
+    List<TipoProdutoBean> listaTipoPizza;
     ProdutoController produtoController;
     List<ProdutoBean> listaProduto;
 
@@ -74,6 +77,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
     List<ProdutoBean> listaPizzaSabor2;
     ComboBoxModel<ProdutoBean> modeloBorda;
     List<ProdutoBean> listaBorda;
+    IngredientesPizzaView ingredienteV;
 
     /**
      * Creates new form PedidoView
@@ -104,9 +108,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
         precoProdutoController = new PrecoProdutoController();
         modeloTipoProd = cbTipo.getModel();
+        modeloTipoPizza = cbTipoPizza.getModel();
         produtoController = new ProdutoController();
 
         populaTipoProduto();
+        populaTipoPizza();
 
         grupoPesquisa = new ButtonGroup();
         grupoPesquisa.add(rbNome);
@@ -122,12 +128,12 @@ public class PedidoView extends javax.swing.JInternalFrame {
         modeloPizzaSabor2 = cbSabor2.getModel();
         modeloBorda = cbBorda.getModel();
 
-        populaListaPizzaInteira();
-        populaListaPizzaSabor1();
-        populaListaPizzaSabor2();
-        populaListaBorda();
-
+//        populaListaPizzaInteira();
+//        populaListaPizzaSabor1();
+//        populaListaPizzaSabor2();
+//        populaListaBorda();
         txtCodigo.setText(String.valueOf(decimalFormatoCodigo.format(entregaPedidoController.controleCodigoPedido() + 1)));
+        ingredienteV = new IngredientesPizzaView(Global.principal, true);
 
     }
 
@@ -212,7 +218,6 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lblEstado = new javax.swing.JLabel();
         pnlPedido = new javax.swing.JPanel();
         txtCliente = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
         btnRemove = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
@@ -248,7 +253,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
         txtQtdPizza = new javax.swing.JTextField();
         txtValorSubPizza = new javax.swing.JTextField();
         btnAdicionaPizza = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnIngredInteira = new javax.swing.JButton();
+        lblUsuario2 = new javax.swing.JLabel();
+        cbTipoPizza = new javax.swing.JComboBox();
+        btnIngredSabor1 = new javax.swing.JButton();
+        btnIngredSabor2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblUsuario1 = new javax.swing.JLabel();
         cbTipo = new javax.swing.JComboBox();
@@ -269,7 +278,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("PEDIDO");
-        setPreferredSize(new java.awt.Dimension(699, 680));
+        setPreferredSize(new java.awt.Dimension(891, 681));
 
         btnContinuarPedido.setText("Continuar Pedido");
         btnContinuarPedido.setEnabled(false);
@@ -550,7 +559,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
                                 .addComponent(lblCep)
                                 .addGap(78, 78, 78)
                                 .addComponent(lbl_rua))
-                            .addComponent(txtCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
+                            .addComponent(txtCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -670,7 +679,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(btnContinuarPedido)
                     .addComponent(btnFechar)
                     .addComponent(btnNovoCliente))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pnlPai.addTab("Cliente", pnlCliente);
@@ -755,14 +764,14 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
         });
         txtValorRecebido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtValorRecebidoKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtValorRecebidoKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtValorRecebidoKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtValorRecebidoKeyPressed(evt);
             }
         });
 
@@ -884,10 +893,34 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnIngredInteira.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pizzaria/icons/interrogacao.gif"))); // NOI18N
+        btnIngredInteira.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnIngredInteiraActionPerformed(evt);
+            }
+        });
+
+        lblUsuario2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUsuario2.setText("Tipo:");
+
+        cbTipoPizza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Tipo Produto" }));
+        cbTipoPizza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoPizzaActionPerformed(evt);
+            }
+        });
+
+        btnIngredSabor1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pizzaria/icons/interrogacao.gif"))); // NOI18N
+        btnIngredSabor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngredSabor1ActionPerformed(evt);
+            }
+        });
+
+        btnIngredSabor2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pizzaria/icons/interrogacao.gif"))); // NOI18N
+        btnIngredSabor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngredSabor2ActionPerformed(evt);
             }
         });
 
@@ -896,27 +929,37 @@ public class PedidoView extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(rbInteira)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbMeiaPizza)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSabor2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSabor1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(rbInteira)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbMeiaPizza)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(lblUsuario2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTipoPizza, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnIngredSabor1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIngredSabor2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtValorDescPizza, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionaPizza))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 19, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbBorda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValorSubPizza, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -926,20 +969,22 @@ public class PedidoView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtQtdPizza, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbSabor2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbSabor1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbInteira, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnIngredInteira, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbBorda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtValorSubPizza, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -950,17 +995,26 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(rbMeiaPizza))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cbInteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(cbTipoPizza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario2))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(cbInteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnIngredInteira))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(cbSabor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnIngredSabor1)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbSabor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbSabor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(cbSabor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnIngredSabor2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -980,12 +1034,16 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(btnAdicionaPizza)))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos Diversos:"));
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnIngredInteira, btnIngredSabor1, cbInteira, cbSabor1, cbSabor2, cbTipoPizza});
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("PRODUTOS DIVERSOS:"));
 
         lblUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblUsuario1.setText("Tipo:");
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Tipo Produto" }));
+        cbTipo.setMinimumSize(new java.awt.Dimension(138, 25));
+        cbTipo.setPreferredSize(new java.awt.Dimension(138, 25));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoActionPerformed(evt);
@@ -996,6 +1054,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lblUsuario.setText("Produto:");
 
         cbProduto.setEnabled(false);
+        cbProduto.setMinimumSize(new java.awt.Dimension(138, 25));
+        cbProduto.setPreferredSize(new java.awt.Dimension(138, 25));
         cbProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbProdutoActionPerformed(evt);
@@ -1063,15 +1123,15 @@ public class PedidoView extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAdicionaProduto)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdicionaProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUsuario1)
-                            .addComponent(lblUsuario))
+                            .addComponent(lblUsuario)
+                            .addComponent(lblUsuario1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbTipo, 0, 205, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbTipo, 0, 315, Short.MAX_VALUE)
                             .addComponent(cbProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1081,30 +1141,30 @@ public class PedidoView extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtValorDescProd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(cbxGratis))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(txtValorProd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(lblQuantidade1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtQuantidadeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 32, Short.MAX_VALUE)))
+                                        .addComponent(txtQuantidadeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtValorDescProd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(cbxGratis)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario1)
-                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario)
-                    .addComponent(cbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtValorProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor2)
@@ -1115,9 +1175,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(txtValorDescProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor3)
                     .addComponent(cbxGratis))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdicionaProduto)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdicionaProduto))
         );
 
         txtCodigo.setEditable(false);
@@ -1145,26 +1204,18 @@ public class PedidoView extends javax.swing.JInternalFrame {
             .addGroup(pnlPedidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPedidoLayout.createSequentialGroup()
-                        .addComponent(txtCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlPedidoLayout.createSequentialGroup()
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCliente))
                     .addGroup(pnlPedidoLayout.createSequentialGroup()
                         .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(pnlPedidoLayout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlPedidoLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlPedidoLayout.createSequentialGroup()
                                 .addComponent(lblFormaPagamento)
                                 .addGap(1, 1, 1)
                                 .addComponent(cbFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
                                 .addComponent(lblFormaPagamento1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtValorRecebido, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1190,7 +1241,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(btnFinalizar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnCancelarPedido)))))
+                                        .addComponent(btnCancelarPedido))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPedidoLayout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         pnlPedidoLayout.setVerticalGroup(
@@ -1201,11 +1256,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1228,8 +1283,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
                     .addComponent(btnCancelarPedido)
                     .addComponent(btnFinalizar)
                     .addComponent(btnImprimirCupom))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86))
         );
 
         pnlPedidoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCliente, txtCodigo});
@@ -1588,6 +1642,9 @@ public class PedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbInteiraActionPerformed
 
     private void rbInteiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbInteiraActionPerformed
+        cbInteira.removeAllItems();
+        cbSabor1.removeAllItems();
+        cbSabor2.removeAllItems();
         cbSabor1.setEnabled(false);
         cbSabor2.setEnabled(false);
         cbInteira.setEnabled(true);
@@ -1596,12 +1653,16 @@ public class PedidoView extends javax.swing.JInternalFrame {
 //        Color cor = new Color(204, 255, 255);
 //        txtQtdPizza.setBackground(cor);
         cbBorda.setSelectedIndex(0);
-        cbSabor1.setSelectedIndex(0);
-        cbSabor2.setSelectedIndex(0);
+        cbSabor1.setSelectedIndex(-1);
+        cbSabor2.setSelectedIndex(-1);
         txtValorPizza.setText("");
+        cbTipoPizza.setSelectedIndex(0);
     }//GEN-LAST:event_rbInteiraActionPerformed
 
     private void rbMeiaPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMeiaPizzaActionPerformed
+        cbInteira.removeAllItems();
+        cbSabor1.removeAllItems();
+        cbSabor2.removeAllItems();
         cbSabor1.setEnabled(true);
         cbSabor2.setEnabled(true);
         cbInteira.setEnabled(false);
@@ -1612,8 +1673,9 @@ public class PedidoView extends javax.swing.JInternalFrame {
 //        Color cor = new Color(255, 255, 204);
 //        txtQtdPizza.setBackground(cor);
         cbBorda.setSelectedIndex(0);
-        cbInteira.setSelectedIndex(0);
+        cbInteira.setSelectedIndex(-1);
         txtValorPizza.setText("");
+        cbTipoPizza.setSelectedIndex(0);
     }//GEN-LAST:event_rbMeiaPizzaActionPerformed
 
     private void cbSabor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSabor2ActionPerformed
@@ -1760,11 +1822,89 @@ public class PedidoView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtValorRecebidoKeyPressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnIngredInteiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredInteiraActionPerformed
         // TODO add your handling code here:
-        IngredientesPizzaView.populaIngredientes((((ProdutoBean) cbInteira.getSelectedItem()).getIngredientes()));
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Point location = btnIngredInteira.getLocation();
+        String descIngred[] = (((ProdutoBean) cbInteira.getSelectedItem()).getIngredientes()).split(" ");
+        String string = (((ProdutoBean) cbInteira.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbInteira.getSelectedItem()).getDescricao() + "\n\n");
+        for (String area : descIngred) {
+            string += area + "\n";
+        }
+        ingredienteV.setLocation(location);
+        ingredienteV.setTitle("Ingredientes");
+        ingredienteV.txaIngredientes.setText(string);
+        ingredienteV.setVisible(true);
+
+    }//GEN-LAST:event_btnIngredInteiraActionPerformed
+
+    private void cbTipoPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPizzaActionPerformed
+        // TODO add your handling code here:
+
+        if (cbTipoPizza.getSelectedIndex() > 0) {
+            cbInteira.removeAllItems();
+            cbSabor1.removeAllItems();
+            cbSabor2.removeAllItems();
+            populaListaPizzaInteira();
+            populaListaPizzaSabor1();
+            populaListaPizzaSabor2();
+            populaListaBorda();
+            if (rbInteira.isSelected()) {
+                cbSabor1.setEnabled(false);
+                cbSabor2.setEnabled(false);
+                cbInteira.setEnabled(true);
+                txtQtdPizza.setEditable(true);
+                txtQtdPizza.setText("");
+//        Color cor = new Color(204, 255, 255);
+//        txtQtdPizza.setBackground(cor);
+                cbBorda.setSelectedIndex(0);
+                cbSabor1.setSelectedIndex(-1);
+                cbSabor2.setSelectedIndex(-1);
+                txtValorPizza.setText("");
+            } else {
+                cbSabor1.setEnabled(true);
+                cbSabor2.setEnabled(true);
+                cbInteira.setEnabled(false);
+                txtQtdPizza.setEditable(true);
+                txtQtdPizza.setText("");
+//        txtQtdPizza.setEditable(false);
+//        txtQtdPizza.setText("1");
+//        Color cor = new Color(255, 255, 204);
+//        txtQtdPizza.setBackground(cor);
+                cbBorda.setSelectedIndex(0);
+                cbInteira.setSelectedIndex(-1);
+                txtValorPizza.setText("");
+            }
+
+        }
+    }//GEN-LAST:event_cbTipoPizzaActionPerformed
+
+    private void btnIngredSabor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredSabor1ActionPerformed
+        // TODO add your handling code here:
+        Point location = btnIngredSabor1.getLocation();
+        String descIngred[] = (((ProdutoBean) cbSabor1.getSelectedItem()).getIngredientes()).split(" ");
+        String string = (((ProdutoBean) cbSabor1.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor1.getSelectedItem()).getDescricao() + "\n\n");
+        for (String area : descIngred) {
+            string += area + "\n";
+        }
+        ingredienteV.setLocation(location);
+        ingredienteV.setTitle("Ingredientes");
+        ingredienteV.txaIngredientes.setText(string);
+        ingredienteV.setVisible(true);
+    }//GEN-LAST:event_btnIngredSabor1ActionPerformed
+
+    private void btnIngredSabor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredSabor2ActionPerformed
+        // TODO add your handling code here:
+        Point location = btnIngredSabor2.getLocation();
+        String descIngred[] = (((ProdutoBean) cbSabor2.getSelectedItem()).getIngredientes()).split(" ");
+        String string = (((ProdutoBean) cbSabor2.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor2.getSelectedItem()).getDescricao() + "\n\n");
+        for (String area : descIngred) {
+            string += area + "\n";
+        }
+        ingredienteV.setLocation(location);
+        ingredienteV.setTitle("Ingredientes");
+        ingredienteV.txaIngredientes.setText(string);
+        ingredienteV.setVisible(true);
+    }//GEN-LAST:event_btnIngredSabor2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1776,6 +1916,9 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnImprimirCupom;
+    private javax.swing.JButton btnIngredInteira;
+    private javax.swing.JButton btnIngredSabor1;
+    private javax.swing.JButton btnIngredSabor2;
     private javax.swing.JButton btnNovoCliente;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemove;
@@ -1787,9 +1930,9 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbSabor1;
     private javax.swing.JComboBox cbSabor2;
     private javax.swing.JComboBox cbTipo;
+    private javax.swing.JComboBox cbTipoPizza;
     private javax.swing.JCheckBox cbxGratis;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1804,7 +1947,6 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCelular;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCidade;
@@ -1822,6 +1964,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuario1;
+    private javax.swing.JLabel lblUsuario2;
     private javax.swing.JLabel lblValor1;
     private javax.swing.JLabel lblValor2;
     private javax.swing.JLabel lblValor3;
@@ -2037,6 +2180,14 @@ public class PedidoView extends javax.swing.JInternalFrame {
         }
     }
 
+    public void populaTipoPizza() {
+        listaTipoPizza = new ArrayList<>();
+        entregaPedidoController.controleListaTipoPizza(listaTipoPizza);
+        for (TipoProdutoBean tipoProdutoBeans : listaTipoPizza) {
+            cbTipoPizza.addItem(tipoProdutoBeans);
+        }
+    }
+
     public void populaListaProduto() {
         if (cbTipo.getSelectedIndex() > 0) {
             listaProduto = new ArrayList<>();
@@ -2055,7 +2206,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
     public void populaListaPizzaInteira() {
         listaPizzaInteira = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
-        entregaPedidoController.controleListaPizza(listaPizzaInteira);
+        entregaPedidoController.controleListaPizza(listaPizzaInteira, ((TipoProdutoBean) cbTipoPizza.getSelectedItem()).getCodigo());
         for (ProdutoBean prdutoBeans : listaPizzaInteira) {
             cbInteira.addItem(prdutoBeans);
         }
@@ -2064,7 +2215,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
     public void populaListaPizzaSabor1() {
         listaPizzaSabor1 = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
-        entregaPedidoController.controleListaPizza(listaPizzaSabor1);
+        entregaPedidoController.controleListaPizza(listaPizzaSabor1, ((TipoProdutoBean) cbTipoPizza.getSelectedItem()).getCodigo());
         for (ProdutoBean prdutoBeans : listaPizzaSabor1) {
             cbSabor1.addItem(prdutoBeans);
         }
@@ -2073,7 +2224,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
     public void populaListaPizzaSabor2() {
         listaPizzaSabor2 = new ArrayList<>();
         // precoProdutoController.controleListaProduto(listaProduto, ((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo());
-        entregaPedidoController.controleListaPizza(listaPizzaSabor2);
+        entregaPedidoController.controleListaPizza(listaPizzaSabor2, ((TipoProdutoBean) cbTipoPizza.getSelectedItem()).getCodigo());
         for (ProdutoBean prdutoBeans : listaPizzaSabor2) {
             cbSabor2.addItem(prdutoBeans);
         }

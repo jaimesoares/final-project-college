@@ -311,8 +311,32 @@ public class PedidoModel {
             JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL ", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
+    
+    public void populaListaTipoPizza(List<TipoProdutoBean> lista) {
+        String SQLSelection = "select \n"
+                + "  `tprd_id`,\n"
+                + "  `tprd_descr`,\n"
+                + "  `tprd_stt_pizza` \n"
+                + "from\n"
+                + "  `pizzaria`.`tipo_prod` \n"
+                + "where `tprd_stt_pizza` = 'S';";
 
-    public void pesquisaPizza(List<ProdutoBean> listaDePizza) {
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                TipoProdutoBean novo = new TipoProdutoBean();
+                novo.setCodigo(rs.getInt("tprd_id"));
+                novo.setDescricao(rs.getString("tprd_descr"));
+                lista.add(novo);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL ", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }
+
+    public void pesquisaPizza(List<ProdutoBean> listaDePizza, int codigo) {
         try {
             String SQLPesquisa = "SELECT \n"
                     + "  t.`tprd_id`,\n"
@@ -326,7 +350,7 @@ public class PedidoModel {
                     + "    ON t.tprd_id = p.`prd_tipo_prod` \n"
                     // + "  JOIN `pizzaria`.`tab_precos_venda` c \n"
                     //+ "    ON c.tprc_cod_prod = p.prd_prod \n"
-                    + "WHERE t.`tprd_descr` = 'Pizza';";
+                    + "WHERE t.`tprd_id` = '"+codigo+"';";
 
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = pstmt.executeQuery();
