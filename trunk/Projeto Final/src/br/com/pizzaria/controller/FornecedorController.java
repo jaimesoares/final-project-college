@@ -11,10 +11,10 @@ import br.com.pizzaria.model.FornecedorModel;
 public class FornecedorController {
 
     ClienteModel clienteModel;
- 
+
     public FornecedorController() {
        // clienteModel = new ClienteModel();
-       
+
     }
 
     public boolean verificarDados(ClienteBean cliente) {
@@ -51,17 +51,17 @@ public class FornecedorController {
     public String controleDeCodigo() {
         return clienteModel.proximoCliente();
     }
-    
-    public void controlePesquisa(String pesquisa, DefaultTableModel modelo){
-        
-        FornecedorModel a= new FornecedorModel();
+
+    public void controlePesquisa(String pesquisa, DefaultTableModel modelo) {
+
+        FornecedorModel a = new FornecedorModel();
         a.procuraFornecedor(pesquisa, modelo);
     }
-    
-    public ClienteBean controlePreenchimento(int codigo){
+
+    public ClienteBean controlePreenchimento(int codigo) {
         return clienteModel.preencherCampos(codigo);
     }
-    
+
     public boolean verificarDadosParaEditar(FornecedorBean fornecedor) {
         if (fornecedor.getNome().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
@@ -88,9 +88,10 @@ public class FornecedorController {
             JOptionPane.showMessageDialog(null, "Campo nome não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
             return false;
         }
-FornecedorBean a = new FornecedorBean();        
+        FornecedorBean a = new FornecedorBean();
         if ((a.getEmail().isEmpty())) {
-        } else if ((a.getEmail().contains("@")) && (a.getEmail().contains(".")) && (!a.getEmail().contains(" "))) {
+        } else 
+            if ((a.getEmail().contains("@")) && (a.getEmail().contains(".")) && (!a.getEmail().contains(" "))) {
             String usuario = new String(a.getEmail().substring(0, a.getEmail().lastIndexOf('@')));
             String dominio = new String(a.getEmail().substring(a.getEmail().lastIndexOf('@') + 1, a.getEmail().length()));
             if ((usuario.length() >= 1) && (!usuario.contains("@")) && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".") >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
@@ -107,6 +108,22 @@ FornecedorBean a = new FornecedorBean();
         //clienteModel.editarFornecedor(fornecedor);
         return true;
     }
-    
-    
-}        
+
+    public boolean verificaEmail(FornecedorBean fornecedor) {
+        if ((fornecedor.getEmail().isEmpty())) {
+        } else if ((fornecedor.getEmail().contains("@")) && (fornecedor.getEmail().contains(".")) && (!fornecedor.getEmail().contains(" "))) {
+            String usuario = new String(fornecedor.getEmail().substring(0, fornecedor.getEmail().lastIndexOf('@')));
+            String dominio = new String(fornecedor.getEmail().substring(fornecedor.getEmail().lastIndexOf('@') + 1, fornecedor.getEmail().length()));
+            if ((usuario.length() >= 1) && (!usuario.contains("@")) && (dominio.contains(".")) && (!dominio.contains("@")) && (dominio.indexOf(".") >= 1) && (dominio.lastIndexOf(".") < dominio.length() - 1)) {
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo 'E-MAIL' inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+                return false;
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo 'E-MAIL' inválido!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+            return false;
+        }
+        return true;
+    }
+}

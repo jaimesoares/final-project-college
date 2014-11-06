@@ -50,7 +50,8 @@ public class ProdutoModel {
                     + "             `prod_estocavel`,"
                     + "             `prd_unid_med`,"
                     + "             `prd_acab_prima`,"
-                    + "             `prd_prod_venda`"
+                    + "             `prd_prod_venda`,"
+                    + "             `prd_ingrediente`"
                     + ")\n"
                     + "values (?,\n"
                     + "        ?,\n"
@@ -61,7 +62,8 @@ public class ProdutoModel {
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                    + "       ?);";
+                    + "        ?,\n"
+                    + "        ?);";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsertion);
 
             pstm.setString(1, produtoBeans.getDescricao());
@@ -74,6 +76,7 @@ public class ProdutoModel {
             pstm.setString(8, String.valueOf(produtoBeans.getUnidadeMedida()));
             pstm.setString(9, String.valueOf(produtoBeans.getProdAcabadoPrima()));
             pstm.setString(10, String.valueOf(produtoBeans.getVenda()));
+            pstm.setString(11, produtoBeans.getIngredientes());
 
             pstm.execute();
             
@@ -127,7 +130,7 @@ public class ProdutoModel {
         try {
             //String SQLSelection = "select * from produtos where prd_prod = ?;";
             String SQLSelection = "select \n"
-                    + "p.`prd_prod`,\n"
+                      + "p.`prd_prod`,\n"
                     + "  p.`prd_descr`,\n"
                     + "  p.`prd_id_fornec`,\n"
                     + "  p.`prd_qtd_min_estoq`,\n"
@@ -139,13 +142,17 @@ public class ProdutoModel {
                     + "  p.`prod_estocavel`,"
                     + "  p.`prd_unid_med`,"
                     + "  p.`prd_acab_prima`,"
-                    + "  p.`prd_prod_venda`"
-                   
+                    + "  p.`prd_prod_venda`,"
+    
+                    + "  p.`prd_ingrediente`"
                     + "from\n"
                     + "  `pizzaria`.`produtos` p \n"
-                   
-                    + "where p.`prd_prod` = ? ;\n";
-                    
+                    + "where p.`prd_prod` = ?;\n";
+         
+            
+            
+            
+            
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
@@ -182,7 +189,7 @@ public class ProdutoModel {
 
                 
                 
-                
+                //JOptionPane.showMessageDialog(null,rs.getString("prd_ingrediente"));    
                 produtoBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("prod_data_cadastro")));
                 produtoBeans.setDescricao(rs.getString("prd_descr"));
                 produtoBeans.setEstocavel(rs.getString("prod_estocavel").charAt(0));
@@ -194,7 +201,7 @@ public class ProdutoModel {
                 produtoBeans.setUnidadeMedida(rs.getString("prd_unid_med"));
                 produtoBeans.setProdAcabadoPrima(rs.getString("prd_acab_prima").charAt(0));
                 produtoBeans.setVenda(rs.getString("prd_prod_venda").charAt(0));
-
+                produtoBeans.setIngredientes(rs.getString("prd_ingrediente"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
@@ -209,18 +216,19 @@ public class ProdutoModel {
                     + "  `prd_descr` = ?,\n"
                     + "  `prd_qtd_min_estoq` = ?,\n"
                     + "  `prd_stt_avisa_estoq_min` = ?,\n"                    
-                    + "  `prd_prod_venda`= ?"
-                    + "where `prd_prod` = ?;";
+                    + "  `prd_prod_venda`= ?,"
+                    + "  `prd_ingrediente`= ?" 
+                    + "where `prd_prod` =  ?;";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLUpdate);
             pstm.setString(1, produtoBeans.getDescricao());
             pstm.setDouble(2, produtoBeans.getQtdMinima());
             pstm.setString(3, String.valueOf(produtoBeans.getAvisaEstoqueMinimo()));          
             pstm.setString(4, String.valueOf(produtoBeans.getVenda()));
-            pstm.setInt(5, produtoBeans.getCodigo());
-
+            pstm.setString(5, produtoBeans.getIngredientes());
+            pstm.setInt(6, produtoBeans.getCodigo());
             pstm.executeUpdate();
             ConectaBanco.getConnection().commit();
-
+// olha..
             JOptionPane.showMessageDialog(null, "Produto alterado com sucesso! ", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
             return true;
         } catch (SQLException ex) {
@@ -245,6 +253,8 @@ public class ProdutoModel {
                 TipoProdutoBean novo = new TipoProdutoBean();
                 novo.setCodigo(rs.getInt("tprd_id"));
                 novo.setDescricao(rs.getString("tprd_descr"));
+                novo.setPizza(rs.getString("tprd_descr"));
+                
                 lista.add(novo);
             }
         } catch (SQLException ex) {
