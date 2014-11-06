@@ -131,7 +131,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 //        populaListaPizzaInteira();
 //        populaListaPizzaSabor1();
 //        populaListaPizzaSabor2();
-//        populaListaBorda();
+        populaListaBorda();
         txtCodigo.setText(String.valueOf(decimalFormatoCodigo.format(entregaPedidoController.controleCodigoPedido() + 1)));
         ingredienteV = new IngredientesPizzaView(Global.principal, true);
 
@@ -725,6 +725,22 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblPedido);
+        if (tblPedido.getColumnModel().getColumnCount() > 0) {
+            tblPedido.getColumnModel().getColumn(0).setResizable(false);
+            tblPedido.getColumnModel().getColumn(0).setPreferredWidth(200);
+            tblPedido.getColumnModel().getColumn(1).setResizable(false);
+            tblPedido.getColumnModel().getColumn(1).setPreferredWidth(8);
+            tblPedido.getColumnModel().getColumn(2).setResizable(false);
+            tblPedido.getColumnModel().getColumn(2).setPreferredWidth(8);
+            tblPedido.getColumnModel().getColumn(3).setResizable(false);
+            tblPedido.getColumnModel().getColumn(3).setPreferredWidth(5);
+            tblPedido.getColumnModel().getColumn(4).setResizable(false);
+            tblPedido.getColumnModel().getColumn(4).setPreferredWidth(8);
+            tblPedido.getColumnModel().getColumn(5).setResizable(false);
+            tblPedido.getColumnModel().getColumn(5).setPreferredWidth(8);
+            tblPedido.getColumnModel().getColumn(6).setResizable(false);
+            tblPedido.getColumnModel().getColumn(6).setPreferredWidth(8);
+        }
 
         btnCancelarPedido.setText("Fechar");
         btnCancelarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -821,14 +837,13 @@ public class PedidoView extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("Vlr. Desc:");
 
-        cbInteira.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Pizza Inteira" }));
+        cbInteira.setEnabled(false);
         cbInteira.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbInteiraActionPerformed(evt);
             }
         });
 
-        cbSabor1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Pizza Sabor 1" }));
         cbSabor1.setEnabled(false);
         cbSabor1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -836,7 +851,6 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
         });
 
-        cbSabor2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Pizza Sabor 2" }));
         cbSabor2.setEnabled(false);
         cbSabor2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1514,6 +1528,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
         } else {
             txtTroco.setText("");
+            btnFinalizar.setEnabled(false);
         }
     }//GEN-LAST:event_txtValorRecebidoKeyReleased
 
@@ -1529,6 +1544,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     private void txtValorRecebidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorRecebidoActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtValorRecebidoActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
@@ -1633,7 +1649,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             txtValorPizza.setText("");
             //00:09 OK
             txtQtdPizza.setText("");
-            if (cbInteira.getSelectedIndex() > 0) {
+            if (cbInteira.getSelectedIndex() >= 0) {
                 //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
                 txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
             }
@@ -1647,7 +1663,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         cbSabor2.removeAllItems();
         cbSabor1.setEnabled(false);
         cbSabor2.setEnabled(false);
-        cbInteira.setEnabled(true);
+        cbInteira.setEnabled(false);
         txtQtdPizza.setEditable(true);
         txtQtdPizza.setText("");
 //        Color cor = new Color(204, 255, 255);
@@ -1663,8 +1679,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
         cbInteira.removeAllItems();
         cbSabor1.removeAllItems();
         cbSabor2.removeAllItems();
-        cbSabor1.setEnabled(true);
-        cbSabor2.setEnabled(true);
+        cbSabor1.setEnabled(false);
+        cbSabor2.setEnabled(false);
         cbInteira.setEnabled(false);
         txtQtdPizza.setEditable(true);
         txtQtdPizza.setText("");
@@ -1719,9 +1735,16 @@ public class PedidoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Selecione uma forma de Pagamento!");
             txtValorRecebido.setEditable(false);
             txtValorRecebido.setText("");
-        } else {
+            txtValorRecebidoKeyReleased(null);
+        } else
+        if(cbFormaPagamento.getSelectedIndex() == 1){
             txtValorRecebido.setEditable(true);
             txtValorRecebido.setText("");
+            txtValorRecebidoKeyReleased(null);
+        }else{
+            txtValorRecebido.setEditable(false);
+            txtValorRecebido.setText(txtTotal.getText());
+            txtValorRecebidoKeyReleased(null);
         }
     }//GEN-LAST:event_cbFormaPagamentoActionPerformed
 
@@ -1824,30 +1847,37 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     private void btnIngredInteiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredInteiraActionPerformed
         // TODO add your handling code here:
-        Point location = btnIngredInteira.getLocation();
-        String descIngred[] = (((ProdutoBean) cbInteira.getSelectedItem()).getIngredientes()).split(" ");
-        String string = (((ProdutoBean) cbInteira.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbInteira.getSelectedItem()).getDescricao() + "\n\n");
-        for (String area : descIngred) {
-            string += area + "\n";
+        if (cbInteira.getSelectedIndex() >= 0) {
+            Point location = btnIngredInteira.getLocation();
+            String descIngred[] = (((ProdutoBean) cbInteira.getSelectedItem()).getIngredientes()).split(" ");
+            String string = (((ProdutoBean) cbInteira.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbInteira.getSelectedItem()).getDescricao() + "\n\n");
+            for (String area : descIngred) {
+                string += area + "\n";
+            }
+            ingredienteV.setLocation(location);
+            ingredienteV.setTitle("Ingredientes");
+            ingredienteV.txaIngredientes.setText(string);
+            ingredienteV.setVisible(true);
         }
-        ingredienteV.setLocation(location);
-        ingredienteV.setTitle("Ingredientes");
-        ingredienteV.txaIngredientes.setText(string);
-        ingredienteV.setVisible(true);
 
     }//GEN-LAST:event_btnIngredInteiraActionPerformed
 
     private void cbTipoPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPizzaActionPerformed
         // TODO add your handling code here:
-
+        cbInteira.removeAllItems();
+        cbSabor1.removeAllItems();
+        cbSabor2.removeAllItems();
+        cbSabor1.setEnabled(false);
+        cbSabor2.setEnabled(false);
+        cbInteira.setEnabled(false);
         if (cbTipoPizza.getSelectedIndex() > 0) {
-            cbInteira.removeAllItems();
-            cbSabor1.removeAllItems();
-            cbSabor2.removeAllItems();
             populaListaPizzaInteira();
             populaListaPizzaSabor1();
             populaListaPizzaSabor2();
-            populaListaBorda();
+            cbSabor1.setSelectedIndex(-1);
+            cbSabor2.setSelectedIndex(-1);
+            cbInteira.setSelectedIndex(-1);
+            //   populaListaBorda();
             if (rbInteira.isSelected()) {
                 cbSabor1.setEnabled(false);
                 cbSabor2.setEnabled(false);
@@ -1880,30 +1910,34 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     private void btnIngredSabor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredSabor1ActionPerformed
         // TODO add your handling code here:
-        Point location = btnIngredSabor1.getLocation();
-        String descIngred[] = (((ProdutoBean) cbSabor1.getSelectedItem()).getIngredientes()).split(" ");
-        String string = (((ProdutoBean) cbSabor1.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor1.getSelectedItem()).getDescricao() + "\n\n");
-        for (String area : descIngred) {
-            string += area + "\n";
+        if (cbSabor1.getSelectedIndex() >= 0) {
+            Point location = btnIngredSabor1.getLocation();
+            String descIngred[] = (((ProdutoBean) cbSabor1.getSelectedItem()).getIngredientes()).split(" ");
+            String string = (((ProdutoBean) cbSabor1.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor1.getSelectedItem()).getDescricao() + "\n\n");
+            for (String area : descIngred) {
+                string += area + "\n";
+            }
+            ingredienteV.setLocation(location);
+            ingredienteV.setTitle("Ingredientes");
+            ingredienteV.txaIngredientes.setText(string);
+            ingredienteV.setVisible(true);
         }
-        ingredienteV.setLocation(location);
-        ingredienteV.setTitle("Ingredientes");
-        ingredienteV.txaIngredientes.setText(string);
-        ingredienteV.setVisible(true);
     }//GEN-LAST:event_btnIngredSabor1ActionPerformed
 
     private void btnIngredSabor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredSabor2ActionPerformed
         // TODO add your handling code here:
-        Point location = btnIngredSabor2.getLocation();
-        String descIngred[] = (((ProdutoBean) cbSabor2.getSelectedItem()).getIngredientes()).split(" ");
-        String string = (((ProdutoBean) cbSabor2.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor2.getSelectedItem()).getDescricao() + "\n\n");
-        for (String area : descIngred) {
-            string += area + "\n";
+        if (cbSabor2.getSelectedIndex() >= 0) {
+            Point location = btnIngredSabor2.getLocation();
+            String descIngred[] = (((ProdutoBean) cbSabor2.getSelectedItem()).getIngredientes()).split(" ");
+            String string = (((ProdutoBean) cbSabor2.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor2.getSelectedItem()).getDescricao() + "\n\n");
+            for (String area : descIngred) {
+                string += area + "\n";
+            }
+            ingredienteV.setLocation(location);
+            ingredienteV.setTitle("Ingredientes");
+            ingredienteV.txaIngredientes.setText(string);
+            ingredienteV.setVisible(true);
         }
-        ingredienteV.setLocation(location);
-        ingredienteV.setTitle("Ingredientes");
-        ingredienteV.txaIngredientes.setText(string);
-        ingredienteV.setVisible(true);
     }//GEN-LAST:event_btnIngredSabor2ActionPerformed
 
 
@@ -2350,8 +2384,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
         double valorBorda = 0;
         double valorDesconto = 0;
         double valorTotal;
-        System.out.println(cbSabor2.getSelectedIndex() + "2");
-        if (cbSabor1.getSelectedIndex() <= 0 || cbSabor2.getSelectedIndex() <= 0) {
+        
+        if (cbSabor1.getSelectedIndex() <= -1 || cbSabor2.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(null, "Selecione dois sabores!");
         } else if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
 
@@ -2383,9 +2417,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
                 }
             }
 
-            cbSabor1.setSelectedIndex(0);
-            cbSabor2.setSelectedIndex(0);
-            cbBorda.setSelectedIndex(0);
+            
+            cbTipoPizza.setSelectedIndex(0);
             cbFormaPagamento.setEnabled(true);
             txtTroco.setText("");
             btnFinalizar.setEnabled(false);
@@ -2402,7 +2435,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         double valorBorda = 0;
         double valorDesconto = 0;
         double valorTotal;
-        if (cbInteira.getSelectedIndex() <= 0) {
+        if (cbInteira.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(null, "Selecione uma Pizza!");
         } else if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
 
@@ -2440,7 +2473,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
     public void controleValorSabores() {
         txtValorPizza.setText("");
 
-        if (cbSabor2.getSelectedIndex() > 0 && cbSabor1.getSelectedIndex() > 0) {
+        if (cbSabor2.getSelectedIndex() >= 0 && cbSabor1.getSelectedIndex() >= 0) {
             double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
             double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
             if (sabor1 >= sabor2) {

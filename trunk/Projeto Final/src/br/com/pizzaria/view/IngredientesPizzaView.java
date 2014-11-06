@@ -36,6 +36,7 @@ public class IngredientesPizzaView extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        txaIngredientes.setEditable(false);
         txaIngredientes.setColumns(20);
         txaIngredientes.setRows(5);
         jScrollPane1.setViewportView(txaIngredientes);
