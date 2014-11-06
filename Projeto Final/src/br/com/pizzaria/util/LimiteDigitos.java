@@ -32,7 +32,7 @@ public class LimiteDigitos extends PlainDocument {
         }
         int totalquantia = (getLength() + str.length());
         if (totalquantia <= quantidadeMax) {
-            super.insertString(offset, str.replaceAll("[^a-z|^0-9]",""), attr);
+            super.insertString(offset, str, attr);
             return;
         }
         String nova = str.substring(0, getLength()-quantidadeMax);
