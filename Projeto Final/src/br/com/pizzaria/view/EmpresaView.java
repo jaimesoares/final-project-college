@@ -567,7 +567,7 @@ btnNovo1.setText("Salvar");
     private void btnFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar1ActionPerformed
 
         if (btnFechar1.getText().equals("Cancelar")) {
-            JOptionPane.showMessageDialog(null, "if");
+          //  JOptionPane.showMessageDialog(null, "if");
             table(true);
             modelo.setNumRows(0);
             list.listaFornecedor(modelo);
@@ -578,7 +578,7 @@ btnNovo1.setText("Salvar");
           
 
         } else {
-            JOptionPane.showMessageDialog(null, "Else");
+            //JOptionPane.showMessageDialog(null, "Else");
             btnNovo1.setText("Novo");
             btnFechar1.setText("Fechar");
            

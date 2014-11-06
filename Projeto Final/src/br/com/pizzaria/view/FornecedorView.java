@@ -34,9 +34,9 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     public FornecedorView() {
         initComponents();
-        habilitarCampos(false);
+        habilitarCampos(true);
         txtData.setText(VerificarData.retornoDeDataAtual());
-        btnNovo1.setText("Novo");
+        btnNovo1.setText("Salvar");
          txtData.setEditable(false);
         FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -64,7 +64,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         lbl_rua2 = new javax.swing.JLabel();
         lbl_data1 = new javax.swing.JLabel();
         sep_formulario = new javax.swing.JSeparator();
-        sep_pesquisa = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFornecedor = new javax.swing.JTable();
         sep_tabela = new javax.swing.JSeparator();
@@ -174,6 +173,9 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
         });
         txfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txfPesquisarKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfPesquisarKeyReleased(evt);
             }
@@ -372,7 +374,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(sep_tabela)
                     .addComponent(sep_formulario)
-                    .addComponent(sep_pesquisa)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_data1)
@@ -422,12 +423,16 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
+                .addComponent(sep_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_data1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(sep_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(lbl_telefone)
@@ -483,16 +488,10 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 .addComponent(lbl_rua3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sep_formulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_data1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sep_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -520,9 +519,9 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblFornecedorMousePressed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
-        modelo.setNumRows(0);
+       modelo.setNumRows(0);
         fornecedorController.controlePesquisa(txfPesquisar.getText(), modelo);
-
+         
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void txfTelefone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTelefone1ActionPerformed
@@ -581,18 +580,22 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void btnNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo1ActionPerformed
 
-        if (btnNovo1.getText().equals("Novo")) {
-            btnNovo1.setText("Salvar");
-            habilitarCampos(true);
-            limpaTudo();
-        } else {
+        
+        FornecedorBean e = new FornecedorBean();
 
+        String email = txtNome2.getText();
+
+        e.setEmail(email);
+
+       fornecedorController.verificaEmail(e);
+        
+        
+        if (btnNovo1.getText().equals("Salvar")) {
             cadastraFornecedor();
             limpaTudo();
             list.listaFornecedor(modelo);
-            habilitarCampos(false);
-
-        }
+           fornecedorController.verificaEmail(e);
+        } 
 
 
     }//GEN-LAST:event_btnNovo1ActionPerformed
@@ -610,15 +613,17 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
             if (btnEditar1.getText().equals("Editar")) {
 
-                editarFornecedor(codigo);
-                // btnEditar1.setText("Salvar");
-                //JOptionPane.showMessageDialog(null, codigo1);
+                editarFornecedor(codigo);               
                 btnFechar1.setText("Cancelar");
-                btnNovo1.setEnabled(false);
-                habilitarCampos(false);
+                btnNovo1.setEnabled(true);
+                habilitarCampos(true);
 
-                txfPesquisar.setEnabled(false);
+                txfPesquisar.setEnabled(true);
                 modelo.setNumRows(0);
+                limpaTudo();
+                table(true);
+               list.listaFornecedor(modelo);
+               
             } else {
                 // JOptionPane.showMessageDialog(null, codigo);
                 editarFornecedor(codigo);
@@ -638,12 +643,12 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     private void btnFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar1ActionPerformed
 
         if (btnFechar1.getText().equals("Cancelar")) {
-            JOptionPane.showMessageDialog(null, "if");
+            //JOptionPane.showMessageDialog(null, "if");
             table(true);
             modelo.setNumRows(0);
             list.listaFornecedor(modelo);
             btnFechar1.setText("Fechar");
-            btnNovo1.setText("Novo");
+           
 
             limpaTudo();
             if (btnEditar1.getText().equals("Salvar")) {
@@ -654,8 +659,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             habilitarCampos(false);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Else");
-            btnNovo1.setText("Novo");
+            //JOptionPane.showMessageDialog(null, "Else");
+           
             btnFechar1.setText("Fechar");
             btnEditar1.setEnabled(true);
             tblFornecedor.setEnabled(true);
@@ -705,7 +710,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
             }
             txtBairro.setEditable(false);
-            txtCep.setEditable(false);
+            txtCep.setEditable(true);
             txtCidade.setEditable(false);
             txtRua.setEditable(false);
             txtEstado.setEditable(false);
@@ -751,15 +756,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void txtNome2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNome2FocusLost
 
-        FornecedorBean e = new FornecedorBean();
-
-        String email = txtNome2.getText();
-
-        e.setEmail(email);
-
-        if (fornecedorController.verificaEmail(e)) {
-            System.out.println("salvar");
-        }
+        
 
     }//GEN-LAST:event_txtNome2FocusLost
 
@@ -779,7 +776,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
             table(true);
             modelo.setNumRows(0);
             list.listaFornecedor(modelo);
@@ -796,6 +793,10 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     private void txfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfPesquisarActionPerformed
+
+    private void txfPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyPressed
+        
+    }//GEN-LAST:event_txfPesquisarKeyPressed
 
     public void cadastraFornecedor() {
 
@@ -854,7 +855,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
-            btnNovo1.setText("Novo");
+           
             
             
         } catch (SQLException ex) {
@@ -888,7 +889,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_telefone1;
     private javax.swing.JSeparator sep_codigo;
     private javax.swing.JSeparator sep_formulario;
-    private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
     private javax.swing.JTable tblFornecedor;
     private javax.swing.JFormattedTextField txfPesquisar;
@@ -941,6 +941,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtEstado.setText("");
         txtBairro.setText("");
         jFormattedTextField2.setText("");
+        txtNumero.setText("");
 
     }
 
@@ -1034,7 +1035,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            JOptionPane.showMessageDialog(null, "Editado  com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Editar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
