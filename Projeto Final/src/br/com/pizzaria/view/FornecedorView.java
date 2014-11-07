@@ -648,7 +648,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             modelo.setNumRows(0);
             list.listaFornecedor(modelo);
             btnFechar1.setText("Fechar");
-           
+            habilitarCampos(true);
+           txfPesquisar.setText("");
 
             limpaTudo();
             if (btnEditar1.getText().equals("Salvar")) {
@@ -656,7 +657,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 btnEditar1.setText("Editar");
             }
             btnNovo1.setEnabled(true);
-            habilitarCampos(false);
+           
 
         } else {
             //JOptionPane.showMessageDialog(null, "Else");
