@@ -135,6 +135,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txfPesquisar.setForeground(new java.awt.Color(0, 51, 255));
         txfPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txfPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfPesquisarActionPerformed(evt);
+            }
+        });
         txfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfPesquisarKeyReleased(evt);
@@ -206,6 +211,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 txfCEPFocusLost(evt);
             }
         });
+        txfCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfCEPActionPerformed(evt);
+            }
+        });
         txfCEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txfCEPKeyPressed(evt);
@@ -236,6 +246,12 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         lbl_rua3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua3.setText("E-mail:");
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
 
         txfTelCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,6 +305,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 txtCpfFocusLost(evt);
             }
         });
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfActionPerformed(evt);
+            }
+        });
         txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCpfKeyPressed(evt);
@@ -312,7 +333,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro7.setText("Placa Moto:");
 
         txtPlaca.setEditable(false);
-        txtPlaca.setBackground(new java.awt.Color(240, 240, 240));
         txtPlaca.setEnabled(false);
         txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,7 +341,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         });
 
         txtCnh.setEditable(false);
-        txtCnh.setBackground(new java.awt.Color(240, 240, 240));
         txtCnh.setEnabled(false);
         txtCnh.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -333,7 +352,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         lbl_bairro8.setText("CNH:");
 
         txtMoto.setEditable(false);
-        txtMoto.setBackground(new java.awt.Color(240, 240, 240));
         txtMoto.setEnabled(false);
 
         lbl_bairro9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -703,9 +721,9 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txfCEPFocusLost
 
     private void txfCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCEPKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            populaCamposCep();
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            populaCamposCep();
+//        }
     }//GEN-LAST:event_txfCEPKeyPressed
 
     private void txfTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfTelefoneKeyTyped
@@ -750,6 +768,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCpfKeyTyped
 
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+       
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (ValidaCPF.isCPF(txtCpf.getText())) {
                 txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
@@ -786,6 +805,22 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtCnhKeyTyped
+
+    private void txfCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfCEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfCEPActionPerformed
+
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
+
+    private void txfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfPesquisarActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

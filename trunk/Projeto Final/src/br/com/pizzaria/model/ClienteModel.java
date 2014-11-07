@@ -88,7 +88,7 @@ public class ClienteModel {
                 modelo.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Impossível Cadastrar", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            JOptionPane.showMessageDialog(null, "Cliente não cadastrado", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
 

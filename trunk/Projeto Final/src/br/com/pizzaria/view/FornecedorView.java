@@ -37,7 +37,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         habilitarCampos(true);
         txtData.setText(VerificarData.retornoDeDataAtual());
         btnNovo1.setText("Salvar");
-         txtData.setEditable(false);
+        txtData.setEditable(false);
         FormatoData = new SimpleDateFormat("dd/MM/yyyy");
 
         fornecedorBeans = new FornecedorBean();
@@ -173,9 +173,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
         });
         txfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txfPesquisarKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfPesquisarKeyReleased(evt);
             }
@@ -515,13 +512,16 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         preencherCampos(codigo);
         table(false);
         btnFechar1.setText("Cancelar");
-         txtData.setEditable(false);
+        txtData.setEditable(false);
     }//GEN-LAST:event_tblFornecedorMousePressed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
-       modelo.setNumRows(0);
-        fornecedorController.controlePesquisa(txfPesquisar.getText(), modelo);
-         
+        if (txfPesquisar.getText().isEmpty()) {
+            modelo.setNumRows(0);
+        } else {
+            modelo.setNumRows(0);
+            fornecedorController.controlePesquisa(txfPesquisar.getText(), modelo);
+        }
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void txfTelefone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTelefone1ActionPerformed
@@ -580,22 +580,20 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void btnNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo1ActionPerformed
 
-        
         FornecedorBean e = new FornecedorBean();
 
         String email = txtNome2.getText();
 
         e.setEmail(email);
 
-       fornecedorController.verificaEmail(e);
-        
-        
+        fornecedorController.verificaEmail(e);
+
         if (btnNovo1.getText().equals("Salvar")) {
             cadastraFornecedor();
             limpaTudo();
             list.listaFornecedor(modelo);
-           fornecedorController.verificaEmail(e);
-        } 
+            fornecedorController.verificaEmail(e);
+        }
 
 
     }//GEN-LAST:event_btnNovo1ActionPerformed
@@ -613,7 +611,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
             if (btnEditar1.getText().equals("Editar")) {
 
-                editarFornecedor(codigo);               
+                editarFornecedor(codigo);
                 btnFechar1.setText("Cancelar");
                 btnNovo1.setEnabled(true);
                 habilitarCampos(true);
@@ -622,8 +620,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 modelo.setNumRows(0);
                 limpaTudo();
                 table(true);
-               list.listaFornecedor(modelo);
-               
+                list.listaFornecedor(modelo);
+
             } else {
                 // JOptionPane.showMessageDialog(null, codigo);
                 editarFornecedor(codigo);
@@ -649,7 +647,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             list.listaFornecedor(modelo);
             btnFechar1.setText("Fechar");
             habilitarCampos(true);
-           txfPesquisar.setText("");
+            txfPesquisar.setText("");
 
             limpaTudo();
             if (btnEditar1.getText().equals("Salvar")) {
@@ -657,11 +655,10 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 btnEditar1.setText("Editar");
             }
             btnNovo1.setEnabled(true);
-           
 
         } else {
             //JOptionPane.showMessageDialog(null, "Else");
-           
+
             btnFechar1.setText("Fechar");
             btnEditar1.setEnabled(true);
             tblFornecedor.setEnabled(true);
@@ -757,7 +754,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void txtNome2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNome2FocusLost
 
-        
 
     }//GEN-LAST:event_txtNome2FocusLost
 
@@ -794,10 +790,6 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     private void txfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfPesquisarActionPerformed
-
-    private void txfPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyPressed
-        
-    }//GEN-LAST:event_txfPesquisarKeyPressed
 
     public void cadastraFornecedor() {
 
@@ -850,15 +842,12 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             pstm.setString(13, txtEstado.getText());
             pstm.setString(14, "Ativo");
 
-           // JOptionPane.showMessageDialog(null, "terminei a instrução");
+            // JOptionPane.showMessageDialog(null, "terminei a instrução");
             pstm.execute();
             ConectaBanco.getConnection().commit();
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
 
-           
-            
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
 
@@ -933,7 +922,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         txtRua.setText("");
         txtBairro.setText("");
         txfTelefone.setText("");
-        
+
         txfTelefone1.setText("");
         txtCep.setText("");
         txtCidade.setText("");
