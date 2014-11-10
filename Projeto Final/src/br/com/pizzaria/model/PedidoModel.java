@@ -141,7 +141,7 @@ public class PedidoModel {
             pstmt.execute();
             pedidobeans.setCodigoPedido(codigoDoPedido());
 
-            if (cadastrarItens(codigoDoPedido(), pedidobeans) && cadastrarCupom(pedidobeans) && atualizaMovimentoEstoque(pedidobeans)) {
+            if (cadastrarItens(pedidobeans) && cadastrarCupom(pedidobeans) && atualizaMovimentoEstoque(pedidobeans)) {
                 ConectaBanco.getConnection().commit();
                 JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
                 return true;
@@ -161,7 +161,7 @@ public class PedidoModel {
     }
 
     public int codigoDoPedido() {
-        int codigo = 0;
+        int codigo = 1;
 
         try {
             String SQLSelection = "select ped_cod from pedido order by ped_cod desc limit 1";
@@ -179,7 +179,7 @@ public class PedidoModel {
         return codigo;
     }
 
-    public boolean cadastrarItens(/*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*//*String codigoCliente, String codigoFuncioario, int tamanhoTabela,*/int codigoPedido, PedidoBean pedidoBeans) {
+    public boolean cadastrarItens(PedidoBean pedidoBeans) {
         DecimalFormat formatoDecimal = new DecimalFormat("0.00");
 //        List<String> cupom = new ArrayList<>();
         String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
@@ -209,7 +209,7 @@ public class PedidoModel {
                         + "        );";
 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
-                pstmt.setInt(1, codigoPedido);
+                pstmt.setInt(1, pedidoBeans.getCodigoPedido());
                 pstmt.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
                 pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
                 pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());

@@ -1554,7 +1554,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
                 if (entregaPedidoController.conttroleDePedido(/*String.valueOf(clienteBeans.getCodigoCliente()), codigoFuncionario + "", txtTotal.getText(), tblPedido.getRowCount(), */pedidoBeans)) {
 //                limpaFinaliza();
 //                limpaTudo();
-                    CozinhaView.populaTabela();
+                    //new CozinhaView();
+                    CozinhaView.getCozinha();
 //                this.dispose();
                     btnAdicionaPizza.setEnabled(false);
                     btnAdicionaProduto.setEnabled(false);
@@ -1849,7 +1850,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (cbInteira.getSelectedIndex() >= 0) {
             Point location = btnIngredInteira.getLocation();
-            String descIngred[] = (((ProdutoBean) cbInteira.getSelectedItem()).getIngredientes()).split(" ");
+            String descIngred[] = (((ProdutoBean) cbInteira.getSelectedItem()).getIngredientes()).split(",");
             String string = (((ProdutoBean) cbInteira.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbInteira.getSelectedItem()).getDescricao() + "\n\n");
             for (String area : descIngred) {
                 string += area + "\n";
@@ -1912,7 +1913,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (cbSabor1.getSelectedIndex() >= 0) {
             Point location = btnIngredSabor1.getLocation();
-            String descIngred[] = (((ProdutoBean) cbSabor1.getSelectedItem()).getIngredientes()).split(" ");
+            String descIngred[] = (((ProdutoBean) cbSabor1.getSelectedItem()).getIngredientes()).split(",");
             String string = (((ProdutoBean) cbSabor1.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor1.getSelectedItem()).getDescricao() + "\n\n");
             for (String area : descIngred) {
                 string += area + "\n";
@@ -1928,7 +1929,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (cbSabor2.getSelectedIndex() >= 0) {
             Point location = btnIngredSabor2.getLocation();
-            String descIngred[] = (((ProdutoBean) cbSabor2.getSelectedItem()).getIngredientes()).split(" ");
+            String descIngred[] = (((ProdutoBean) cbSabor2.getSelectedItem()).getIngredientes()).split(",");
             String string = (((ProdutoBean) cbSabor2.getSelectedItem()).getTipoProduto().getDescricao() + " " + ((ProdutoBean) cbSabor2.getSelectedItem()).getDescricao() + "\n\n");
             for (String area : descIngred) {
                 string += area + "\n";
