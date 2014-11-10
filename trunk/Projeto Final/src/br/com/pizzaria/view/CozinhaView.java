@@ -13,18 +13,30 @@ public class CozinhaView extends javax.swing.JFrame {
     
     CozinhaController cozinhaController;
     static DefaultTableModel modelo;
+    
 
-    public CozinhaView() {
+    public CozinhaView() {        
         initComponents();
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         cozinhaController = new CozinhaController();
         modelo = (DefaultTableModel) tblPedido.getModel();
         populaTabela();
+        
     }
     
-    public static void populaTabela(){
+    public static void populaTabela(){        
         modelo.setNumRows(0);
         CozinhaController.controleTabela(modelo); 
+    }
+    
+    static CozinhaView cozinhaV;
+    public static void getCozinha(){
+        if (cozinhaV == null || !cozinhaV.isShowing()) {
+            cozinhaV = new CozinhaView();
+            cozinhaV.setVisible(true);
+        }else{
+            populaTabela();
+        }
     }
 
     @SuppressWarnings("unchecked")

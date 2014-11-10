@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 class StreamGobbler extends Thread {
 
@@ -49,7 +52,9 @@ public class Backup {
             String mysql = "mysqldump";
             cmd[0] = "cmd.exe";
             cmd[1] = "/C";
-            cmd[2] = mysql + " -u root -proot pizzaria -r \"" + path + "\\backup.sql\"";
+             cmd[2] = mysql + " -u root -proot pizzaria -r \"" + path + "\\backup.sql\" " ;
+            
+           // cmd[2] = mysql + " -u root -proot pizzaria -r \"" + path + "\\backup.sql\"";
 //                cmd[2] = mysql+" -u root -proot test cliente funcionario > \"C:\\Users\\Jaime\\Desktop\\Nova pasta\\testbackup.sql\"";
 
 //            String mysql ="mysql";
@@ -84,6 +89,18 @@ public class Backup {
     public static void main(String args[]) {
 
         Backup.gerarBackup();
+        
+//        String exit;
+//        while(true){
+//            try {
+//                String showInputDialog = JOptionPane.showInputDialog("test");
+//                String execCommand = Backup.execCommand(showInputDialog);
+//                JOptionPane.showMessageDialog(null, execCommand);
+//            } catch (IOException ex) {
+//                Logger.getLogger(Backup.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+        
 
 //        try {
 //            System.out.println(System.getProperty("os.name"));
@@ -125,4 +142,51 @@ public class Backup {
 //            t.printStackTrace();
 //        }
     }
+    
+    
+    
+    public synchronized static String execCommand(final String commandLine) throws IOException {  
+  
+    boolean success = false;  
+    String result;  
+  
+    Process p;  
+    BufferedReader input;  
+    StringBuffer cmdOut = new StringBuffer();  
+    String lineOut = null;  
+    int numberOfOutline = 0;  
+  
+    try {  
+  
+        p = Runtime.getRuntime().exec(commandLine);  
+  
+        input = new BufferedReader(new InputStreamReader(p.getInputStream()));  
+  
+        while ((lineOut = input.readLine()) != null) {  
+            if (numberOfOutline > 0) {  
+                cmdOut.append("\n");  
+            }  
+            cmdOut.append(lineOut);  
+            numberOfOutline++;  
+        }  
+  
+        result = cmdOut.toString();  
+  
+        success = true;  
+  
+        input.close();  
+          
+    } catch (IOException e) {  
+        result = String.format("Falha ao executar comando %s. Erro: %s", commandLine, e.toString());  
+    }  
+  
+    // Se não executou com sucesso, lança a falha  
+    if (!success) {  
+        throw new IOException(result);  
+    }  
+  
+    return result;  
+  
+}  
+    
 }

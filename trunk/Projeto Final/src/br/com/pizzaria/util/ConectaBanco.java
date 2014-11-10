@@ -1,36 +1,59 @@
 package br.com.pizzaria.util;
 
+import ConfiguracaoBanco.EXECUTE.ConfiguraBancoMain;
+import ConfiguracaoBanco.FACTORY.ConnectionFactory;
+import ConfiguracaoBanco.FILE.ManageFiles;
+import ConfiguracaoBanco.FILE.ManageFilesReader;
+import ConfiguracaoBanco.GUI.Frame;
+import ConfiguracaoBanco.GUI.FrameConnection;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ConectaBanco implements AutoCloseable {
 
-    private final String url = "jdbc:mysql://localhost/pizzaria";
-    private final String driverName = "com.mysql.jdbc.Driver";
-    private final String userName = "root";
-    private final String password = "root";
     private static Connection con;
     private static String status;
 
+    String server;
+    String door;
+    String dataBase;
+    String user;
+    String password;
+
     public ConectaBanco() {
+
         try {
-            Class.forName(driverName);
-            con = DriverManager.getConnection(url, userName, password);
+            ManageFiles manageFiles = new ManageFiles();
+            ManageFilesReader manageFilesReader = new ManageFilesReader(5, manageFiles.getArquivoDeConf());
+
+            server = manageFilesReader.getArrayDoArquivo()[0];
+            door = manageFilesReader.getArrayDoArquivo()[1];
+            dataBase = manageFilesReader.getArrayDoArquivo()[2];
+            user = manageFilesReader.getArrayDoArquivo()[3];
+            password = manageFilesReader.getArrayDoArquivo()[4];
+            
+            con = DriverManager.getConnection("jdbc:mysql://" + server + ":" + door + "/" + dataBase, user, password);
             con.setAutoCommit(false);
             System.out.println("Conectou");
-            status="Conectou";
-        } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Driver não encontrado \n Contatar o suporte");
-            System.out.println("Driver não encontrado");
-            status="Driver não encontrado";
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar no banco \n Contatar o suporte ");
-            System.out.println("Erro ao conectar ao banco");
-            status="Erro ao conectar ao banco";
+            status = "Conectou";
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            new Frame();
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar no banco ");
+            new FrameConnection();
+            System.out.println("Erro ao conectar no banco");
+            status = "Erro ao conectar no banco";
         }
-
     }
 
     public static Connection getConnection() {
@@ -45,8 +68,8 @@ public class ConectaBanco implements AutoCloseable {
             con.close();
         }
     }
-    
-    public static String statusBanco(){
+
+    public static String statusBanco() {
         return ConectaBanco.status;
     }
 

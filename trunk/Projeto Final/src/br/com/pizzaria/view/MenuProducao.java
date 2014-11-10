@@ -105,10 +105,11 @@ public class MenuProducao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPedidoBalcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoBalcaoActionPerformed
-        if (cozinhaV == null || !cozinhaV.isShowing()) {
-            cozinhaV = new CozinhaView();
-            cozinhaV.setVisible(true);
-        }
+//        if (cozinhaV == null || !cozinhaV.isShowing()) {
+//            cozinhaV = new CozinhaView();
+//            cozinhaV.setVisible(true);
+//        }
+        CozinhaView.getCozinha();
     }//GEN-LAST:event_btnPedidoBalcaoActionPerformed
 
     private void btnPedidoBalcao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoBalcao1ActionPerformed
