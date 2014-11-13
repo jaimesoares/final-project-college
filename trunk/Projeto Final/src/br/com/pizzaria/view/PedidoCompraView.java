@@ -667,7 +667,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
             //limpaCampos();
             cbProduto.removeAllItems();
             cbProduto.setEnabled(true);
-            populaListaProduto();
+            populaListaProduto();///Cara desculpa pensei que fosse meu pc kkkk relaxa boy ...isso estava funcionando ... vamos dar uma olhada
 
         } else {
             cbProduto.setEnabled(true);
@@ -798,7 +798,10 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
 
         if (cbFornecedor.getSelectedIndex() >= 0) {
 
-            capituraCnpj();
+           // capituraCnpj();
+          txtCNPJ.setText(((FornecedorBean)cbFornecedor.getSelectedItem()).getPfj()); // uma outra duvida... a dinamica dessa tela ... tipo e
+          //ele vai gravar em qual tabela...quando ele add um intem vai para tabela abaixo?;;;;essa 
+            
         }
 
     }//GEN-LAST:event_cbFornecedorActionPerformed
@@ -827,8 +830,9 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
 
     public void populaFornecedor() {
 
-        String SQLSelection = "SELECT\n"
-                + "  `for_nome`\n"
+        String SQLSelection = "SELECT\n" //mexemos no 
+                + "  `for_nome`,\n"
+                + "  `for_cod_pfj`\n"
                 + "  \n"
                 + "FROM `pizzaria`.`fornecedor`\n"
                 + "WHERE `for_status` ='Ativo' ;";
@@ -841,6 +845,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                 FornecedorBean novo = new FornecedorBean();
 
                 novo.setNome(rs.getString("for_nome"));
+                novo.setPfj(rs.getString("for_cod_pfj"));
 
                 cbFornecedor.addItem(novo);
             }
@@ -852,20 +857,23 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
 
     public void capituraCnpj() {
 
-        String name = cbFornecedor.getSelectedItem().toString();
+        String name = ((FornecedorBean)cbFornecedor.getSelectedItem()).getPfj();// aqui o erro
 
-        String SQLSelection = "SELECT\n"
-                + " `for_cod_pfj`,"
-                + "FROM `pizzaria`.`fornecedor`\n"
-                + "WHERE `for_nome` = wilkor;";
+        String SQLSelection = "SELECT \n"
+                + "  `for_cod_pfj` \n"
+                + "FROM\n"
+                + "  `pizzaria`.`fornecedor` \n"
+                + "WHERE `for_nome` = '"+name+"' and for_status='Ativo';\n"
+                + "";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
             ResultSet rs = pstm.executeQuery();
-
-            txtCNPJ.setText(rs.getString("for_cod_pfj`"));
-
+            if (rs.next()) {
+                txtCNPJ.setText(rs.getString("for_cod_pfj`"));
+            }
         } catch (SQLException ex) {
+            // tentei colocar a varial name... depois meu nome  como agora.. mas não tras de jeito nehum.... não consegui vazer no padrão de lista como vc faz =(
             JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL ", 0, new ImageIcon("imagens/cancelar.png"));
         }
 
