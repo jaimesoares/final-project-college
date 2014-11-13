@@ -78,56 +78,61 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblValor3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco" min="-2" pref="66" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtTotal" min="-2" pref="66" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           <Component id="lblValor4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco1" min="-2" pref="66" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtValorDes" min="-2" pref="66" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="lblValor5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco2" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="txtValorNf" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNome" min="-2" pref="531" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_data6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txfNascimento2" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="lbl_data2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="txtDtemissao" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBox1" min="-2" pref="420" max="-2" attributes="0"/>
-                              <Component id="lbl_data7" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_data2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txfNascimento" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jComboBox2" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
                               <Component id="lbl_data10" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jComboBox3" min="-2" pref="183" max="-2" attributes="0"/>
                               <Component id="lbl_data11" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lbl_data12" max="32767" attributes="0"/>
-                              <Component id="txtBairro7" min="-2" pref="64" max="-2" attributes="0"/>
+                              <Component id="txtParc" min="-2" pref="64" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_data6" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCNPJ" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbFornecedor" min="-2" pref="420" max="-2" attributes="0"/>
+                              <Component id="lbl_data7" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="txtObs" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,15 +145,15 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txfNascimento2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_data2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txfNascimento" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDtemissao" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_data10" min="-2" max="-2" attributes="0"/>
@@ -163,28 +168,28 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_data12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBairro7" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtParc" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtNome" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtObs" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblValor3" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="txtPreco" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblValor4" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="txtPreco1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtValorDes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblValor5" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="txtPreco2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtValorNf" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtNome">
+        <Component class="javax.swing.JTextField" name="txtObs">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -202,9 +207,9 @@
             <Property name="text" type="java.lang.String" value="Dt. Emiss&#xe3;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfNascimento">
+        <Component class="javax.swing.JTextField" name="txtDtemissao">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNascimentoKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDtemissaoKeyTyped"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(formatoNascimento);"/>
@@ -219,9 +224,9 @@
             <Property name="text" type="java.lang.String" value="CNPJ Fornec:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfNascimento2">
+        <Component class="javax.swing.JTextField" name="txtCNPJ">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNascimento2KeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCNPJKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_data7">
@@ -232,12 +237,15 @@
             <Property name="text" type="java.lang.String" value="Nome Fornecedor:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cbFornecedor">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbFornecedorActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor3">
           <Properties>
@@ -247,10 +255,10 @@
             <Property name="text" type="java.lang.String" value="Vlr. Total:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco">
+        <Component class="javax.swing.JTextField" name="txtTotal">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPrecoFocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrecoKeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTotalFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTotalKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor4">
@@ -261,10 +269,10 @@
             <Property name="text" type="java.lang.String" value="Vlr. Desc:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco1">
+        <Component class="javax.swing.JTextField" name="txtValorDes">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco1FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco1KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtValorDesFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorDesKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor5">
@@ -275,10 +283,10 @@
             <Property name="text" type="java.lang.String" value="Vlr. NF:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco2">
+        <Component class="javax.swing.JTextField" name="txtValorNf">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco2FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco2KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtValorNfFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorNfKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_data10">
@@ -307,7 +315,12 @@
         <Component class="javax.swing.JComboBox" name="jComboBox3">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Escolha forma de Pagamento"/>
+                <StringItem index="1" value="Dinheiro"/>
+                <StringItem index="2" value="Cart&#xe3;o de Cr&#xe9;dito"/>
+                <StringItem index="3" value="Cart&#xe3;o de D&#xe9;bito"/>
+              </StringArray>
             </Property>
           </Properties>
         </Component>
@@ -319,10 +332,10 @@
             <Property name="text" type="java.lang.String" value="Parcelas:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtBairro7">
+        <Component class="javax.swing.JTextField" name="txtParc">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBairro7ActionPerformed"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBairro7KeyTyped"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtParcActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtParcKeyTyped"/>
           </Events>
         </Component>
       </SubComponents>
@@ -354,7 +367,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="txtUM" min="-2" pref="75" max="-2" attributes="0"/>
                               <Component id="lbl_data9" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -362,22 +375,22 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblValor6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPreco3" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                              <Component id="txtproduto" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblValor7" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPreco4" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="txtqtd" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblValor8" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPreco5" linkSize="1" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="txtVuni" linkSize="1" min="-2" pref="84" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblValor9" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPreco6" linkSize="1" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="txtVtotal" linkSize="1" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -385,12 +398,12 @@
                                   <Component id="lblValor10" linkSize="1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="4" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtPreco7" alignment="0" pref="104" max="32767" attributes="0"/>
+                              <Component id="txtVdescon" alignment="0" pref="104" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblValor11" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPreco8" min="-2" pref="89" max="-2" attributes="0"/>
+                              <Component id="txtVnf" min="-2" pref="89" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -423,7 +436,7 @@
                       <Group type="102" attributes="0">
                           <Component id="lbl_data9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUM" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -431,32 +444,32 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblValor6" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtproduto" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblValor7" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco4" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtqtd" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblValor8" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco5" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVuni" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblValor9" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco6" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVtotal" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblValor10" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco7" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVdescon" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblValor11" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPreco8" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVnf" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -520,12 +533,12 @@
             <Property name="text" type="java.lang.String" value="Unid. Med."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtUM">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco3">
+        <Component class="javax.swing.JTextField" name="txtproduto">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco3FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco3KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtprodutoFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtprodutoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor6">
@@ -544,10 +557,10 @@
             <Property name="text" type="java.lang.String" value="Qtde:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco4">
+        <Component class="javax.swing.JTextField" name="txtqtd">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco4FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco4KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtqtdFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtqtdKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor8">
@@ -558,10 +571,10 @@
             <Property name="text" type="java.lang.String" value="Vlr. Unit.:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco5">
+        <Component class="javax.swing.JTextField" name="txtVuni">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco5FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco5KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtVuniFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtVuniKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor9">
@@ -572,10 +585,10 @@
             <Property name="text" type="java.lang.String" value="Vlr. Total:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco6">
+        <Component class="javax.swing.JTextField" name="txtVtotal">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco6FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco6KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtVtotalFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtVtotalKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor10">
@@ -586,10 +599,10 @@
             <Property name="text" type="java.lang.String" value="Vlr. Desc.:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco7">
+        <Component class="javax.swing.JTextField" name="txtVdescon">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco7FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco7KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtVdesconFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtVdesconKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblValor11">
@@ -600,16 +613,19 @@
             <Property name="text" type="java.lang.String" value="Vlr. NF.:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPreco8">
+        <Component class="javax.swing.JTextField" name="txtVnf">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPreco8FocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreco8KeyTyped"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtVnfFocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtVnfKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Adicionar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
