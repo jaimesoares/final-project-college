@@ -178,8 +178,8 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVerificarActionPerformed
-        // TODO add your handling code here:
-        if(verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), FSenha.getText())){
+        // TODO add your handling code here: 
+        if(verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))){
             FServidor.setEditable(false);
             FPorta.setEditable(false);
             FSenha.setEditable(false);
@@ -191,7 +191,7 @@ public class Frame extends javax.swing.JFrame {
     private void BContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BContinuarActionPerformed
         // TODO add your handling code here:
         dispose();
-        Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), FSenha.getText());
+        Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()));
     }//GEN-LAST:event_BContinuarActionPerformed
 
     private void FServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FServidorActionPerformed
@@ -211,7 +211,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void BVerificarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BVerificarKeyPressed
         // TODO add your handling code here:
-        if(verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), FSenha.getText())){
+        if(verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))){
             FServidor.setEditable(false);
             FPorta.setEditable(false);
             FSenha.setEditable(false);
@@ -223,7 +223,7 @@ public class Frame extends javax.swing.JFrame {
     private void BContinuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BContinuarKeyPressed
         // TODO add your handling code here:
         dispose();
-        Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), FSenha.getText());
+        Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(FSenha.getPassword()));
     }//GEN-LAST:event_BContinuarKeyPressed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

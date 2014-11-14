@@ -1,8 +1,5 @@
 package br.com.pizzaria.bean;
 
-import javax.swing.JOptionPane;
-import br.com.pizzaria.view.FornecedorView;
-
 public class FornecedorBean {
     
     private int codigo;
@@ -19,6 +16,7 @@ public class FornecedorBean {
     private String Endereco;
     private String Bairro;
     private String Estado;
+    private String status;
     
 
     public FornecedorBean() {
@@ -232,5 +230,19 @@ public class FornecedorBean {
         
       
         
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -44,10 +44,10 @@ public class ConectaBanco implements AutoCloseable {
             status = "Conectou";
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
             new Frame();
         } catch (IOException ex) {
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar no banco ");
             new FrameConnection();

@@ -174,7 +174,7 @@ public class FrameConnection extends javax.swing.JFrame {
     private void BConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConcluirActionPerformed
         try {
             // TODO add your handling code here:
-            manageFilesWriter.setArquivoDeConf(manageFiles.getArquivoDeConf(), FieldServer.getText(), FieldDoor.getText(), FieldDataBase.getText(), FieldUser.getText(), FieldPassword.getText());
+            manageFilesWriter.setArquivoDeConf(manageFiles.getArquivoDeConf(), FieldServer.getText(), FieldDoor.getText(), FieldDataBase.getText(), FieldUser.getText(), String.valueOf(FieldPassword.getPassword()));
             dispose();
         } catch (IOException ex) {
             Logger.getLogger(FrameConnection.class.getName()).log(Level.SEVERE, null, ex);

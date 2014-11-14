@@ -1544,7 +1544,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     private void txtValorRecebidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorRecebidoActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtValorRecebidoActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
@@ -1570,9 +1570,13 @@ public class PedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
-        limpaFinaliza();
-        limpaTudo();
-        this.dispose();
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                limpaFinaliza();
+                limpaTudo();
+                this.dispose();
+                break;
+        }
     }//GEN-LAST:event_btnCancelarPedidoActionPerformed
 
     private void tblPedidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidoMousePressed
@@ -1608,7 +1612,6 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     private void btnAdicionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaProdutoActionPerformed
         double subTotal = 0.0;
-
         double valorDesconto = 0.0;
         double valorTotal = 0.0;
 
@@ -1737,12 +1740,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
             txtValorRecebido.setEditable(false);
             txtValorRecebido.setText("");
             txtValorRecebidoKeyReleased(null);
-        } else
-        if(cbFormaPagamento.getSelectedIndex() == 1){
+        } else if (cbFormaPagamento.getSelectedIndex() == 1) {
             txtValorRecebido.setEditable(true);
             txtValorRecebido.setText("");
             txtValorRecebidoKeyReleased(null);
-        }else{
+        } else {
             txtValorRecebido.setEditable(false);
             txtValorRecebido.setText(txtTotal.getText());
             txtValorRecebidoKeyReleased(null);
@@ -2385,7 +2387,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         double valorBorda = 0;
         double valorDesconto = 0;
         double valorTotal;
-        
+
         if (cbSabor1.getSelectedIndex() <= -1 || cbSabor2.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(null, "Selecione dois sabores!");
         } else if (entregaPedidoController.verificaItens(txtQtdPizza.getText())) {
@@ -2418,7 +2420,6 @@ public class PedidoView extends javax.swing.JInternalFrame {
                 }
             }
 
-            
             cbTipoPizza.setSelectedIndex(0);
             cbFormaPagamento.setEnabled(true);
             txtTroco.setText("");
@@ -2442,7 +2443,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
             if (!(txtValorSubPizza.getText().isEmpty())) {
                 valorBorda = Double.parseDouble(txtValorSubPizza.getText());
-                subTotal = Double.parseDouble(txtValorPizza.getText()) + valorBorda * Integer.parseInt(txtQtdPizza.getText());
+                subTotal = (Double.parseDouble(txtValorPizza.getText()) + valorBorda) * Integer.parseInt(txtQtdPizza.getText());
             } else {
                 subTotal = Double.parseDouble(txtValorPizza.getText()) * Integer.parseInt(txtQtdPizza.getText());
             }
