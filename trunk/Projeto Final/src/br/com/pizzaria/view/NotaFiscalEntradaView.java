@@ -5,8 +5,33 @@
  */
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.bean.FornecedorBean;
+import br.com.pizzaria.bean.ItemNotaFiscalEntradaBean;
+import br.com.pizzaria.bean.ItemPedidoBean;
+import br.com.pizzaria.bean.PedidoBean;
+import br.com.pizzaria.bean.ProdutoBean;
+import br.com.pizzaria.bean.TipoProdutoBean;
+import br.com.pizzaria.model.PedidoModel;
+import br.com.pizzaria.util.ConectaBanco;
+import br.com.pizzaria.util.ValidaCNPJ;
+import br.com.pizzaria.util.ValidaCPF;
+import br.com.pizzaria.util.VerificarData;
+import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -16,12 +41,30 @@ import javax.swing.text.MaskFormatter;
 public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
     MaskFormatter formatoNascimento;
-    
+    List<TipoProdutoBean> listaTipoProd;
+    List<ProdutoBean> listaProduto;
+    List<FornecedorBean> listaFornec;
+    ComboBoxModel<TipoProdutoBean> modeloTipoProd;
+    ComboBoxModel<ProdutoBean> modeloProduto;
+    ComboBoxModel<FornecedorBean> modeloForncedor;
+    DefaultTableModel modeloDeTabela;
+    DecimalFormat decimalFormato;
+    List<ItemNotaFiscalEntradaBean> listaDeItens;
+
     /**
      * Creates new form NotaFiscalEntradaView
      */
     public NotaFiscalEntradaView() {
         initComponents();
+        modeloTipoProd = cbTipo.getModel();
+        modeloProduto = cbProduto.getModel();
+        modeloForncedor = cbFornecedor.getModel();
+        txtDtEmissao.setText(VerificarData.retornoDeDataAtual());
+        modeloDeTabela = (DefaultTableModel) tblProduto.getModel();
+        decimalFormato = new DecimalFormat("0.00");
+        listaDeItens = new ArrayList<>();
+        populaListaFornecedor();
+        populaTipoProduto();
     }
 
     /**
@@ -35,72 +78,78 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lbl_data3 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        txtBairro5 = new javax.swing.JTextField();
+        txtNumNotaFiscal = new javax.swing.JTextField();
+        txtSerie = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lbl_data4 = new javax.swing.JLabel();
-        txtBairro6 = new javax.swing.JTextField();
+        txtPedCompra = new javax.swing.JTextField();
         lbl_data2 = new javax.swing.JLabel();
         try{        formatoNascimento = new MaskFormatter("##/##/####");    }catch (Exception Erro){      JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);  }
-        txfNascimento = new JFormattedTextField(formatoNascimento);
+        txtDtEmissao = new JFormattedTextField(formatoNascimento);
         try{        formatoNascimento = new MaskFormatter("##/##/####");    }catch (Exception Erro){      JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);  }
-        txfNascimento1 = new JFormattedTextField(formatoNascimento);
+        txtDtReceb = new JFormattedTextField(formatoNascimento);
         lbl_data5 = new javax.swing.JLabel();
         lbl_data6 = new javax.swing.JLabel();
-        txfNascimento2 = new javax.swing.JTextField();
+        txtCNPJ = new javax.swing.JTextField();
         lbl_data7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbFornecedor = new javax.swing.JComboBox();
         lblValor3 = new javax.swing.JLabel();
-        txtPreco = new javax.swing.JTextField();
+        txtTotalProdutosNota = new javax.swing.JTextField();
         lblValor4 = new javax.swing.JLabel();
-        txtPreco1 = new javax.swing.JTextField();
+        txtDescontoNota = new javax.swing.JTextField();
         lblValor5 = new javax.swing.JLabel();
-        txtPreco2 = new javax.swing.JTextField();
+        txtValorNota = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lbl_data1 = new javax.swing.JLabel();
         cbTipo = new javax.swing.JComboBox();
         lbl_data8 = new javax.swing.JLabel();
         cbProduto = new javax.swing.JComboBox();
         lbl_data9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        txtPreco3 = new javax.swing.JTextField();
+        txtUnidadeItem = new javax.swing.JTextField();
+        txtRefProdItem = new javax.swing.JTextField();
         lblValor6 = new javax.swing.JLabel();
         lblValor7 = new javax.swing.JLabel();
-        txtPreco4 = new javax.swing.JTextField();
+        txtQtdeItem = new javax.swing.JTextField();
         lblValor8 = new javax.swing.JLabel();
-        txtPreco5 = new javax.swing.JTextField();
+        txtValorUnitarioItem = new javax.swing.JTextField();
         lblValor9 = new javax.swing.JLabel();
-        txtPreco6 = new javax.swing.JTextField();
+        txtTotalItem = new javax.swing.JTextField();
         lblValor10 = new javax.swing.JLabel();
-        txtPreco7 = new javax.swing.JTextField();
+        txtDescontoItem = new javax.swing.JTextField();
         lblValor11 = new javax.swing.JLabel();
-        txtPreco8 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtTotalNotaItem = new javax.swing.JTextField();
+        btnAdicionar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("NOTA FISCAL DE ENTRADA");
         setPreferredSize(new java.awt.Dimension(680, 680));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cabeçalho Nota Fiscal"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nota Fiscal"));
 
         lbl_data3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data3.setText("Série:");
 
-        txtBairro5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBairro5ActionPerformed(evt);
+        txtNumNotaFiscal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumNotaFiscalKeyTyped(evt);
             }
         });
-        txtBairro5.addKeyListener(new java.awt.event.KeyAdapter() {
+
+        txtSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSerieActionPerformed(evt);
+            }
+        });
+        txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBairro5KeyTyped(evt);
+                txtSerieKeyTyped(evt);
             }
         });
 
@@ -110,34 +159,34 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         lbl_data4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data4.setText("Ped. Compra:");
 
-        txtBairro6.addActionListener(new java.awt.event.ActionListener() {
+        txtPedCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBairro6ActionPerformed(evt);
+                txtPedCompraActionPerformed(evt);
             }
         });
-        txtBairro6.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPedCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBairro6KeyTyped(evt);
+                txtPedCompraKeyTyped(evt);
             }
         });
 
         lbl_data2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data2.setText("Dt. Emissão:");
 
-        txfNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDtEmissao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfNascimentoKeyTyped(evt);
+                txtDtEmissaoKeyTyped(evt);
             }
         });
 
-        txfNascimento1.addActionListener(new java.awt.event.ActionListener() {
+        txtDtReceb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfNascimento1ActionPerformed(evt);
+                txtDtRecebActionPerformed(evt);
             }
         });
-        txfNascimento1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDtReceb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfNascimento1KeyTyped(evt);
+                txtDtRecebKeyTyped(evt);
             }
         });
 
@@ -147,54 +196,73 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         lbl_data6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data6.setText("CNPJ Fornec:");
 
-        txfNascimento2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCNPJ.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCNPJFocusLost(evt);
+            }
+        });
+        txtCNPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfNascimento2KeyTyped(evt);
+                txtCNPJKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCNPJKeyPressed(evt);
             }
         });
 
         lbl_data7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data7.setText("Nome Fornecedor:");
 
+        cbFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFornecedorActionPerformed(evt);
+            }
+        });
+
         lblValor3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor3.setText("Vlr. Total:");
 
-        txtPreco.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtTotalProdutosNota.setEditable(false);
+        txtTotalProdutosNota.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPrecoFocusLost(evt);
+                txtTotalProdutosNotaFocusLost(evt);
             }
         });
-        txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTotalProdutosNota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecoKeyTyped(evt);
+                txtTotalProdutosNotaKeyTyped(evt);
             }
         });
 
         lblValor4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor4.setText("Vlr. Desc:");
 
-        txtPreco1.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtDescontoNota.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco1FocusLost(evt);
+                txtDescontoNotaFocusLost(evt);
             }
         });
-        txtPreco1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDescontoNota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco1KeyTyped(evt);
+                txtDescontoNotaKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescontoNotaKeyPressed(evt);
             }
         });
 
         lblValor5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor5.setText("Vlr. NF:");
 
-        txtPreco2.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtValorNota.setEditable(false);
+        txtValorNota.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco2FocusLost(evt);
+                txtValorNotaFocusLost(evt);
             }
         });
-        txtPreco2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtValorNota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco2KeyTyped(evt);
+                txtValorNotaKeyTyped(evt);
             }
         });
 
@@ -203,52 +271,54 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblValor3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblValor4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblValor5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_data6)
-                            .addComponent(txfNascimento2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_data7)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addComponent(lblValor3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTotalProdutosNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblValor4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDescontoNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblValor5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtValorNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 205, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_data3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBairro5))
+                    .addComponent(txtSerie))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_data4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBairro6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDtEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_data2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_data5)
-                    .addComponent(txfNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDtReceb, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_data6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtCNPJ)
+                        .addGap(33, 33, 33)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_data7))
+                .addGap(26, 26, 26))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txfNascimento, txfNascimento1, txtBairro6});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDtEmissao, txtDtReceb, txtPedCompra});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,20 +327,20 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(3, 3, 3)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNumNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbl_data3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBairro5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_data4)
                             .addComponent(lbl_data2)
                             .addComponent(lbl_data5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBairro6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDtEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDtReceb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -279,16 +349,16 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                             .addComponent(lbl_data7))
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txfNascimento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValor3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotalProdutosNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor4, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescontoNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValor5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtValorNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Itens Nota Fiscal"));
@@ -317,14 +387,16 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         lbl_data9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data9.setText("Unid. Med.");
 
-        txtPreco3.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtUnidadeItem.setEditable(false);
+
+        txtRefProdItem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco3FocusLost(evt);
+                txtRefProdItemFocusLost(evt);
             }
         });
-        txtPreco3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtRefProdItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco3KeyTyped(evt);
+                txtRefProdItemKeyTyped(evt);
             }
         });
 
@@ -334,76 +406,97 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         lblValor7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor7.setText("Qtde:");
 
-        txtPreco4.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtQtdeItem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco4FocusLost(evt);
+                txtQtdeItemFocusLost(evt);
             }
         });
-        txtPreco4.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtQtdeItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco4KeyTyped(evt);
+                txtQtdeItemKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQtdeItemKeyPressed(evt);
             }
         });
 
         lblValor8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor8.setText("Vlr. Unit.:");
 
-        txtPreco5.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtValorUnitarioItem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco5FocusLost(evt);
+                txtValorUnitarioItemFocusLost(evt);
             }
         });
-        txtPreco5.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtValorUnitarioItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco5KeyTyped(evt);
+                txtValorUnitarioItemKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtValorUnitarioItemKeyPressed(evt);
             }
         });
 
         lblValor9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor9.setText("Vlr. Total:");
 
-        txtPreco6.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtTotalItem.setEditable(false);
+        txtTotalItem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco6FocusLost(evt);
+                txtTotalItemFocusLost(evt);
             }
         });
-        txtPreco6.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTotalItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco6KeyTyped(evt);
+                txtTotalItemKeyTyped(evt);
             }
         });
 
         lblValor10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor10.setText("Vlr. Desc.:");
 
-        txtPreco7.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtDescontoItem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco7FocusLost(evt);
+                txtDescontoItemFocusLost(evt);
             }
         });
-        txtPreco7.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDescontoItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco7KeyTyped(evt);
+                txtDescontoItemKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescontoItemKeyPressed(evt);
             }
         });
 
         lblValor11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblValor11.setText("Vlr. NF.:");
 
-        txtPreco8.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtTotalNotaItem.setEditable(false);
+        txtTotalNotaItem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPreco8FocusLost(evt);
+                txtTotalNotaItemFocusLost(evt);
             }
         });
-        txtPreco8.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTotalNotaItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPreco8KeyTyped(evt);
+                txtTotalNotaItemKeyTyped(evt);
             }
         });
 
-        jButton1.setText("Adicionar");
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Remover");
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -447,24 +540,24 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_data9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtUnidadeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValor6)
-                            .addComponent(txtPreco3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtRefProdItem, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValor7)
-                            .addComponent(txtPreco4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQtdeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValor8)
-                            .addComponent(txtPreco5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtValorUnitarioItem, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValor9)
-                            .addComponent(txtPreco6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTotalItem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -472,23 +565,23 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(lblValor10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtPreco7))
+                                    .addComponent(txtDescontoItem))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblValor11)
-                                    .addComponent(txtPreco8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtTotalNotaItem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1)
+                                .addComponent(btnAdicionar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
+                                .addComponent(btnRemover)))
                         .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblValor10, txtPreco5, txtPreco6});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblValor10, txtTotalItem, txtValorUnitarioItem});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,7 +590,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbl_data9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtUnidadeItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbl_data8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -511,46 +604,46 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor6, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRefProdItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor7, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtQtdeItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor8, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtValorUnitarioItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor9, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTotalItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor10, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDescontoItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblValor11, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTotalNotaItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnAdicionar)
+                    .addComponent(btnRemover))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Excluir");
+        btnExcluir.setText("Excluir");
 
-        jButton4.setText("Salvar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Fechar");
+        btnFechar.setText("Fechar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -563,11 +656,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
+                        .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)))
+                        .addComponent(btnFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -579,57 +672,67 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnFechar))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBairro5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairro5KeyTyped
+    private void txtSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerieKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSerieKeyTyped
+
+    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSerieActionPerformed
+
+    private void txtPedCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPedCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPedCompraActionPerformed
+
+    private void txtPedCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPedCompraKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPedCompraKeyTyped
+
+    private void txtDtEmissaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDtEmissaoKeyTyped
+        String caracteres = "0987654321";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDtEmissaoKeyTyped
+
+    private void txtDtRecebKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDtRecebKeyTyped
         // TODO add your handling code here:
         String caracteres = "0987654321";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtBairro5KeyTyped
+    }//GEN-LAST:event_txtDtRecebKeyTyped
 
-    private void txtBairro5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairro5ActionPerformed
+    private void txtCNPJKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNPJKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBairro5ActionPerformed
-
-    private void txtBairro6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairro6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBairro6ActionPerformed
-
-    private void txtBairro6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairro6KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBairro6KeyTyped
-
-    private void txfNascimentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNascimentoKeyTyped
         String caracteres = "0987654321";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-    }//GEN-LAST:event_txfNascimentoKeyTyped
+    }//GEN-LAST:event_txtCNPJKeyTyped
 
-    private void txfNascimento1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNascimento1KeyTyped
+    private void txtTotalProdutosNotaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTotalProdutosNotaFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txfNascimento1KeyTyped
+    }//GEN-LAST:event_txtTotalProdutosNotaFocusLost
 
-    private void txfNascimento2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNascimento2KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfNascimento2KeyTyped
-
-    private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecoFocusLost
-
-    private void txtPrecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyTyped
+    private void txtTotalProdutosNotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalProdutosNotaKeyTyped
         String caracteres = "0987654321,.";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
@@ -637,161 +740,260 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             evt.consume();
 
         }
-    }//GEN-LAST:event_txtPrecoKeyTyped
+    }//GEN-LAST:event_txtTotalProdutosNotaKeyTyped
 
-    private void txtPreco1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco1FocusLost
+    private void txtDescontoNotaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoNotaFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco1FocusLost
+        calculaValorTotalNotaDesconto();
+    }//GEN-LAST:event_txtDescontoNotaFocusLost
 
-    private void txtPreco1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco1KeyTyped
+    private void txtDescontoNotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoNotaKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco1KeyTyped
+        String caracteres = "0987654321.,";
 
-    private void txtPreco2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco2FocusLost
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescontoNotaKeyTyped
 
-    private void txtPreco2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco2KeyTyped
+    private void txtValorNotaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorNotaFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco2KeyTyped
+    }//GEN-LAST:event_txtValorNotaFocusLost
+
+    private void txtValorNotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorNotaKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorNotaKeyTyped
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        //        if (cbTipo.getSelectedIndex() > 0) {
-            //            limpaCampos();
-            //            cbProduto.removeAllItems();
-            //            populaListaProduto();
-            //            cbProduto.setEnabled(true);
-            //        } else {
-            //            cbProduto.setEnabled(false);
-            //            cbProduto.setSelectedIndex(0);
-            //            limpaCampos();
-            //        }
+        if (cbTipo.getSelectedIndex() > 0) {
+            limpaCamposItens();
+            cbProduto.removeAllItems();
+            populaListaProduto();
+            cbProduto.setEnabled(true);
+        } else {
+            cbProduto.setEnabled(false);
+            cbProduto.setSelectedIndex(0);
+            limpaCamposItens();
+        }
     }//GEN-LAST:event_cbTipoActionPerformed
 
     private void cbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProdutoActionPerformed
-        //        if (cbProduto.getSelectedIndex() > 0) {
-            //            //txtValor.setText(consultaEstoqueController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
-            //            limpaCampos();
-            //            cbData.removeAllItems();
-            //            populaListaData();
-            //            cbData.setEnabled(true);
-            //
-            //            //txtValorProd.setText(decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
-            //        } else {
-            //            cbData.setEnabled(false);
-            //            cbData.setSelectedIndex(0);
-            //            limpaCampos();
-            //        }
+        if (cbProduto.getSelectedIndex() > 0) {
+            limpaCamposItens();
+
+            txtUnidadeItem.setText(((ProdutoBean) modeloProduto.getSelectedItem()).getUnidadeMedida());
+
+        } else {
+
+            limpaCamposItens();
+        }
     }//GEN-LAST:event_cbProdutoActionPerformed
 
-    private void txtPreco3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco3FocusLost
+    private void txtRefProdItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRefProdItemFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco3FocusLost
+    }//GEN-LAST:event_txtRefProdItemFocusLost
 
-    private void txtPreco3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco3KeyTyped
+    private void txtRefProdItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRefProdItemKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco3KeyTyped
+    }//GEN-LAST:event_txtRefProdItemKeyTyped
 
-    private void txtPreco4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco4FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco4FocusLost
+    private void txtQtdeItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtdeItemFocusLost
+        // TODO add your handling code here:        
+        txtTotalItem.setText("");
+        txtDescontoItem.setText("");
+        txtTotalNotaItem.setText("");
+        calculaTotalItem();
+    }//GEN-LAST:event_txtQtdeItemFocusLost
 
-    private void txtPreco4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco4KeyTyped
+    private void txtQtdeItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdeItemKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco4KeyTyped
+        String caracteres = "0987654321.,";
 
-    private void txtPreco5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco5FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco5FocusLost
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQtdeItemKeyTyped
 
-    private void txtPreco5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco5KeyTyped
+    private void txtValorUnitarioItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorUnitarioItemFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco5KeyTyped
+        txtTotalItem.setText("");
+        txtDescontoItem.setText("");
+        txtTotalNotaItem.setText("");
+        calculaTotalItem();
+    }//GEN-LAST:event_txtValorUnitarioItemFocusLost
 
-    private void txtPreco6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco6FocusLost
+    private void txtValorUnitarioItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorUnitarioItemKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco6FocusLost
+        String caracteres = "0987654321.,";
 
-    private void txtPreco6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco6KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco6KeyTyped
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorUnitarioItemKeyTyped
 
-    private void txtPreco7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco7FocusLost
+    private void txtTotalItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTotalItemFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco7FocusLost
+    }//GEN-LAST:event_txtTotalItemFocusLost
 
-    private void txtPreco7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco7KeyTyped
+    private void txtTotalItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalItemKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco7KeyTyped
+        String caracteres = "0987654321.,";
 
-    private void txtPreco8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreco8FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco8FocusLost
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTotalItemKeyTyped
 
-    private void txtPreco8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreco8KeyTyped
+    private void txtDescontoItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoItemFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPreco8KeyTyped
+        calculaTotalNotaItem();
+    }//GEN-LAST:event_txtDescontoItemFocusLost
+
+    private void txtDescontoItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoItemKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescontoItemKeyTyped
+
+    private void txtTotalNotaItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTotalNotaItemFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalNotaItemFocusLost
+
+    private void txtTotalNotaItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalNotaItemKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTotalNotaItemKeyTyped
 
     private void tblProdutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMousePressed
-//        produtoBeans = produtoController.controlePreenchimento(((ProdutoBean) modeloTabela.getValueAt(tblProduto.getSelectedRow(), 0)).getCodigo());
-//
-//        System.out.println(produtoBeans.getTipoProduto().getDescricao());
-//        txaDescricao.setText(produtoBeans.getDescricao());
-//        modeloTipoProd.setSelectedItem(produtoBeans.getTipoProduto());
-//        txtPreco.setText(String.valueOf(formatoDecimal.format(produtoBeans.getPrecoProduto().getPreco())));
-//        if (String.valueOf(produtoBeans.getEstocavel()).equals("S")) {
-//            cbEstocavel.setSelectedIndex(0);
-//        } else {
-//            cbEstocavel.setSelectedIndex(1);
-//        }
-//        if (String.valueOf(produtoBeans.getAvisaEstoqueMinimo()).equals("S")) {
-//            cbAvisa.setSelectedIndex(0);
-//        } else {
-//            cbAvisa.setSelectedIndex(1);
-//        }
-//
-//        if (produtoBeans.getProdAcabadoPrima() == 'P') {
-//            rbMateriaPrima.setSelected(true);
-//        } else {
-//            rbProdAcabado.setSelected(true);
-//        }
-//
-//        if (produtoBeans.getVenda() == 'S') {
-//            cbxProdutoVenda.setSelected(true);
-//        } else {
-//            cbxProdutoVenda.setSelected(false);
-//        }
-//
-//        txtQtd.setText(String.valueOf(produtoBeans.getQtdMinima()));
-//        //txtQtdEstoque.setText(String.valueOf(produtoBeans.getQtdSaldoEstoque()));
-//        txtData.setText(produtoBeans.getDataCad());
-//
-//        modeloUnidade.setSelectedItem(produtoBeans.getUnidadeMedida());
+
     }//GEN-LAST:event_tblProdutoMousePressed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if (validaCamposNotaFiscal()) {
 
-    private void txfNascimento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNascimento1ActionPerformed
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void txtDtRecebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDtRecebActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txfNascimento1ActionPerformed
+    }//GEN-LAST:event_txtDtRecebActionPerformed
+
+    private void cbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFornecedorActionPerformed
+        // TODO add your handling code here:
+        txtCNPJ.setText(((FornecedorBean) modeloForncedor.getSelectedItem()).getPfj());
+        validaCNPJCPF();
+
+    }//GEN-LAST:event_cbFornecedorActionPerformed
+
+    private void txtCNPJFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCNPJFocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtCNPJFocusLost
+
+    private void txtCNPJKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNPJKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pesquisaFornecedor(txtCNPJ.getText());
+        }
+    }//GEN-LAST:event_txtCNPJKeyPressed
+
+    private void txtNumNotaFiscalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumNotaFiscalKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumNotaFiscalKeyTyped
+
+    private void txtQtdeItemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdeItemKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtTotalItem.setText("");
+            txtDescontoItem.setText("");
+            txtTotalNotaItem.setText("");
+            calculaTotalItem();
+        }
+    }//GEN-LAST:event_txtQtdeItemKeyPressed
+
+    private void txtValorUnitarioItemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorUnitarioItemKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtTotalItem.setText("");
+            txtDescontoItem.setText("");
+            txtTotalNotaItem.setText("");
+            calculaTotalItem();
+        }
+    }//GEN-LAST:event_txtValorUnitarioItemKeyPressed
+
+    private void txtDescontoItemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoItemKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            calculaTotalNotaItem();
+        }
+    }//GEN-LAST:event_txtDescontoItemKeyPressed
+
+    int item = 0;
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        if (validaCamposItem()) {
+            adicionaItemPedido();
+            modeloDeTabela.addRow(new Object[]{item, cbProduto.getSelectedItem(), txtUnidadeItem.getText(), txtQtdeItem.getText(), decimalFormato.format(Double.parseDouble(txtValorUnitarioItem.getText())), txtTotalItem.getText(), txtDescontoItem.getText().isEmpty() ? 0 : decimalFormato.format(Double.parseDouble(txtDescontoItem.getText())), txtTotalNotaItem.getText()});
+            cbTipo.setSelectedIndex(0);
+            calculaTotal();
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        int linha = tblProduto.getSelectedRow();
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um item na lista para remover", "ERRO", 0, new ImageIcon("imagens/cancelar.png"));
+        } else {
+            switch (JOptionPane.showConfirmDialog(null, "Remover Item " + listaDeItens.get(linha), "Remover item de pedido", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    modeloDeTabela.removeRow(linha);
+                    listaDeItens.remove(linha);
+                    calculaTotal();
+                    break;
+            }
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void txtDescontoNotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoNotaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            calculaValorTotalNotaDesconto();
+        }
+    }//GEN-LAST:event_txtDescontoNotaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox cbFornecedor;
     private javax.swing.JComboBox cbProduto;
     private javax.swing.JComboBox cbTipo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblValor10;
     private javax.swing.JLabel lblValor11;
     private javax.swing.JLabel lblValor3;
@@ -811,20 +1013,412 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_data8;
     private javax.swing.JLabel lbl_data9;
     private javax.swing.JTable tblProduto;
-    private javax.swing.JTextField txfNascimento;
-    private javax.swing.JTextField txfNascimento1;
-    private javax.swing.JTextField txfNascimento2;
-    private javax.swing.JTextField txtBairro5;
-    private javax.swing.JTextField txtBairro6;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtPreco;
-    private javax.swing.JTextField txtPreco1;
-    private javax.swing.JTextField txtPreco2;
-    private javax.swing.JTextField txtPreco3;
-    private javax.swing.JTextField txtPreco4;
-    private javax.swing.JTextField txtPreco5;
-    private javax.swing.JTextField txtPreco6;
-    private javax.swing.JTextField txtPreco7;
-    private javax.swing.JTextField txtPreco8;
+    private javax.swing.JTextField txtCNPJ;
+    private javax.swing.JTextField txtDescontoItem;
+    private javax.swing.JTextField txtDescontoNota;
+    private javax.swing.JTextField txtDtEmissao;
+    private javax.swing.JTextField txtDtReceb;
+    private javax.swing.JTextField txtNumNotaFiscal;
+    private javax.swing.JTextField txtPedCompra;
+    private javax.swing.JTextField txtQtdeItem;
+    private javax.swing.JTextField txtRefProdItem;
+    private javax.swing.JTextField txtSerie;
+    private javax.swing.JTextField txtTotalItem;
+    private javax.swing.JTextField txtTotalNotaItem;
+    private javax.swing.JTextField txtTotalProdutosNota;
+    private javax.swing.JTextField txtUnidadeItem;
+    private javax.swing.JTextField txtValorNota;
+    private javax.swing.JTextField txtValorUnitarioItem;
     // End of variables declaration//GEN-END:variables
+
+    public void populaTipoProduto() {
+        listaTipoProd = new ArrayList<>();
+        populaListaTipoProduto(listaTipoProd);
+        for (TipoProdutoBean tipoProdutoBeans : listaTipoProd) {
+            cbTipo.addItem(tipoProdutoBeans);
+        }
+    }
+
+    public void limpaCamposItens() {
+        txtDescontoItem.setText("");
+        txtQtdeItem.setText("");
+        txtRefProdItem.setText("");
+        txtTotalItem.setText("");
+        txtUnidadeItem.setText("");
+        txtValorUnitarioItem.setText("");
+        txtTotalNotaItem.setText("");
+    }
+
+    public void populaListaProduto() {
+        if (cbTipo.getSelectedIndex() > 0) {
+            listaProduto = new ArrayList<>();
+            pesquisaProdutos(((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getCodigo(), listaProduto);
+            cbProduto.addItem("Selecionar Produto");
+
+            for (ProdutoBean prdutoBeans : listaProduto) {
+                cbProduto.addItem(prdutoBeans);
+            }
+
+        } else {
+
+            cbProduto.setSelectedIndex(0);
+        }
+    }
+
+    public void populaListaTipoProduto(List<TipoProdutoBean> lista) {
+        String SQLSelection = "select \n"
+                + "  `tprd_id`,\n"
+                + "  `tprd_descr`,\n"
+                + "  `tprd_stt_pizza` \n"
+                + "from\n"
+                + "  `pizzaria`.`tipo_prod` \n"
+                + "where tprd_stt_pizza='N';";
+
+        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                TipoProdutoBean novo = new TipoProdutoBean();
+                novo.setCodigo(rs.getInt("tprd_id"));
+                novo.setDescricao(rs.getString("tprd_descr"));
+                lista.add(novo);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível Carregar Lista " + ex, "Erro de SQL ", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+    }
+
+    public void pesquisaProdutos(int codigo, List<ProdutoBean> listaDeItens) {
+        try {
+            String SQLPesquisa = "SELECT \n"
+                    + "  t.`tprd_id`,\n"
+                    + "  t.`tprd_descr`,\n"
+                    + "  p.`prd_prod`,\n"
+                    + "  p.`prd_prod_venda`,\n"
+                    + "  p.`prd_descr`,\n"
+                    + "  p.`prd_unid_med`,\n"
+                    + "  p.`prod_estocavel`\n "
+                    //                    + "  c.`sdoe_qtd_sdo_atu` \n"
+                    + "FROM\n"
+                    + "  `pizzaria`.`tipo_prod` t \n"
+                    + "  JOIN `pizzaria`.`produtos` p \n"
+                    + "    ON p.`prd_tipo_prod`=t.tprd_id \n"
+                    //                     + "  JOIN `pizzaria`.`saldo_estoque` c \n"
+                    //                    + "    ON c.sdoe_cod_prod = p.prd_prod \n"
+                    + "WHERE t.`tprd_id` = '" + codigo + "' and p.`prod_estocavel` ='S';";
+
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLPesquisa);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ProdutoBean novo = new ProdutoBean();
+                novo.setCodigo(rs.getInt("prd_prod"));
+                novo.setDescricao(rs.getString("prd_descr"));
+                novo.getTipoProduto().setCodigo(rs.getInt("tprd_id"));
+                novo.getTipoProduto().setDescricao(rs.getString("tprd_descr"));
+                novo.setEstocavel(rs.getString("prod_estocavel").charAt(0));
+                novo.setUnidadeMedida(rs.getString("prd_unid_med"));
+
+                listaDeItens.add(novo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void populaListaFornecedor() {
+        listaFornec = new ArrayList<>();
+        populaFornecedor(listaFornec);
+        for (FornecedorBean fornecedor : listaFornec) {
+            cbFornecedor.addItem(fornecedor);
+        }
+    }
+
+    public void populaFornecedor(List<FornecedorBean> listaFornec) {
+
+        try {
+
+            String SQLSelection = "select * from fornecedor ;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                FornecedorBean novo = new FornecedorBean();
+                novo.setNome(rs.getString("for_nome"));
+                novo.setCodigo(rs.getInt("for_id_fornec"));
+                novo.setPfj(rs.getString("for_cod_pfj"));
+
+                listaFornec.add(novo);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro no banco de dados! " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+
+    }
+
+    public void validaCNPJCPF() {
+        if (ValidaCNPJ.isCNPJ(txtCNPJ.getText())) {
+            txtCNPJ.setText(ValidaCNPJ.imprimeCNPJ(txtCNPJ.getText()));
+        } else if (ValidaCPF.isCPF(txtCNPJ.getText())) {
+            txtCNPJ.setText(ValidaCPF.imprimeCPF(txtCNPJ.getText()));
+        }
+
+    }
+
+    public void pesquisaFornecedor(String cnpjcpf) {
+
+        try {
+
+            String SQLSelection = "select * from fornecedor where for_cod_pfj = ?;";
+            PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            pstm.setString(1, cnpjcpf);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                FornecedorBean novo = new FornecedorBean();
+                novo.setNome(rs.getString("for_nome"));;
+                novo.setCodigo(rs.getInt("for_id_fornec"));
+                novo.setPfj(rs.getString("for_cod_pfj"));
+                modeloForncedor.setSelectedItem(novo);
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossível preencher os campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+        }
+
+    }
+
+    public void calculaTotalItem() {
+        if (!txtQtdeItem.getText().isEmpty() && !txtValorUnitarioItem.getText().isEmpty()) {
+            txtTotalItem.setText(decimalFormato.format(Double.parseDouble(txtValorUnitarioItem.getText().replace(",", ".")) * Double.parseDouble(txtQtdeItem.getText().replace(",", "."))));
+            txtTotalNotaItem.setText(decimalFormato.format(Double.parseDouble(txtValorUnitarioItem.getText().replace(",", ".")) * Double.parseDouble(txtQtdeItem.getText().replace(",", "."))));
+        }
+    }
+
+    public void calculaTotalNotaItem() {
+        if (!txtQtdeItem.getText().isEmpty() && !txtValorUnitarioItem.getText().isEmpty()) {
+            txtTotalItem.setText(decimalFormato.format(Double.parseDouble(txtValorUnitarioItem.getText().replace(",", ".")) * Double.parseDouble(txtQtdeItem.getText().replace(",", "."))));
+        }
+        if (!txtTotalItem.getText().isEmpty() && !txtDescontoItem.getText().isEmpty()) {
+            txtTotalNotaItem.setText(decimalFormato.format(Double.parseDouble(txtTotalItem.getText().replace(",", ".")) - Double.parseDouble(txtDescontoItem.getText().replace(",", "."))));
+        }
+    }
+
+    public boolean validaCamposItem() {
+        if (cbProduto.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto!");
+            cbProduto.requestFocus();
+            return false;
+        }
+        if (txtQtdeItem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Quantidade não pode ser vazio!");
+            txtQtdeItem.requestFocus();
+            return false;
+        }
+        if (txtValorUnitarioItem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Valor Unitário não pode ser vazio!");
+            txtValorUnitarioItem.requestFocus();
+            return false;
+        }
+        if (txtTotalItem.getText().isEmpty()) {
+            return false;
+
+        }
+        if (txtTotalNotaItem.getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public void adicionaItemPedido() {
+        ItemNotaFiscalEntradaBean itemPedido = new ItemNotaFiscalEntradaBean();
+        itemPedido.setCodigoProduto(((ProdutoBean) cbProduto.getSelectedItem()).getCodigo());
+        itemPedido.setPrecoUnitario(Double.parseDouble(txtValorUnitarioItem.getText().replace(",", ".")));
+        itemPedido.setQuantidade(Double.parseDouble(txtQtdeItem.getText().replace(",", ".")));
+        itemPedido.setPrecoTotalItem(Double.parseDouble(txtTotalItem.getText().replace(",", ".")));
+        itemPedido.setCodigoItem(++item);
+        itemPedido.setPrecoTotalNotaFiscalItem(Double.parseDouble(txtTotalNotaItem.getText().replace(",", ".")));
+        itemPedido.setItemProdutoBean((ProdutoBean) cbProduto.getSelectedItem());
+        itemPedido.setValotDesconto((txtDescontoItem.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoItem.getText().replace(",", "."))));
+        itemPedido.setRefItemProduto(txtRefProdItem.getText());
+
+        listaDeItens.add(itemPedido);
+    }
+
+    public void calculaTotal() {
+        double totalNotaFiscal = 0;
+        for (ItemNotaFiscalEntradaBean listaDeIten : listaDeItens) {
+            totalNotaFiscal += listaDeIten.getPrecoTotalNotaFiscalItem();
+        }
+
+        txtTotalProdutosNota.setText(decimalFormato.format(totalNotaFiscal).replace(",", "."));
+        txtValorNota.setText(decimalFormato.format(totalNotaFiscal).replace(",", "."));
+        txtDescontoNota.setText("");
+    }
+
+    public void calculaValorTotalNotaDesconto() {
+        if (!txtTotalProdutosNota.getText().isEmpty() && !txtDescontoNota.getText().isEmpty()) {
+            txtValorNota.setText(decimalFormato.format(Double.parseDouble(txtTotalProdutosNota.getText().replace(",", ".")) - Double.parseDouble(txtDescontoNota.getText().replace(",", "."))));
+        }
+    }
+
+    public boolean validaCamposNotaFiscal() {
+        if (txtNumNotaFiscal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Num. Nota Fiscal não pode ser vazio!");
+            txtNumNotaFiscal.requestFocus();
+            return false;
+        }
+        if (txtSerie.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Série não pode ser vazio!");
+            txtSerie.requestFocus();
+            return false;
+        }
+
+        if (txtDtReceb.getText().equals("  /  /    ")) {
+            JOptionPane.showMessageDialog(null, "Campo Data Recebimento não pode ser vazio!");
+            txtDtReceb.requestFocus();
+            return false;
+        }
+        if (txtCNPJ.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo CNPJ não pode ser vazio!");
+            txtCNPJ.requestFocus();
+            return false;
+        }
+
+        if (txtTotalProdutosNota.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Adicione pelo menos um Item na Compra");
+            return false;
+        }
+        if (txtValorNota.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Erro de Preenchimento!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean cadastraNotaFiscalEntrada() {
+        Date data = new Date();
+        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            String SQLInserePedido = "insert into `pizzaria`.`nf_entrada`\n"
+                    + "            (`nfe_nro_nf`,\n"
+                    + "             `nfe_ser`,\n"
+                    + "             `nfe_cod_forn`,\n"
+                    + "             `nfe_dt_movto`,\n"
+                    + "             `nfe_vlr_tot_prod`,\n"
+                    + "             `nfe_vlr_nf`,\n"
+                    + "             `nfe_vlr_desc`,\n"
+                    
+                    + "             `nfe_dt_emis`,\n"
+                    + "             `nfe_dt_receb`,\n"
+                    + "             `nfe_ped_compra`,\n"
+                    + "             `nfe_id_usuario`)\n"
+                    + "values (?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?,\n"
+                   
+                    + "        ?,\n"
+                    + "        ?,\n"
+                    + "        ?);";
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
+
+            pstmt.setInt(1, Integer.parseInt(txtNumNotaFiscal.getText()));
+            pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
+            pstmt.setInt(3, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
+            pstmt.setString(4, formatoData.format(data));
+            pstmt.setDouble(5, Double.parseDouble(txtTotalProdutosNota.getText()));
+            pstmt.setDouble(6, Double.parseDouble(txtValorNota.getText()));
+            pstmt.setDouble(7, txtDescontoNota.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoNota.getText()));
+            pstmt.execute();
+
+            if (cadastrarItens(null)) {
+                ConectaBanco.getConnection().commit();
+                JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            try {
+                ConectaBanco.getConnection().rollback();
+                JOptionPane.showMessageDialog(null, "Impossível Cadastrar Pedido" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+            } catch (SQLException ex1) {
+                Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            return false;
+        }
+    }
+
+    public boolean cadastrarItens(PedidoBean pedidoBeans) {
+        DecimalFormat formatoDecimal = new DecimalFormat("0.00");
+//        List<String> cupom = new ArrayList<>();
+        String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
+//        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
+//        cupom.add("---------------------------------------------------------");//60 espaços
+//        cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
+//        cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
+        for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
+            try {
+
+                String SQLInsertItens = "insert into `pizzaria`.`item`\n"
+                        + "            (`item_ped_cod`,\n"
+                        + "             `item_cod_prod`,\n"
+                        + "             `item_quantidade`,\n"
+                        + "             `item_preco_unit`,\n"
+                        + "             `item_preco_tot`,\n"
+                        + "             `item_stt_meia_pizza`,\n"
+                        + "             `item_cod_prod2`\n"
+                        + "             )\n"
+                        + "values (?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?\n"
+                        + "        );";
+
+                PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
+                pstmt.setInt(1, pedidoBeans.getCodigoPedido());
+                pstmt.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
+                pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
+                pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());
+                pstmt.setDouble(5, pedidoBeans.getItensPedido().get(i).getPrecoTotal());
+
+                if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
+                    pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
+                    pstmt.setInt(7, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
+                } else {
+                    pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
+                    pstmt.setString(7, null);
+                }
+
+                pstmt.execute();
+
+//                cupom.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao()) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
+            } catch (SQLException ex) {
+                Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    ConectaBanco.getConnection().rollback();
+                    //JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
+                } catch (SQLException ex1) {
+                    Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                return false;
+            }
+        }
+//        cupom.add("------------------------------------------------------------");
+//        cupom.add("Total:                                    R$" + totalPedido);
+//        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
+//        cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
+//        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
+        return true;
+    }
 }
