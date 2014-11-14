@@ -16,6 +16,7 @@ import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.PedidoController;
 import br.com.pizzaria.controller.PrecoProdutoController;
 import br.com.pizzaria.controller.ProdutoController;
+import br.com.pizzaria.util.CentralizarForm;
 import br.com.pizzaria.util.Global;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -1802,6 +1803,10 @@ public class PedidoView extends javax.swing.JInternalFrame {
         cbFormaPagamento.setEnabled(false);
         txtValorRecebido.setEnabled(false);
         this.dispose();
+        PedidoView pedidoV = new PedidoView(codigoFuncionario);
+        Global.principal.Desktop.add(pedidoV);
+        CentralizarForm.centralizaForm(pedidoV);
+        pedidoV.setVisible(true);
 
     }//GEN-LAST:event_btnImprimirCupomActionPerformed
 

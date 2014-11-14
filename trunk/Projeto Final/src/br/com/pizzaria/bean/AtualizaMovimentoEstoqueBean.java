@@ -14,8 +14,8 @@ public class AtualizaMovimentoEstoqueBean {
     private String dataMovimento;
     private ProdutoBean produtoBean;
     private int tipoMovimento;
-    private long quantidadeProduto;
-    private int numeroDocumento;
+    private double quantidadeProduto;
+    private long numeroDocumento;
 
     /**
      * @return the dataMovimento
@@ -48,28 +48,28 @@ public class AtualizaMovimentoEstoqueBean {
     /**
      * @return the quantidadeProduto
      */
-    public long getQuantidadeProduto() {
+    public double getQuantidadeProduto() {
         return quantidadeProduto;
     }
 
     /**
      * @param quantidadeProduto the quantidadeProduto to set
      */
-    public void setQuantidadeProduto(long quantidadeProduto) {
+    public void setQuantidadeProduto(double quantidadeProduto) {
         this.quantidadeProduto = quantidadeProduto;
     }
 
     /**
      * @return the numeroDocumento
      */
-    public int getNumeroDocumento() {
+    public long getNumeroDocumento() {
         return numeroDocumento;
     }
 
     /**
      * @param numeroDocumento the numeroDocumento to set
      */
-    public void setNumeroDocumento(int numeroDocumento) {
+    public void setNumeroDocumento(long numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
 
