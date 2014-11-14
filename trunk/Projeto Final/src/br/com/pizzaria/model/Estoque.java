@@ -45,8 +45,10 @@ public class Estoque {
                     + "             `estq_dt_movto`,\n"
                     + "             `estq_cod_prod`,\n"
                     + "             `estq_tipo`,\n"
+                    + "             `estq_nro_docto`,\n"
                     + "             `estq_qtd`)\n"
                     + "values (\n"
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -56,7 +58,8 @@ public class Estoque {
             pstmt.setString(1, atualizaMovimentoEstoque.getDataMovimento());
             pstmt.setInt(2, atualizaMovimentoEstoque.getProdutoBean().getCodigo());
             pstmt.setInt(3, atualizaMovimentoEstoque.getTipoMovimento());
-            pstmt.setDouble(4, atualizaMovimentoEstoque.getQuantidadeProduto());
+            pstmt.setString(4, atualizaMovimentoEstoque.getNumeroDocumento());
+            pstmt.setDouble(5, atualizaMovimentoEstoque.getQuantidadeProduto());
 
             pstmt.execute();
 
@@ -193,13 +196,11 @@ public class Estoque {
                             + "             `sdoe_qtd_sdo_ant`,\n"
                             + "             `sdoe_qtd_ent`,\n"
                             + "             `sdoe_qtd_sai`,\n"
-                            + "             `sdoe_qtd_sdo_atu`,\n"
-                            + "             `sdoe_nro_docto`)\n"
+                            + "             `sdoe_qtd_sdo_atu`)\n"
                             + "values (?,\n"
                             + "       ?,\n"
                             + "        ?,\n"
                             + "        ?,\n"
-                            + "       ?,\n"
                             + "       ?,\n"
                             + "        ?);";
                     PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsert);
@@ -211,8 +212,6 @@ public class Estoque {
 
                     saldoAtual = saldoAnterior + quantidadeEntrada - quantidadeSaida;
                     pstm.setLong(6, saldoAtual); //saldo que deverá ser atualizado
-
-                    pstm.setInt(7, (int)atualizaMovimentoEstoque.getNumeroDocumento());
 
                     pstm.execute();
 
