@@ -23,11 +23,9 @@ import javax.swing.JOptionPane;
 public class Estoque {
 
     /*
-    Este método não realiza o comit no banco, portanto a classe que estiver chamando 
-    deverá fazer o comit caso retorne verdadeia a condião.
-    */
-    
-    
+     Este método não realiza o comit no banco, portanto a classe que estiver chamando 
+     deverá fazer o comit caso retorne verdadeia a condião.
+     */
     public static boolean atualizaMovimentoEstoque(List<AtualizaMovimentoEstoqueBean> atualizaEstoque) {
 
         for (AtualizaMovimentoEstoqueBean MovimentoEstoque : atualizaEstoque) {
@@ -58,9 +56,9 @@ public class Estoque {
             pstmt.setString(1, atualizaMovimentoEstoque.getDataMovimento());
             pstmt.setInt(2, atualizaMovimentoEstoque.getProdutoBean().getCodigo());
             pstmt.setInt(3, atualizaMovimentoEstoque.getTipoMovimento());
-            pstmt.setLong(4, atualizaMovimentoEstoque.getQuantidadeProduto());
+            pstmt.setDouble(4, atualizaMovimentoEstoque.getQuantidadeProduto());
 
-            pstmt.execute();            
+            pstmt.execute();
 
         } catch (SQLException ex) {
             Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,9 +70,6 @@ public class Estoque {
             }
             return false;
         }
-
-        
-   
 
         boolean insert = true;
 
@@ -198,11 +193,13 @@ public class Estoque {
                             + "             `sdoe_qtd_sdo_ant`,\n"
                             + "             `sdoe_qtd_ent`,\n"
                             + "             `sdoe_qtd_sai`,\n"
-                            + "             `sdoe_qtd_sdo_atu`)\n"
+                            + "             `sdoe_qtd_sdo_atu`,\n"
+                            + "             `sdoe_nro_docto`)\n"
                             + "values (?,\n"
                             + "       ?,\n"
                             + "        ?,\n"
                             + "        ?,\n"
+                            + "       ?,\n"
                             + "       ?,\n"
                             + "        ?);";
                     PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLInsert);
@@ -214,6 +211,8 @@ public class Estoque {
 
                     saldoAtual = saldoAnterior + quantidadeEntrada - quantidadeSaida;
                     pstm.setLong(6, saldoAtual); //saldo que deverá ser atualizado
+
+                    pstm.setLong(7, atualizaMovimentoEstoque.getNumeroDocumento());
 
                     pstm.execute();
 

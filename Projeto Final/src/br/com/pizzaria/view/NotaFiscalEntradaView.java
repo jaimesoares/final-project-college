@@ -5,14 +5,19 @@
  */
 package br.com.pizzaria.view;
 
+import br.com.pizzaria.bean.AtualizaMovimentoEstoqueBean;
 import br.com.pizzaria.bean.FornecedorBean;
 import br.com.pizzaria.bean.ItemNotaFiscalEntradaBean;
 import br.com.pizzaria.bean.ItemPedidoBean;
 import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.bean.ProdutoBean;
 import br.com.pizzaria.bean.TipoProdutoBean;
+import br.com.pizzaria.model.Estoque;
 import br.com.pizzaria.model.PedidoModel;
+import br.com.pizzaria.util.CentralizarForm;
 import br.com.pizzaria.util.ConectaBanco;
+import br.com.pizzaria.util.Global;
+import br.com.pizzaria.util.LimiteDigitos;
 import br.com.pizzaria.util.ValidaCNPJ;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificarData;
@@ -63,6 +68,8 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         modeloDeTabela = (DefaultTableModel) tblProduto.getModel();
         decimalFormato = new DecimalFormat("0.00");
         listaDeItens = new ArrayList<>();
+        txtNumNotaFiscal.setDocument(new LimiteDigitos(10));
+        txtSerie.setDocument(new LimiteDigitos(3));
         populaListaFornecedor();
         populaTipoProduto();
     }
@@ -883,7 +890,13 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         if (validaCamposNotaFiscal()) {
-
+            if (cadastraNotaFiscalEntrada()) {
+                this.dispose();
+                NotaFiscalEntradaView notaFiscalEntradaV = new NotaFiscalEntradaView();
+                Global.principal.Desktop.add(notaFiscalEntradaV);
+                CentralizarForm.centralizaForm(notaFiscalEntradaV);
+                notaFiscalEntradaV.setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -1308,10 +1321,10 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     + "             `nfe_vlr_tot_prod`,\n"
                     + "             `nfe_vlr_nf`,\n"
                     + "             `nfe_vlr_desc`,\n"
-                    
                     + "             `nfe_dt_emis`,\n"
                     + "             `nfe_dt_receb`,\n"
                     + "             `nfe_ped_compra`,\n"
+                    + "             `nfe_vlr_imposto`,\n"
                     + "             `nfe_id_usuario`)\n"
                     + "values (?,\n"
                     + "        ?,\n"
@@ -1321,24 +1334,29 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                   
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
 
-            pstmt.setInt(1, Integer.parseInt(txtNumNotaFiscal.getText()));
+            pstmt.setLong(1, Long.parseLong(txtNumNotaFiscal.getText()));
             pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
             pstmt.setInt(3, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
             pstmt.setString(4, formatoData.format(data));
             pstmt.setDouble(5, Double.parseDouble(txtTotalProdutosNota.getText()));
             pstmt.setDouble(6, Double.parseDouble(txtValorNota.getText()));
             pstmt.setDouble(7, txtDescontoNota.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoNota.getText()));
+            pstmt.setString(8, VerificarData.converteParaSql(txtDtEmissao.getText()));
+            pstmt.setString(9, VerificarData.converteParaSql(txtDtReceb.getText()));
+            pstmt.setInt(10, txtPedCompra.getText().isEmpty() ? 0 : Integer.parseInt(txtDescontoNota.getText()));
+            pstmt.setDouble(11, 0);
+            pstmt.setString(12, Global.usuario.getLogin());
             pstmt.execute();
 
-            if (cadastrarItens(null)) {
+            if (cadastrarItens() && atualizaEstoque()) {
                 ConectaBanco.getConnection().commit();
-                JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                JOptionPane.showMessageDialog(null, "Nota Fiscal Entrada realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
                 return true;
             } else {
                 return false;
@@ -1355,58 +1373,54 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         }
     }
 
-    public boolean cadastrarItens(PedidoBean pedidoBeans) {
-        DecimalFormat formatoDecimal = new DecimalFormat("0.00");
-//        List<String> cupom = new ArrayList<>();
-        String totalPedido = formatoDecimal.format(pedidoBeans.getValorTotalPedido());
-//        cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
-//        cupom.add("---------------------------------------------------------");//60 espaços
-//        cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
-//        cupom.add("PROD                QTD       VL UNIT.  VL TOTAL  ");
-        for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
+    public boolean cadastrarItens() {
+
+        for (int i = 0; i < listaDeItens.size(); i++) {
             try {
 
-                String SQLInsertItens = "insert into `pizzaria`.`item`\n"
-                        + "            (`item_ped_cod`,\n"
-                        + "             `item_cod_prod`,\n"
-                        + "             `item_quantidade`,\n"
-                        + "             `item_preco_unit`,\n"
-                        + "             `item_preco_tot`,\n"
-                        + "             `item_stt_meia_pizza`,\n"
-                        + "             `item_cod_prod2`\n"
-                        + "             )\n"
+                String SQLInsertItens = "insert into `pizzaria`.`item_nf_entrada`\n"
+                        + "            (`nfei_nro_nf`,\n"
+                        + "             `nfei_ser`,\n"
+                        + "             `nfei_cod_forn`,\n"
+                        + "             `nfei_cod_item`,\n"
+                        + "             `nfei_cod_prod`,\n"
+                        + "             `nfei_qtde`,\n"
+                        + "             `nfei_vlr_unit`,\n"
+                        + "             `nfei_vlr_desc`,\n"
+                        + "             `nfei_ref_prod`,\n"
+                        + "             `nfei_vlr_nf`,\n"
+                        + "             `nfei_vlr_tot_prod`)\n"
                         + "values (?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
-                        + "        ?\n"
-                        + "        );";
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "       ?);";
 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
-                pstmt.setInt(1, pedidoBeans.getCodigoPedido());
-                pstmt.setInt(2, pedidoBeans.getItensPedido().get(i).getCodigoProduto());
-                pstmt.setInt(3, pedidoBeans.getItensPedido().get(i).getQuantidade());
-                pstmt.setDouble(4, pedidoBeans.getItensPedido().get(i).getPrecoUnitario());
-                pstmt.setDouble(5, pedidoBeans.getItensPedido().get(i).getPrecoTotal());
-
-                if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
-                    pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
-                    pstmt.setInt(7, pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
-                } else {
-                    pstmt.setString(6, pedidoBeans.getItensPedido().get(i).getMeiaPizza());
-                    pstmt.setString(7, null);
-                }
-
+                pstmt.setInt(1, Integer.parseInt(txtNumNotaFiscal.getText()));
+                pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
+                pstmt.setInt(3, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
+                pstmt.setInt(4, listaDeItens.get(i).getCodigoItem());
+                pstmt.setInt(5, listaDeItens.get(i).getCodigoProduto());
+                pstmt.setDouble(6, listaDeItens.get(i).getQuantidade());
+                pstmt.setDouble(7, listaDeItens.get(i).getPrecoUnitario());
+                pstmt.setDouble(8, listaDeItens.get(i).getValotDesconto());
+                pstmt.setString(9, listaDeItens.get(i).getRefItemProduto());
+                pstmt.setDouble(10, listaDeItens.get(i).getPrecoTotalItem());
+                pstmt.setDouble(11, listaDeItens.get(i).getPrecoTotalNotaFiscalItem());
                 pstmt.execute();
 
-//                cupom.add(campoNota(pedidoBeans.getItensPedido().get(i).getDescricao()) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
             } catch (SQLException ex) {
                 Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
                 try {
                     ConectaBanco.getConnection().rollback();
-                    //JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                    JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
 
                 } catch (SQLException ex1) {
                     Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
@@ -1414,11 +1428,28 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                 return false;
             }
         }
-//        cupom.add("------------------------------------------------------------");
-//        cupom.add("Total:                                    R$" + totalPedido);
-//        cupom.add(pedidoBeans.getTipoPagamento() + ":                                  R$" + pedidoBeans.getValorRecebido());
-//        cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
-//        JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
+
+        return true;
+    }
+
+    public boolean atualizaEstoque() {
+        Date data = new Date();
+        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+
+        for (int i = 0; i < listaDeItens.size(); i++) {
+            AtualizaMovimentoEstoqueBean novo = new AtualizaMovimentoEstoqueBean();
+
+            novo.setDataMovimento(formatoData.format(data));
+            novo.setNumeroDocumento(Long.parseLong(txtNumNotaFiscal.getText()));
+            novo.setProdutoBean(listaDeItens.get(i).getItemProdutoBean());
+            novo.setQuantidadeProduto(listaDeItens.get(i).getQuantidade());
+            novo.setTipoMovimento(3);
+
+            if (!Estoque.atualizaMovimentoEstoque(novo)) {
+                return false;
+            }
+
+        }
         return true;
     }
 }
