@@ -651,6 +651,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         });
 
         btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -992,6 +997,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             calculaValorTotalNotaDesconto();
         }
     }//GEN-LAST:event_txtDescontoNotaKeyPressed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1403,7 +1413,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         + "       ?);";
 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
-                pstmt.setInt(1, Integer.parseInt(txtNumNotaFiscal.getText()));
+                pstmt.setLong(1, Long.parseLong(txtNumNotaFiscal.getText()));
                 pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
                 pstmt.setInt(3, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
                 pstmt.setInt(4, listaDeItens.get(i).getCodigoItem());
@@ -1446,6 +1456,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             novo.setTipoMovimento(3);
 
             if (!Estoque.atualizaMovimentoEstoque(novo)) {
+                try {
+                    ConectaBanco.getConnection().rollback();
+                } catch (SQLException ex1) {
+                    Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                }
                 return false;
             }
 

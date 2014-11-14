@@ -212,7 +212,7 @@ public class Estoque {
                     saldoAtual = saldoAnterior + quantidadeEntrada - quantidadeSaida;
                     pstm.setLong(6, saldoAtual); //saldo que deverá ser atualizado
 
-                    pstm.setLong(7, atualizaMovimentoEstoque.getNumeroDocumento());
+                    pstm.setInt(7, (int)atualizaMovimentoEstoque.getNumeroDocumento());
 
                     pstm.execute();
 
