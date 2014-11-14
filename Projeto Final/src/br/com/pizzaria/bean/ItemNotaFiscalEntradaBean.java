@@ -11,7 +11,7 @@ package br.com.pizzaria.bean;
  * @author katia
  */
 public class ItemNotaFiscalEntradaBean {
-    private int numNotaFiscal;//resgatar no processo de registrar o pedido
+    private String numNotaFiscal;//resgatar no processo de registrar o pedido
     private int serieNotaFiscal;    
     private int codigoItem;    
     private int codigoProduto;    
@@ -27,14 +27,14 @@ public class ItemNotaFiscalEntradaBean {
     /**
      * @return the numNotaFiscal
      */
-    public int getNumNotaFiscal() {
+    public String getNumNotaFiscal() {
         return numNotaFiscal;
     }
 
     /**
      * @param numNotaFiscal the numNotaFiscal to set
      */
-    public void setNumNotaFiscal(int numNotaFiscal) {
+    public void setNumNotaFiscal(String numNotaFiscal) {
         this.numNotaFiscal = numNotaFiscal;
     }
 

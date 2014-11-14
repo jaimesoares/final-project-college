@@ -70,6 +70,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         listaDeItens = new ArrayList<>();
         txtNumNotaFiscal.setDocument(new LimiteDigitos(10));
         txtSerie.setDocument(new LimiteDigitos(3));
+        
         populaListaFornecedor();
         populaTipoProduto();
     }
@@ -930,6 +931,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
     private void txtNumNotaFiscalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumNotaFiscalKeyTyped
         // TODO add your handling code here:
+        System.out.println(txtNumNotaFiscal.getText());
         String caracteres = "0987654321.,";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
@@ -969,7 +971,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (validaCamposItem()) {
             adicionaItemPedido();
-            modeloDeTabela.addRow(new Object[]{item, cbProduto.getSelectedItem(), txtUnidadeItem.getText(), txtQtdeItem.getText(), decimalFormato.format(Double.parseDouble(txtValorUnitarioItem.getText())), txtTotalItem.getText(), txtDescontoItem.getText().isEmpty() ? 0 : decimalFormato.format(Double.parseDouble(txtDescontoItem.getText())), txtTotalNotaItem.getText()});
+            modeloDeTabela.addRow(new Object[]{item, cbProduto.getSelectedItem(), txtUnidadeItem.getText(), txtQtdeItem.getText(), decimalFormato.format(Double.parseDouble(txtValorUnitarioItem.getText().replace(",", "."))), txtTotalItem.getText(), txtDescontoItem.getText().isEmpty() ? 0 : decimalFormato.format(Double.parseDouble(txtDescontoItem.getText().replace(",", "."))), txtTotalNotaItem.getText()});
             cbTipo.setSelectedIndex(0);
             calculaTotal();
         }
@@ -1349,8 +1351,8 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     + "        ?,\n"
                     + "        ?);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
-
-            pstmt.setLong(1, Long.parseLong(txtNumNotaFiscal.getText()));
+           
+            pstmt.setString(1, txtNumNotaFiscal.getText());
             pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
             pstmt.setInt(3, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
             pstmt.setString(4, formatoData.format(data));
@@ -1369,12 +1371,13 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Nota Fiscal Entrada realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
                 return true;
             } else {
+                ConectaBanco.closeConnection();
                 return false;
             }
 
         } catch (SQLException ex) {
             try {
-                ConectaBanco.getConnection().rollback();
+                ConectaBanco.getConnection().rollback();                
                 JOptionPane.showMessageDialog(null, "Impossível Cadastrar Pedido" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
             } catch (SQLException ex1) {
                 Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
@@ -1413,7 +1416,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         + "       ?);";
 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
-                pstmt.setLong(1, Long.parseLong(txtNumNotaFiscal.getText()));
+                pstmt.setString(1, txtNumNotaFiscal.getText());
                 pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
                 pstmt.setInt(3, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
                 pstmt.setInt(4, listaDeItens.get(i).getCodigoItem());
@@ -1450,7 +1453,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             AtualizaMovimentoEstoqueBean novo = new AtualizaMovimentoEstoqueBean();
 
             novo.setDataMovimento(formatoData.format(data));
-            novo.setNumeroDocumento(Long.parseLong(txtNumNotaFiscal.getText()));
+            novo.setNumeroDocumento(txtNumNotaFiscal.getText());
             novo.setProdutoBean(listaDeItens.get(i).getItemProdutoBean());
             novo.setQuantidadeProduto(listaDeItens.get(i).getQuantidade());
             novo.setTipoMovimento(3);

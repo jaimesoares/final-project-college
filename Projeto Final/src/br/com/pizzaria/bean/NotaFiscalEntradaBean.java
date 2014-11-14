@@ -5,7 +5,7 @@ import java.util.List;
 
 public class NotaFiscalEntradaBean {
     
-    private int numNotaFiscal;
+    private String numNotaFiscal;
     private int serieNotaFiscal;
     private Integer codigoFornecedor;
     private String dataMovimento;
@@ -28,14 +28,14 @@ public class NotaFiscalEntradaBean {
     /**
      * @return the numNotaFiscal
      */
-    public int getNumNotaFiscal() {
+    public String getNumNotaFiscal() {
         return numNotaFiscal;
     }
 
     /**
      * @param numNotaFiscal the numNotaFiscal to set
      */
-    public void setNumNotaFiscal(int numNotaFiscal) {
+    public void setNumNotaFiscal(String numNotaFiscal) {
         this.numNotaFiscal = numNotaFiscal;
     }
 
