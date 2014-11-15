@@ -66,11 +66,11 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Pedido", "Tipo Pedido", "Cliente ", "Telefone", "Forma Pagto.", "Vlr. Total", "Situação"
+                "Pedido", "Tipo Pedido", "Cliente ", "Telefone", "Forma Pagto.", "Vlr. Total", "Situação", "Hora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -84,10 +84,6 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblPedido);
-        if (tblPedido.getColumnModel().getColumnCount() > 0) {
-            tblPedido.getColumnModel().getColumn(5).setHeaderValue("Vlr. Total");
-            tblPedido.getColumnModel().getColumn(6).setHeaderValue("Situação");
-        }
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -159,11 +155,11 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Tipo", "Produto", "Preço Unit.", "Quantidade", "Total", "Hora"
+                "Tipo", "Produto", "Preço Unit.", "Quantidade", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -318,7 +318,7 @@ public class PrincipalView extends javax.swing.JFrame {
         login.setVisible(true);
 
     }
-
+    static boolean menuEvent=false;
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -349,6 +349,9 @@ public class PrincipalView extends javax.swing.JFrame {
 
         janela.telaLogin();
 
+        
+        
+        
         EventQueue queue = new EventQueue() {
             protected void dispatchEvent(AWTEvent event) {
                 super.dispatchEvent(event);
@@ -361,7 +364,7 @@ public class PrincipalView extends javax.swing.JFrame {
                         a = event.paramString().split(",");
                         tecla = a[1].split("=");
                         //System.out.println(tecla[1]);
-
+if(menuEvent){
                         switch (Integer.parseInt(tecla[1])) {
                             case 112: //F1
                                 Global.principal.mnEmpresaMousePressed(null);
@@ -419,10 +422,12 @@ public class PrincipalView extends javax.swing.JFrame {
                                 break;
                         }
                     }
+                    }
                 }
             }
         };
         Toolkit.getDefaultToolkit().getSystemEventQueue().push(queue);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -463,6 +468,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mnProducao.setVisible(valor);
         mnRelatorio.setVisible(valor);
         mnVenda.setVisible(valor);
+        menuEvent = valor;
 
     }
 
