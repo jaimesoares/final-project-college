@@ -32,7 +32,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         momentUser = new UsuarioBean();
         usuarioController = new UsuarioController();
         play = new Som();
-        this.login();
+        //this.login();
         txtUsuario.setDocument(new LimiteDigitos(23));
         txtSenha.setDocument(new LimiteDigitos(20));
         
@@ -61,6 +61,8 @@ public class LoginView extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mniSuporte = new javax.swing.JMenuItem();
+
+        setTitle("LOGIN");
 
         painelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acesso ao sistema", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri Light", 1, 12))); // NOI18N
 

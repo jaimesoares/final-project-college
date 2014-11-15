@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
@@ -103,9 +105,10 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
         btnFuncao = new javax.swing.JButton();
         btnModulo = new javax.swing.JButton();
         btnEmpresa = new javax.swing.JButton();
+        btnFuncao1 = new javax.swing.JButton();
 
         setTitle("Menu Empresa");
-        setPreferredSize(new java.awt.Dimension(308, 417));
+        setPreferredSize(new java.awt.Dimension(308, 477));
 
         btnFuncionario.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnFuncionario.setForeground(new java.awt.Color(0, 51, 255));
@@ -152,6 +155,15 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             }
         });
 
+        btnFuncao1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnFuncao1.setForeground(new java.awt.Color(0, 51, 255));
+        btnFuncao1.setText("<html>Logout<font size='2' style='color:black'> Crtl-5 </font>");
+        btnFuncao1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFuncao1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,7 +175,8 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
                     .addComponent(btnUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnModulo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnFuncao, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnEmpresa, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnEmpresa, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnFuncao1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,7 +192,9 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
                 .addComponent(btnModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFuncao1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,19 +240,37 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModuloActionPerformed
 
     private void btnEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaActionPerformed
-  if (empresaV == null || !empresaV.isShowing()) {
+        if (empresaV == null || !empresaV.isShowing()) {
             empresaV = new EmpresaView();
             Global.principal.Desktop.add(empresaV);
             centralizaForm(empresaV);
             empresaV.setVisible(true);
-        }        
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEmpresaActionPerformed
+
+    private void btnFuncao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncao1ActionPerformed
+
+        // TODO add your handling code here:
+        this.dispose();
+//        PrincipalView janela = new PrincipalView();
+       Global.principal.habiltaMenu(false);
+//        janela.setVisible(true);
+//        Global.principal = janela;
+        LoginView login = new LoginView();
+        login.setVisible(true);
+        centralizaForm(login);
+        Global.principal.Desktop.add(login);
+//        carregaLogin();
+
+
+    }//GEN-LAST:event_btnFuncao1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmpresa;
     private javax.swing.JButton btnFuncao;
+    private javax.swing.JButton btnFuncao1;
     private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnModulo;
     private javax.swing.JButton btnUsuario;
@@ -263,5 +296,9 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
         Dimension jInternalFrameSize = frame.getSize();
         frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+
+    public void carregaLogin() {
+
     }
 }
