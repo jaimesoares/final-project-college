@@ -188,9 +188,8 @@
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="lbl_data13" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtipoPedido" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="lblValor3" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
                           <Component id="txtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblValor4" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
@@ -198,6 +197,7 @@
                           <Component id="lblValor5" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
                           <Component id="txtValorNf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jtipoPedido" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -319,7 +319,10 @@
         <Component class="javax.swing.JComboBox" name="jCondPagamento">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Selecione Cond/Pagamento"/>
+                <StringItem index="1" value="3x"/>
+              </StringArray>
             </Property>
           </Properties>
         </Component>
