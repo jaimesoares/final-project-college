@@ -39,6 +39,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         modelo = (DefaultTableModel) tblFuncionario.getModel();
         modeloCargos = cbCargo.getModel();
         populaCargo();
+        btnNovoActionPerformed(null);
 
     }
 

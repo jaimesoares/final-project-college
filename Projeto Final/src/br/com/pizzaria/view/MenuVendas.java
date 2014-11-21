@@ -26,6 +26,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
     ClienteView clienteV;
     PedidoView pedidoV;
     CancelamentoPedidosView cancelamentoPedidoV;
+    EntregaPedidoView entregaPedV;
 
     /**
      * Creates new form MenuProdução
@@ -78,9 +79,10 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         btnCliente = new javax.swing.JButton();
         btnCliente1 = new javax.swing.JButton();
         btnCliente2 = new javax.swing.JButton();
+        btnCliente3 = new javax.swing.JButton();
 
         setTitle("Menu Vendas");
-        setPreferredSize(new java.awt.Dimension(308, 411));
+        setPreferredSize(new java.awt.Dimension(308, 487));
 
         btnPedido.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPedido.setForeground(new java.awt.Color(0, 51, 255));
@@ -127,6 +129,15 @@ public class MenuVendas extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCliente3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnCliente3.setForeground(new java.awt.Color(0, 51, 255));
+        btnCliente3.setText("<html>Atualiza Entrega <font size='2' style='color:black'> Crtl-3 </font>");
+        btnCliente3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliente3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,7 +149,8 @@ public class MenuVendas extends javax.swing.JInternalFrame {
                     .addComponent(btnCancelarPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnCliente1)
-                    .addComponent(btnCliente2))
+                    .addComponent(btnCliente2)
+                    .addComponent(btnCliente3))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -154,6 +166,8 @@ public class MenuVendas extends javax.swing.JInternalFrame {
                 .addComponent(btnCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -197,12 +211,23 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCliente2ActionPerformed
 
+    private void btnCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliente3ActionPerformed
+        // TODO add your handling code here:
+        if (entregaPedV == null || !entregaPedV.isShowing()) {
+            entregaPedV = new EntregaPedidoView();
+            Global.principal.Desktop.add(entregaPedV);
+            centralizaForm(entregaPedV);
+            entregaPedV.setVisible(true);
+        }
+    }//GEN-LAST:event_btnCliente3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarPedido;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnCliente1;
     private javax.swing.JButton btnCliente2;
+    private javax.swing.JButton btnCliente3;
     private javax.swing.JButton btnPedido;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {
