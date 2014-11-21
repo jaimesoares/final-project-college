@@ -7,6 +7,7 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.controller.CozinhaController;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class CozinhaView extends javax.swing.JFrame {
@@ -17,7 +18,7 @@ public class CozinhaView extends javax.swing.JFrame {
 
     public CozinhaView() {        
         initComponents();
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         cozinhaController = new CozinhaController();
         modelo = (DefaultTableModel) tblPedido.getModel();
         populaTabela();
@@ -71,6 +72,17 @@ public class CozinhaView extends javax.swing.JFrame {
         tblPedido.setRowHeight(40);
         tblPedido.setRowMargin(10);
         jScrollPane1.setViewportView(tblPedido);
+        if (tblPedido.getColumnModel().getColumnCount() > 0) {
+            tblPedido.getColumnModel().getColumn(0).setMinWidth(90);
+            tblPedido.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tblPedido.getColumnModel().getColumn(0).setMaxWidth(90);
+            tblPedido.getColumnModel().getColumn(2).setMinWidth(90);
+            tblPedido.getColumnModel().getColumn(2).setPreferredWidth(90);
+            tblPedido.getColumnModel().getColumn(2).setMaxWidth(90);
+            tblPedido.getColumnModel().getColumn(3).setMinWidth(120);
+            tblPedido.getColumnModel().getColumn(3).setPreferredWidth(120);
+            tblPedido.getColumnModel().getColumn(3).setMaxWidth(120);
+        }
 
         getContentPane().add(jScrollPane1);
 

@@ -261,32 +261,7 @@ public class PedidoModel {
         return "";
     }
 
-    public String campoNota(String campo) {
-        int espaco = 25 - campo.length();
-
-        for (int j = 0; j < espaco; j++) {
-            campo = campo.concat(" ");
-        }
-        return campo;
-    }
-
-    public String campoNota2(String campo) {
-        int espaco = 10 - campo.length();
-
-        for (int j = 0; j < espaco; j++) {
-            campo = campo.concat(" ");
-        }
-        return campo;
-    }
     
-    public String campoFormaPagamento(String campo) {
-        int espaco = 42 - campo.length();
-
-        for (int j = 0; j < espaco; j++) {
-            campo = campo.concat(" ");
-        }
-        return campo;
-    }
 
     public void populaListaTipoProduto(List<TipoProdutoBean> lista) {
         String SQLSelection = "select \n"
@@ -534,9 +509,9 @@ public class PedidoModel {
         cupom.add(selectEmpresa().getEndereco()+", "+selectEmpresa().getNumero()+" - "+selectEmpresa().getBairro()+" SP");
         cupom.add("CNPJ: "+selectEmpresa().getPfj()+" INSCR. EST.: 116.854.228.110");
         cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
-        cupom.add("---------------------------------------------------------");//60 espaços
+        cupom.add("------------------------------------------------------------");//60 espaços
         cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
-        cupom.add("PRODUTO                  QTD       VL UNIT.  VL TOTAL  ");
+        cupom.add("PRODUTO                        QTD       VL UNIT.  VL TOTAL  ");
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
 
             if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
@@ -544,7 +519,9 @@ public class PedidoModel {
             } else {
                 descricao = pedidoBeans.getItensPedido().get(i).getDescricao();
             }
-
+            
+            
+            
             cupom.add(campoNota(descricao) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
 
         }
@@ -555,6 +532,41 @@ public class PedidoModel {
         JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
     }
 
+    public String verificaTamanhoCampo(String campo){
+        return "";
+    }
+    
+    
+    
+    
+    public String campoNota(String campo) {
+        int espaco = 31 - campo.length();
+
+        for (int j = 0; j < espaco; j++) {
+            campo = campo.concat(" ");
+        }
+        return campo;
+    }
+
+    public String campoNota2(String campo) {
+        int espaco = 10 - campo.length();
+
+        for (int j = 0; j < espaco; j++) {
+            campo = campo.concat(" ");
+        }
+        return campo;
+    }
+    
+    public String campoFormaPagamento(String campo) {
+        int espaco = 42 - campo.length();
+
+        for (int j = 0; j < espaco; j++) {
+            campo = campo.concat(" ");
+        }
+        return campo;
+    }
+    
+    
     public boolean atualizaMovimentoEstoque(PedidoBean pedidoBeans) {
 
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
