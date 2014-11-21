@@ -511,24 +511,23 @@ public class PedidoModel {
         cupom.add(VerificarData.converteParaJAVA(pedidoBeans.getData()) + "      " + pedidoBeans.getHora());
         cupom.add("------------------------------------------------------------");//60 espaços
         cupom.add("                      CUPOM NÃO FISCAL                      ");//16 - 8
-        cupom.add("PRODUTO                        QTD       VL UNIT.  VL TOTAL  ");
+        cupom.add("PRODUTO                           QTD     VL UNIT.  VL TOTAL  ");
         for (int i = 0; i < pedidoBeans.getItensPedido().size(); i++) {
 
+            String tipo = pedidoBeans.getItensPedido().get(i).getItemProdutoBean().getTipoProduto().getDescricao();
+            
             if (pedidoBeans.getItensPedido().get(i).getMeiaPizza().endsWith("S")) {
-                descricao = pedidoBeans.getItensPedido().get(i).getDescricao() + "/" + pesquisaProduto(pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
+                descricao = pedidoBeans.getItensPedido().get(i).getDescricao() + "/\n" + pesquisaProduto(pedidoBeans.getItensPedido().get(i).getCodigoProduto2());
+                cupom.add(tipo+" "+pedidoBeans.getItensPedido().get(i).getDescricao() + "/\n"+campoNota(pesquisaProduto(pedidoBeans.getItensPedido().get(i).getCodigoProduto2())) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota3("R$" +String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota3("R$" +String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
             } else {
                 descricao = pedidoBeans.getItensPedido().get(i).getDescricao();
+                cupom.add(campoNota(tipo+" "+descricao) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota3("R$" +String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota3("R$" +String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
             }
-            
-            
-            
-            cupom.add(campoNota(descricao) + "" + campoNota2(String.valueOf(pedidoBeans.getItensPedido().get(i).getQuantidade())) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoUnitario()))) + "" + campoNota2(String.valueOf(formatoDecimal.format(pedidoBeans.getItensPedido().get(i).getPrecoTotal()))));
-
         }
         cupom.add("------------------------------------------------------------");
-        cupom.add("Total:                                    R$" + totalPedido);//42 ESPAÇOS
-        cupom.add(campoFormaPagamento(pedidoBeans.getTipoPagamento()+":") +"R$" + pedidoBeans.getValorRecebido());
-        cupom.add("Troco:                                    R$" + pedidoBeans.getValorTroco());
+        cupom.add("Total:                                              R$" + totalPedido);//52 ESPAÇOS
+        cupom.add(campoFormaPagamento(pedidoBeans.getTipoPagamento()+":") +"R$" + formatoDecimal.format(pedidoBeans.getValorRecebido()));
+        cupom.add("Troco:                                              R$" + formatoDecimal.format(pedidoBeans.getValorTroco()));
         JOptionPane.showMessageDialog(null, GeneratorPDF.gerarPDF(cupom));
     }
 
@@ -540,7 +539,7 @@ public class PedidoModel {
     
     
     public String campoNota(String campo) {
-        int espaco = 31 - campo.length();
+        int espaco = 34 - campo.length();
 
         for (int j = 0; j < espaco; j++) {
             campo = campo.concat(" ");
@@ -549,6 +548,15 @@ public class PedidoModel {
     }
 
     public String campoNota2(String campo) {
+        int espaco = 8 - campo.length();
+
+        for (int j = 0; j < espaco; j++) {
+            campo = campo.concat(" ");
+        }
+        return campo;
+    }
+    
+    public String campoNota3(String campo) {
         int espaco = 10 - campo.length();
 
         for (int j = 0; j < espaco; j++) {
@@ -558,7 +566,7 @@ public class PedidoModel {
     }
     
     public String campoFormaPagamento(String campo) {
-        int espaco = 42 - campo.length();
+        int espaco = 52 - campo.length();
 
         for (int j = 0; j < espaco; j++) {
             campo = campo.concat(" ");
