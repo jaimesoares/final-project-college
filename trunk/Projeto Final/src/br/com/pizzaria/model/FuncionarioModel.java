@@ -4,6 +4,7 @@ import br.com.pizzaria.bean.CargoBean;
 import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.FuncionarioBean;
 import br.com.pizzaria.util.ConectaBanco;
+import br.com.pizzaria.util.ConectaBancoCorreios;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -118,7 +119,7 @@ public class FuncionarioModel {
             while (rs.next()) {
                 FuncionarioBean novo = new FuncionarioBean();
                 novo.setCodigo(rs.getInt("fun_codigo"));
-                
+
                 novo.setNome(rs.getString("fun_nome"));
                 novo.getCargo().setDescricao(rs.getString("crg_descr"));
                 modelo.addRow(new Object[]{novo, rs.getString("crg_descr")});
@@ -273,6 +274,7 @@ public class FuncionarioModel {
                 + "on c.`cep_municip` = m.`mun_cod` "
                 + "WHERE c.`cep_cod` = ? ;";
 
+        // try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
             pstm.setString(1, cep);
             ResultSet rs = pstm.executeQuery();
