@@ -48,6 +48,12 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
         lblModulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblModulo.setText("Módulo:");
 
+        cbUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUsuarioActionPerformed(evt);
+            }
+        });
+
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +131,10 @@ public final class DefinirModuloView extends javax.swing.JInternalFrame {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void cbUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -882,6 +882,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
         jLabel11.setText("Valor:");
 
         txtQtdPizza.setBackground(new java.awt.Color(204, 255, 255));
+        txtQtdPizza.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQtdPizzaMouseClicked(evt);
+            }
+        });
         txtQtdPizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQtdPizzaActionPerformed(evt);
@@ -1092,6 +1097,11 @@ public class PedidoView extends javax.swing.JInternalFrame {
         lblQuantidade1.setText("Qtde:");
 
         txtQuantidadeProd.setBackground(new java.awt.Color(204, 255, 255));
+        txtQuantidadeProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQuantidadeProdMouseClicked(evt);
+            }
+        });
         txtQuantidadeProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantidadeProdActionPerformed(evt);
@@ -1488,7 +1498,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
             txtValorDescProd.setText("");
             txtValorProd.setText("");
-            txtQuantidadeProd.setText("");
+            txtQuantidadeProd.setText("1");
             cbxGratis.setSelected(false);
             txtValorProd.setText(decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
         } else {
@@ -1657,6 +1667,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             if (cbInteira.getSelectedIndex() >= 0) {
                 //txtValor.setText(entregaPedidoController.controleDeValor(((ProdutoBean) cbProdutos.getSelectedItem()).getCodigo()) + "");
                 txtValorPizza.setText(decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", "."));
+                txtQtdPizza.setText("1");
             }
         }
         cbBorda.setSelectedIndex(0);
@@ -1947,6 +1958,16 @@ public class PedidoView extends javax.swing.JInternalFrame {
             ingredienteV.setVisible(true);
         }
     }//GEN-LAST:event_btnIngredSabor2ActionPerformed
+
+    private void txtQtdPizzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQtdPizzaMouseClicked
+        // TODO add your handling code here:
+        txtQtdPizza.setText("");
+    }//GEN-LAST:event_txtQtdPizzaMouseClicked
+
+    private void txtQuantidadeProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuantidadeProdMouseClicked
+        // TODO add your handling code here:
+        txtQuantidadeProd.setText("");
+    }//GEN-LAST:event_txtQuantidadeProdMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2479,7 +2500,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     public void controleValorSabores() {
         txtValorPizza.setText("");
-
+        txtQtdPizza.setText("1");
         if (cbSabor2.getSelectedIndex() >= 0 && cbSabor1.getSelectedIndex() >= 0) {
             double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
             double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
