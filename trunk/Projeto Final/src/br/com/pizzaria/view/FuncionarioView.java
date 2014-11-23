@@ -136,11 +136,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txfPesquisar.setForeground(new java.awt.Color(0, 51, 255));
         txfPesquisar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txfPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfPesquisarActionPerformed(evt);
-            }
-        });
         txfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfPesquisarKeyReleased(evt);
@@ -212,11 +207,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 txfCEPFocusLost(evt);
             }
         });
-        txfCEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfCEPActionPerformed(evt);
-            }
-        });
         txfCEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txfCEPKeyPressed(evt);
@@ -247,12 +237,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         lbl_rua3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_rua3.setText("E-mail:");
-
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
 
         txfTelCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,11 +290,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 txtCpfFocusLost(evt);
             }
         });
-        txtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfActionPerformed(evt);
-            }
-        });
         txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCpfKeyPressed(evt);
@@ -362,7 +341,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         txtEstado.setBackground(new java.awt.Color(255, 255, 204));
 
         jLabel2.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Manutenção de Funcionário");
 

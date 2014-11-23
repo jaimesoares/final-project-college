@@ -178,7 +178,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         if (pedidoV == null || !pedidoV.isShowing()) {
             pedidoV = new PedidoView(1);
             Global.principal.Desktop.add(pedidoV);
-            centralizaForm(pedidoV);
+            centralizaFormPedido(pedidoV);
             pedidoV.setVisible(true);
         }
     }//GEN-LAST:event_btnPedidoActionPerformed
@@ -250,6 +250,13 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         Dimension desktopSize = Global.principal.Desktop.getSize();
         Dimension jInternalFrameSize = frame.getSize();
         frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+    
+    public void centralizaFormPedido(JInternalFrame frame) {
+        Dimension desktopSize = Global.principal.getDesktop().getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation(((desktopSize.width - jInternalFrameSize.width)) / 2+80,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 }

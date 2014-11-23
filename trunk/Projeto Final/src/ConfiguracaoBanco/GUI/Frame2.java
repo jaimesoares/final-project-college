@@ -51,7 +51,7 @@ public class Frame2 extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
         jTextArea1.setRows(3);
-        jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"Pizzaria\".\n\nPara dar continuidade ao processo insira o nome do\nbanco de dados a ser criado para o sistema.");
+        jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"Pizzaria\".\n\nPara dar continuidade ao processo clique em \ncontinuar para criar o banco de dados do sistema.");
         jScrollPane1.setViewportView(jTextArea1);
 
         BContinuar.setText("Continuar");
@@ -171,7 +171,7 @@ public class Frame2 extends javax.swing.JFrame {
 
             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Não foi possivel criar o Banco de Dados: " + FBancoDeDados.getText());
+            JOptionPane.showMessageDialog(null, "Banco de Dados: " + FBancoDeDados.getText()+" já existente!");
             dispose();
         }
     }//GEN-LAST:event_BContinuarActionPerformed

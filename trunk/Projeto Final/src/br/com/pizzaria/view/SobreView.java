@@ -28,7 +28,7 @@ public class SobreView extends javax.swing.JFrame {
         });
 
         lblNome.setFont(new java.awt.Font("Arial", 2, 36)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(255, 51, 51));
+        lblNome.setForeground(new java.awt.Color(0, 0, 255));
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNome.setText("PIZZARIA MAMA");
 
