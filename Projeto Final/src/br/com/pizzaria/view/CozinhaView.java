@@ -58,7 +58,7 @@ public class CozinhaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código Pedido", "Item", "Quantidade", "Hora"
+                "Cód. Pedido", "Item", "Quantidade", "Hora"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -235,7 +235,7 @@ btnNovo1.setText("Salvar");
         lbl_bairro1.setText("Site:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Cadastro Empresa");
 

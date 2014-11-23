@@ -88,7 +88,7 @@ public class ConnectionFactory {
             return DriverManager.getConnection("jdbc:mysql://" + server + ":" + door + "/" + dataBase, user, password);
                
         } catch (SQLException excecao) {
-            JOptionPane.showMessageDialog(null, "Não foi possivel realizar a conecção!");
+            JOptionPane.showMessageDialog(null, "Não foi possivel realizar a conexão!\n Verficar Senha.");
             throw new RuntimeException(excecao);
         }
     }

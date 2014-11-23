@@ -121,7 +121,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Entrega de Pedidos");
         jLabel1.setOpaque(true);
@@ -262,7 +262,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
         txtNumPedido.setEditable(false);
         txtNumPedido.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        txtNumPedido.setForeground(new java.awt.Color(255, 0, 0));
+        txtNumPedido.setForeground(new java.awt.Color(0, 0, 255));
         txtNumPedido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNumPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -618,7 +618,7 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 ConectaBanco.getConnection().rollback();
             }
 
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso", "Atualização efetivada", 1, new ImageIcon("imagens/ticado.png"));
 
         } catch (SQLException ex) {
             try {

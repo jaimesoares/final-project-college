@@ -687,7 +687,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
         txtCliente.setEditable(false);
         txtCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtCliente.setForeground(new java.awt.Color(255, 0, 51));
+        txtCliente.setForeground(new java.awt.Color(0, 0, 255));
         txtCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnRemove.setText("Remover Item");
@@ -1206,7 +1206,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
         txtCodigo.setEditable(false);
         txtCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtCodigo.setForeground(new java.awt.Color(255, 0, 51));
+        txtCodigo.setForeground(new java.awt.Color(0, 0, 255));
         txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
