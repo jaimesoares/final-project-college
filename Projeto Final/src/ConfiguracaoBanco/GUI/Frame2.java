@@ -54,7 +54,7 @@ public class Frame2 extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
         jTextArea1.setRows(3);
-        jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"Pizzaria\".\n\nPara dar continuidade ao processo clique em \ncontinuar para criar o banco de dados do sistema.");
+        jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"PizzariaJava\".\n\nPara dar continuidade ao processo clique em \ncontinuar para criar o banco de dados do sistema.");
         jScrollPane1.setViewportView(jTextArea1);
 
         BContinuar.setText("Continuar");

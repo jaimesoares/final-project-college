@@ -118,7 +118,7 @@
                   <Font name="Monospaced" size="13" style="1"/>
                 </Property>
                 <Property name="rows" type="int" value="3"/>
-                <Property name="text" type="java.lang.String" value="Assistente de Configura&#xe7;&#xe3;o para Banco de Dados&#xa;do Sistema &quot;Pizzaria&quot;.&#xa;&#xa;Para dar continuidade ao processo clique em &#xa;continuar para criar o banco de dados do sistema."/>
+                <Property name="text" type="java.lang.String" value="Assistente de Configura&#xe7;&#xe3;o para Banco de Dados&#xa;do Sistema &quot;PizzariaJava&quot;.&#xa;&#xa;Para dar continuidade ao processo clique em &#xa;continuar para criar o banco de dados do sistema."/>
               </Properties>
             </Component>
           </SubComponents>
