@@ -18,7 +18,6 @@ import br.com.pizzaria.model.PedidoModel;
 import br.com.pizzaria.util.CentralizarForm;
 import br.com.pizzaria.util.ConectaBanco;
 import br.com.pizzaria.util.Global;
-import br.com.pizzaria.util.LimiteDigitos;
 import br.com.pizzaria.util.ValidaCNPJ;
 import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.VerificarData;
@@ -129,14 +128,14 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
         txtValorDes = new javax.swing.JTextField();
         lblValor5 = new javax.swing.JLabel();
         txtValorNf = new javax.swing.JTextField();
-        lbl_data10 = new javax.swing.JLabel();
-        jCondPagamento = new javax.swing.JComboBox();
         lbl_data11 = new javax.swing.JLabel();
         jFormaPagamento = new javax.swing.JComboBox();
         lbl_data12 = new javax.swing.JLabel();
         txtParc = new javax.swing.JTextField();
         lbl_data13 = new javax.swing.JLabel();
         jtipoPedido = new javax.swing.JComboBox();
+        lbl_data10 = new javax.swing.JLabel();
+        jCondPagamento = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         txtUnidadeItem = new javax.swing.JTextField();
         lblValor11 = new javax.swing.JLabel();
@@ -243,15 +242,15 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
             }
         });
 
-        lbl_data10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_data10.setText("Cond. Pagto.:");
-
-        jCondPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Cond/Pagamento", "3x" }));
-
         lbl_data11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data11.setText("Forma Pagto.:");
 
         jFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
+        jFormaPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormaPagamentoActionPerformed(evt);
+            }
+        });
 
         lbl_data12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data12.setText("Parcelas:");
@@ -277,6 +276,16 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
             }
         });
 
+        lbl_data10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbl_data10.setText("Cond. Pagto.:");
+
+        jCondPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha cond/Pagamento", "À Vista", "Parcelado" }));
+        jCondPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCondPagamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -287,17 +296,9 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                     .addComponent(txtObs)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_data6)
-                                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_data7)))
                             .addComponent(jLabel1)
                             .addComponent(lbl_data13))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 523, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -310,30 +311,37 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                                 .addComponent(lblValor4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtValorDes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                                 .addComponent(lblValor5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_data2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtDtemissao)
-                                        .addGap(23, 23, 23)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCondPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_data10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(lbl_data2)
+                                    .addComponent(txtDtemissao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_data11, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(35, 35, 35)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_data10)
+                                    .addComponent(jCondPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtValorNf, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lbl_data12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtParc, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtParc, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_data6)
+                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_data7)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cbFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -343,27 +351,29 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                     .addComponent(lbl_data6)
                     .addComponent(lbl_data7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_data2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDtemissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_data2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDtemissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_data11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_data12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtParc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbl_data10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCondPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_data11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_data12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtParc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCondPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4)
                 .addComponent(lbl_data13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -574,12 +584,13 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                                     .addComponent(txtDescontoItem)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(lblValor10)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 6, Short.MAX_VALUE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblValor11)
                                     .addComponent(txtTotalNotaItem, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnAdicionar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemover))))
@@ -763,7 +774,6 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
 
         txtCNPJ.setText(((FornecedorBean) cbFornecedor.getSelectedItem()).getPfj());
         validaCNPJCPF();
-        
 
 
     }//GEN-LAST:event_cbFornecedorActionPerformed
@@ -937,6 +947,26 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
     private void jtipoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtipoPedidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtipoPedidoActionPerformed
+
+    private void jFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormaPagamentoActionPerformed
+
+        if (jFormaPagamento.getSelectedItem().equals("Dinheiro") || jFormaPagamento.getSelectedItem().equals("Cartão de Débito")) {
+
+            jCondPagamento.setSelectedIndex(1);
+
+        } else if (jFormaPagamento.getSelectedItem().equals("Cartão de Crédito")) {
+
+            jCondPagamento.setSelectedIndex(2);
+
+        } else {
+
+            jCondPagamento.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jFormaPagamentoActionPerformed
+
+    private void jCondPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCondPagamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCondPagamentoActionPerformed
     public void populaTipoProduto() {
         ProdutoModel produtoModel = new ProdutoModel();
 
@@ -985,7 +1015,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                 novo.setNome(rs.getString("for_nome"));
                 novo.setPfj(rs.getString("for_cod_pfj"));
                 novo.setCodigo(rs.getInt("for_id_fornec"));
-                
+
                 cbFornecedor.addItem(novo);
             }
         } catch (SQLException ex) {
@@ -1221,18 +1251,16 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
     }
 
     private boolean cadastraPedido() {
-    String tp="";
-    
-    FornecedorBean f =new FornecedorBean();
-    
-    
-    JOptionPane.showMessageDialog(null,((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
+
+        String tp = "";
+
+  //  FornecedorBean f =new FornecedorBean();
+        //JOptionPane.showMessageDialog(null,((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
         try {
             String SQLInserePedido = "INSERT INTO `pizzaria`.`ped_compra`\n"
                     + "            (`pedc_data`,\n"
-                               
                     + "             `pedc_vlr_tot`,\n"
                     + "             `pedc_vlr_desc`,\n"
                     + "             `pedc_cod_fornec`,\n"
@@ -1250,43 +1278,43 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
-                   // + "        'pedc_situacao',\n"
+                    // + "        'pedc_situacao',\n"
                     //+ "        'pedc_dt_entrega',\n"  
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?\n);";
             PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInserePedido);
 
-           // pstmt.setInt(1, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
-            pstmt.setString(1,  formatoData.format(data));
-            pstmt.setDouble(2,(txtTotal.getText().isEmpty()?0:Double.parseDouble(txtTotal.getText())));//assim?
-            pstmt.setDouble(3,(txtValorDes.getText().isEmpty()?0:Double.parseDouble(txtValorDes.getText())));//da um erro aqui ...eu até dei uma olhada no banco ...e está como decima ai usei o Double certo né?ok
+            // pstmt.setInt(1, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
+            pstmt.setString(1, formatoData.format(data));
+            pstmt.setDouble(2, (txtTotal.getText().isEmpty() ? 0 : Double.parseDouble(txtTotal.getText())));//assim?
+            pstmt.setDouble(3, (txtValorDes.getText().isEmpty() ? 0 : Double.parseDouble(txtValorDes.getText())));//da um erro aqui ...eu até dei uma olhada no banco ...e está como decima ai usei o Double certo né?ok
             pstmt.setInt(4, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
             pstmt.setString(5, Global.usuario.getLogin());
-            if(jtipoPedido.getSelectedItem().equals("Pedido")){
-              
-               tp="P";
-                
-            }else{
-                 
-              tp="C";
-                
+            if (jtipoPedido.getSelectedItem().equals("Pedido")) {
+
+                tp = "P";
+
+            } else {
+
+                tp = "C";
+
             }
             pstmt.setString(6, tp);
             pstmt.setString(7, jFormaPagamento.getSelectedItem().toString());
             pstmt.setString(8, jCondPagamento.getSelectedItem().toString());//não tem nada nesse combo!ok 
             pstmt.setString(9, txtObs.getText());
-          
+
             pstmt.execute();
 
-            // if (cadastrarItens() && atualizaEstoque()) {
-               ConectaBanco.getConnection().commit();
-               JOptionPane.showMessageDialog(null, "Nota Fiscal Entrada realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
-            //return true;
-            //} else {
-            //   ConectaBanco.closeConnection();
-            //  return false;
-            //}
+             if (cadastrarItens() ) {
+            ConectaBanco.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+            return true;
+            } else {
+               ConectaBanco.closeConnection();
+              return false;
+            }
         } catch (SQLException ex) {
             try {
                 ConectaBanco.getConnection().rollback();
@@ -1295,13 +1323,91 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                 Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return false;
-       
-    
+
         }
-        return false;
         
-}
-}
+
+    }
 
     
+     public boolean cadastrarItens() {
+
+        for (int i = 0; i < listaDeItens.size(); i++) {//toda vez que apertar no botão acionar grava um item nessa lista listaDeItens aqui voce varre ela e popula o banco blz man...vai lá dormir vou me virar kkk já ajudou pra carambaboa sorte e boa naoite...ja ja eu levanto man....04:30puts fui falo mano dorme Com Deus nós Amém
+           try {
+
+                String SQLInsertItens = "insert into `pizzaria`.`item_ped_compra` (\n"//os itens do pedido ok
+                        + "  `pedci_cod_ped`,\n"//código do pedido aqui falta 
+                       // + "  `pedci_item`,\n"
+                        + "  `pedci_cod_prod`,\n"
+                        + "  `pedci_qtde`,\n"
+                        + "  `pedci_vlr_unit`,\n"
+                        + "  `pedci_vlr_desc`,\n"
+                        + "  `pedci_vlr_tot`,\n"
+                        + "  `pedci_cod_ref_prod`,\n"
+                        + "  `pedci_situacao`\n"
+                        + ") "
+                        + "values (?,\n"
+                      //  + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        + "        ?,\n"
+                        
+                        + "       ?);";
+
+                PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
+                pstmt.setInt(1, codigoDoPedido());
+               // pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
+               // pstmt.setInt(2, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
+               // pstmt.setInt(2,2);
+                pstmt.setInt(2, listaDeItens.get(i).getCodigoProduto());
+                pstmt.setDouble(3, listaDeItens.get(i).getQuantidade());
+                pstmt.setDouble(4, listaDeItens.get(i).getPrecoUnitario());
+                pstmt.setDouble(5, listaDeItens.get(i).getValotDesconto());
+                pstmt.setDouble(6, listaDeItens.get(i).getPrecoTotalNotaFiscalItem());
+                pstmt.setString(7, listaDeItens.get(i).getRefItemProduto());
+                //pstmt.setDouble(7, listaDeItens.get(i).getPrecoTotalItem());
+                
+                pstmt.setString(8, "P");
+                pstmt.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    ConectaBanco.getConnection().rollback();
+                    JOptionPane.showMessageDialog(null, "Impossível Cadastrar Item" + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+
+                } catch (SQLException ex1) {
+                    Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                return false;
+            }
+        }
+
+        return true;
+    }
+     
+     public int codigoDoPedido() {
+        int codigo = 1;
+
+        try {
+            String SQLSelection = "select pedc_cod from ped_compra order by pedc_cod desc limit 1";
+
+            PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                codigo = rs.getInt("pedc_cod");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //JOptionPane.showMessageDialog(null, codigo);
+        return codigo;
+    }
     
+   
+}
+
