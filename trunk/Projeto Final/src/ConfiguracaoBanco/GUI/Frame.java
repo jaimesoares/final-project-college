@@ -5,20 +5,20 @@
 package ConfiguracaoBanco.GUI;
 
 import ConfiguracaoBanco.DAO.VerificaConexaoDAO;
-
+import javax.swing.JOptionPane;
 
 public class Frame extends javax.swing.JFrame {
-    
+
     public Frame() {
         initComponents();
         FServidor.requestFocus();
         setLocationRelativeTo(null);
         setVisible(true);
-        
+
     }
 
     VerificaConexaoDAO verificaConexaoDAO = new VerificaConexaoDAO();
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -26,7 +26,6 @@ public class Frame extends javax.swing.JFrame {
         PBorda = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        BContinuar = new javax.swing.JButton();
         BVerificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -47,19 +46,6 @@ public class Frame extends javax.swing.JFrame {
         jTextArea1.setRows(3);
         jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"Pizzaria\".\n\nPara dar continuidade ao processo certifique-se\nde ter instalado o Banco de Dados MySQL");
         jScrollPane1.setViewportView(jTextArea1);
-
-        BContinuar.setText("Continuar");
-        BContinuar.setEnabled(false);
-        BContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BContinuarActionPerformed(evt);
-            }
-        });
-        BContinuar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BContinuarKeyPressed(evt);
-            }
-        });
 
         BVerificar.setText("Verificar");
         BVerificar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,15 +107,11 @@ public class Frame extends javax.swing.JFrame {
                             .addComponent(FServidor, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                             .addComponent(FSenha))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PBordaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PBordaLayout.createSequentialGroup()
-                                .addGap(0, 44, Short.MAX_VALUE)
-                                .addComponent(BVerificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(BContinuar))
-                            .addGroup(PBordaLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(jLabel4)
+                        .addGap(0, 47, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PBordaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BVerificar)))
                 .addContainerGap())
         );
         PBordaLayout.setVerticalGroup(
@@ -151,9 +133,7 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(FSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(PBordaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BContinuar)
-                    .addComponent(BVerificar))
+                .addComponent(BVerificar)
                 .addContainerGap())
         );
 
@@ -179,20 +159,16 @@ public class Frame extends javax.swing.JFrame {
 
     private void BVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVerificarActionPerformed
         // TODO add your handling code here: 
-        if(verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))){
+        if (verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))) {
+            JOptionPane.showMessageDialog(null, "Conexão configurada com sucesso!");
+            dispose();
+            Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()));
             FServidor.setEditable(false);
             FPorta.setEditable(false);
             FSenha.setEditable(false);
-            BContinuar.setEnabled(true);
-            BContinuar.requestFocus();
+            
         }
     }//GEN-LAST:event_BVerificarActionPerformed
-
-    private void BContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BContinuarActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()));
-    }//GEN-LAST:event_BContinuarActionPerformed
 
     private void FServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FServidorActionPerformed
         // TODO add your handling code here:
@@ -211,23 +187,18 @@ public class Frame extends javax.swing.JFrame {
 
     private void BVerificarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BVerificarKeyPressed
         // TODO add your handling code here:
-        if(verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))){
+        if (verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))) {
             FServidor.setEditable(false);
             FPorta.setEditable(false);
             FSenha.setEditable(false);
-            BContinuar.setEnabled(true);
-            BContinuar.requestFocus();
+            JOptionPane.showMessageDialog(null, "Conexão configurada com sucesso!");
+            dispose();
+            Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()));
+            
         }
     }//GEN-LAST:event_BVerificarKeyPressed
 
-    private void BContinuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BContinuarKeyPressed
-        // TODO add your handling code here:
-        dispose();
-        Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(FSenha.getPassword()));
-    }//GEN-LAST:event_BContinuarKeyPressed
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BContinuar;
     private javax.swing.JButton BVerificar;
     private javax.swing.JTextField FPorta;
     private javax.swing.JPasswordField FSenha;

@@ -43,6 +43,15 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
             }
 
         });
+        btnSobre1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnSobre1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnSobre1ActionPerformed(e);
+            }
+
+        });
 
     }
 
@@ -72,7 +81,7 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
 
         btnSobre1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnSobre1.setForeground(new java.awt.Color(0, 51, 255));
-        btnSobre1.setText("<html>Gerar Backup <font size='2' style='color:black'> Crtl-1 </font>");
+        btnSobre1.setText("<html>Gerar Backup <font size='2' style='color:black'> Crtl-2 </font>");
         btnSobre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSobre1ActionPerformed(evt);

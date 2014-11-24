@@ -452,7 +452,27 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
                 if (rs.getString("ped_entregador") != null) {
                     entregador = pesquisaEntregador(Integer.parseInt(rs.getString("ped_entregador"))).getNome();
                 }
-                tabela.addRow(new Object[]{rs.getInt("ped_cod"), rs.getString("cli_nome"), rs.getString("cli_telefone"), rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), entregador, rs.getString("ped_stt_canc"), rs.getString("ped_hr"), rs.getString("ped_hr_saiu"), rs.getString("ped_hr_entrega")});
+                String situacao = "";
+                switch (rs.getString("ped_stt_canc")) {
+                    case "A":
+                        situacao = "Aberto";
+                        break;
+                    case "C":
+                        situacao = "Cancelado";
+                        break;
+                    case "S":
+                        situacao = "Saiu p/ Entrega";
+                        break;
+                    case "E":
+                        situacao = "Entrega OK";
+                        break;
+                    case "N":
+                        situacao = "Não Entregue";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+                tabela.addRow(new Object[]{rs.getInt("ped_cod"), rs.getString("cli_nome"), rs.getString("cli_telefone"), rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), entregador, situacao, rs.getString("ped_hr"), rs.getString("ped_hr_saiu"), rs.getString("ped_hr_entrega")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -481,7 +501,27 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "", "", rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), "", rs.getString("ped_stt_canc"), rs.getString("ped_hr"), rs.getString("ped_hr_saiu"), rs.getString("ped_hr_entrega")});
+                String situacao = "";
+                switch (rs.getString("ped_stt_canc")) {
+                    case "A":
+                        situacao = "Aberto";
+                        break;
+                    case "C":
+                        situacao = "Cancelado";
+                        break;
+                    case "S":
+                        situacao = "Saiu p/ Entrega";
+                        break;
+                    case "E":
+                        situacao = "Entrega OK";
+                        break;
+                    case "N":
+                        situacao = "Não Entregue";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "", "", rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), "", situacao, rs.getString("ped_hr"), rs.getString("ped_hr_saiu"), rs.getString("ped_hr_entrega")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);

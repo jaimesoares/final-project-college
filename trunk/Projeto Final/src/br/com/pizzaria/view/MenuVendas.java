@@ -63,6 +63,33 @@ public class MenuVendas extends javax.swing.JInternalFrame {
             }
 
         });
+        btnCliente1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnCliente1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCliente1ActionPerformed(e);
+            }
+
+        });
+        btnCliente2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnCliente2.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCliente2ActionPerformed(e);
+            }
+
+        });
+        btnCliente3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnCliente3.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCliente3ActionPerformed(e);
+            }
+
+        });
     }
 
     /**
@@ -113,7 +140,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
 
         btnCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCliente1.setForeground(new java.awt.Color(0, 51, 255));
-        btnCliente1.setText("<html>Entrega de Pedidos <font size='2' style='color:black'> Crtl-3 </font>");
+        btnCliente1.setText("<html>Entrega de Pedidos <font size='2' style='color:black'> Crtl-4 </font>");
         btnCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCliente1ActionPerformed(evt);
@@ -122,7 +149,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
 
         btnCliente2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCliente2.setForeground(new java.awt.Color(0, 51, 255));
-        btnCliente2.setText("<html>Fechamento do Dia <font size='2' style='color:black'> Crtl-3 </font>");
+        btnCliente2.setText("<html>Fechamento do Dia <font size='2' style='color:black'> Crtl-5 </font>");
         btnCliente2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCliente2ActionPerformed(evt);
@@ -131,7 +158,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
 
         btnCliente3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCliente3.setForeground(new java.awt.Color(0, 51, 255));
-        btnCliente3.setText("<html>Atualiza Entrega <font size='2' style='color:black'> Crtl-3 </font>");
+        btnCliente3.setText("<html>Atualiza Entrega <font size='2' style='color:black'> Crtl-6 </font>");
         btnCliente3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCliente3ActionPerformed(evt);
@@ -188,7 +215,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         if (cancelamentoPedidoV == null || !cancelamentoPedidoV.isShowing()) {
             cancelamentoPedidoV = new CancelamentoPedidosView(Global.principal);
             Global.principal.Desktop.add(cancelamentoPedidoV);
-            centralizaForm(cancelamentoPedidoV);
+            centralizaFormCancelamento(cancelamentoPedidoV);
             cancelamentoPedidoV.setVisible(true);
         }
     }//GEN-LAST:event_btnCancelarPedidoActionPerformed
@@ -216,7 +243,7 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         if (entregaPedV == null || !entregaPedV.isShowing()) {
             entregaPedV = new EntregaPedidoView();
             Global.principal.Desktop.add(entregaPedV);
-            centralizaForm(entregaPedV);
+            centralizaFormCancelamento(entregaPedV);
             entregaPedV.setVisible(true);
         }
     }//GEN-LAST:event_btnCliente3ActionPerformed
@@ -245,18 +272,25 @@ public class MenuVendas extends javax.swing.JInternalFrame {
         Dimension dw = getSize();
         setLocation((0), (0));
     }
-    
+
     private void centralizaForm(JInternalFrame frame) {
         Dimension desktopSize = Global.principal.Desktop.getSize();
         Dimension jInternalFrameSize = frame.getSize();
         frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
-    
+
     public void centralizaFormPedido(JInternalFrame frame) {
         Dimension desktopSize = Global.principal.getDesktop().getSize();
         Dimension jInternalFrameSize = frame.getSize();
-        frame.setLocation(((desktopSize.width - jInternalFrameSize.width)) / 2+80,
+        frame.setLocation(((desktopSize.width - jInternalFrameSize.width)) / 2 + 100,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+    
+    public void centralizaFormCancelamento(JInternalFrame frame) {
+        Dimension desktopSize = Global.principal.getDesktop().getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation(((desktopSize.width - jInternalFrameSize.width)) / 2 + 150,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 }

@@ -92,7 +92,7 @@ ConsultaMovEstoqueView movimentoEstoque;
         if (relatorioClienteV == null || !relatorioClienteV.isShowing()) {
             relatorioClienteV = new RelatorioClienteView(Global.principal);
             Global.principal.Desktop.add(relatorioClienteV);
-            centralizaForm(relatorioClienteV);
+            centralizaFormCancelamento(relatorioClienteV);
             relatorioClienteV.setVisible(true);
         }
     }//GEN-LAST:event_btnRelatorioClienteActionPerformed
@@ -123,6 +123,13 @@ ConsultaMovEstoqueView movimentoEstoque;
         Dimension desktopSize = Global.principal.Desktop.getSize();
         Dimension jInternalFrameSize = frame.getSize();
         frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+    
+    public void centralizaFormCancelamento(JInternalFrame frame) {
+        Dimension desktopSize = Global.principal.getDesktop().getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation(((desktopSize.width - jInternalFrameSize.width)) / 2 + 150,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 }

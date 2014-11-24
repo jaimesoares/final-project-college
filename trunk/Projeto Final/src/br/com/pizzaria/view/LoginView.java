@@ -32,7 +32,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         momentUser = new UsuarioBean();
         usuarioController = new UsuarioController();
         play = new Som();
-        this.login();
+        //this.login();
         txtUsuario.setDocument(new LimiteDigitos(23));
         txtSenha.setDocument(new LimiteDigitos(20));
         

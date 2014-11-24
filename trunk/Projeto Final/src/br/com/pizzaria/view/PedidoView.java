@@ -1814,9 +1814,20 @@ public class PedidoView extends javax.swing.JInternalFrame {
         cbFormaPagamento.setEnabled(false);
         txtValorRecebido.setEnabled(false);
         this.dispose();
+        
         PedidoView pedidoV = new PedidoView(codigoFuncionario);
         Global.principal.Desktop.add(pedidoV);
-        CentralizarForm.centralizaForm(pedidoV);
+       // CentralizarForm.centralizaForm(pedidoV);
+        
+        
+        Dimension desktopSize = Global.principal.getDesktop().getSize();
+        Dimension jInternalFrameSize = pedidoV.getSize();
+        pedidoV.setLocation(((desktopSize.width - jInternalFrameSize.width)) / 2 + 100,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    
+        
+        
+        
         pedidoV.setVisible(true);
 
     }//GEN-LAST:event_btnImprimirCupomActionPerformed
