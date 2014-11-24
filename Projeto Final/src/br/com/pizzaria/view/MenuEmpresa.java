@@ -88,6 +88,15 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
             }
 
         });
+         btnFuncao1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnFuncao1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnFuncao1ActionPerformed(e);
+            }
+
+        });
 
     }
 
@@ -157,7 +166,7 @@ public class MenuEmpresa extends javax.swing.JInternalFrame {
 
         btnFuncao1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnFuncao1.setForeground(new java.awt.Color(0, 51, 255));
-        btnFuncao1.setText("<html>Logout<font size='2' style='color:black'> Crtl-5 </font>");
+        btnFuncao1.setText("<html>Logout<font size='2' style='color:black'> Crtl-6 </font>");
         btnFuncao1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFuncao1ActionPerformed(evt);

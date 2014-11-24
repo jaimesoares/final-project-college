@@ -5,8 +5,6 @@
  */
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.util.Global;
-
 /**
  *
  * @author Jaime
@@ -106,6 +104,7 @@ public class IngredientesPizzaView extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 IngredientesPizzaView dialog = new IngredientesPizzaView(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

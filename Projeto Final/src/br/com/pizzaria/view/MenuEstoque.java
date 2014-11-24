@@ -65,6 +65,42 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             }
 
         });
+        btnPrecoProduto1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnPrecoProduto1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPrecoProduto1ActionPerformed(e);
+            }
+
+        });
+        btnPrecoProduto2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnPrecoProduto2.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPrecoProduto2ActionPerformed(e);
+            }
+
+        });
+        btnPrecoProduto3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnPrecoProduto3.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPrecoProduto3ActionPerformed(e);
+            }
+
+        });
+        btnRelatorioCliente1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_7, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnRelatorioCliente1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnRelatorioCliente1ActionPerformed(e);
+            }
+
+        });
     }
 
     /**
@@ -120,7 +156,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnPrecoProduto1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPrecoProduto1.setForeground(new java.awt.Color(0, 51, 255));
-        btnPrecoProduto1.setText("<html> Ajustes de Estoque<font size='2' style='color:black'> Crtl-3 </font>");
+        btnPrecoProduto1.setText("<html> Ajustes de Estoque<font size='2' style='color:black'> Crtl-4 </font>");
         btnPrecoProduto1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrecoProduto1ActionPerformed(evt);
@@ -129,7 +165,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnPrecoProduto2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPrecoProduto2.setForeground(new java.awt.Color(0, 51, 255));
-        btnPrecoProduto2.setText("<html>Incluir NF Entrada<font size='2' style='color:black'> Crtl-3 </font>");
+        btnPrecoProduto2.setText("<html>Incluir NF Entrada<font size='2' style='color:black'> Crtl-5 </font>");
         btnPrecoProduto2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrecoProduto2ActionPerformed(evt);
@@ -138,7 +174,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnPrecoProduto3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPrecoProduto3.setForeground(new java.awt.Color(0, 51, 255));
-        btnPrecoProduto3.setText("<html> Excluir NF Entrada<font size='2' style='color:black'> Crtl-3 </font>");
+        btnPrecoProduto3.setText("<html> Excluir NF Entrada<font size='2' style='color:black'> Crtl-6 </font>");
         btnPrecoProduto3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrecoProduto3ActionPerformed(evt);
@@ -147,7 +183,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
 
         btnRelatorioCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnRelatorioCliente1.setForeground(new java.awt.Color(0, 51, 255));
-        btnRelatorioCliente1.setText("<html> Movimento Estoque <font size='2' style='color:black'> Crtl-1 </font>");
+        btnRelatorioCliente1.setText("<html> Movimento Estoque <font size='2' style='color:black'> Crtl-7 </font>");
         btnRelatorioCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioCliente1ActionPerformed(evt);

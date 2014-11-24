@@ -35,7 +35,7 @@ public class SuporteView extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPORTE");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Sistema Pizzaria Mama"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Sistema Pizzaria Aragão"));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

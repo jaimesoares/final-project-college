@@ -44,6 +44,33 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             }
 
         });
+        btnFornecedor1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnFornecedor1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnFornecedor1ActionPerformed(e);
+            }
+
+        });
+        btnFornecedor2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnFornecedor2.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnFornecedor2ActionPerformed(e);
+            }
+
+        });
+        btnFornecedor3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnFornecedor3.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnFornecedor3ActionPerformed(e);
+            }
+
+        });
 
     }
 
@@ -80,7 +107,7 @@ public class MenuCompras extends javax.swing.JInternalFrame {
 
         btnFornecedor1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnFornecedor1.setForeground(new java.awt.Color(0, 51, 255));
-        btnFornecedor1.setText("<html>Cotação <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor1.setText("<html>Cotação <font size='2' style='color:black'> Crtl-2 </font>");
         btnFornecedor1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFornecedor1ActionPerformed(evt);
@@ -89,7 +116,7 @@ public class MenuCompras extends javax.swing.JInternalFrame {
 
         btnFornecedor2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnFornecedor2.setForeground(new java.awt.Color(0, 51, 255));
-        btnFornecedor2.setText("<html>Pedido de Compra <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor2.setText("<html>Pedido de Compra <font size='2' style='color:black'> Crtl-3 </font>");
         btnFornecedor2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFornecedor2ActionPerformed(evt);
@@ -98,7 +125,7 @@ public class MenuCompras extends javax.swing.JInternalFrame {
 
         btnFornecedor3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnFornecedor3.setForeground(new java.awt.Color(0, 51, 255));
-        btnFornecedor3.setText("<html>Cancela Pedido de Compra <font size='2' style='color:black'> Crtl-1 </font>");
+        btnFornecedor3.setText("<html>Cancela Pedido de Compra <font size='2' style='color:black'> Crtl-4 </font>");
         btnFornecedor3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFornecedor3ActionPerformed(evt);

@@ -45,7 +45,27 @@ public class CancelamentoPedidoModel {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "Entrega", rs.getString("cli_nome"), rs.getString("cli_telefone"), rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), rs.getString("ped_stt_canc"), rs.getString("ped_hr")});
+                String situacao = "";
+                switch (rs.getString("ped_stt_canc")) {
+                    case "A":
+                        situacao = "Aberto";
+                        break;
+                    case "C":
+                        situacao = "Cancelado";
+                        break;
+                    case "S":
+                        situacao = "Saiu p/ Entrega";
+                        break;
+                    case "E":
+                        situacao = "Entrega OK";
+                        break;
+                    case "N":
+                        situacao = "Não Entregue";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "Entrega", rs.getString("cli_nome"), rs.getString("cli_telefone"), rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), situacao, rs.getString("ped_hr")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,7 +132,27 @@ public class CancelamentoPedidoModel {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "Balcão", "", "", rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), rs.getString("ped_stt_canc"), rs.getString("ped_hr")});
+                String situacao = "";
+                switch (rs.getString("ped_stt_canc")) {
+                    case "A":
+                        situacao = "Aberto";
+                        break;
+                    case "C":
+                        situacao = "Cancelado";
+                        break;
+                    case "S":
+                        situacao = "Saiu p/ Entrega";
+                        break;
+                    case "E":
+                        situacao = "Entrega OK";
+                        break;
+                    case "N":
+                        situacao = "Não Entregue";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "Balcão", "", "", rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), situacao, rs.getString("ped_hr")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,7 +166,6 @@ public class CancelamentoPedidoModel {
                 + "  i.`item_preco_unit`,\n"
                 + "  i.`item_quantidade`,\n"
                 + "  i.`item_preco_tot`,\n"
-                
                 + "  i.item_stt_meia_pizza \n"
                 + "FROM\n"
                 + "  pedido p \n"

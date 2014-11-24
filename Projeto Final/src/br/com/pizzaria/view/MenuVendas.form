@@ -110,7 +110,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Entrega de Pedidos &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-3 &lt;/font&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Entrega de Pedidos &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-4 &lt;/font&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCliente1ActionPerformed"/>
@@ -124,7 +124,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Fechamento do Dia &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-3 &lt;/font&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Fechamento do Dia &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-5 &lt;/font&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCliente2ActionPerformed"/>
@@ -138,7 +138,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Atualiza Entrega &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-3 &lt;/font&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Atualiza Entrega &lt;font size=&apos;2&apos; style=&apos;color:black&apos;&gt; Crtl-6 &lt;/font&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCliente3ActionPerformed"/>

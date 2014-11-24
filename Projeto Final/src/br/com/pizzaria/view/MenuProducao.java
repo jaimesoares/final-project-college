@@ -43,6 +43,15 @@ public class MenuProducao extends javax.swing.JInternalFrame {
             }
 
         });
+        btnPedidoBalcao1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnPedidoBalcao1.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPedidoBalcao1ActionPerformed(e);
+            }
+
+        });
 
     }
 
@@ -73,7 +82,7 @@ public class MenuProducao extends javax.swing.JInternalFrame {
 
         btnPedidoBalcao1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnPedidoBalcao1.setForeground(new java.awt.Color(0, 51, 255));
-        btnPedidoBalcao1.setText("<html>Requisição de Material <font size='2' style='color:black'> Crtl-1 </font>");
+        btnPedidoBalcao1.setText("<html>Requisição de Material <font size='2' style='color:black'> Crtl-2 </font>");
         btnPedidoBalcao1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPedidoBalcao1ActionPerformed(evt);

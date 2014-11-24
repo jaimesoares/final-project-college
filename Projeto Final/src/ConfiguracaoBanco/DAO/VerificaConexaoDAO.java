@@ -89,7 +89,13 @@ public class VerificaConexaoDAO {
                     + "  `cli_obs` varchar(100) DEFAULT NULL,\n"
                     + "  `cli_cidade` varchar(100) DEFAULT NULL,\n"
                     + "  PRIMARY KEY (`cli_cod`)\n"
-                    + ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Tabela de Cadastro dos Clientes';\n");
+                    + ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Tabela de Cadastro dos Clientes';\n");
+
+            statement.execute("CREATE TABLE `" + dataBase + "`.`cond_pagto` (\n"
+                    + "`cpg_cod` int(11) NOT NULL,\n"
+                    + "  `cpg_descr` varchar(20) DEFAULT NULL,\n"
+                    + "  PRIMARY KEY (`cpg_cod`)\n"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`cupom_titulos_receb` (\n"
                     + "  `ctrc_cupom` int(10) unsigned NOT NULL,\n"
@@ -106,6 +112,15 @@ public class VerificaConexaoDAO {
                     + "  PRIMARY KEY (`fec_ano_mes_fech`,`fec_cod_prod`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
+            statement.execute("CREATE TABLE `" + dataBase + "`.`forma_pagto` (\n"
+                    + "  `fpg_cod` int(11) NOT NULL,\n"
+                    + "  `fpg_descr` varchar(45) DEFAULT NULL,\n"
+                    + "  `fpg_nro_dias` int(11) DEFAULT NULL,\n"
+                    + "  `fpg_qtde_parc` int(11) DEFAULT NULL,\n"
+                    + "  `fpg_fora_periodo` char(1) DEFAULT 'N' COMMENT 'N=Nao  S=Sim (Fora da Data, fora da Quinzena, etc)\\\\n',\n"
+                    + "  PRIMARY KEY (`fpg_cod`)\n"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
             statement.execute("CREATE TABLE `" + dataBase + "`.`invent_estoq_mes` (\n"
                     + "  `inv_ano_mes_invent` int(10) unsigned NOT NULL,\n"
                     + "  `inv_cod_prod` int(10) unsigned NOT NULL,\n"
@@ -114,21 +129,20 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`item_nf_entrada` (\n"
-                    + "  `nfei_nro_nf` int(10) unsigned NOT NULL,\n"
+                    + "`nfei_nro_nf` char(10) NOT NULL,\n"
                     + "  `nfei_ser` char(3) NOT NULL,\n"
-                    + "  `nfei_seq` int(10) unsigned NOT NULL,\n"
                     + "  `nfei_cod_forn` int(10) unsigned NOT NULL,\n"
                     + "  `nfei_cod_item` int(10) unsigned NOT NULL,\n"
                     + "  `nfei_cod_prod` int(10) unsigned NOT NULL,\n"
                     + "  `nfei_qtde` decimal(10,3) DEFAULT NULL,\n"
-                    + "  `nfei_vlr` decimal(10,2) unsigned zerofill DEFAULT NULL,\n"
+                    + "  `nfei_vlr_unit` decimal(10,2) unsigned zerofill DEFAULT NULL,\n"
                     + "  `nfei_vlr_desc` decimal(10,2) DEFAULT NULL,\n"
                     + "  `nfei_vlr_imposto` decimal(10,2) DEFAULT NULL,\n"
                     + "  `nfei_ref_prod` varchar(15) DEFAULT NULL,\n"
                     + "  `nfei_vlr_nf` decimal(10,2) DEFAULT NULL,\n"
-                    + "  `nfei_vlr_tot_prod` decimal(10,2) DEFAULT NULL, \n"
-                    + "  PRIMARY KEY (`nfei_nro_nf`,`nfei_ser`,`nfei_seq`,`nfei_cod_forn`,`nfei_cod_item`)\n"
-                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
+                    + "  `nfei_vlr_tot_prod` decimal(10,2) DEFAULT NULL,\n"
+                    + "  PRIMARY KEY (`nfei_nro_nf`,`nfei_ser`,`nfei_cod_forn`,`nfei_cod_item`)\n"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`movto_caixa` (\n"
                     + "  `mcx_id_Movto_Cxa` int(10) unsigned NOT NULL AUTO_INCREMENT,\n"
@@ -147,24 +161,6 @@ public class VerificaConexaoDAO {
                     + "  `umed_descr` varchar(20) NOT NULL,\n"
                     + "  PRIMARY KEY (`umed_unid_med`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
-
-            statement.execute("CREATE TABLE `" + dataBase + "`.`nf_entrada` (\n"
-                    + "  `nfe_nro_nf` int(10) unsigned NOT NULL,\n"
-                    + "  `nfe_ser` char(3) NOT NULL,\n"
-                    + "  `nfe_cod_forn` int(11) unsigned NOT NULL,\n"
-                    + "  `nfe_dt_movto` date NOT NULL,\n"
-                    + "  `nfe_vlr_tot_prod` decimal(10,2) NOT NULL,\n"
-                    + "  `nfe_vlr_nf` decimal(10,2) NOT NULL,\n"
-                    + "  `nfe_vlr_desc` decimal(10,2) NOT NULL,\n"
-                    + "  `nfe_vlr_imposto` decimal(10,2) NOT NULL,\n"
-                    + "  `nfe_dt_emis` date NOT NULL,\n"
-                    + "  `nfe_dt_receb` date NOT NULL,\n"
-                    + "  `nfe_ped_compra` int(11) DEFAULT NULL COMMENT 'S/N',\n"
-                    + "  `nfe_id_usuario` varchar(15) DEFAULT NULL,\n"
-                    + "  PRIMARY KEY (`nfe_nro_nf`,`nfe_ser`,`nfe_cod_forn`),\n"
-                    + "  KEY `fk_entrada_usuario` (`nfe_id_usuario`),\n"
-                    + "  CONSTRAINT `fk_entrada_usuario` FOREIGN KEY (`nfe_id_usuario`) REFERENCES `usuario` (`usu_login`)\n"
-                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`nf_entrada_titulos_pagar` (\n"
                     + "  `nfet_cod_forn` int(10) unsigned NOT NULL,\n"
@@ -416,9 +412,43 @@ public class VerificaConexaoDAO {
                     + "\n"
                     + "\n");
 
+            statement.execute("CREATE TABLE `" + dataBase + "`.`ped_compra` (\n"
+                    + "`pedc_cod` int(11) NOT NULL AUTO_INCREMENT,\n"
+                    + "  `pedc_data` date NOT NULL,\n"
+                    + "  `pedc_vlr_tot` decimal(7,2) NOT NULL,\n"
+                    + "  `pedc_vlr_desc` decimal(6,2) NOT NULL,\n"
+                    + "  `pedc_cod_fornec` int(11) NOT NULL,\n"
+                    + "  `pedc_id_usuario` varchar(15) NOT NULL,\n"
+                    + "  `pedc_tp_ped_cotacao` char(1) NOT NULL DEFAULT 'P' COMMENT 'P=Pedido   C=Cotação',\n"
+                    + "  `pedc_situacao` char(1) NOT NULL DEFAULT 'P' COMMENT 'P=Pendente   R=Recebido   C=Cancelado',\n"
+                    + "  `pedc_dt_entrega` date DEFAULT NULL,\n"
+                    + "  `pedc_forma_pagto` varchar(50) DEFAULT NULL,\n"
+                    + "  `pedc_cond_pagto` varchar(50) DEFAULT NULL,\n"
+                    + "  `pedc_obs` varchar(45) DEFAULT NULL,\n"
+                    + "  `pedc_vlr_liq` decimal(10,2) DEFAULT NULL,\n"
+                    + "  PRIMARY KEY (`pedc_cod`)\n"
+                    + ") ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;");
+
+            statement.execute("CREATE TABLE `" + dataBase + "`.`item_ped_compra` (\n"
+                    + "`pedci_cod_ped` int(11) NOT NULL,\n"
+                    + "  `pedci_item` int(11) NOT NULL,\n"
+                    + "  `pedci_cod_prod` int(11) NOT NULL,\n"
+                    + "  `pedci_qtde` decimal(10,4) NOT NULL,\n"
+                    + "  `pedci_vlr_unit` decimal(10,2) NOT NULL,\n"
+                    + "  `pedci_vlr_desc` decimal(10,2) NOT NULL,\n"
+                    + "  `pedci_vlr_tot` decimal(10,2) NOT NULL,\n"
+                    + "  `pedci_cod_ref_prod` varchar(15) DEFAULT NULL,\n"
+                    + "  `pedci_situacao` char(1) NOT NULL DEFAULT 'P' COMMENT 'P=Pendente   R=Recebido',\n"
+                    + "  PRIMARY KEY (`pedci_cod_ped`,`pedci_item`),\n"
+                    + "  KEY `fk_item_pedcompra_pedcompra_idx` (`pedci_cod_ped`),\n"
+                    + "  KEY `fk_item_pedcompra_produtos_idx` (`pedci_cod_prod`),\n"
+                    + "  CONSTRAINT `fk_item_pedcompra_pedcompra` FOREIGN KEY (`pedci_cod_ped`) REFERENCES `ped_compra` (`pedc_cod`) ON DELETE NO ACTION ON UPDATE NO ACTION,\n"
+                    + "  CONSTRAINT `fk_item_pedcompra_produtos` FOREIGN KEY (`pedci_cod_prod`) REFERENCES `produtos` (`prd_prod`) ON DELETE NO ACTION ON UPDATE NO ACTION\n"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
             statement.execute("\n"
                     + "CREATE TABLE `" + dataBase + "`.`ajuste_estoq` (\n"
-                    + "  `aju_id` int(11) NOT NULL AUTO_INCREMENT,\n"
+                    + "`aju_id` int(11) NOT NULL AUTO_INCREMENT,\n"
                     + "  `aju_dt_movto` date NOT NULL,\n"
                     + "  `aju_cod_prod` int(11) NOT NULL,\n"
                     + "  `aju_tipo_movto` int(11) NOT NULL,\n"
@@ -431,7 +461,7 @@ public class VerificaConexaoDAO {
                     + "  CONSTRAINT `fk_ajuste_funcionario` FOREIGN KEY (`aju_cod_func`) REFERENCES `funcionario` (`fun_codigo`),\n"
                     + "  CONSTRAINT `fk_ajuste_produtos` FOREIGN KEY (`aju_cod_prod`) REFERENCES `produtos` (`prd_prod`),\n"
                     + "  CONSTRAINT `fk_ajuste_tipo_movto` FOREIGN KEY (`aju_tipo_movto`) REFERENCES `tipo_movto_estoq` (`tme_id_tipo`)\n"
-                    + ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;\n");
+                    + ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`requis_estoq` (\n"
                     + "  `req_id` int(11) NOT NULL AUTO_INCREMENT,\n"
@@ -462,7 +492,7 @@ public class VerificaConexaoDAO {
                     + "  `sdoe_qtd_ent` decimal(12,5) NOT NULL,\n"
                     + "  `sdoe_qtd_sai` decimal(12,5) NOT NULL,\n"
                     + "  `sdoe_qtd_sdo_atu` decimal(12,5) NOT NULL,\n"
-                    + "  `sdoe_nro_docto` int(11) DEFAULT NULL,\n"
+                    + "  `sdoe_nro_docto` char(10) DEFAULT NULL,\n"
                     + "  PRIMARY KEY (`sdoe_dt_movto`,`sdoe_cod_prod`),\n"
                     + "  KEY `fk_saldo_estoque_produtos` (`sdoe_cod_prod`),\n"
                     + "  CONSTRAINT `fk_saldo_estoque_produtos` FOREIGN KEY (`sdoe_cod_prod`) REFERENCES `produtos` (`prd_prod`) ON DELETE NO ACTION ON UPDATE NO ACTION\n"
@@ -493,8 +523,26 @@ public class VerificaConexaoDAO {
                     + "  CONSTRAINT `fk_usuario_funcionario` FOREIGN KEY (`usu_fun_cod`) REFERENCES `funcionario` (`fun_codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de Usuarios do Sistema';\n");
 
+            statement.execute("CREATE TABLE `" + dataBase + "`.`nf_entrada` (\n"
+                    + "  `nfe_nro_nf` char(10) unsigned NOT NULL,\n"
+                    + "  `nfe_ser` char(3) NOT NULL,\n"
+                    + "  `nfe_cod_forn` int(11) unsigned NOT NULL,\n"
+                    + "  `nfe_dt_movto` date NOT NULL,\n"
+                    + "  `nfe_vlr_tot_prod` decimal(10,2) NOT NULL,\n"
+                    + "  `nfe_vlr_nf` decimal(10,2) NOT NULL,\n"
+                    + "  `nfe_vlr_desc` decimal(10,2) NOT NULL,\n"
+                    + "  `nfe_vlr_imposto` decimal(10,2) NOT NULL,\n"
+                    + "  `nfe_dt_emis` date NOT NULL,\n"
+                    + "  `nfe_dt_receb` date NOT NULL,\n"
+                    + "  `nfe_ped_compra` int(11) DEFAULT NULL COMMENT 'S/N',\n"
+                    + "  `nfe_id_usuario` varchar(15) DEFAULT NULL,\n"
+                    + "  PRIMARY KEY (`nfe_nro_nf`,`nfe_ser`,`nfe_cod_forn`),\n"
+                    + "  KEY `fk_entrada_usuario` (`nfe_id_usuario`),\n"
+                    + "  CONSTRAINT `fk_entrada_usuario` FOREIGN KEY (`nfe_id_usuario`) REFERENCES `usuario` (`usu_login`)\n"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
             statement.execute("CREATE TABLE `" + dataBase + "`.`pedido` (\n"
-                    + "  `ped_cod` int(11) NOT NULL AUTO_INCREMENT,\n"
+                    + "`ped_cod` int(11) NOT NULL AUTO_INCREMENT,\n"
                     + "  `ped_data` date NOT NULL,\n"
                     + "  `ped_hr` time NOT NULL,\n"
                     + "  `ped_vlr_tot` decimal(7,2) NOT NULL,\n"
@@ -505,12 +553,17 @@ public class VerificaConexaoDAO {
                     + "  `ped_obs` varchar(100) DEFAULT NULL,\n"
                     + "  `ped_tipo` varchar(1) DEFAULT NULL,\n"
                     + "  `ped_pagamento` varchar(30) DEFAULT NULL,\n"
+                    + "  `ped_hr_saiu` time DEFAULT NULL,\n"
+                    + "  `ped_hr_entrega` time DEFAULT NULL,\n"
+                    + "  `ped_obs_entrega` varchar(100) DEFAULT NULL,\n"
+                    + "  `ped_entregador` int(10) DEFAULT NULL,\n"
                     + "  PRIMARY KEY (`ped_cod`),\n"
                     + "  KEY `fk_pedvenda_cliente_idx` (`ped_cli_cod`),\n"
                     + "  KEY `fk_pedvenda_usuario_idx` (`ped_id_usuario`),\n"
+                    + "  KEY `fk_pedvenda_entregador` (`ped_entregador`),\n"
                     + "  CONSTRAINT `fk_pedvenda_cliente` FOREIGN KEY (`ped_cli_cod`) REFERENCES `cliente` (`cli_cod`) ON DELETE NO ACTION ON UPDATE NO ACTION,\n"
                     + "  CONSTRAINT `fk_pedvenda_usuario` FOREIGN KEY (`ped_id_usuario`) REFERENCES `usuario` (`usu_login`) ON DELETE NO ACTION ON UPDATE NO ACTION\n"
-                    + ") ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;\n"
+                    + ") ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;"
                     + "\n"
                     + "\n"
                     + "\n");
@@ -602,6 +655,7 @@ public class VerificaConexaoDAO {
                     + "  `estq_dt_movto` date NOT NULL,\n"
                     + "  `estq_cod_prod` int(11) NOT NULL,\n"
                     + "  `estq_tipo` int(11) NOT NULL,\n"
+                    + "`estq_nro_docto` char(10) DEFAULT NULL,"
                     + "  `estq_qtd` decimal(12,5) NOT NULL,\n"
                     + "  PRIMARY KEY (`estq_id`),\n"
                     + "  KEY `fk_movto_estoq_tipo_movto_estoq_idx` (`estq_tipo`),\n"
