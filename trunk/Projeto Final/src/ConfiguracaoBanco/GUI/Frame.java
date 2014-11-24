@@ -44,7 +44,7 @@ public class Frame extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
         jTextArea1.setRows(3);
-        jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"Pizzaria\".\n\nPara dar continuidade ao processo certifique-se\nde ter instalado o Banco de Dados MySQL");
+        jTextArea1.setText("Assistente de Configuração para Banco de Dados\ndo Sistema \"PizzariaJava\".\n\nPara dar continuidade ao processo certifique-se\nde ter instalado o Banco de Dados MySQL");
         jScrollPane1.setViewportView(jTextArea1);
 
         BVerificar.setText("Verificar");
@@ -161,8 +161,9 @@ public class Frame extends javax.swing.JFrame {
         // TODO add your handling code here: 
         if (verificaConexaoDAO.VerificaConexao(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()))) {
             JOptionPane.showMessageDialog(null, "Conexão configurada com sucesso!");
-            dispose();
+           
             Frame2 frame2 = new Frame2(FServidor.getText(), FPorta.getText(), String.valueOf(this.FSenha.getPassword()));
+            this. dispose();
             FServidor.setEditable(false);
             FPorta.setEditable(false);
             FSenha.setEditable(false);

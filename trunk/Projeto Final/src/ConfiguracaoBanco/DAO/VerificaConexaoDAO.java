@@ -98,16 +98,16 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`cupom_titulos_receb` (\n"
-                    + "  `ctrc_cupom` int(10) unsigned NOT NULL,\n"
+                    + "  `ctrc_cupom` int(10)  NOT NULL,\n"
                     + "  `ctrc_ser` char(3) NOT NULL,\n"
-                    + "  `ctrc_seq` int(10) unsigned NOT NULL,\n"
-                    + "  `ctrc_num_tit_receb` int(10) unsigned NOT NULL,\n"
+                    + "  `ctrc_seq` int(10)  NOT NULL,\n"
+                    + "  `ctrc_num_tit_receb` int(10)  NOT NULL,\n"
                     + "  PRIMARY KEY (`ctrc_cupom`,`ctrc_ser`,`ctrc_seq`,`ctrc_num_tit_receb`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`fech_estoq_mes` (\n"
-                    + "  `fec_ano_mes_fech` int(10) unsigned NOT NULL,\n"
-                    + "  `fec_cod_prod` int(10) unsigned NOT NULL,\n"
+                    + "  `fec_ano_mes_fech` int(10)  NOT NULL,\n"
+                    + "  `fec_cod_prod` int(10)  NOT NULL,\n"
                     + "  `fec_qtde_sdo_inicial` decimal(12,5) NOT NULL,\n"
                     + "  PRIMARY KEY (`fec_ano_mes_fech`,`fec_cod_prod`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
@@ -122,8 +122,8 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`invent_estoq_mes` (\n"
-                    + "  `inv_ano_mes_invent` int(10) unsigned NOT NULL,\n"
-                    + "  `inv_cod_prod` int(10) unsigned NOT NULL,\n"
+                    + "  `inv_ano_mes_invent` int(10)  NOT NULL,\n"
+                    + "  `inv_cod_prod` int(10)  NOT NULL,\n"
                     + "  `inv_qtde` decimal(12,5) NOT NULL,\n"
                     + "  PRIMARY KEY (`inv_ano_mes_invent`,`inv_cod_prod`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
@@ -131,11 +131,11 @@ public class VerificaConexaoDAO {
             statement.execute("CREATE TABLE `" + dataBase + "`.`item_nf_entrada` (\n"
                     + "`nfei_nro_nf` char(10) NOT NULL,\n"
                     + "  `nfei_ser` char(3) NOT NULL,\n"
-                    + "  `nfei_cod_forn` int(10) unsigned NOT NULL,\n"
-                    + "  `nfei_cod_item` int(10) unsigned NOT NULL,\n"
-                    + "  `nfei_cod_prod` int(10) unsigned NOT NULL,\n"
+                    + "  `nfei_cod_forn` int(10)  NOT NULL,\n"
+                    + "  `nfei_cod_item` int(10)  NOT NULL,\n"
+                    + "  `nfei_cod_prod` int(10)  NOT NULL,\n"
                     + "  `nfei_qtde` decimal(10,3) DEFAULT NULL,\n"
-                    + "  `nfei_vlr_unit` decimal(10,2) unsigned zerofill DEFAULT NULL,\n"
+                    + "  `nfei_vlr_unit` decimal(10,2)  zerofill DEFAULT NULL,\n"
                     + "  `nfei_vlr_desc` decimal(10,2) DEFAULT NULL,\n"
                     + "  `nfei_vlr_imposto` decimal(10,2) DEFAULT NULL,\n"
                     + "  `nfei_ref_prod` varchar(15) DEFAULT NULL,\n"
@@ -145,12 +145,12 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`movto_caixa` (\n"
-                    + "  `mcx_id_Movto_Cxa` int(10) unsigned NOT NULL AUTO_INCREMENT,\n"
-                    + "  `mcx_num_parc_pagar` int(10) unsigned DEFAULT NULL,\n"
-                    + "  `mcx_num_tit_pagar` int(10) unsigned DEFAULT NULL,\n"
+                    + "  `mcx_id_Movto_Cxa` int(10)  NOT NULL AUTO_INCREMENT,\n"
+                    + "  `mcx_num_parc_pagar` int(10)  DEFAULT NULL,\n"
+                    + "  `mcx_num_tit_pagar` int(10)  DEFAULT NULL,\n"
                     + "  `mcx_num_parc_receb` int(11) DEFAULT NULL,\n"
-                    + "  `mcx_num_tit_receb` int(10) unsigned DEFAULT NULL,\n"
-                    + "  `mcx_tipo_doc` int(10) unsigned NOT NULL,\n"
+                    + "  `mcx_num_tit_receb` int(10)  DEFAULT NULL,\n"
+                    + "  `mcx_tipo_doc` int(10)  NOT NULL,\n"
                     + "  `mcx_dt_mov` date NOT NULL,\n"
                     + "  `mcx_vlr_doc` decimal(10,2) NOT NULL,\n"
                     + "  PRIMARY KEY (`mcx_id_Movto_Cxa`)\n"
@@ -163,11 +163,11 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`nf_entrada_titulos_pagar` (\n"
-                    + "  `nfet_cod_forn` int(10) unsigned NOT NULL,\n"
-                    + "  `nfet_seq` int(10) unsigned NOT NULL,\n"
+                    + "  `nfet_cod_forn` int(10)  NOT NULL,\n"
+                    + "  `nfet_seq` int(10)  NOT NULL,\n"
                     + "  `nfet_ser` char(3) NOT NULL,\n"
-                    + "  `nfet_nro_nf` int(10) unsigned NOT NULL,\n"
-                    + "  `nfet_num_tit_pagar` int(10) unsigned NOT NULL,\n"
+                    + "  `nfet_nro_nf` int(10)  NOT NULL,\n"
+                    + "  `nfet_num_tit_pagar` int(10)  NOT NULL,\n"
                     + "  PRIMARY KEY (`nfet_cod_forn`,`nfet_seq`,`nfet_ser`,`nfet_nro_nf`,`nfet_num_tit_pagar`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
@@ -192,9 +192,9 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`titulos_receb_parc` (\n"
-                    + "  `trcp_num_tit_receb` int(10) unsigned NOT NULL,\n"
+                    + "  `trcp_num_tit_receb` int(10)  NOT NULL,\n"
                     + "  `trcp_num_parc_receb` int(11) NOT NULL,\n"
-                    + "  `trcp_tp_receb` int(10) unsigned NOT NULL,\n"
+                    + "  `trcp_tp_receb` int(10)  NOT NULL,\n"
                     + "  `trcp_vlr_parc` decimal(10,2) DEFAULT NULL,\n"
                     + "  `trcp_dt_venc` date DEFAULT NULL,\n"
                     + "  `trcp_dt_recbto` date DEFAULT NULL,\n"
@@ -202,7 +202,7 @@ public class VerificaConexaoDAO {
                     + "  `trcp_vlr_desc` decimal(10,2) DEFAULT NULL,\n"
                     + "  `trcp_vlr_multa` decimal(10,2) DEFAULT NULL,\n"
                     + "  `trcp_vlr_recebido` decimal(10,2) DEFAULT NULL,\n"
-                    + "  `trcp_bco_cheq` int(10) unsigned DEFAULT NULL,\n"
+                    + "  `trcp_bco_cheq` int(10)  DEFAULT NULL,\n"
                     + "  `trcp_age_cheq` char(10) DEFAULT NULL,\n"
                     + "  `trcp_cta_cheq` char(10) DEFAULT NULL,\n"
                     + "  `trcp_nro_cheq` char(30) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,\n"
@@ -232,13 +232,13 @@ public class VerificaConexaoDAO {
                     + "\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`tipo_receb` (\n"
-                    + "  `tpr_receb` int(10) unsigned NOT NULL AUTO_INCREMENT,\n"
+                    + "  `tpr_receb` int(10)  NOT NULL AUTO_INCREMENT,\n"
                     + "  `tpr_descr` char(20) NOT NULL,\n"
                     + "  PRIMARY KEY (`tpr_receb`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`tipos_doctos` (\n"
-                    + "  `tpd_tipo_doc` int(10) unsigned NOT NULL AUTO_INCREMENT,\n"
+                    + "  `tpd_tipo_doc` int(10)  NOT NULL AUTO_INCREMENT,\n"
                     + "  `tpd_descr` varchar(60) NOT NULL,\n"
                     + "  `tpd_descr_resu` char(10) NOT NULL,\n"
                     + "  `tpd_stt_ent_sai` char(1) NOT NULL COMMENT 'E=Entrada S=Saida',\n"
@@ -252,18 +252,18 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`titulos_pagar` (\n"
-                    + "  `tpg_num_tit_pagar` int(10) unsigned NOT NULL AUTO_INCREMENT,\n"
+                    + "  `tpg_num_tit_pagar` int(10)  NOT NULL AUTO_INCREMENT,\n"
                     + "  `tpg_dt_movto` date NOT NULL,\n"
-                    + "  `tpg_tipo_doc` int(10) unsigned NOT NULL,\n"
+                    + "  `tpg_tipo_doc` int(10)  NOT NULL,\n"
                     + "  `tpg_vlr_tot_titulo` decimal(10,2) DEFAULT NULL,\n"
                     + "  `tpg_vlr_entrada` decimal(10,2) DEFAULT NULL,\n"
                     + "  PRIMARY KEY (`tpg_num_tit_pagar`)\n"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`titulos_pagar_parc` (\n"
-                    + "  `tpgp_num_tit_pagar` int(10) unsigned NOT NULL,\n"
-                    + "  `tpgp_num_parc_pagar` int(10) unsigned NOT NULL,\n"
-                    + "  `tpgp_cod_pagto` int(10) unsigned NOT NULL,\n"
+                    + "  `tpgp_num_tit_pagar` int(10)  NOT NULL,\n"
+                    + "  `tpgp_num_parc_pagar` int(10)  NOT NULL,\n"
+                    + "  `tpgp_cod_pagto` int(10)  NOT NULL,\n"
                     + "  `tpgpvlr_parc` decimal(10,2) NOT NULL,\n"
                     + "  `tpgp_dt_venc` date NOT NULL,\n"
                     + "  `tpgp_dt_pagto` date DEFAULT NULL,\n"
@@ -271,7 +271,7 @@ public class VerificaConexaoDAO {
                     + "  `tpgp_vlr_desc` decimal(10,2) DEFAULT NULL,\n"
                     + "  `tpgp_vlr_multa` decimal(10,2) DEFAULT NULL,\n"
                     + "  `tpgp_vlr_pago` decimal(10,2) DEFAULT NULL,\n"
-                    + "  `tpgp_bco_cheq` int(10) unsigned DEFAULT NULL,\n"
+                    + "  `tpgp_bco_cheq` int(10)  DEFAULT NULL,\n"
                     + "  `tpgp_age_cheq` char(10) DEFAULT NULL,\n"
                     + "  `tpgp_cta_cheq` char(10) DEFAULT NULL,\n"
                     + "  `tpgp_nro_cheq` char(20) DEFAULT NULL,\n"
@@ -280,9 +280,9 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`titulos_receb` (\n"
-                    + "  `trc_num_tit_receb` int(10) unsigned NOT NULL AUTO_INCREMENT,\n"
+                    + "  `trc_num_tit_receb` int(10)  NOT NULL AUTO_INCREMENT,\n"
                     + "  `trc_dt_movto` date NOT NULL,\n"
-                    + "  `trc_tipo_doc` int(10) unsigned NOT NULL,\n"
+                    + "  `trc_tipo_doc` int(10)  NOT NULL,\n"
                     + "  `trc_vlr_tot_titulo` decimal(10,2) NOT NULL,\n"
                     + "  `trc_vlr_entrada` decimal(10,2) NOT NULL,\n"
                     + "  PRIMARY KEY (`trc_num_tit_receb`)\n"
@@ -524,9 +524,9 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de Usuarios do Sistema';\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`nf_entrada` (\n"
-                    + "  `nfe_nro_nf` char(10) unsigned NOT NULL,\n"
+                    + "  `nfe_nro_nf` char(10)  NOT NULL,\n"
                     + "  `nfe_ser` char(3) NOT NULL,\n"
-                    + "  `nfe_cod_forn` int(11) unsigned NOT NULL,\n"
+                    + "  `nfe_cod_forn` int(11)  NOT NULL,\n"
                     + "  `nfe_dt_movto` date NOT NULL,\n"
                     + "  `nfe_vlr_tot_prod` decimal(10,2) NOT NULL,\n"
                     + "  `nfe_vlr_nf` decimal(10,2) NOT NULL,\n"
