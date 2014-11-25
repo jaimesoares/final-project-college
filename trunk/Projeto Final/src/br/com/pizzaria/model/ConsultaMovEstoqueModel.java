@@ -138,13 +138,34 @@ public class ConsultaMovEstoqueModel {
 
                 anterior.setText(String.valueOf(rs.getLong("sdoe_qtd_sdo_ant")));
                 atual.setText(String.valueOf(rs.getLong("sdoe_qtd_sdo_atu")));
-                if (rs.getString("tme_stt_ent_sai").equals("E")) {
+                
+                String tipoEntSaida;
+                String quantidadeEsqoque;
+                
+                switch (rs.getString("tme_stt_ent_sai")) {
+                    case "E":
+                        tipoEntSaida = "Entrada";
+                        quantidadeEsqoque = "(+) "+rs.getLong("estq_qtd");
+                        break;
+                    case "S":
+                        tipoEntSaida = "Saída";
+                        quantidadeEsqoque = "(-) "+rs.getLong("estq_qtd");
+                        break;
+                    
+                    default:
+                        throw new AssertionError();
+                }
+                
+                if (tipoEntSaida.equals("Entrada")) {
                     entrada += rs.getLong("estq_qtd");
                 } else {
                     saida += rs.getLong("estq_qtd");
                 }
                 total = entrada - saida;
-                tabela.addRow(new Object[]{rs.getString("tme_descr"), rs.getString("tme_stt_ent_sai"), rs.getLong("estq_qtd")});
+                
+                
+                
+                tabela.addRow(new Object[]{rs.getString("tme_descr"), tipoEntSaida, quantidadeEsqoque});
             }
          //   tabela.addRow(new Object[]{"", "", ""});
            // tabela.addRow(new Object[]{"Total:", "", total});

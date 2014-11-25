@@ -208,7 +208,7 @@ public class AjusteEstoqueModel {
             
             if (atualizaMovimentoEstoque(ajusteEstoque)) {
                 ConectaBanco.getConnection().commit();
-                JOptionPane.showMessageDialog(null, "Estoque atualizadO", "ESTOQUE", 1, new ImageIcon("imagens/ticado.png"));
+                JOptionPane.showMessageDialog(null, "Estoque atualizado", "ESTOQUE", 1, new ImageIcon("imagens/ticado.png"));
                 return true;
             } else {
                 return false;

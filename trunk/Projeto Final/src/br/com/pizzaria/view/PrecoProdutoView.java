@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public final class PrecoProdutoView extends javax.swing.JInternalFrame {
@@ -185,7 +187,14 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (precoProdutoController.controlePrecoData(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), txtPreco.getText().toString().replace(",", "."))) {
+        if (txtPreco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo 'Preço' não pode ser vazio!", "ERRO DE PREENCHIMENTO", 0, new ImageIcon("imagens/cancelar.png"));
+
+        } else if (precoProdutoController.controlePrecoData(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), txtPreco.getText().replace(",", "."))) {
+            modeloListaProd.removeAllElements();
+            modeloTabelaPrecoProd.setNumRows(0);
+            precoProdutoController.controlePesquisaPrecoProdutos(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), modeloTabelaPrecoProd);
+            txtPreco.setText("");
         } else if (precoProdutoController.verificarDados(((ProdutoBean) modeloComboProd.getSelectedItem()).getCodigo(), txtPreco.getText())) {
             modeloListaProd.removeAllElements();
             modeloTabelaPrecoProd.setNumRows(0);
@@ -197,7 +206,11 @@ public final class PrecoProdutoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        this.dispose();
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                this.dispose();
+                break;
+        }
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed

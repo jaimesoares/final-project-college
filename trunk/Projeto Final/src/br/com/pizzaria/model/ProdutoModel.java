@@ -253,7 +253,7 @@ public class ProdutoModel {
                 TipoProdutoBean novo = new TipoProdutoBean();
                 novo.setCodigo(rs.getInt("tprd_id"));
                 novo.setDescricao(rs.getString("tprd_descr"));
-                novo.setPizza(rs.getString("tprd_descr"));
+                novo.setPizza(rs.getString("tprd_stt_pizza"));
                 
                 lista.add(novo);
             }

@@ -35,7 +35,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         formatoDecimal = new DecimalFormat("0.00");
         modeloTipoProd = cbTipo.getModel();
         precoProdutoController = new PrecoProdutoController();
-        
+
         grupoProdAcabPrima = new ButtonGroup();
         grupoProdAcabPrima.add(rbMateriaPrima);
         grupoProdAcabPrima.add(rbProdAcabado);
@@ -43,7 +43,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         modeloUnidade = cbUnidadeMedida.getModel();
         populaTipoProduto();
         habilitarCampos(false);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -446,9 +446,8 @@ public class ProdutoView extends javax.swing.JInternalFrame {
             cbTipo.setEnabled(true);
             cbTipo.requestFocus();
             cbTipo.setSelectedIndex(0);
-           
-            // limpaNovo();
 
+            // limpaNovo();
         } else {
 
             capturaBeans();
@@ -472,7 +471,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
         modeloTabela.setNumRows(0);
         produtoController.controlePesquisa(txfPesquisar.getText(), modeloTabela);
-      
+
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void tblProdutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMousePressed
@@ -482,18 +481,16 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
         modeloTipoProd.setSelectedItem(produtoBeans.getTipoProduto());
         txtPreco.setText(String.valueOf(formatoDecimal.format(produtoBeans.getPrecoProduto().getPreco())));
-        
-            if(produtoBeans.getTipoProduto().getDescricao().equals("Pizza")){
-            
-       txaDescricao2.setVisible(true);
+
+        if (produtoBeans.getTipoProduto().getDescricao().equals("Pizza")) {
+
+            txaDescricao2.setVisible(true);
             lbingred.setVisible(true);
             txaDescricao2.setEditable(true);
-              }else{
-                
-            
-            }
-            
-            
+        } else {
+
+        }
+
         if (String.valueOf(produtoBeans.getEstocavel()).equals("S")) {
             cbEstocavel.setSelectedIndex(1);
         } else {
@@ -512,20 +509,11 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         }
 
         if (produtoBeans.getVenda() == 'S') {
-            
+
             cbxProdutoVenda.setSelected(true);
         } else {
             cbxProdutoVenda.setSelected(false);
         }
-        
-    
-        
-         
-        
-             
-             
-    
-       
 
         txtQtd.setText(String.valueOf(produtoBeans.getQtdMinima()));
         //txtQtdEstoque.setText(String.valueOf(produtoBeans.getQtdSaldoEstoque()));
@@ -534,7 +522,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         modeloUnidade.setSelectedItem(produtoBeans.getUnidadeMedida());
         txaDescricao.setText(produtoBeans.getDescricao());
         txaDescricao2.setText(produtoBeans.getIngredientes());
-        
+
     }//GEN-LAST:event_tblProdutoMousePressed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -586,7 +574,11 @@ public class ProdutoView extends javax.swing.JInternalFrame {
             }
             btnFechar.setText("Fechar");
         } else {
-            this.dispose();
+            switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    this.dispose();
+                    break;
+            }
         }
     }//GEN-LAST:event_btnFecharActionPerformed
 
@@ -600,21 +592,20 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         if (cbTipo.getSelectedIndex() > 0) {
 //            habilitarCampos(true);
             verificaPizza(false);
-            
-            if(cbTipo.getSelectedIndex()== 1){
-                
+
+            if (((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getPizza().equals("S")) {
+
                 lbingred.setVisible(true);
                 txaDescricao2.setVisible(true);
                 txaDescricao2.setEditable(true);
-            }else{
-                
+            } else {
+
                 lbingred.setVisible(false);
                 txaDescricao2.setVisible(false);
             }
-            
-     
+
         } else {
-            
+
             cbUnidadeMedida.setEnabled(false);
             cbUnidadeMedida.setSelectedIndex(0);
 
@@ -636,13 +627,9 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
             rbMateriaPrima.setEnabled(false);
             rbProdAcabado.setEnabled(false);
-            
-            
-            
 
-        
         }
-        
+
     }//GEN-LAST:event_cbTipoActionPerformed
 
     private void txtPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusLost
@@ -746,9 +733,9 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         rbMateriaPrima.setEnabled(valor);
         rbProdAcabado.setEnabled(valor);
         cbxProdutoVenda.setEnabled(valor);
-        
-             lbingred.setVisible(valor);
-            txaDescricao2.setVisible(valor);
+
+        lbingred.setVisible(valor);
+        txaDescricao2.setVisible(valor);
     }
 
     final void habilitarCamposEditar(boolean valor) {
@@ -803,7 +790,7 @@ public class ProdutoView extends javax.swing.JInternalFrame {
         produtoBeans.setAvisaEstoqueMinimo((cbAvisa.getSelectedItem().toString().charAt(0)));
         produtoBeans.setProdAcabadoPrima(rbMateriaPrima.isSelected() ? 'P' : 'A');
         produtoBeans.setIngredientes(txaDescricao2.getText());
-         
+
         if (!txtQtd.getText().isEmpty()) {
             produtoBeans.setQtdMinima(Double.parseDouble(txtQtd.getText()));
         }
@@ -845,12 +832,11 @@ public class ProdutoView extends javax.swing.JInternalFrame {
     }
 
     public void verificaPizza(boolean editar) {
-        if (((TipoProdutoBean)modeloTipoProd.getSelectedItem()).getPizza().equals("S")) {
-            
-            
+        if (((TipoProdutoBean) modeloTipoProd.getSelectedItem()).getPizza().equals("S")) {
+
             lbingred.setVisible(true);
             txaDescricao2.setVisible(true);
-            
+
             cbAvisa.setSelectedIndex(0);
             cbAvisa.setEnabled(false);
 
@@ -874,10 +860,10 @@ public class ProdutoView extends javax.swing.JInternalFrame {
 
             rbProdAcabado.setSelected(true);
             rbProdAcabado.setEnabled(true);
-           
+
             txaDescricao2.setEditable(true);
             txaDescricao2.setText("");
-           
+
         } else {
             cbAvisa.setSelectedIndex(0);
             cbAvisa.setEnabled(true);

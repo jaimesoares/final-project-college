@@ -1852,7 +1852,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
 
     private void txtValorDescPizzaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorDescPizzaKeyTyped
         // TODO add your handling code here:
-        String caracteres = "0987654321";
+        String caracteres = "0987654321.,";
 
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
@@ -2437,8 +2437,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
 
             if (!(txtValorDescPizza.getText().isEmpty())) {
-                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText());
-                valorDesconto = Double.parseDouble(txtValorDescPizza.getText());
+                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText().replace(",", "."));
+                valorDesconto = Double.parseDouble(txtValorDescPizza.getText().replace(",", "."));
             } else {
                 valorTotal = subTotal;
             }
@@ -2486,8 +2486,8 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
 
             if (!(txtValorDescPizza.getText().isEmpty())) {
-                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText());
-                valorDesconto = Double.parseDouble(txtValorDescPizza.getText());
+                valorTotal = subTotal - Double.parseDouble(txtValorDescPizza.getText().replace(",", "."));
+                valorDesconto = Double.parseDouble(txtValorDescPizza.getText().replace(",", "."));
             } else {
                 valorTotal = subTotal;
             }

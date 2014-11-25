@@ -44,15 +44,7 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             }
 
         });
-        btnFornecedor1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK), "evento");
-        btnFornecedor1.getActionMap().put("evento", new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnFornecedor1ActionPerformed(e);
-            }
-
-        });
+       
         btnFornecedor2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK), "evento");
         btnFornecedor2.getActionMap().put("evento", new AbstractAction() {
 
@@ -84,12 +76,11 @@ public class MenuCompras extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnFornecedor = new javax.swing.JButton();
-        btnFornecedor1 = new javax.swing.JButton();
         btnFornecedor2 = new javax.swing.JButton();
         btnFornecedor3 = new javax.swing.JButton();
 
         setTitle("Menu Compras");
-        setPreferredSize(new java.awt.Dimension(308, 352));
+        setPreferredSize(new java.awt.Dimension(308, 276));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -102,15 +93,6 @@ public class MenuCompras extends javax.swing.JInternalFrame {
         btnFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFornecedorActionPerformed(evt);
-            }
-        });
-
-        btnFornecedor1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnFornecedor1.setForeground(new java.awt.Color(0, 51, 255));
-        btnFornecedor1.setText("<html>Cotação <font size='2' style='color:black'> Crtl-2 </font>");
-        btnFornecedor1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFornecedor1ActionPerformed(evt);
             }
         });
 
@@ -140,7 +122,6 @@ public class MenuCompras extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnFornecedor1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(btnFornecedor2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(btnFornecedor3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
@@ -150,8 +131,6 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnFornecedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFornecedor2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -170,10 +149,6 @@ public class MenuCompras extends javax.swing.JInternalFrame {
             fornecedorV.setVisible(true);
         }
     }//GEN-LAST:event_btnFornecedorActionPerformed
-
-    private void btnFornecedor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedor1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFornecedor1ActionPerformed
 
     private void btnFornecedor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedor2ActionPerformed
         // TODO add your handling code here:
@@ -198,7 +173,6 @@ public class MenuCompras extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFornecedor;
-    private javax.swing.JButton btnFornecedor1;
     private javax.swing.JButton btnFornecedor2;
     private javax.swing.JButton btnFornecedor3;
     // End of variables declaration//GEN-END:variables

@@ -18,6 +18,7 @@ import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.ValidaCNPJ;
 import java.util.List;
 import br.com.pizzaria.model.FornecedorModel;
+import br.com.pizzaria.util.ConectaBancoCorreios;
 
 public class FornecedorView extends javax.swing.JInternalFrame {
 
@@ -594,10 +595,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         fornecedorController.verificaEmail(e);
 
         if (btnNovo1.getText().equals("Salvar")) {
-            cadastraFornecedor();
-            limpaTudo();
-            list.listaFornecedor(modelo);
-            fornecedorController.verificaEmail(e);
+            if (cadastraFornecedor()) {
+                limpaTudo();
+                list.listaFornecedor(modelo);
+                fornecedorController.verificaEmail(e);
+            }
         }
 
 
@@ -701,7 +703,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
         String nada = "00 18 20 34 40 - 63 79 80";
 
-        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
             pstm.setString(1, txtCep.getText().substring(0, 5) + txtCep.getText().substring(6, 9));
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
@@ -800,7 +802,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    public void cadastraFornecedor() {
+    public boolean cadastraFornecedor() {
 
         try {
             modelo.setNumRows(0);
@@ -859,9 +861,9 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
-
+            return false;
         }
-
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

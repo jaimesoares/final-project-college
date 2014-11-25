@@ -585,7 +585,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
                 switch (JOptionPane.showConfirmDialog(null, "Deseja cadastrar usuário de sistema para " + txtNome.getText(), "Cadastro de Usuários", JOptionPane.YES_NO_OPTION)) {
                     case 0:
-                        UsuarioView usuarioV = new UsuarioView();
+                        UsuarioView usuarioV = new UsuarioView(txtNome.getText());
                         Global.principal.Desktop.add(usuarioV);
                         Dimension desktopSize = Global.principal.Desktop.getSize();
                         Dimension jInternalFrameSize = usuarioV.getSize();
@@ -678,7 +678,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
             }
             btnFechar.setText("Fechar");
         } else {
-            this.dispose();
+            switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    this.dispose();
+                    break;
+            }
         }
     }//GEN-LAST:event_btnFecharActionPerformed
 
@@ -748,7 +752,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCpfKeyTyped
 
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
-       
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (ValidaCPF.isCPF(txtCpf.getText())) {
                 txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));

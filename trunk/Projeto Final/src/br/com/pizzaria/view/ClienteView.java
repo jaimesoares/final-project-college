@@ -478,16 +478,15 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
-      
-        
-        if(txtPesquisar.getText().isEmpty()){
-             modelo.setNumRows(0);
-           
-        }else{
+
+        if (txtPesquisar.getText().isEmpty()) {
             modelo.setNumRows(0);
-        clienteController.controlePesquisa(txtPesquisar.getText(), modelo);
-        
-}
+
+        } else {
+            modelo.setNumRows(0);
+            clienteController.controlePesquisa(txtPesquisar.getText(), modelo);
+
+        }
     }//GEN-LAST:event_txtPesquisarKeyReleased
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
@@ -526,7 +525,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
             }
             btnFechar.setText("Fechar");
         } else {
-            this.dispose();
+            switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    this.dispose();
+                    break;
+            }
         }
     }//GEN-LAST:event_btnFecharActionPerformed
 
@@ -552,12 +555,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 tblCliente.setEnabled(true);
                 txtPesquisar.setEnabled(true);
 
-                if (frame.getTitle().equalsIgnoreCase("PEDIDO")) {                    
+                if (frame.getTitle().equalsIgnoreCase("PEDIDO")) {
                     frame.pesquisaCliente(txtNome.getText());
                     frame.setVisible(true);
                     this.dispose();
                 }
-                
+
                 limpaTudo();
                 habilitarCampos(false);
             }

@@ -6,6 +6,7 @@ import br.com.pizzaria.controller.CancelamentoPedidoController;
 import br.com.pizzaria.controller.PedidoController;
 import br.com.pizzaria.util.VerificarData;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -18,12 +19,12 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
     PedidoController pedidoController;
     DefaultTableModel modeloTabelaPedido;
     DefaultTableModel modeloTabelaItemPedido;
-    JFrame frame;
+
     CancelamentoPedidoController cancelamentoPedidoController;
 
-    public CancelamentoPedidosView(JFrame frame) {
+    public CancelamentoPedidosView() {
         initComponents();
-        this.frame = frame;
+
         habilitarCampos(false);
 
         pedidoBean = new PedidoBean();
@@ -233,24 +234,11 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblPedidoMousePressed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-//        if (btnFechar.getText().equals("Cancelar")) {
-//            limpaTudo();
-//            if (btnEditar.getText().equals("Salvar")) {
-//                btnEditar.setText("Editar");
-//                btnNovo.setEnabled(true);
-//                habilitarCampos(false);
-//            } else {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//                tblCliente.setEnabled(true);
-//                txtPesquisar.setEnabled(true);
-//                habilitarCampos(false);
-//            }
-//            btnFechar.setText("Fechar");
-//        } else {
-        this.dispose();
-//        }
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                this.dispose();
+                break;
+        }
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregaActionPerformed
@@ -276,10 +264,15 @@ public class CancelamentoPedidosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblItemPedidoMousePressed
 
     private void btnCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPedidoActionPerformed
-        if (cancelamentoPedidoController.controleCancelaPedido(Integer.parseInt(modeloTabelaPedido.getValueAt(tblPedido.getSelectedRow(), 0).toString()))) {
-
-            btnTodosPedidosActionPerformed(null);
+        switch (JOptionPane.showConfirmDialog(null, "Deseja Cancelar o Pedido: "+modeloTabelaPedido.getValueAt(tblPedido.getSelectedRow(), 0).toString()+"?", "Cancelar Pedido", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                if (cancelamentoPedidoController.controleCancelaPedido(Integer.parseInt(modeloTabelaPedido.getValueAt(tblPedido.getSelectedRow(), 0).toString()))) {
+                    btnTodosPedidosActionPerformed(null);
+                }
+                break;
         }
+
+
     }//GEN-LAST:event_btnCancelarPedidoActionPerformed
 
 
