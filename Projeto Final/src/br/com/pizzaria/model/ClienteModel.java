@@ -3,6 +3,7 @@ package br.com.pizzaria.model;
 import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.util.ConectaBanco;
+import br.com.pizzaria.util.ConectaBancoCorreios;
 import br.com.pizzaria.util.VerificarData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -229,7 +230,7 @@ public class ClienteModel {
                 + "on c.`cep_municip` = m.`mun_cod` "
                 + "WHERE c.`cep_cod` = ? ;";
 
-        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
             pstm.setString(1, cep);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {

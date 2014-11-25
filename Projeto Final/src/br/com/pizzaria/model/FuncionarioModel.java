@@ -275,7 +275,7 @@ public class FuncionarioModel {
                 + "WHERE c.`cep_cod` = ? ;";
 
         // try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
-        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
             pstm.setString(1, cep);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {

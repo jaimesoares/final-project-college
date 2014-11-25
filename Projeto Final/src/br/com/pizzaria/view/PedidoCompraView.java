@@ -671,6 +671,11 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("Fechar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -967,6 +972,15 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
     private void jCondPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCondPagamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCondPagamentoActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:                
+                this.dispose();
+                break;
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
     public void populaTipoProduto() {
         ProdutoModel produtoModel = new ProdutoModel();
 

@@ -138,16 +138,18 @@ public class TipoProdutoView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-
-        this.dispose();
-
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                this.dispose();
+                break;
+        }
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         String pizza;
-        if(cbxProducao.isSelected()){
+        if (cbxProducao.isSelected()) {
             pizza = "S";
-        }else{
+        } else {
             pizza = "N";
         }
         if (tipoProdutoController.verificarDados(txtTipo.getText(), pizza)) {
@@ -160,13 +162,13 @@ public class TipoProdutoView extends javax.swing.JInternalFrame {
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         TipoProdutoBean novo = (TipoProdutoBean) lstCargo.getSelectedValue();
-        if(novo.getDescricao().equals("Pizza")){
+        if (novo.getDescricao().equals("Pizza")) {
             JOptionPane.showMessageDialog(null, "Campo não pode ser removido");
-        }else{
-        tipoProdutoController.verificarDadosParaEditar(novo);
-        modelo.removeAllElements();
-        carregaListaCargo();
-        txtTipo.setText("");
+        } else {
+            tipoProdutoController.verificarDadosParaEditar(novo);
+            modelo.removeAllElements();
+            carregaListaCargo();
+            txtTipo.setText("");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 

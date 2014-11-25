@@ -83,15 +83,7 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             }
 
         });
-        btnPrecoProduto3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_DOWN_MASK), "evento");
-        btnPrecoProduto3.getActionMap().put("evento", new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnPrecoProduto3ActionPerformed(e);
-            }
-
-        });
+        
         btnRelatorioCliente1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_7, InputEvent.CTRL_DOWN_MASK), "evento");
         btnRelatorioCliente1.getActionMap().put("evento", new AbstractAction() {
 
@@ -117,10 +109,10 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         btnPrecoProduto = new javax.swing.JButton();
         btnPrecoProduto1 = new javax.swing.JButton();
         btnPrecoProduto2 = new javax.swing.JButton();
-        btnPrecoProduto3 = new javax.swing.JButton();
         btnRelatorioCliente1 = new javax.swing.JButton();
 
         setTitle("Menu Estoque");
+        setPreferredSize(new java.awt.Dimension(308, 472));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -172,15 +164,6 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPrecoProduto3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnPrecoProduto3.setForeground(new java.awt.Color(0, 51, 255));
-        btnPrecoProduto3.setText("<html> Excluir NF Entrada<font size='2' style='color:black'> Crtl-6 </font>");
-        btnPrecoProduto3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrecoProduto3ActionPerformed(evt);
-            }
-        });
-
         btnRelatorioCliente1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnRelatorioCliente1.setForeground(new java.awt.Color(0, 51, 255));
         btnRelatorioCliente1.setText("<html> Movimento Estoque <font size='2' style='color:black'> Crtl-7 </font>");
@@ -210,9 +193,6 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                         .addComponent(btnPrecoProduto2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnRelatorioCliente1)))
                 .addContainerGap())
         );
@@ -230,10 +210,8 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrecoProduto2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrecoProduto3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRelatorioCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,10 +267,6 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnPrecoProduto2ActionPerformed
 
-    private void btnPrecoProduto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecoProduto3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPrecoProduto3ActionPerformed
-
     private void btnRelatorioCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioCliente1ActionPerformed
         // TODO add your handling code here:
         if (movimentoEstoque == null || !movimentoEstoque.isShowing()) {
@@ -308,7 +282,6 @@ public class MenuEstoque extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrecoProduto;
     private javax.swing.JButton btnPrecoProduto1;
     private javax.swing.JButton btnPrecoProduto2;
-    private javax.swing.JButton btnPrecoProduto3;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRelatorioCliente1;
     private javax.swing.JButton btnTipoProduto;

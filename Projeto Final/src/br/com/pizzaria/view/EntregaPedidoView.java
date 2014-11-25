@@ -333,24 +333,11 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblPedidoMousePressed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-//        if (btnFechar.getText().equals("Cancelar")) {
-//            limpaTudo();
-//            if (btnEditar.getText().equals("Salvar")) {
-//                btnEditar.setText("Editar");
-//                btnNovo.setEnabled(true);
-//                habilitarCampos(false);
-//            } else {
-//                btnNovo.setText("Novo");
-//                btnFechar.setText("Fechar");
-//                btnEditar.setEnabled(true);
-//                tblCliente.setEnabled(true);
-//                txtPesquisar.setEnabled(true);
-//                habilitarCampos(false);
-//            }
-//            btnFechar.setText("Fechar");
-//        } else {
-        this.dispose();
-//        }
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                this.dispose();
+                break;
+        }
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregaActionPerformed
@@ -383,8 +370,9 @@ public class EntregaPedidoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBalcaoActionPerformed
 
     private void btnAtualizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarPedidoActionPerformed
-        if (tblPedido.getSelectedRow() >= 0) {
+        if (tblPedido.getSelectedRow() >= 0) {            
             editarPedido();
+            CozinhaView.getCozinha();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um pedido!");
         }

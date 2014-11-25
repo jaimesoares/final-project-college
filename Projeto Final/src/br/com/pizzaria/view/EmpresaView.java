@@ -18,6 +18,7 @@ import br.com.pizzaria.util.ValidaCPF;
 import br.com.pizzaria.util.ValidaCNPJ;
 import java.util.List;
 import br.com.pizzaria.model.FornecedorModel;
+import br.com.pizzaria.util.ConectaBancoCorreios;
 
 public class EmpresaView extends javax.swing.JInternalFrame {
 
@@ -617,7 +618,7 @@ btnNovo1.setText("Salvar");
 
         String nada = "00 18 20 34 40 - 63 79 80";
 
-        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
             pstm.setString(1, txtCep.getText().substring(0, 5) + txtCep.getText().substring(6, 9));
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {

@@ -19,10 +19,37 @@ public class UsuarioView extends javax.swing.JInternalFrame {
         usuarioBeans = new UsuarioBean();
         modelo = (DefaultTableModel) tblFucnionario.getModel();
         populaListaFuncionario();
+
+    }
+
+    public UsuarioView(String nomeFunc) {
+        initComponents();
+        usuarioController = new UsuarioController();
+        usuarioBeans = new UsuarioBean();
+        modelo = (DefaultTableModel) tblFucnionario.getModel();
+        populaListaFuncionario();
+        selecionaUsuario(nomeFunc);
+        btnNovoActionPerformed(null);
+
     }
 
     public final void populaListaFuncionario() {
         usuarioController.controleListaFuncionario(modelo);
+    }
+
+    /**
+     *
+     * @param nomeFunc
+     */
+    public void selecionaUsuario(String nomeFunc) {
+
+        int qtdLinha = modelo.getRowCount();
+        for (int i = 0; i < qtdLinha; i++) {
+            String codigoFunc = ((FuncionarioBean) modelo.getValueAt(i, 0)).getNome();
+            if (codigoFunc.equals(nomeFunc)) {
+                tblFucnionario.setRowSelectionInterval(i, i);
+            }
+        }
     }
 
     /**
@@ -292,7 +319,11 @@ public class UsuarioView extends javax.swing.JInternalFrame {
             }
             btnFechar.setText("Fechar");
         } else {
-            this.dispose();
+            switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+                case 0:
+                    this.dispose();
+                    break;
+            }
         }
     }//GEN-LAST:event_btnFecharActionPerformed
 

@@ -1028,7 +1028,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+                switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                this.dispose();
+                break;
+        }
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void txtUnidadeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadeItemActionPerformed

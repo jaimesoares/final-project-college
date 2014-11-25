@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import br.com.pizzaria.bean.FornecedorBean;
+import br.com.pizzaria.util.ConectaBancoCorreios;
 
 public class FornecedorModel {
 
@@ -193,7 +194,7 @@ public class FornecedorModel {
                 + "on c.`cep_municip` = m.`mun_cod` "
                 + "WHERE c.`cep_cod` = ? ;";
 
-        try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
+        try (PreparedStatement pstm = ConectaBancoCorreios.getConnection().prepareStatement(SQLSelection)) {
             pstm.setString(1, cep);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {

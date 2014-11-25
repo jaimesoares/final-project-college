@@ -275,8 +275,11 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-
-        this.dispose();
+        switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
+            case 0:
+                this.dispose();
+                break;
+        }
 
     }//GEN-LAST:event_btnFecharActionPerformed
 
@@ -312,7 +315,7 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Entre com a quantidade!");
             txtQtdAjuste.requestFocus();
         } else {
-            if(ajusteEstoqueController.controleAjusteEstoque(populaAjuste())){
+            if (ajusteEstoqueController.controleAjusteEstoque(populaAjuste())) {
                 cbTipo.setSelectedIndex(0);
             }
         }

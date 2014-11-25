@@ -31,7 +31,7 @@ public class ProdutoController {
             return false;
         }
 
-        return produtoModel.cadastrarProduto(produto, preco);
+        return produtoModel.cadastrarProduto(produto, preco.replace(",", "."));
     }
 
     public void controlePesquisa(String pesquisa, DefaultTableModel modelo) {

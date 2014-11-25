@@ -270,7 +270,7 @@ public class PedidoModel {
                 + "  `tprd_stt_pizza` \n"
                 + "from\n"
                 + "  `pizzaria`.`tipo_prod` \n"
-                + "where `tprd_descr` <> 'Pizza' and `tprd_descr` <> 'Borda';";
+                + "where `tprd_stt_pizza` = 'N' and `tprd_descr` <> 'Borda' and `tprd_descr` <> 'Ingredientes';";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
