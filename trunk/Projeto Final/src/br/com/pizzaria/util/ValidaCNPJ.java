@@ -9,7 +9,8 @@ import java.util.InputMismatchException;
 
 public class ValidaCNPJ {
 
-    public static boolean isCNPJ(String CNPJ) {
+    public static boolean isCNPJ(String CNPJV) {
+        String CNPJ = CNPJV.replaceAll("[./-]", "");
         if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111")
                 || CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333")
                 || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555")
@@ -69,7 +70,8 @@ public class ValidaCNPJ {
         }
     }
 
-    public static String imprimeCNPJ(String CNPJ) {
+    public static String imprimeCNPJ(String CNPJV) {
+        String CNPJ = CNPJV.replaceAll("[./-]", "");
         return (CNPJ.substring(0, 2) + "." + CNPJ.substring(2, 5) + "."
                 + CNPJ.substring(5, 8) + "." + CNPJ.substring(8, 12) + "-"
                 + CNPJ.substring(12, 14));
