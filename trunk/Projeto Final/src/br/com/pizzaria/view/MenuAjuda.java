@@ -6,6 +6,7 @@
 package br.com.pizzaria.view;
 
 import br.com.pizzaria.util.Backup;
+import br.com.pizzaria.util.GeneratorPDF;
 import br.com.pizzaria.util.Global;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -52,6 +53,15 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
             }
 
         });
+        btnSobre2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnSobre2.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnSobre2ActionPerformed(e);
+            }
+
+        });
 
     }
 
@@ -66,6 +76,7 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
 
         btnSobre = new javax.swing.JButton();
         btnSobre1 = new javax.swing.JButton();
+        btnSobre2 = new javax.swing.JButton();
 
         setTitle("Menu Ajuda");
         setPreferredSize(new java.awt.Dimension(308, 263));
@@ -88,6 +99,15 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSobre2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnSobre2.setForeground(new java.awt.Color(0, 51, 255));
+        btnSobre2.setText("<html>Manual do Usuário <font size='2' style='color:black'> Crtl-3 </font>");
+        btnSobre2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSobre2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +116,8 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSobre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnSobre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addComponent(btnSobre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnSobre2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,9 +125,11 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSobre1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSobre2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,10 +150,17 @@ public class MenuAjuda extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnSobre1ActionPerformed
 
+    private void btnSobre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobre2ActionPerformed
+        // TODO add your handling code here:
+        String path = System.getProperty("user.dir") + "\\Manual\\Manual.pdf";
+        GeneratorPDF.abrirPdf(path);
+    }//GEN-LAST:event_btnSobre2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSobre;
     private javax.swing.JButton btnSobre1;
+    private javax.swing.JButton btnSobre2;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (new ActionListener() {
         public void actionPerformed(ActionEvent e) {
