@@ -1357,10 +1357,12 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                         + "  `pedci_vlr_desc`,\n"
                         + "  `pedci_vlr_tot`,\n"
                         + "  `pedci_cod_ref_prod`,\n"
+                        +" `pedci_vlr_liq`, "
                         + "  `pedci_situacao`\n"
                         + ") "
                         + "values (?,\n"
                         //  + "        ?,\n"
+                        + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
@@ -1378,11 +1380,11 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                 pstmt.setDouble(3, listaDeItens.get(i).getQuantidade());
                 pstmt.setDouble(4, listaDeItens.get(i).getPrecoUnitario());
                 pstmt.setDouble(5, listaDeItens.get(i).getValotDesconto());
-                pstmt.setDouble(6, listaDeItens.get(i).getPrecoTotalNotaFiscalItem());
+                pstmt.setDouble(8, listaDeItens.get(i).getPrecoTotalNotaFiscalItem());
                 pstmt.setString(7, listaDeItens.get(i).getRefItemProduto());
-                //pstmt.setDouble(7, listaDeItens.get(i).getPrecoTotalItem());
+                pstmt.setDouble(6, listaDeItens.get(i).getPrecoTotalItem());
 
-                pstmt.setString(8, "P");
+                pstmt.setString(9, "P");
                 pstmt.execute();
 
             } catch (SQLException ex) {
