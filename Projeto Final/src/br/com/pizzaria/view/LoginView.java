@@ -7,6 +7,7 @@ package br.com.pizzaria.view;
 
 import br.com.pizzaria.bean.UsuarioBean;
 import br.com.pizzaria.controller.UsuarioController;
+import br.com.pizzaria.util.GeneratorPDF;
 import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.LimiteDigitos;
 import br.com.pizzaria.util.Som;
@@ -61,6 +62,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mniSuporte = new javax.swing.JMenuItem();
+        mnManual = new javax.swing.JMenuItem();
 
         setTitle("LOGIN");
 
@@ -182,6 +184,14 @@ public class LoginView extends javax.swing.JInternalFrame {
         });
         mnAjuda.add(mniSuporte);
 
+        mnManual.setText("Manual do Usuário");
+        mnManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnManualActionPerformed(evt);
+            }
+        });
+        mnAjuda.add(mnManual);
+
         jMenuBar1.add(mnAjuda);
 
         setJMenuBar(jMenuBar1);
@@ -283,6 +293,12 @@ public class LoginView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioKeyTyped
 
+    private void mnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnManualActionPerformed
+        // TODO add your handling code here:
+        String path = System.getProperty("user.dir") + "\\Manual\\Manual.pdf";
+        GeneratorPDF.abrirPdf(path);
+    }//GEN-LAST:event_mnManualActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
@@ -294,6 +310,7 @@ public class LoginView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu mnAjuda;
+    private javax.swing.JMenuItem mnManual;
     private javax.swing.JMenuItem mniSuporte;
     private javax.swing.JPanel painelLogin;
     private javax.swing.JSeparator separador;
