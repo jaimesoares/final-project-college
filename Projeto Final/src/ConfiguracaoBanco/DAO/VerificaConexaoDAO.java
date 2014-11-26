@@ -131,11 +131,11 @@ public class VerificaConexaoDAO {
             statement.execute("CREATE TABLE `" + dataBase + "`.`item_nf_entrada` (\n"
                     + "`nfei_nro_nf` char(10) NOT NULL,\n"
                     + "  `nfei_ser` char(3) NOT NULL,\n"
-                    + "  `nfei_cod_forn` int(10)  NOT NULL,\n"
-                    + "  `nfei_cod_item` int(10)  NOT NULL,\n"
-                    + "  `nfei_cod_prod` int(10)  NOT NULL,\n"
+                    + "  `nfei_cod_forn` int(10) NOT NULL,\n"
+                    + "  `nfei_cod_item` int(10) NOT NULL,\n"
+                    + "  `nfei_cod_prod` int(10) NOT NULL,\n"
                     + "  `nfei_qtde` decimal(10,3) DEFAULT NULL,\n"
-                    + "  `nfei_vlr_unit` decimal(10,2)  zerofill DEFAULT NULL,\n"
+                    + "  `nfei_vlr_unit` decimal(10,2) unsigned zerofill DEFAULT NULL,\n"
                     + "  `nfei_vlr_desc` decimal(10,2) DEFAULT NULL,\n"
                     + "  `nfei_vlr_imposto` decimal(10,2) DEFAULT NULL,\n"
                     + "  `nfei_ref_prod` varchar(15) DEFAULT NULL,\n"
@@ -427,11 +427,11 @@ public class VerificaConexaoDAO {
                     + "  `pedc_obs` varchar(45) DEFAULT NULL,\n"
                     + "  `pedc_vlr_liq` decimal(10,2) DEFAULT NULL,\n"
                     + "  PRIMARY KEY (`pedc_cod`)\n"
-                    + ") ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;");
+                    + ") ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`item_ped_compra` (\n"
                     + "`pedci_cod_ped` int(11) NOT NULL,\n"
-                    + "  `pedci_item` int(11) NOT NULL,\n"
+                    + "  `pedci_item` int(11) NOT NULL AUTO_INCREMENT,\n"
                     + "  `pedci_cod_prod` int(11) NOT NULL,\n"
                     + "  `pedci_qtde` decimal(10,4) NOT NULL,\n"
                     + "  `pedci_vlr_unit` decimal(10,2) NOT NULL,\n"
@@ -439,12 +439,14 @@ public class VerificaConexaoDAO {
                     + "  `pedci_vlr_tot` decimal(10,2) NOT NULL,\n"
                     + "  `pedci_cod_ref_prod` varchar(15) DEFAULT NULL,\n"
                     + "  `pedci_situacao` char(1) NOT NULL DEFAULT 'P' COMMENT 'P=Pendente   R=Recebido',\n"
+                    + "  `pedci_vlr_liq` decimal(10,2) DEFAULT NULL,\n"
                     + "  PRIMARY KEY (`pedci_cod_ped`,`pedci_item`),\n"
                     + "  KEY `fk_item_pedcompra_pedcompra_idx` (`pedci_cod_ped`),\n"
                     + "  KEY `fk_item_pedcompra_produtos_idx` (`pedci_cod_prod`),\n"
+                    + "  KEY `pedci_item` (`pedci_item`),\n"
                     + "  CONSTRAINT `fk_item_pedcompra_pedcompra` FOREIGN KEY (`pedci_cod_ped`) REFERENCES `ped_compra` (`pedc_cod`) ON DELETE NO ACTION ON UPDATE NO ACTION,\n"
                     + "  CONSTRAINT `fk_item_pedcompra_produtos` FOREIGN KEY (`pedci_cod_prod`) REFERENCES `produtos` (`prd_prod`) ON DELETE NO ACTION ON UPDATE NO ACTION\n"
-                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+                    + ") ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;");
 
             statement.execute("\n"
                     + "CREATE TABLE `" + dataBase + "`.`ajuste_estoq` (\n"
@@ -524,9 +526,9 @@ public class VerificaConexaoDAO {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabela de Usuarios do Sistema';\n");
 
             statement.execute("CREATE TABLE `" + dataBase + "`.`nf_entrada` (\n"
-                    + "  `nfe_nro_nf` char(10)  NOT NULL,\n"
+                    + "`nfe_nro_nf` char(10) NOT NULL,\n"
                     + "  `nfe_ser` char(3) NOT NULL,\n"
-                    + "  `nfe_cod_forn` int(11)  NOT NULL,\n"
+                    + "  `nfe_cod_forn` int(11) NOT NULL,\n"
                     + "  `nfe_dt_movto` date NOT NULL,\n"
                     + "  `nfe_vlr_tot_prod` decimal(10,2) NOT NULL,\n"
                     + "  `nfe_vlr_nf` decimal(10,2) NOT NULL,\n"
