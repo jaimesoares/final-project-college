@@ -75,7 +75,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
         populaListaFornecedor();
         populaTipoProduto();
-        pesquisaPedido();
+//        pesquisaPedido();
     }
 
     /**
@@ -92,8 +92,6 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         txtNumNotaFiscal = new javax.swing.JTextField();
         txtSerie = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        lbl_data4 = new javax.swing.JLabel();
-        txtPedCompra = new javax.swing.JTextField();
         lbl_data2 = new javax.swing.JLabel();
         try{        formatoNascimento = new MaskFormatter("##/##/####");    }catch (Exception Erro){      JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);  }
         txtDtEmissao = new JFormattedTextField(formatoNascimento);
@@ -169,28 +167,6 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Número NF:");
 
-        lbl_data4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_data4.setText("Ped. Compra:");
-
-        txtPedCompra.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPedCompraFocusLost(evt);
-            }
-        });
-        txtPedCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPedCompraActionPerformed(evt);
-            }
-        });
-        txtPedCompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPedCompraKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPedCompraKeyTyped(evt);
-            }
-        });
-
         lbl_data2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data2.setText("Dt. Emissão:");
 
@@ -217,22 +193,22 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         lbl_data6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_data6.setText("CNPJ Fornec:");
 
-        txtCNPJ.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtCNPJFocusLost(evt);
-            }
-        });
         txtCNPJ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCNPJActionPerformed(evt);
             }
         });
-        txtCNPJ.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCNPJKeyPressed(evt);
+        txtCNPJ.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCNPJFocusLost(evt);
             }
+        });
+        txtCNPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCNPJKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCNPJKeyPressed(evt);
             }
         });
 
@@ -293,7 +269,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         });
 
         lbl_data11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_data11.setText("Ped. Compra:");
+        lbl_data11.setText("Num. Ped. Compra:");
 
         cbPedCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,37 +281,35 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCNPJ)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_data6)
-                        .addGap(0, 40, Short.MAX_VALUE)))
-                .addGap(497, 497, 497))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblValor3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotalProdutosNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblValor4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescontoNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblValor5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValorNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_data7)
-                            .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(265, 265, 265)
+                                .addComponent(cbPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblValor3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotalProdutosNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblValor4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDescontoNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblValor5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtValorNota, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_data7)
+                                    .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_data11)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_data11)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_data6)
+                            .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNumNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,7 +317,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_data3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtSerie))
+                            .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDtEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,10 +326,6 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDtReceb, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_data5))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_data4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -372,19 +342,21 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbl_data11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(cbPedCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_data6)
+                        .addGap(26, 26, 26))
+                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_data2)
-                            .addComponent(lbl_data5)
-                            .addComponent(lbl_data4))
+                            .addComponent(lbl_data5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDtEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDtReceb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPedCompra)))
+                            .addComponent(txtDtReceb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -393,13 +365,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         .addComponent(lbl_data3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_data6)
-                        .addGap(26, 26, 26))
-                    .addComponent(txtCNPJ, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValor3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTotalProdutosNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -623,7 +589,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(lblValor10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtDescontoItem))
+                                    .addComponent(txtDescontoItem, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblValor11)
@@ -755,14 +721,6 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSerieActionPerformed
-
-    private void txtPedCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPedCompraActionPerformed
-
-    }//GEN-LAST:event_txtPedCompraActionPerformed
-
-    private void txtPedCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPedCompraKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPedCompraKeyTyped
 
     private void txtDtEmissaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDtEmissaoKeyTyped
         String caracteres = "0987654321";
@@ -961,8 +919,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
     private void cbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFornecedorActionPerformed
         // TODO add your handling code here:
+        //System.out.println(comboNumPedido.getSize());
+        cbPedCompra.removeAllItems();
         txtCNPJ.setText(((FornecedorBean) modeloForncedor.getSelectedItem()).getPfj());
         validaCNPJCPF();
+        pesquisaPedidoFornecedor(((FornecedorBean) modeloForncedor.getSelectedItem()).getCodigo());
 
     }//GEN-LAST:event_cbFornecedorActionPerformed
 
@@ -1066,25 +1027,15 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalItemActionPerformed
 
-    private void txtPedCompraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPedCompraFocusLost
-        pesquisaPedido();
-
-
-    }//GEN-LAST:event_txtPedCompraFocusLost
-
-    private void txtPedCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPedCompraKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            pesquisaPedido();
-
-        }// será que não ficaria legar selecionar o fornecerdor e aparer os pedidos?melhor vamos fazer isso então
-    }//GEN-LAST:event_txtPedCompraKeyPressed
-
     private void txtCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCNPJActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCNPJActionPerformed
 
     private void cbPedCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPedCompraActionPerformed
         // TODO add your handling code here:
+        if (comboNumPedido.getSize() > 0) {
+            pesquisaPedido(((FornecedorBean) modeloForncedor.getSelectedItem()).getCodigo(), Integer.parseInt(comboNumPedido.getSelectedItem().toString()));
+        }
     }//GEN-LAST:event_cbPedCompraActionPerformed
 
 
@@ -1115,7 +1066,6 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_data11;
     private javax.swing.JLabel lbl_data2;
     private javax.swing.JLabel lbl_data3;
-    private javax.swing.JLabel lbl_data4;
     private javax.swing.JLabel lbl_data5;
     private javax.swing.JLabel lbl_data6;
     private javax.swing.JLabel lbl_data7;
@@ -1128,7 +1078,6 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDtEmissao;
     private javax.swing.JTextField txtDtReceb;
     private javax.swing.JTextField txtNumNotaFiscal;
-    private javax.swing.JTextField txtPedCompra;
     private javax.swing.JTextField txtQtdeItem;
     private javax.swing.JTextField txtRefProdItem;
     private javax.swing.JTextField txtSerie;
@@ -1422,7 +1371,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     + "             `nfe_ped_compra`,\n"
                     + "             `nfe_vlr_imposto`,\n"
                     + "             `nfe_id_usuario`)\n"
-                    + "values (?,\n"//Esse campo vai receber o codigo do pedido de compra, certo! Voce pode fazer com que carregue todos os itens quando colocar o codigo do pedido aqui? vamos nessa ... é que esse campo não tem cara de uma pesquisa kkverdade.temos que deixar com cara de pesquisa. eu faço isso...ok qualquer coisa estarei aqui estou fazendo o instalador do projeto e vou rever a documentação completa blz.. qualquer duvida eu chamo pode apostar kkkokkkk.fui
+                    + "values (?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
@@ -1445,7 +1394,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             pstmt.setDouble(7, txtDescontoNota.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoNota.getText()));
             pstmt.setString(8, VerificarData.converteParaSql(txtDtEmissao.getText()));
             pstmt.setString(9, VerificarData.converteParaSql(txtDtReceb.getText()));
-            pstmt.setInt(10, txtPedCompra.getText().isEmpty() ? 0 : Integer.parseInt(txtDescontoNota.getText()));
+//            pstmt.setInt(10, txtPedCompra.getText().isEmpty() ? 0 : Integer.parseInt(txtDescontoNota.getText()));
 
             pstmt.setDouble(11, 0);
             pstmt.setString(12, Global.usuario.getLogin());
@@ -1556,7 +1505,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         return true;
     }
 
-    public void pesquisaPedido() {
+    public void pesquisaPedido(int codigoFornec, int codigoPedido) {
 
         String SQLSelection = "SELECT\n"
                 + "  `pedc_cod`,\n"
@@ -1573,29 +1522,23 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                 + "  `pedc_obs`,\n"
                 + "  `pedc_vlr_liq`\n"
                 + "FROM `pizzaria`.`ped_compra`\n"
-                + "WHERE pedc_cod = ?"
+                + "WHERE pedc_cod_fornec = ? and pedc_cod = ? "
                 + "LIMIT 0, 1000;";
-        ;
+
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
-            pstm.setString(1, txtPedCompra.getText());
+            pstm.setInt(1, codigoFornec);
+            pstm.setInt(2, codigoPedido);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
 
-                // JOptionPane.showMessageDialog(null, rs.getString("nfe_nro_nf"));    estou pegando da tabela Nf_entrada  acho que voce não entendeu direito  o campo ped compra vai buscar o pedido feito na tela de pedido de compra que voce fez hummm.       
-                // txtNumNotaFiscal.setText(rs.getString("nfe_nro_nf"));
-                //txtSerie.setText(rs.getString("nfe_ser"));
-                //txtDtEmissao.setText(rs.getString("pedc_data"));
-                //txtDtReceb.setText(rs.getString("nfe_dt_receb"));//a data não vem!essa data de recebimento quem coloca é o usuario qunado cadastrar a nota fiscal.
-                //    JOptionPane.showMessageDialog(null, rs.getString("nfe_dt_receb"));
-                ///txtTotalProdutosNota.setText(rs.getString("pedc_vlr_tot"));
-                //txtDescontoNota.setText(rs.getString("pedc_vlr_desc"));
-                //txtValorNota.setText(rs.getString("pedc_vlr_tot"));
-
-                codigo= rs.getInt("pedc_cod");
+                txtDtEmissao.setText(rs.getString("pedc_data"));
+                txtTotalProdutosNota.setText(rs.getString("pedc_vlr_tot"));
+                txtDescontoNota.setText(rs.getString("pedc_vlr_desc"));
+                txtValorNota.setText(rs.getString("pedc_vlr_liq"));
                 
-                //pesquisaItensPedido(codigoPedido);// o fornecedor não aparece aqui em cima então mais ai eu vou ter que fazer a pequisa com esse codigo para descobrir o fornecedor... ai  que eu começo a ficar muito confuso 
-                //JOptionPane.showMessageDialog(null, codigoPedido);
+
+                pesquisaItensPedido(codigoPedido);// o fornecedor não aparece aqui em cima então mais ai eu vou ter que fazer a pequisa com esse codigo para descobrir o fornecedor... ai  que eu começo a ficar muito confuso 
             }
 
         } catch (SQLException ex) {
@@ -1620,11 +1563,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                 + "WHERE pedci_cod_ped = ?\n"
                 + "LIMIT 0, 1000;";
 
-        String SQLSelection1 = "SELECT\n"
-                + "`tprd_descr`\n"
-                + "FROM `pizzaria`.`tipo_prod\n"
-                + "WHERE tprd_id = ?\n"
-                + "LIMIT 0, 1000;";
+        
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
@@ -1633,32 +1572,31 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             while (rs.next()) {
 
                 //JOptionPane.showMessageDialog(null, rs.getString("pedci_cod_ped"));    //estou pegando da tabela Nf_entrada  acho que voce não entendeu direito  o campo ped compra vai buscar o pedido feito na tela de pedido de compra que voce fez hummm.       
-//                txtRefProdItem.setText(rs.getString("pedci_cod_ref_prod"));
-//                txtQtdeItem.setText(rs.getString("pedci_qtde"));
-//                txtUnidadeItem.setText(rs.getString("pedci_vlr_unit"));
-//                txtTotalItem.setText(rs.getString("pedci_vlr_tot"));//a data não vem!essa data de recebimento quem coloca é o usuario qunado cadastrar a nota fiscal.
-//                //    JOptionPane.showMessageDialog(null, rs.getString("nfe_dt_receb"));
-//               txtDescontoItem.setText(rs.getString("pedci_vlr_desc"));
-//                txtDescontoNota.setText(rs.getString("nfe_vlr_desc"));
-//                txtTotalNotaItem.setText(rs.getString("pedci_vlr_tot"));
-//                ItemNotaFiscalEntradaBean itemPedido = new ItemNotaFiscalEntradaBean();
-//                itemPedido.setCodigoProduto(rs.getInt("pedci_cod_prod"));//ok
-//                itemPedido.setPrecoUnitario(Double.parseDouble(txtValorUnitarioItem.getText().replace(",", ".")));
-//                itemPedido.setQuantidade(Double.parseDouble(txtQtdeItem.getText().replace(",", ".")));
-//                itemPedido.setPrecoTotalItem(Double.parseDouble(txtTotalItem.getText().replace(",", ".")));
-//                itemPedido.setCodigoItem(++item);
-//                itemPedido.setPrecoTotalNotaFiscalItem(Double.parseDouble(txtTotalNotaItem.getText().replace(",", ".")));
-//                itemPedido.setItemProdutoBean((ProdutoBean) cbProduto.getSelectedItem());
-//                itemPedido.setValotDesconto((txtDescontoItem.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoItem.getText().replace(",", "."))));
-//                itemPedido.setRefItemProduto(txtRefProdItem.getText());
-//                 
-//                
-//                listaDeItens.add(itemPedido);
-                PreparedStatement pstm1 = ConectaBanco.getConnection().prepareStatement(SQLSelection1);
-                pstm1.setInt(1, rs.getInt("pedci_item"));
-                ResultSet rs1 = pstm1.executeQuery();
+                txtRefProdItem.setText(rs.getString("pedci_cod_ref_prod"));
+                txtQtdeItem.setText(rs.getString("pedci_qtde"));
+                txtUnidadeItem.setText(rs.getString("pedci_vlr_unit"));
+                txtTotalItem.setText(rs.getString("pedci_vlr_tot"));//a data não vem!essa data de recebimento quem coloca é o usuario qunado cadastrar a nota fiscal.
+                //    JOptionPane.showMessageDialog(null, rs.getString("nfe_dt_receb"));
+               txtDescontoItem.setText(rs.getString("pedci_vlr_desc"));
+                txtDescontoNota.setText(rs.getString("nfe_vlr_desc"));
+                txtTotalNotaItem.setText(rs.getString("pedci_vlr_tot"));
+                
+                ItemNotaFiscalEntradaBean itemPedido = new ItemNotaFiscalEntradaBean();
+                itemPedido.setCodigoProduto(rs.getInt("pedci_cod_prod"));//ok
+                itemPedido.setPrecoUnitario(rs.getDouble("pedci_vlr_unit"));
+                itemPedido.setQuantidade(Integer.parseInt(rs.getString("pedci_qtde")));
+                itemPedido.setPrecoTotalItem(rs.getDouble("pedci_vlr_tot"));
+                itemPedido.setCodigoItem(++item);
+                itemPedido.setPrecoTotalNotaFiscalItem(Double.parseDouble(txtTotalNotaItem.getText().replace(",", ".")));
+                itemPedido.setItemProdutoBean((ProdutoBean) cbProduto.getSelectedItem());
+                itemPedido.setValotDesconto((txtDescontoItem.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoItem.getText().replace(",", "."))));
+                itemPedido.setRefItemProduto(rs.getString("pedci_cod_ref_prod"));
+                 
+                
+                listaDeItens.add(itemPedido);
+                
 
-                modeloDeTabela.addRow(new Object[]{rs.getString("pedci_item"), rs1.getString("tprd_descr")});
+                modeloDeTabela.addRow(new Object[]{rs.getString("pedci_item"), rs.getString("tprd_descr")});
             }
 
         } catch (SQLException ex) {
@@ -1683,7 +1621,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                 + "  `pedc_obs`,\n"
                 + "  `pedc_vlr_liq`\n"
                 + "FROM `pizzaria`.`ped_compra`\n"
-                + "WHERE pedc_cod_fornec ="+codigo+"\n"
+                + "WHERE pedc_cod_fornec =?\n"
                 + "LIMIT 0, 1000;";
 
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
@@ -1691,12 +1629,14 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                
-             cbPedCompra.addItem( rs.getInt("pedc_cod")); 
+
+                cbPedCompra.addItem(rs.getInt("pedc_cod"));
+
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível preencher os campos aqui " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
         }
     }
+
 }

@@ -976,7 +976,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         switch (JOptionPane.showConfirmDialog(null, "Deseja sair", "Sair", JOptionPane.YES_NO_OPTION)) {
-            case 0:                
+            case 0:
                 this.dispose();
                 break;
         }
@@ -1268,7 +1268,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
 
         String tp = "";
 
-  //  FornecedorBean f =new FornecedorBean();
+        //  FornecedorBean f =new FornecedorBean();
         //JOptionPane.showMessageDialog(null,((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
@@ -1283,8 +1283,8 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                     //+ "             `pedc_situacao`,\n"
                     //+ "             `pedc_dt_entrega`,\n"
                     + "             `pedc_forma_pagto`,\n"
-                    + "             `pedc_cond_pagto`,\n"
-                    //+ "             
+                    + "             `pedc_cond_pagto`, \n"
+                    + "  `pedc_vlr_liq`, \n"
                     + "             `pedc_obs`)\n"
                     + " VALUES (?,\n"
                     + "        ?,\n"
@@ -1294,6 +1294,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                     + "        ?,\n"
                     // + "        'pedc_situacao',\n"
                     //+ "        'pedc_dt_entrega',\n"  
+                    + "        ?,\n"
                     + "        ?,\n"
                     + "        ?,\n"
                     + "        ?\n);";
@@ -1317,17 +1318,17 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
             pstmt.setString(6, tp);
             pstmt.setString(7, jFormaPagamento.getSelectedItem().toString());
             pstmt.setString(8, jCondPagamento.getSelectedItem().toString());//não tem nada nesse combo!ok 
-            pstmt.setString(9, txtObs.getText());
-
+            pstmt.setString(10, txtObs.getText());
+            pstmt.setDouble(9, (txtValorNf.getText().isEmpty() ? 0 : Double.parseDouble(txtValorNf.getText())));//assim?
             pstmt.execute();
 
-             if (cadastrarItens() ) {
-            ConectaBanco.getConnection().commit();
-            JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
-            return true;
+            if (cadastrarItens()) {
+                ConectaBanco.getConnection().commit();
+                JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
+                return true;
             } else {
-               ConectaBanco.closeConnection();
-              return false;
+                ConectaBanco.closeConnection();
+                return false;
             }
         } catch (SQLException ex) {
             try {
@@ -1339,19 +1340,17 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
             return false;
 
         }
-        
 
     }
 
-    
-     public boolean cadastrarItens() {
+    public boolean cadastrarItens() {
 
         for (int i = 0; i < listaDeItens.size(); i++) {//toda vez que apertar no botão acionar grava um item nessa lista listaDeItens aqui voce varre ela e popula o banco blz man...vai lá dormir vou me virar kkk já ajudou pra carambaboa sorte e boa naoite...ja ja eu levanto man....04:30puts fui falo mano dorme Com Deus nós Amém
-           try {
+            try {
 
                 String SQLInsertItens = "insert into `pizzaria`.`item_ped_compra` (\n"//os itens do pedido ok
                         + "  `pedci_cod_ped`,\n"//código do pedido aqui falta 
-                       // + "  `pedci_item`,\n"
+                        // + "  `pedci_item`,\n"
                         + "  `pedci_cod_prod`,\n"
                         + "  `pedci_qtde`,\n"
                         + "  `pedci_vlr_unit`,\n"
@@ -1361,21 +1360,20 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                         + "  `pedci_situacao`\n"
                         + ") "
                         + "values (?,\n"
-                      //  + "        ?,\n"
+                        //  + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
                         + "        ?,\n"
-                        
                         + "       ?);";
 
                 PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SQLInsertItens);
                 pstmt.setInt(1, codigoDoPedido());
                // pstmt.setInt(2, Integer.parseInt(txtSerie.getText()));
-               // pstmt.setInt(2, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
-               // pstmt.setInt(2,2);
+                // pstmt.setInt(2, ((FornecedorBean) cbFornecedor.getSelectedItem()).getCodigo());
+                // pstmt.setInt(2,2);
                 pstmt.setInt(2, listaDeItens.get(i).getCodigoProduto());
                 pstmt.setDouble(3, listaDeItens.get(i).getQuantidade());
                 pstmt.setDouble(4, listaDeItens.get(i).getPrecoUnitario());
@@ -1383,7 +1381,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                 pstmt.setDouble(6, listaDeItens.get(i).getPrecoTotalNotaFiscalItem());
                 pstmt.setString(7, listaDeItens.get(i).getRefItemProduto());
                 //pstmt.setDouble(7, listaDeItens.get(i).getPrecoTotalItem());
-                
+
                 pstmt.setString(8, "P");
                 pstmt.execute();
 
@@ -1402,8 +1400,8 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
 
         return true;
     }
-     
-     public int codigoDoPedido() {
+
+    public int codigoDoPedido() {
         int codigo = 1;
 
         try {
@@ -1421,7 +1419,5 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
         //JOptionPane.showMessageDialog(null, codigo);
         return codigo;
     }
-    
-   
-}
 
+}
