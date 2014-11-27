@@ -12,6 +12,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
     UsuarioController usuarioController;
     DefaultTableModel modelo;
     UsuarioBean usuarioBeans;
+    String nomeFunc;
 
     public UsuarioView() {
         initComponents();
@@ -24,6 +25,7 @@ public class UsuarioView extends javax.swing.JInternalFrame {
 
     public UsuarioView(String nomeFunc) {
         initComponents();
+        this.nomeFunc = nomeFunc;
         usuarioController = new UsuarioController();
         usuarioBeans = new UsuarioBean();
         modelo = (DefaultTableModel) tblFucnionario.getModel();
@@ -267,6 +269,9 @@ public class UsuarioView extends javax.swing.JInternalFrame {
                     tblFucnionario.setEnabled(true);
                     btnEditar.setEnabled(true);
                     btnRemover.setEnabled(true);
+                    if(nomeFunc!=null){
+                        this.dispose();
+                    }
                 }
             }
 

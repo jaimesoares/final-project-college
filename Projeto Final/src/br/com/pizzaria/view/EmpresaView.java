@@ -47,6 +47,9 @@ btnNovo1.setText("Salvar");
         btnNovo1.setText("Editar");
             
         }
+        if (ValidaCNPJ.isCNPJ(jFormattedTextField2.getText())) {
+                jFormattedTextField2.setText(ValidaCNPJ.imprimeCNPJ(jFormattedTextField2.getText()));
+            }
        
 
        // FormatoData = new SimpleDateFormat("dd/MM/yyyy");
@@ -224,6 +227,7 @@ btnNovo1.setText("Salvar");
         lbl_telefone.setText("Tel. Fixo-1:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CPF:", "CNPJ:" }));
+        jComboBox1.setSelectedIndex(1);
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -258,22 +262,22 @@ btnNovo1.setText("Salvar");
         });
 
         jFormattedTextField2.setBackground(new java.awt.Color(204, 255, 255));
-        jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextField2FocusLost(evt);
-            }
-        });
         jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField2ActionPerformed(evt);
             }
         });
-        jFormattedTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jFormattedTextField2KeyPressed(evt);
+        jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFormattedTextField2FocusLost(evt);
             }
+        });
+        jFormattedTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jFormattedTextField2KeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedTextField2KeyPressed(evt);
             }
         });
 
