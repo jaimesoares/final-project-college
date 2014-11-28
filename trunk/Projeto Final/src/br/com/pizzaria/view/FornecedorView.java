@@ -44,7 +44,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         fornecedorBeans = new FornecedorBean();
         fornecedorController = new FornecedorController();
         modelo = (DefaultTableModel) tblFornecedor.getModel();
-        list.listaFornecedor(modelo);
+        //list.listaFornecedor(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -146,11 +146,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "CPF/CNPJ", "Contato"
+                "Nome", "CPF/CNPJ", "Contato"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -266,14 +266,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         jLabel2.setText("Manutenção de Fornecedor");
 
         txtCep.setBackground(new java.awt.Color(204, 255, 255));
-        txtCep.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtCepFocusLost(evt);
-            }
-        });
         txtCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCepActionPerformed(evt);
+            }
+        });
+        txtCep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCepFocusLost(evt);
             }
         });
         txtCep.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -511,7 +511,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void tblFornecedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMousePressed
         int codigo = 0;
-        codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+        codigo = ((FornecedorBean)modelo.getValueAt(tblFornecedor.getSelectedRow(), 0)).getCodigo();
 
         // list.preencherCampos(Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString()));
         habilitarCampos(true);
@@ -522,12 +522,10 @@ public class FornecedorView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblFornecedorMousePressed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
-        if (txfPesquisar.getText().isEmpty()) {
-            modelo.setNumRows(0);
-        } else {
+       
             modelo.setNumRows(0);
             fornecedorController.controlePesquisa(txfPesquisar.getText(), modelo);
-        }
+        
     }//GEN-LAST:event_txfPesquisarKeyReleased
 
     private void txfTelefone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTelefone1ActionPerformed
@@ -597,7 +595,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         if (btnNovo1.getText().equals("Salvar")) {
             if (cadastraFornecedor()) {
                 limpaTudo();
-                list.listaFornecedor(modelo);
+                //list.listaFornecedor(modelo);
                 fornecedorController.verificaEmail(e);
             }
         }
@@ -627,7 +625,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 modelo.setNumRows(0);
                 limpaTudo();
                 table(true);
-                list.listaFornecedor(modelo);
+               // list.listaFornecedor(modelo);
 
             } else {
                 // JOptionPane.showMessageDialog(null, codigo);
@@ -651,7 +649,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             //JOptionPane.showMessageDialog(null, "if");
             table(true);
             modelo.setNumRows(0);
-            list.listaFornecedor(modelo);
+           // list.listaFornecedor(modelo);
             btnFechar1.setText("Fechar");
             habilitarCampos(true);
             txfPesquisar.setText("");
@@ -783,7 +781,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Excluido com sucesso", "Cadastro efetivado", 1, new ImageIcon("imagens/ticado.png"));
             table(true);
             modelo.setNumRows(0);
-            list.listaFornecedor(modelo);
+           // list.listaFornecedor(modelo);
             limpaTudo();
 
         } catch (SQLException ex) {
@@ -960,8 +958,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     public void preencherCampos(int codigo) {
 
-        int codigo2 = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
-        fornecedorBeans.setCodigo(codigo2);
+//        int codigo2 = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+//        fornecedorBeans.setCodigo(codigo2);
 
         try {
 

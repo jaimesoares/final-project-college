@@ -922,6 +922,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         //System.out.println(comboNumPedido.getSize());
         listaDeItens = new ArrayList<>();
+        modeloDeTabela.setNumRows(0);
         cbPedCompra.removeAllItems();
         txtCNPJ.setText(((FornecedorBean) modeloForncedor.getSelectedItem()).getPfj());
         validaCNPJCPF();

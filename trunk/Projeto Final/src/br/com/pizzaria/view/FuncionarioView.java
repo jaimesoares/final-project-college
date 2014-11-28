@@ -150,11 +150,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Cargo", "Permissão"
+                "Nome", "Telefone", "Cargo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -609,7 +609,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
     private void tblFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMousePressed
 
-        funcionarioBeans = funcionarioController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblFuncionario.getSelectedRow(), 0).toString()));
+        funcionarioBeans = funcionarioController.controlePreenchimento(((FuncionarioBean)modelo.getValueAt(tblFuncionario.getSelectedRow(), 0)).getCodigo());
 
         modeloCargos.setSelectedItem(funcionarioBeans.getCargo());
         txtNome.setText(funcionarioBeans.getNome());
@@ -967,7 +967,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     }
 
     public void verificaEntregador() {
-        if (modeloCargos.getSelectedItem().toString().equals("Entregador")) {
+        if (modeloCargos.getSelectedItem().toString().equals("ENTREGADOR")) {
             txtCnh.setEnabled(true);
             txtMoto.setEnabled(true);
             txtPlaca.setEnabled(true);

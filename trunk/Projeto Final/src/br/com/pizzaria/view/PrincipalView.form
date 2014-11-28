@@ -44,28 +44,12 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnComprasMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnContasPagar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Contas a Pagar F5 |"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnContasPagarMousePressed"/>
-          </Events>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="mnVenda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vendas F6 |"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnVendaMousePressed"/>
-          </Events>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnContarReceber">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Contas a Receber F7 |"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnContarReceberMousePressed"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnRelatorio">

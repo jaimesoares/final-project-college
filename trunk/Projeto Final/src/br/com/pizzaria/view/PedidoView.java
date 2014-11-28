@@ -1644,7 +1644,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
 
             // double subTotal = Double.parseDouble(txtValorProd.getText()) * Integer.parseInt(txtQuantidadeProd.getText());
-            modeloDeTabela.addRow(new Object[]{cbProduto.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), "", txtQuantidadeProd.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+            modeloDeTabela.addRow(new Object[]{cbTipo.getSelectedItem()+" "+cbProduto.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbProduto.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), "", txtQuantidadeProd.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
 
             cbFormaPagamento.setEnabled(true);
             txtTroco.setText("");
@@ -2447,12 +2447,12 @@ public class PedidoView extends javax.swing.JInternalFrame {
                 double sabor1 = ((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco();
                 double sabor2 = ((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco();
                 if (sabor1 >= sabor2) {
-                    modeloDeTabela.addRow(new Object[]{cbSabor1.getSelectedItem() + " / " + cbSabor2.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+                    modeloDeTabela.addRow(new Object[]{cbTipoPizza.getSelectedItem()+" "+cbSabor1.getSelectedItem() + " / " + cbSabor2.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor1.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
                     // modeloDeTabela.addRow(new Object[]{cbSabor2.getSelectedItem() + " meia", 0.00, 0, 0.00});
                     adicionaPizzaSabores("sabor1", valorTotal);
                 } else {
                     // modeloDeTabela.addRow(new Object[]{cbSabor1.getSelectedItem() + " meia", 0.00, 0, 0.00});
-                    modeloDeTabela.addRow(new Object[]{cbSabor2.getSelectedItem() + " / " + cbSabor1.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+                    modeloDeTabela.addRow(new Object[]{cbTipoPizza.getSelectedItem()+" "+cbSabor2.getSelectedItem() + " / " + cbSabor1.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbSabor2.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
                     adicionaPizzaSabores("sabor2", valorTotal);
                 }
             }
@@ -2493,7 +2493,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
             }
 
             if (cbInteira.getSelectedItem() != null) {
-                modeloDeTabela.addRow(new Object[]{cbInteira.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
+                modeloDeTabela.addRow(new Object[]{cbTipoPizza.getSelectedItem()+" "+cbInteira.getSelectedItem(), (decimalFormato.format(((ProdutoBean) cbInteira.getSelectedItem()).getPrecoProduto().getPreco()).replace(",", ".")), decimalFormato.format(valorBorda).replace(",", "."), txtQtdPizza.getText(), decimalFormato.format(subTotal).replace(",", "."), decimalFormato.format(valorDesconto).replace(",", "."), decimalFormato.format(valorTotal).replace(",", ".")});
                 adicionaPizzaInteira(valorTotal);
             }
             cbInteira.setSelectedIndex(0);
