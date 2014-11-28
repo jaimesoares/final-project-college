@@ -51,8 +51,27 @@ public class FornecedorModel {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-               modelo.addRow(new Object[]{rs.getInt("for_id_fornec"),
-                    rs.getString("for_nome"), rs.getString("for_cod_pfj"), rs.getString("for_contato")});
+                FornecedorBean fornecedorBeans = new FornecedorBean();
+                fornecedorBeans.setNome(rs.getString("for_nome"));
+                fornecedorBeans.setTelefone(rs.getString("for_tel"));
+                fornecedorBeans.setTelCelular(rs.getString("for_tel_cel"));
+
+                 fornecedorBeans.setCep(rs.getInt("for_cep"));
+                //  fornecedorBeans.setEndereco(rs.getString("for_rua"));
+                //fornecedorBeans.setCep(rs.getInt("for_numero"));
+                fornecedorBeans.setNumero(rs.getInt("for_nro_ender"));
+                //fornecedorBeans.setCidade(rs.getString("for_cidade"));
+                // fornecedorBeans.setBairro(rs.getString("for_bairro"));
+                // fornecedorBeans.setEstado(rs.getString("for_estado"));
+                // fornecedorBeans.setBairro(rs.getString("for_bairro"));
+                fornecedorBeans.setPfj(rs.getString("for_cod_pfj"));
+                fornecedorBeans.setDataCad(rs.getString("for_dt_cad"));
+                fornecedorBeans.setContato(rs.getString("for_contato"));
+                fornecedorBeans.setEmail(rs.getString("for_email"));
+                fornecedorBeans.setCodigo(rs.getInt("for_id_fornec"));
+                
+                
+               modelo.addRow(new Object[]{fornecedorBeans, rs.getString("for_cod_pfj"), rs.getString("for_contato")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

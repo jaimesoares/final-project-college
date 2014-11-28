@@ -194,11 +194,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Rua", "Bairro", "Telefone"
+                "Nome", "Rua", "Bairro", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -490,7 +490,8 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPesquisarKeyReleased
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
-        clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblCliente.getSelectedRow(), 0).toString()));
+        //clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblCliente.getSelectedRow(), 0).toString()));
+        clienteBeans = clienteController.controlePreenchimento(((ClienteBean)modelo.getValueAt(tblCliente.getSelectedRow(), 0)).getCodigoCliente());
 
         //txtCodigo.setText(clienteBeans.getCodigoCliente() + "");
         txtNome.setText(clienteBeans.getNome());

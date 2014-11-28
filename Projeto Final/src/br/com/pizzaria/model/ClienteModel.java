@@ -82,11 +82,24 @@ public class ClienteModel {
         try (PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection)) {
 
             ResultSet rs = pstm.executeQuery();
-//            if (pesquisa.equals("")) {
-//                rs.next();
-//            }
+//            
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
+                ClienteBean clienteBeans = new ClienteBean();
+                clienteBeans.setObservacao(rs.getString("cli_obs"));
+                clienteBeans.setCep(rs.getString("cli_cep"));
+                clienteBeans.setAniversario(VerificarData.converteParaJAVA(rs.getString("cli_aniversario")));
+                clienteBeans.setTelCelular(rs.getString("cli_tel_cel"));
+                clienteBeans.setEmail(rs.getString("cli_email"));
+                clienteBeans.setNumero(rs.getInt("cli_nro_ender"));
+                clienteBeans.setCodigoCliente(rs.getInt("cli_cod"));
+                clienteBeans.setNome(rs.getString("cli_nome"));
+                clienteBeans.setRua(rs.getString("cli_rua"));
+                clienteBeans.setBairro(rs.getString("cli_bairro"));
+                clienteBeans.setTelefone(rs.getString("cli_telefone"));
+                clienteBeans.setDataCadastro(VerificarData.converteParaJAVA(rs.getString("cli_datacad")));
+                clienteBeans.setCidade(rs.getString("cli_cidade"));
+                
+                modelo.addRow(new Object[]{clienteBeans, rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Cliente não cadastrado", "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

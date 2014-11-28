@@ -97,7 +97,46 @@ public class FuncionarioModel {
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("fun_codigo"), rs.getString("fun_nome"), rs.getString("fun_cargo"), rs.getString("fun_permissao")});
+                FuncionarioBean funcionarioBeans = new FuncionarioBean();
+                funcionarioBeans.setCodigo(rs.getInt("fun_codigo"));
+                funcionarioBeans.setNome(rs.getString("fun_nome"));
+                funcionarioBeans.setTelefone(rs.getString("fun_tel"));
+                funcionarioBeans.setTelCelular(rs.getString("tel_cel"));
+                funcionarioBeans.setNascimento(VerificarData.converteParaJAVA(rs.getString("fun_nascimento")));
+                funcionarioBeans.setRua(rs.getString("fun_rua"));
+                funcionarioBeans.setNumero(rs.getInt("fun_nro_ender"));
+                funcionarioBeans.setCep(rs.getString("fun_cep"));
+                funcionarioBeans.setBairro(rs.getString("fun_bairro"));
+                funcionarioBeans.setCidade(rs.getString("fun_cidade"));
+                funcionarioBeans.setCpf(rs.getString("fun_cpf"));
+                funcionarioBeans.setRg(rs.getString("fun_rg"));
+                funcionarioBeans.setMoto(rs.getString("fun_moto"));
+                funcionarioBeans.setPlacaMoto(rs.getString("fun_placa_moto"));
+                funcionarioBeans.setCnh(rs.getString("fun_cnh"));
+
+                String SQLSelect = "select * from cargo where crg_id_cargo = '" + rs.getInt("fun_cargo") + "';";
+
+                try (PreparedStatement pstmCargo = ConectaBanco.getConnection().prepareStatement(SQLSelect)) {
+
+                    ResultSet rsCargo = pstmCargo.executeQuery();
+
+                    if (rsCargo.next()) {
+                        CargoBean novo = new CargoBean();
+                        novo.setCodigo(rsCargo.getInt("crg_id_cargo"));
+                        novo.setDescricao(rsCargo.getString("crg_descr"));
+                        funcionarioBeans.setCargo(novo);
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Impossível Preencher Campos " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));
+                }
+
+                funcionarioBeans.setEstado(rs.getString("fun_ctps"));
+                funcionarioBeans.setSalario(rs.getDouble("fun_salario"));
+                funcionarioBeans.setValeRefeicao(rs.getDouble("fun_vale_refeicao"));
+                funcionarioBeans.setValeTrans(rs.getDouble("fun_vale_transp"));
+                funcionarioBeans.setEmail(rs.getString("fun_email"));
+                funcionarioBeans.setDataCad(VerificarData.converteParaJAVA(rs.getString("fun_dt_admis")));
+                modelo.addRow(new Object[]{funcionarioBeans,funcionarioBeans.getTelefone(), funcionarioBeans.getCargo().getDescricao()});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Impossível Cadastrar " + ex, "Erro de SQL", 0, new ImageIcon("imagens/cancelar.png"));

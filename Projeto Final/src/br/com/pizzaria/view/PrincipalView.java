@@ -75,9 +75,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mnProducao = new javax.swing.JMenu();
         mnEstoque = new javax.swing.JMenu();
         mnCompras = new javax.swing.JMenu();
-        mnContasPagar = new javax.swing.JMenu();
         mnVenda = new javax.swing.JMenu();
-        mnContarReceber = new javax.swing.JMenu();
         mnRelatorio = new javax.swing.JMenu();
         mnAjuda = new javax.swing.JMenu();
 
@@ -130,14 +128,6 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnCompras);
 
-        mnContasPagar.setText("Contas a Pagar F5 |");
-        mnContasPagar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mnContasPagarMousePressed(evt);
-            }
-        });
-        jMenuBar1.add(mnContasPagar);
-
         mnVenda.setText("Vendas F6 |");
         mnVenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -145,14 +135,6 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(mnVenda);
-
-        mnContarReceber.setText("Contas a Receber F7 |");
-        mnContarReceber.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mnContarReceberMousePressed(evt);
-            }
-        });
-        jMenuBar1.add(mnContarReceber);
 
         mnRelatorio.setText("Relatório F8 |");
         mnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,34 +206,6 @@ public class PrincipalView extends javax.swing.JFrame {
             menu = menuCompras;
         }
     }//GEN-LAST:event_mnComprasMousePressed
-
-    private void mnContasPagarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnContasPagarMousePressed
-        // TODO add your handling code here:
-        if (menu == menuContasPagar) {
-            menu.dispose();
-            menu = new JInternalFrame();
-        } else {
-            menu.dispose();
-            menuContasPagar = new MenuContasPagar();
-            Desktop.add(menuContasPagar);
-            menuContasPagar.setVisible(true);
-            menu = menuContasPagar;
-        }
-    }//GEN-LAST:event_mnContasPagarMousePressed
-
-    private void mnContarReceberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnContarReceberMousePressed
-        // TODO add your handling code here:
-        if (menu == menuContasReceber) {
-            menu.dispose();
-            menu = new JInternalFrame();
-        } else {
-            menu.dispose();
-            menuContasReceber = new MenuContasReceber();
-            Desktop.add(menuContasReceber);
-            menuContasReceber.setVisible(true);
-            menu = menuContasReceber;
-        }
-    }//GEN-LAST:event_mnContarReceberMousePressed
 
     private void mnEmpresaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnEmpresaMousePressed
         // TODO add your handling code here:
@@ -384,13 +338,13 @@ if(menuEvent){
                                 Global.principal.mnComprasMousePressed(null);
                                 break;
                             case 116: //F5
-                                Global.principal.mnContasPagarMousePressed(null);
+//                                Global.principal.mnContasPagarMousePressed(null);
                                 break;
                             case 117: //F6
                                 Global.principal.mnVendaMousePressed(null);
                                 break;
                             case 118: //F7
-                                Global.principal.mnContarReceberMousePressed(null);
+//                                Global.principal.mnContarReceberMousePressed(null);
                                 break;
                             case 119: //F8
                                 Global.principal.mnRelatorioMousePressed(null);
@@ -435,8 +389,6 @@ if(menuEvent){
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCompras;
-    private javax.swing.JMenu mnContarReceber;
-    private javax.swing.JMenu mnContasPagar;
     private javax.swing.JMenu mnEmpresa;
     private javax.swing.JMenu mnEstoque;
     private javax.swing.JMenu mnProducao;
@@ -461,8 +413,8 @@ if(menuEvent){
     public void habiltaMenu(boolean valor) {
         mnAjuda.setVisible(valor);
         mnCompras.setVisible(valor);
-        mnContarReceber.setVisible(valor);
-        mnContasPagar.setVisible(valor);
+//        mnContarReceber.setVisible(valor);
+//        mnContasPagar.setVisible(valor);
         mnEmpresa.setVisible(valor);
         mnEstoque.setVisible(valor);
         mnProducao.setVisible(valor);
