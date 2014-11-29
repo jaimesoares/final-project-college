@@ -2166,7 +2166,7 @@ public class PedidoView extends javax.swing.JInternalFrame {
         pedidoBeans.setObs(txtObservacao1.getText());
         pedidoBeans.setValorTotalPedido(Double.parseDouble(txtTotal.getText()));
         pedidoBeans.setItensPedido(listaDeItens);
-        pedidoBeans.setValorRecebido(Double.parseDouble(txtValorRecebido.getText()));
+        pedidoBeans.setValorRecebido(Double.parseDouble(txtValorRecebido.getText().replace(",", ".")));
         pedidoBeans.setValorTroco(Double.parseDouble(txtTroco.getText()));
         pedidoBeans.setTipoPagamento(cbFormaPagamento.getSelectedItem().toString());
 
