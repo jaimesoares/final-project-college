@@ -513,12 +513,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         int codigo = 0;
         codigo = ((FornecedorBean)modelo.getValueAt(tblFornecedor.getSelectedRow(), 0)).getCodigo();
 
-        // list.preencherCampos(Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString()));
+        //list.preencherCampos(Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString()));
         habilitarCampos(true);
         preencherCampos(codigo);
         table(false);
         btnFechar1.setText("Cancelar");
         txtData.setEditable(false);
+        
+        
     }//GEN-LAST:event_tblFornecedorMousePressed
 
     private void txfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPesquisarKeyReleased
@@ -605,17 +607,21 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
 
-        FornecedorBean fornecedorBeans = new FornecedorBean();
+//        FornecedorBean fornecedorBeans = new FornecedorBean();
+//
+//        int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
 
-        int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
-
+         int codigo = 0;
+        codigo = ((FornecedorBean)modelo.getValueAt(tblFornecedor.getSelectedRow(), 0)).getCodigo();
+         
+         
         if (txtNome.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Selecione um cliente para editar!");
-
+          
         } else {
 
             if (btnEditar1.getText().equals("Editar")) {
-
+               
                 editarFornecedor(codigo);
                 btnFechar1.setText("Cancelar");
                 btnNovo1.setEnabled(true);
@@ -764,7 +770,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
     private void btnRemovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovActionPerformed
 
-        int codigo = Integer.parseInt(modelo.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+         int codigo = 0;
+        codigo = ((FornecedorBean)modelo.getValueAt(tblFornecedor.getSelectedRow(), 0)).getCodigo();
         String in = "Inativo";
 
         try {

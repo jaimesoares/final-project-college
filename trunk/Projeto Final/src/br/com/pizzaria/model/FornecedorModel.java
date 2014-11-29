@@ -47,7 +47,7 @@ public class FornecedorModel {
 
     public void procuraFornecedor(String pesquisa, DefaultTableModel modelo) {
         try {
-            String SQLSelection = "select * from fornecedor where for_nome like '%" + pesquisa + "%';";
+            String SQLSelection = "select * from fornecedor where for_nome like '%" + pesquisa + "%' And for_status ='Ativo';";
             PreparedStatement pstm = ConectaBanco.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
