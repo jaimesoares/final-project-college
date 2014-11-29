@@ -1397,7 +1397,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             pstmt.setDouble(7, txtDescontoNota.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoNota.getText()));
             pstmt.setString(8, VerificarData.converteParaSql(txtDtEmissao.getText()));
             pstmt.setString(9, VerificarData.converteParaSql(txtDtReceb.getText()));
-            pstmt.setInt(10, comboNumPedido.getSize()<0 ? 0 : Integer.parseInt(comboNumPedido.getSelectedItem().toString()));
+            pstmt.setInt(10, comboNumPedido.getSize()<=0 ? 0 : Integer.parseInt(comboNumPedido.getSelectedItem().toString()));
 
             pstmt.setDouble(11, 0);
             pstmt.setString(12, Global.usuario.getLogin());

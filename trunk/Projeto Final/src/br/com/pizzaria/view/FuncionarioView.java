@@ -167,6 +167,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 tblFuncionarioMousePressed(evt);
             }
         });
+        tblFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblFuncionarioKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblFuncionario);
 
         btnEditar.setText("Editar");
@@ -805,6 +810,11 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void tblFuncionarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblFuncionarioKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tblFuncionarioKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

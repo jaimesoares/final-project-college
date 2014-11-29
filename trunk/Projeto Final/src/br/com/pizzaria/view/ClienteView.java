@@ -479,14 +479,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
 
-        if (txtPesquisar.getText().isEmpty()) {
-            modelo.setNumRows(0);
-
-        } else {
+        
             modelo.setNumRows(0);
             clienteController.controlePesquisa(txtPesquisar.getText(), modelo);
 
-        }
+        
     }//GEN-LAST:event_txtPesquisarKeyReleased
 
     private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed

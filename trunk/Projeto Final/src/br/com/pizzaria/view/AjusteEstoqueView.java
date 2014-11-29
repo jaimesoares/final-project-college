@@ -6,6 +6,7 @@ import br.com.pizzaria.bean.TipoProdutoBean;
 import br.com.pizzaria.controller.AjusteEstoqueController;
 import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.VerificarData;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -156,6 +157,9 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
         txtQtdAjuste.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtQtdAjusteKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQtdAjusteKeyPressed(evt);
             }
         });
 
@@ -344,6 +348,22 @@ public class AjusteEstoqueView extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_txtQtdAjusteKeyTyped
+
+    private void txtQtdAjusteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdAjusteKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String tipoMovimento;
+            if (txtQtdAjuste.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Entre com a quantidade!");
+                txtQtdAjuste.requestFocus();
+            } else {
+                if (ajusteEstoqueController.controleAjusteEstoque(populaAjuste())) {
+                    cbTipo.setSelectedIndex(0);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_txtQtdAjusteKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

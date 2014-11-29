@@ -26,6 +26,7 @@ RelatorioClienteView relatorioClienteV;
 RelatorioFornecedor relatorioFornecV;
 RelatorioFuncioanrio relatorioFuncV;
 ConsultaMovEstoqueView movimentoEstoque;
+RelatorioPedido relatorioPedidoV;
     /**
      * Creates new form MenuProdução
      */
@@ -61,6 +62,15 @@ ConsultaMovEstoqueView movimentoEstoque;
             }
 
         });
+         btnRelatorioCliente3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK), "evento");
+        btnRelatorioCliente3.getActionMap().put("evento", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               btnRelatorioCliente3ActionPerformed(e);
+            }
+
+        });
         
     }
 
@@ -76,9 +86,10 @@ ConsultaMovEstoqueView movimentoEstoque;
         btnRelatorioCliente = new javax.swing.JButton();
         btnRelatorioCliente1 = new javax.swing.JButton();
         btnRelatorioCliente2 = new javax.swing.JButton();
+        btnRelatorioCliente3 = new javax.swing.JButton();
 
         setTitle("Menu Relatório");
-        setPreferredSize(new java.awt.Dimension(308, 263));
+        setPreferredSize(new java.awt.Dimension(308, 335));
 
         btnRelatorioCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnRelatorioCliente.setForeground(new java.awt.Color(0, 51, 255));
@@ -107,6 +118,15 @@ ConsultaMovEstoqueView movimentoEstoque;
             }
         });
 
+        btnRelatorioCliente3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnRelatorioCliente3.setForeground(new java.awt.Color(0, 51, 255));
+        btnRelatorioCliente3.setText("<html>Relatório de Pedido<font size='1' style='color:black'> Crtl-4 </font>");
+        btnRelatorioCliente3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioCliente3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +136,8 @@ ConsultaMovEstoqueView movimentoEstoque;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRelatorioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(btnRelatorioCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(btnRelatorioCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addComponent(btnRelatorioCliente2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(btnRelatorioCliente3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,9 +147,11 @@ ConsultaMovEstoqueView movimentoEstoque;
                 .addComponent(btnRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRelatorioCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRelatorioCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRelatorioCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,11 +187,22 @@ ConsultaMovEstoqueView movimentoEstoque;
         }
     }//GEN-LAST:event_btnRelatorioCliente2ActionPerformed
 
+    private void btnRelatorioCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioCliente3ActionPerformed
+        // TODO add your handling code here:
+        if (relatorioPedidoV == null || !relatorioPedidoV.isShowing()) {
+            relatorioPedidoV = new RelatorioPedido();
+            Global.principal.Desktop.add(relatorioPedidoV);
+            centralizaFormCancelamento(relatorioPedidoV);
+            relatorioPedidoV.setVisible(true);
+        }
+    }//GEN-LAST:event_btnRelatorioCliente3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRelatorioCliente;
     private javax.swing.JButton btnRelatorioCliente1;
     private javax.swing.JButton btnRelatorioCliente2;
+    private javax.swing.JButton btnRelatorioCliente3;
     // End of variables declaration//GEN-END:variables
     ActionListener ativar = (  
         new ActionListener(){  
