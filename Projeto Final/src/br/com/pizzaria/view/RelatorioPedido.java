@@ -1,6 +1,5 @@
 package br.com.pizzaria.view;
 
-import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.PedidoBean;
 import br.com.pizzaria.controller.CancelamentoPedidoController;
 import br.com.pizzaria.controller.PedidoController;
@@ -11,6 +10,7 @@ import static br.com.pizzaria.view.CozinhaView.modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -32,8 +32,6 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
 
     public RelatorioPedido() {
         initComponents();
-
-       
 
         pedidoBean = new PedidoBean();
         cancelamentoPedidoController = new CancelamentoPedidoController();
@@ -57,45 +55,17 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        try{
-
-            formatoData = new MaskFormatter("##/##/####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txtDataInicialE = new JFormattedTextField(formatoData);
-        try{
-
-            formatoData = new MaskFormatter("##/##/####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txtDataFinalE = new JFormattedTextField(formatoData);
-        btnListarE = new javax.swing.JButton();
         btnEntrega = new javax.swing.JButton();
+        txtDataInicial = new com.toedter.calendar.JDateChooser();
+        txtDataFinal = new com.toedter.calendar.JDateChooser();
+        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        try{
-
-            formatoData = new MaskFormatter("##/##/####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txtDataInicialB = new JFormattedTextField(formatoData);
-        try{
-
-            formatoData = new MaskFormatter("##/##/####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txtDataFinalB = new JFormattedTextField(formatoData);
-        btnListarB = new javax.swing.JButton();
         btnBalcao = new javax.swing.JButton();
+        txtDataInicialB = new com.toedter.calendar.JDateChooser();
+        txtDataFinalB = new com.toedter.calendar.JDateChooser();
+        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -175,29 +145,17 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Data Final:");
 
-        txtDataInicialE.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataInicialEKeyTyped(evt);
-            }
-        });
-
-        txtDataFinalE.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataFinalEKeyTyped(evt);
-            }
-        });
-
-        btnListarE.setText("Listar");
-        btnListarE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarEActionPerformed(evt);
-            }
-        });
-
         btnEntrega.setText("Listar Todos");
         btnEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntregaActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Listar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -208,34 +166,31 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txtDataInicialE, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtDataFinalE, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListarE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                        .addComponent(btnEntrega))))
+                    .addComponent(jLabel3)
+                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEntrega))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnListarE)
-                        .addComponent(btnEntrega))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataInicialE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataFinalE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEntrega)
+                        .addComponent(jButton4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDataInicial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDataFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -245,30 +200,18 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Data Final:");
 
-        txtDataInicialB.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataInicialBKeyTyped(evt);
-            }
-        });
-
-        txtDataFinalB.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataFinalBKeyTyped(evt);
-            }
-        });
-
-        btnListarB.setText("Listar");
-        btnListarB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarBActionPerformed(evt);
-            }
-        });
-
         btnBalcao.setText("ListarTodos");
         btnBalcao.setToolTipText("Pedidos realizados no balcão");
         btnBalcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBalcaoActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Listar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -279,35 +222,32 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtDataInicialB, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtDataInicialB, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtDataFinalB, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListarB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(btnBalcao)))
+                    .addComponent(jLabel5)
+                    .addComponent(txtDataFinalB, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(btnBalcao)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnListarB)
-                        .addComponent(btnBalcao))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataInicialB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataFinalB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBalcao)
+                        .addComponent(jButton3))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDataInicialB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDataFinalB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -328,8 +268,8 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                         .addComponent(btnFechar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -346,7 +286,7 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(sep_tabela, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar)
@@ -385,55 +325,47 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblItemPedidoMousePressed
 
-    private void txtDataInicialEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataInicialEKeyTyped
-        String caracteres = "0987654321";
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-
-            evt.consume();
-
+        if (txtDataInicialB.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo Data Inicial não pode ser vazio");
+            return;
         }
-    }//GEN-LAST:event_txtDataInicialEKeyTyped
-
-    private void txtDataFinalEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataFinalEKeyTyped
-        String caracteres = "0987654321";
-
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-
-            evt.consume();
-
+        if (txtDataFinalB.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo Data Final não pode ser vazio");
+            return;
         }
-    }//GEN-LAST:event_txtDataFinalEKeyTyped
-
-    private void btnListarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarEActionPerformed
+        SimpleDateFormat formatoData2 = new SimpleDateFormat("dd/MM/yyyy");
         modeloTabelaPedido.setNumRows(0);
         modeloTabelaItemPedido.setNumRows(0);
-        listarPedidoEntregaPeriodo(txtDataInicialE.getText(), txtDataFinalE.getText(), modeloTabelaPedido);
-    }//GEN-LAST:event_btnListarEActionPerformed
+        listarPedidoBalcaoPeriodo(formatoData2.format(txtDataInicialB.getDate()), formatoData2.format(txtDataFinalB.getDate()), modeloTabelaPedido);
 
-    private void txtDataInicialBKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataInicialBKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataInicialBKeyTyped
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void txtDataFinalBKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataFinalBKeyTyped
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_txtDataFinalBKeyTyped
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-    private void btnListarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarBActionPerformed
-        // TODO add your handling code here:
-         modeloTabelaPedido.setNumRows(0);
+        if(txtDataInicial.getDate()==null){
+            JOptionPane.showMessageDialog(null, "Campo Data Inicial não pode ser vazio");
+            return;
+        }
+        if(txtDataFinal.getDate()==null){
+            JOptionPane.showMessageDialog(null, "Campo Data Final não pode ser vazio");
+            return;
+        }
+        SimpleDateFormat formatoData2 = new SimpleDateFormat("dd/MM/yyyy");
+        modeloTabelaPedido.setNumRows(0);
         modeloTabelaItemPedido.setNumRows(0);
-        listarPedidoBalcaoPeriodo(txtDataInicialB.getText(), txtDataFinalB.getText(), modeloTabelaPedido);
-    }//GEN-LAST:event_btnListarBActionPerformed
+        listarPedidoEntregaPeriodo(formatoData2.format(txtDataInicial.getDate()), formatoData2.format(txtDataFinal.getDate()), modeloTabelaPedido);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBalcao;
     private javax.swing.JButton btnEntrega;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnListarB;
-    private javax.swing.JButton btnListarE;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -447,10 +379,10 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_tabela;
     private javax.swing.JTable tblItemPedido;
     private javax.swing.JTable tblPedido;
-    private javax.swing.JTextField txtDataFinalB;
-    private javax.swing.JTextField txtDataFinalE;
-    private javax.swing.JTextField txtDataInicialB;
-    private javax.swing.JTextField txtDataInicialE;
+    private com.toedter.calendar.JDateChooser txtDataFinal;
+    private com.toedter.calendar.JDateChooser txtDataFinalB;
+    private com.toedter.calendar.JDateChooser txtDataInicial;
+    private com.toedter.calendar.JDateChooser txtDataInicialB;
     // End of variables declaration//GEN-END:variables
 
     public void listarPedidoBalcao(String data, DefaultTableModel tabela) {
@@ -458,14 +390,13 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                 + "  p.`ped_cod`,\n"
                 + "  p.`ped_tipo`,\n"
                 + "  p.`ped_pagamento`,\n"
-                 + "  p.ped_data,\n"
+                + "  p.ped_data,\n"
                 + "  p.`ped_vlr_tot`,\n"
                 + "  p.ped_hr,\n"
                 + "  p.`ped_stt_canc` \n"
                 + " from\n"
                 + "  `pizzaria`.`pedido` p \n"
                 + " where `ped_tipo` = 'B' \n"
-                
                 + " limit 0, 1000 ;";
 
         try (PreparedStatement pstmt = ConectaBanco.getConnection().prepareStatement(SqlSelection)) {
@@ -492,7 +423,7 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                     default:
                         throw new AssertionError();
                 }
-                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "Balcão", "", "", rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"),  situacao, VerificarData.converteParaJAVA(rs.getString("ped_data")),  rs.getString("ped_hr")});
+                tabela.addRow(new Object[]{rs.getInt("ped_cod"), "Balcão", "", "", rs.getString("ped_pagamento"), rs.getString("ped_vlr_tot"), situacao, VerificarData.converteParaJAVA(rs.getString("ped_data")), rs.getString("ped_hr")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -531,7 +462,7 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void listarPedidoEntrega(String data, DefaultTableModel tabela) {
         String SqlSelection = "select \n"
                 + "  p.`ped_cod`,\n"
@@ -539,7 +470,7 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                 + "  c.`cli_nome`,\n"
                 + "  c.`cli_telefone`,\n"
                 + "  p.`ped_pagamento`,\n"
-                 + "  p.ped_data,\n"
+                + "  p.ped_data,\n"
                 + "  p.`ped_vlr_tot`,\n"
                 + "  p.ped_hr,\n"
                 + "  p.`ped_stt_canc` \n"
@@ -548,7 +479,6 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                 + "  join `cliente` c \n"
                 + "    on c.`cli_cod` = p.`ped_cli_cod` \n"
                 + " where `ped_tipo` = 'E' \n"
-                
                 + " limit 0, 1000 ;";
 
 //                 "where `ped_tipo` = 'E' and `ped_data` = '"+VerificarData.converteParaSql(data)+"'\n"
@@ -629,8 +559,7 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     public void listarPedidoEntregaPeriodo(String dataInicial, String dataFinal, DefaultTableModel tabela) {
         String SqlSelection = "select \n"
                 + "  p.`ped_cod`,\n"
@@ -638,7 +567,7 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
                 + "  c.`cli_nome`,\n"
                 + "  c.`cli_telefone`,\n"
                 + "  p.`ped_pagamento`,\n"
-                 + "  p.ped_data,\n"
+                + "  p.ped_data,\n"
                 + "  p.`ped_vlr_tot`,\n"
                 + "  p.ped_hr,\n"
                 + "  p.`ped_stt_canc` \n"
@@ -680,5 +609,5 @@ public class RelatorioPedido extends javax.swing.JInternalFrame {
             Logger.getLogger(CancelamentoPedidoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

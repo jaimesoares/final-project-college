@@ -34,6 +34,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -72,7 +73,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         txtNumNotaFiscal.setDocument(new LimiteDigitos(10));
         txtSerie.setDocument(new LimiteDigitos(3));
         comboNumPedido = cbPedCompra.getModel();
-
+        
         populaListaFornecedor();
         populaTipoProduto();
 //        pesquisaPedido();
@@ -95,7 +96,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         lbl_data2 = new javax.swing.JLabel();
         try{        formatoNascimento = new MaskFormatter("##/##/####");    }catch (Exception Erro){      JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);  }
         txtDtEmissao = new JFormattedTextField(formatoNascimento);
-        try{        formatoNascimento = new MaskFormatter("##/##/####");    }catch (Exception Erro){      JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);  }
+        try{        
+            formatoNascimento = new MaskFormatter("##/##/####");    
+        }catch (Exception Erro){      
+            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0); 
+        }
         txtDtReceb = new JFormattedTextField(formatoNascimento);
         lbl_data5 = new javax.swing.JLabel();
         lbl_data6 = new javax.swing.JLabel();
@@ -110,6 +115,8 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         txtValorNota = new javax.swing.JTextField();
         lbl_data11 = new javax.swing.JLabel();
         cbPedCompra = new javax.swing.JComboBox();
+        dcRecebimento = new com.toedter.calendar.JDateChooser();
+        lbl_data10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lbl_data1 = new javax.swing.JLabel();
         cbTipo = new javax.swing.JComboBox();
@@ -179,6 +186,11 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         txtDtReceb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDtRecebActionPerformed(evt);
+            }
+        });
+        txtDtReceb.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDtRecebFocusLost(evt);
             }
         });
         txtDtReceb.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -277,6 +289,19 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             }
         });
 
+        dcRecebimento.setMaxSelectableDate(new java.util.Date(253370775711000L));
+        dcRecebimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dcRecebimentoKeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dcRecebimentoKeyPressed(evt);
+            }
+        });
+
+        lbl_data10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbl_data10.setText("Dt. Receb.:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -325,8 +350,12 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDtReceb, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_data5))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbl_data5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_data10)
+                            .addComponent(dcRecebimento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDtEmissao, txtDtReceb});
@@ -352,7 +381,8 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_data2)
-                            .addComponent(lbl_data5))
+                            .addComponent(lbl_data5)
+                            .addComponent(lbl_data10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDtEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,7 +394,8 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lbl_data3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dcRecebimento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValor3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -924,6 +955,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
         listaDeItens = new ArrayList<>();
         modeloDeTabela.setNumRows(0);
         cbPedCompra.removeAllItems();
+        cbPedCompra.addItem("");
         txtCNPJ.setText(((FornecedorBean) modeloForncedor.getSelectedItem()).getPfj());
         validaCNPJCPF();
         pesquisaPedidoFornecedor(((FornecedorBean) modeloForncedor.getSelectedItem()).getCodigo());
@@ -1036,10 +1068,29 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
 
     private void cbPedCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPedCompraActionPerformed
         // TODO add your handling code here:
-        if (comboNumPedido.getSize() > 0) {
+        modeloDeTabela.setNumRows(0);
+        if (cbPedCompra.getSelectedIndex() > 0) {
             pesquisaPedido(((FornecedorBean) modeloForncedor.getSelectedItem()).getCodigo(), Integer.parseInt(comboNumPedido.getSelectedItem().toString()));
         }
+        
     }//GEN-LAST:event_cbPedCompraActionPerformed
+
+    private void dcRecebimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcRecebimentoKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_dcRecebimentoKeyPressed
+
+    private void txtDtRecebFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDtRecebFocusLost
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_txtDtRecebFocusLost
+
+    private void dcRecebimentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcRecebimentoKeyReleased
+        // TODO add your handling code here:
+       
+              
+    }//GEN-LAST:event_dcRecebimentoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1052,6 +1103,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbPedCompra;
     private javax.swing.JComboBox cbProduto;
     private javax.swing.JComboBox cbTipo;
+    private com.toedter.calendar.JDateChooser dcRecebimento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1066,6 +1118,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblValor8;
     private javax.swing.JLabel lblValor9;
     private javax.swing.JLabel lbl_data1;
+    private javax.swing.JLabel lbl_data10;
     private javax.swing.JLabel lbl_data11;
     private javax.swing.JLabel lbl_data2;
     private javax.swing.JLabel lbl_data3;
@@ -1397,7 +1450,7 @@ public class NotaFiscalEntradaView extends javax.swing.JInternalFrame {
             pstmt.setDouble(7, txtDescontoNota.getText().isEmpty() ? 0 : Double.parseDouble(txtDescontoNota.getText()));
             pstmt.setString(8, VerificarData.converteParaSql(txtDtEmissao.getText()));
             pstmt.setString(9, VerificarData.converteParaSql(txtDtReceb.getText()));
-            pstmt.setInt(10, comboNumPedido.getSize()<=0 ? 0 : Integer.parseInt(comboNumPedido.getSelectedItem().toString()));
+            pstmt.setInt(10, cbPedCompra.getSelectedIndex()==0 ? 0 : Integer.parseInt(comboNumPedido.getSelectedItem().toString()));
 
             pstmt.setDouble(11, 0);
             pstmt.setString(12, Global.usuario.getLogin());

@@ -5,7 +5,7 @@ import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
 import br.com.pizzaria.controller.RelatorioClienteController;
 import br.com.pizzaria.util.VerificarData;
-import javax.swing.JFormattedTextField;
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +21,6 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
     JFrame frame;
     RelatorioClienteController relatorioClienteController;
-   
 
     public RelatorioClienteView(JFrame frame) {
         initComponents();
@@ -31,7 +30,6 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
         clienteBeans = new ClienteBean();
         relatorioClienteController = new RelatorioClienteController();
         modelo = (DefaultTableModel) tblCliente.getModel();
-        
 
     }
 
@@ -50,22 +48,8 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        try{
-
-            formatoData = new MaskFormatter("##/##/####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txtDataInicial = new JFormattedTextField(formatoData);
-        try{
-
-            formatoData = new MaskFormatter("##/##/####");
-
-        }catch (Exception Erro){
-            JOptionPane.showMessageDialog(null, "Data inválida", "ERRO DE FORMATAÇÃO", 0);
-        }
-        txtDataFinal = new JFormattedTextField(formatoData);
+        txtDataInicial = new com.toedter.calendar.JDateChooser();
+        txtDataFinal = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
 
         setClosable(true);
@@ -139,18 +123,6 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Data Final:");
 
-        txtDataInicial.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataInicialKeyTyped(evt);
-            }
-        });
-
-        txtDataFinal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataFinalKeyTyped(evt);
-            }
-        });
-
         jButton3.setText("Listar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,18 +137,17 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(26, 26, 26))))
+                        .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,12 +156,12 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDataInicial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDataFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,29 +248,9 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
 //            }
 //            btnFechar.setText("Fechar");
 //        } else {
-            this.dispose();
+        this.dispose();
 //        }
     }//GEN-LAST:event_btnFecharActionPerformed
-
-    private void txtDataInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataInicialKeyTyped
-        String caracteres = "0987654321";
-
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-
-            evt.consume();
-
-        }
-    }//GEN-LAST:event_txtDataInicialKeyTyped
-
-    private void txtDataFinalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataFinalKeyTyped
-        String caracteres = "0987654321";
-
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-
-            evt.consume();
-
-        }
-    }//GEN-LAST:event_txtDataFinalKeyTyped
 
     private void btnCadastradosHojeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastradosHojeActionPerformed
         modelo.setNumRows(0);
@@ -312,8 +263,21 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnTodosClientesActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         modelo.setNumRows(0);
-         relatorioClienteController.controlePeriodoCliente(txtDataInicial.getText(),txtDataFinal.getText(), modelo );
+
+        if (txtDataInicial.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo Data Inicial não pode ser vazio");
+            return;
+        }
+        if (txtDataFinal.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Campo Data Final não pode ser vazio");
+            return;
+        }
+        SimpleDateFormat formatoData2 = new SimpleDateFormat("dd/MM/yyyy");
+
+        modelo.setNumRows(0);
+        relatorioClienteController.controlePeriodoCliente(formatoData2.format(txtDataInicial.getDate()), formatoData2.format(txtDataFinal.getDate()), modelo);
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -330,8 +294,8 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator sep_pesquisa;
     private javax.swing.JSeparator sep_tabela;
     private javax.swing.JTable tblCliente;
-    private javax.swing.JTextField txtDataFinal;
-    private javax.swing.JTextField txtDataInicial;
+    private com.toedter.calendar.JDateChooser txtDataFinal;
+    private com.toedter.calendar.JDateChooser txtDataInicial;
     // End of variables declaration//GEN-END:variables
 
     final void habilitarCampos(boolean valor) {
@@ -400,10 +364,10 @@ public class RelatorioClienteView extends javax.swing.JInternalFrame {
 //        txtPesquisar.setText("");
 //        txtRua.setText("");
     }
-    
-    public void populaCamposCep(){
+
+    public void populaCamposCep() {
         CepBean cepBeans;
-        
+
 //        if (clienteController.controleCepValido(cepBeans = clienteController.controleCep(txfCEP.getText().replace("-", "")))) {
 //            txtBairro.setText(cepBeans.getBairro());
 //            txtCidade.setText(cepBeans.getCidade());

@@ -208,25 +208,23 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDataInicial" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtDataFinal" min="-2" pref="94" max="-2" attributes="0"/>
-                          <EmptySpace pref="38" max="32767" attributes="0"/>
+                          <Component id="txtDataInicial" min="-2" pref="128" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtDataFinal" min="-2" pref="128" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -238,13 +236,13 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtDataInicial" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDataFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtDataInicial" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDataFinal" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton3" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -260,23 +258,9 @@
             <Property name="text" type="java.lang.String" value="Data Final:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDataInicial">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDataInicialKeyTyped"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(formatoData);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;&#xd;&#xa;    formatoData = new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;&#xd;&#xa;}catch (Exception Erro){&#xd;&#xa;    JOptionPane.showMessageDialog(null, &quot;Data inv&#xe1;lida&quot;, &quot;ERRO DE FORMATA&#xc7;&#xc3;O&quot;, 0);&#xd;&#xa;}"/>
-          </AuxValues>
+        <Component class="com.toedter.calendar.JDateChooser" name="txtDataInicial">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDataFinal">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDataFinalKeyTyped"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(formatoData);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;&#xd;&#xa;    formatoData = new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;&#xd;&#xa;}catch (Exception Erro){&#xd;&#xa;    JOptionPane.showMessageDialog(null, &quot;Data inv&#xe1;lida&quot;, &quot;ERRO DE FORMATA&#xc7;&#xc3;O&quot;, 0);&#xd;&#xa;}"/>
-          </AuxValues>
+        <Component class="com.toedter.calendar.JDateChooser" name="txtDataFinal">
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
