@@ -89,7 +89,7 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
         listaDeItens = new ArrayList<>();
         modeloProduto = cbProduto.getModel();
         txtDtemissao.setText(VerificarData.retornoDeDataAtual());
-        txtUnidadeItem.setEditable(true);
+        txtUnidadeItem.setEditable(false);
         modeloTipoProd = cbTipo.getModel();
         modeloProduto = cbProduto.getModel();
         modeloForncedor = cbFornecedor.getModel();
@@ -928,27 +928,6 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbProdutoActionPerformed
 
-    private void txtDescontoItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoItemFocusLost
-        // TODO add your handling code here:
-        calculaTotalNotaItem();
-    }//GEN-LAST:event_txtDescontoItemFocusLost
-
-    private void txtDescontoItemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoItemKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            calculaTotalNotaItem();
-        }
-    }//GEN-LAST:event_txtDescontoItemKeyPressed
-
-    private void txtDescontoItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoItemKeyTyped
-        // TODO add your handling code here:
-        String caracteres = "0987654321.,";
-
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDescontoItemKeyTyped
-
     private void jtipoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtipoPedidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtipoPedidoActionPerformed
@@ -981,6 +960,27 @@ public class PedidoCompraView extends javax.swing.JInternalFrame {
                 break;
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtDescontoItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoItemKeyTyped
+        // TODO add your handling code here:
+        String caracteres = "0987654321.,";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescontoItemKeyTyped
+
+    private void txtDescontoItemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoItemKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            calculaTotalNotaItem();
+        }
+    }//GEN-LAST:event_txtDescontoItemKeyPressed
+
+    private void txtDescontoItemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoItemFocusLost
+        // TODO add your handling code here:
+        calculaTotalNotaItem();
+    }//GEN-LAST:event_txtDescontoItemFocusLost
     public void populaTipoProduto() {
         ProdutoModel produtoModel = new ProdutoModel();
 

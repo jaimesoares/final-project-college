@@ -52,9 +52,33 @@ public class VerificarData {
 
         return formatoHora.format(horaAtual);
     }
+    
+    public static Date verificaDataDate(String data) {
+
+        Long dia = new Long(data.substring(0, 2));
+        Long mes = new Long(data.substring(3, 5));
+        Long ano = new Long(data.substring(6, 10));
+
+        try {
+
+            GregorianCalendar dataCalendar = new GregorianCalendar();
+            dataCalendar.setLenient(false);
+            dataCalendar.set(GregorianCalendar.YEAR, ano.intValue());
+            dataCalendar.set(GregorianCalendar.MONTH, mes.intValue()-1);
+            dataCalendar.set(GregorianCalendar.DATE, dia.intValue());
+
+            return dataCalendar.getTime();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+
+    }
 
     public static void main(String[] args) {
-        //VerificarData.verificaData("29/02/2014");
+        Date verificaDataDate = VerificarData.verificaDataDate("28/02/2014");
+        System.out.println(verificaDataDate);
     }
 
 }

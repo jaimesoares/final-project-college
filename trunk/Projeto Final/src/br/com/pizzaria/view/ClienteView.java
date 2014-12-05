@@ -3,6 +3,7 @@ package br.com.pizzaria.view;
 import br.com.pizzaria.bean.CepBean;
 import br.com.pizzaria.bean.ClienteBean;
 import br.com.pizzaria.controller.ClienteController;
+import br.com.pizzaria.util.Global;
 import br.com.pizzaria.util.VerificarData;
 import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
@@ -116,6 +117,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         ;
         txtEstado = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -316,6 +318,13 @@ public class ClienteView extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Manutenção de Cliente");
 
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -400,7 +409,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_data1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisar))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtPesquisar)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,7 +425,9 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_data1))
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbl_telefone)
@@ -476,35 +491,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
-
-        
-            modelo.setNumRows(0);
-            clienteController.controlePesquisa(txtPesquisar.getText(), modelo);
-
-        
-    }//GEN-LAST:event_txtPesquisarKeyReleased
-
-    private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
-        //clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblCliente.getSelectedRow(), 0).toString()));
-        clienteBeans = clienteController.controlePreenchimento(((ClienteBean)modelo.getValueAt(tblCliente.getSelectedRow(), 0)).getCodigoCliente());
-
-        //txtCodigo.setText(clienteBeans.getCodigoCliente() + "");
-        txtNome.setText(clienteBeans.getNome());
-        txtRua.setText(clienteBeans.getRua());
-        txtBairro.setText(clienteBeans.getBairro());
-        txfTelefone.setText(clienteBeans.getTelefone());
-        txtData.setText(clienteBeans.getDataCadastro());
-        txaObs.setText(clienteBeans.getObservacao());
-        txfCEP.setText(clienteBeans.getCep() + "");
-        txfNascimento.setText(clienteBeans.getAniversario());
-        txfTelCelular.setText(clienteBeans.getTelCelular());
-        txtCidade.setText(clienteBeans.getCidade());
-        txtEstado.setText("SP");
-        txtEmail.setText(clienteBeans.getEmail());
-        txtNumero.setText(clienteBeans.getNumero() + "");
-    }//GEN-LAST:event_tblClienteMousePressed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         if (btnFechar.getText().equals("Cancelar")) {
@@ -591,10 +577,6 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarActionPerformed
-
     private void txfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfTelefoneActionPerformed
@@ -665,11 +647,62 @@ public class ClienteView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
+    private void tblClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMousePressed
+        //clienteBeans = clienteController.controlePreenchimento(Integer.parseInt(modelo.getValueAt(tblCliente.getSelectedRow(), 0).toString()));
+        clienteBeans = clienteController.controlePreenchimento(((ClienteBean) modelo.getValueAt(tblCliente.getSelectedRow(), 0)).getCodigoCliente());
+
+        //txtCodigo.setText(clienteBeans.getCodigoCliente() + "");
+        txtNome.setText(clienteBeans.getNome());
+        txtRua.setText(clienteBeans.getRua());
+        txtBairro.setText(clienteBeans.getBairro());
+        txfTelefone.setText(clienteBeans.getTelefone());
+        txtData.setText(clienteBeans.getDataCadastro());
+        txaObs.setText(clienteBeans.getObservacao());
+        txfCEP.setText(clienteBeans.getCep() + "");
+        txfNascimento.setText(clienteBeans.getAniversario());
+        txfTelCelular.setText(clienteBeans.getTelCelular());
+        txtCidade.setText(clienteBeans.getCidade());
+        txtEstado.setText("SP");
+        txtEmail.setText(clienteBeans.getEmail());
+        txtNumero.setText(clienteBeans.getNumero() + "");
+    }//GEN-LAST:event_tblClienteMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PesquisaCliente pesquisaCliente = new PesquisaCliente(Global.principal, true);
+        pesquisaCliente.setVisible(true);
+        clienteBeans = pesquisaCliente.getClienteBean();
+        txtNome.setText(clienteBeans.getNome());
+        txtRua.setText(clienteBeans.getRua());
+        txtBairro.setText(clienteBeans.getBairro());
+        txfTelefone.setText(clienteBeans.getTelefone());
+        txtData.setText(clienteBeans.getDataCadastro());
+        txaObs.setText(clienteBeans.getObservacao());
+        txfCEP.setText(clienteBeans.getCep() + "");
+        txfNascimento.setText(clienteBeans.getAniversario());
+        txfTelCelular.setText(clienteBeans.getTelCelular());
+        txtCidade.setText(clienteBeans.getCidade());
+        txtEstado.setText("SP");
+        txtEmail.setText(clienteBeans.getEmail());
+        txtNumero.setText(clienteBeans.getNumero() + "");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
+
+        modelo.setNumRows(0);
+        clienteController.controlePesquisa(txtPesquisar.getText(), modelo);
+    }//GEN-LAST:event_txtPesquisarKeyReleased
+
+    private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
