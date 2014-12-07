@@ -21,17 +21,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jaime
  */
-public class PesquisaCliente extends javax.swing.JDialog {
+public class ClientePesquisa extends javax.swing.JDialog {
 
     /**
-     * Creates new form PesquisaCliente
+     * Creates new form ClientePesquisa
      */
     ClienteBean clienteBeans;
     ClienteController clienteController;
     DefaultTableModel modelo;
     ButtonGroup grupoPesquisa;
 
-    public PesquisaCliente(java.awt.Frame parent, boolean modal) {
+    public ClientePesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -202,20 +202,21 @@ public class PesquisaCliente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesquisaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesquisaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesquisaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesquisaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PesquisaCliente dialog = new PesquisaCliente(new javax.swing.JFrame(), true);
+                ClientePesquisa dialog = new ClientePesquisa(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

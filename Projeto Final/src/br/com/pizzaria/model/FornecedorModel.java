@@ -57,12 +57,12 @@ public class FornecedorModel {
                 fornecedorBeans.setTelCelular(rs.getString("for_tel_cel"));
 
                  fornecedorBeans.setCep(rs.getInt("for_cep"));
-                //  fornecedorBeans.setEndereco(rs.getString("for_rua"));
+                  fornecedorBeans.setEndereco(rs.getString("for_ender"));
                 //fornecedorBeans.setCep(rs.getInt("for_numero"));
                 fornecedorBeans.setNumero(rs.getInt("for_nro_ender"));
-                //fornecedorBeans.setCidade(rs.getString("for_cidade"));
-                // fornecedorBeans.setBairro(rs.getString("for_bairro"));
-                // fornecedorBeans.setEstado(rs.getString("for_estado"));
+                fornecedorBeans.setCidade(rs.getString("for_cidade"));
+                 fornecedorBeans.setBairro(rs.getString("for_bairro"));
+                 fornecedorBeans.setEstado(rs.getString("for_estado"));
                 // fornecedorBeans.setBairro(rs.getString("for_bairro"));
                 fornecedorBeans.setPfj(rs.getString("for_cod_pfj"));
                 fornecedorBeans.setDataCad(rs.getString("for_dt_cad"));
