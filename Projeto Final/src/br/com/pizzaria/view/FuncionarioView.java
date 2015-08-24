@@ -28,6 +28,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 //    DefaultTableModel modelo;
     List<CargoBean> listaCargo;
     ComboBoxModel<CargoBean> modeloCargos;
+    String test;
 
     public FuncionarioView() {
         initComponents();
